@@ -49,13 +49,16 @@
   <div class="hero-right">
     {% assign featured = all_products[section.settings.featured_product] %}
     <div class="hero-card-main">
-      <div class="hcm-img{% unless featured != blank and featured.featured_image %} no-image{% endunless %}">
-        {% if featured != blank and featured.featured_image %}
-          <img src="{{ featured.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ featured.title }}">
-        {% else %}
-          🎧
-        {% endif %}
-      </div>
+      <a href="{% if featured != blank %}{{ featured.url }}{% else %}/collections/all{% endif %}"
+         style="display:block; text-decoration:none; cursor:pointer;">
+        <div class="hcm-img{% unless featured != blank and featured.featured_image %} no-image{% endunless %}">
+          {% if featured != blank and featured.featured_image %}
+            <img src="{{ featured.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ featured.title }}">
+          {% else %}
+            🎧
+          {% endif %}
+        </div>
+      </a>
       <span class="hcm-tag">
         {% if featured != blank %}{{ section.settings.card_tag }}{% else %}Más vendido{% endif %}
       </span>
