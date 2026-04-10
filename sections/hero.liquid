@@ -51,7 +51,7 @@
     <div class="hero-card-main">
       <div class="hcm-img{% unless featured != blank and featured.featured_image %} no-image{% endunless %}">
         {% if featured != blank and featured.featured_image %}
-          <img src="{{ featured.featured_image | img_url: 'medium' }}" alt="{{ featured.title }}">
+          <img src="{{ featured.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ featured.title }}">
         {% else %}
           🎧
         {% endif %}
@@ -67,13 +67,13 @@
           {% if featured != blank %}{{ featured.price | money }}{% else %}$89.99{% endif %}
         </span>
         {% if featured != blank %}
-          <a href="{{ featured.url }}" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none">Ver</a>
+          <a href="{{ featured.url }}" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none">+</a>
         {% else %}
           <a href="/collections/all" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none">+</a>
         {% endif %}
       </div>
     </div>
-    <div class="hero-card-sm hcs1">
+    <div class="hero-card-sm hcs1" style="left:-60px;">
       <div class="hcs-icon green">💊</div>
       <div class="hcs-info">
         <span class="hcs-name">{{ section.settings.card_sm1_name | default: 'Vitaminas C+D' }}</span>
