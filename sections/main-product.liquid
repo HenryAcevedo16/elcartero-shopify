@@ -1,0 +1,254 @@
+<div class="breadcrumb">
+  <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
+  {% if collection %}
+    <a href="{{ collection.url }}">{{ collection.title }}</a><span>›</span>
+  {% else %}
+    <a href="/collections/all">Catálogo</a><span>›</span>
+  {% endif %}
+  <span class="current">{{ product.title }}</span>
+</div>
+
+<!-- PRODUCT -->
+<div class="product-section">
+
+  <!-- GALLERY -->
+  <div class="gallery reveal">
+    <div class="gallery-main">
+      <div class="gm-bg" id="mainImg">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | img_url: '1024x1024' }}" alt="{{ product.title }}" style="width:100%; height:100%; object-fit:contain;" id="FeaturedImage">
+        {% else %}
+          <span id="mainEmoji">🎧</span>
+        {% endif %}
+      </div>
+      {% if product.compare_at_price > product.price %}
+        <span class="gm-label">Oferta</span>
+      {% endif %}
+    </div>
+    
+    {% if product.images.size > 1 %}
+    <div class="gallery-thumbs">
+      {% for image in product.images %}
+        <div class="thumb thumb-bg{{ forloop.index | modulo: 4 | plus: 1 }} {% if forloop.first %}active{% endif %}" onclick="setThumb(this, '{{ image | img_url: '1024x1024' }}')">
+           <img src="{{ image | img_url: 'compact' }}" style="width:100%; height:100%; object-fit:contain; border-radius:10px;">
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- INFO PANEL -->
+  <div class="reveal d1">
+    <div class="prod-badges">
+      <span class="pbadge pb-elec">{{ product.type | default: 'Producto' }}</span>
+      {% if product.available %}
+        <span class="pbadge pb-stock">✔ En stock</span>
+      {% else %}
+        <span class="pbadge pb-new" style="background:var(--muted)">Agotado</span>
+      {% endif %}
+    </div>
+    
+    <h1 class="prod-title">{{ product.title }}</h1>
+    
+    <div class="prod-rating-row">
+      <span class="rating-stars">★★★★★</span>
+      <span class="rating-num">4.9</span>
+      <span class="rating-count">(124 reseñas)</span>
+      <a href="#reviews" class="rating-link">Ver todas →</a>
+    </div>
+
+    <div class="price-block">
+      <div>
+        {% if product.compare_at_price > product.price %}
+          <div class="price-old">{{ product.compare_at_price | money }}</div>
+        {% endif %}
+        <div class="price-now">{{ product.price | money }}</div>
+      </div>
+      {% if product.compare_at_price > product.price %}
+        <div class="price-save">Oferta Especial</div>
+      {% endif %}
+    </div>
+
+    <div class="section-divider"></div>
+
+    <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="ajax-cart-form">
+      
+      <!-- Variantes Selector Oculto usado por Shopify -->
+      <select name="id" id="productSelect" style="display:none;">
+        {% for variant in product.variants %}
+          {% if variant.available %}
+            <option value="{{ variant.id }}">
+              {{ variant.title }} - {{ variant.price | money_with_currency }}
+            </option>
+          {% else %}
+            <option disabled="disabled">
+              {{ variant.title }} - Agotado
+            </option>
+          {% endif %}
+        {% endfor %}
+      </select>
+
+      <!-- Si el producto tiene múltiples opciones de variantes (ej: Color y Tamaño) -->
+      {% unless product.has_only_default_variant %}
+        {% for option in product.options_with_values %}
+          <div class="variant-wrapper" style="margin-bottom: 24px;">
+            <p class="opt-label" style="margin-top:4px;">{{ option.name }}: <strong style="color:var(--dark);text-transform:none;letter-spacing:0;" id="{{ option.name }}-Name">{{ option.values.first }}</strong></p>
+            <div class="color-opts" id="opts-{{ option.name | handleize }}">
+              {% for value in option.values %}
+                <label class="color-dot {% if forloop.first %}selected{% endif %}"
+                       style="background: var(--sand); display:flex; justify-content:center; align-items:center;"
+                       onclick="selectOpt(this, '{{ option.name | escape }}', '{{ value | escape }}')">
+                  <input type="radio" value="{{ value | escape }}" name="{{ option.name }}" {% if forloop.first %}checked{% endif %} style="display:none;">
+                  <span style="font-size: 0.6rem; font-weight:700;">{{ value | slice: 0, 3 }}</span>
+                </label>
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+      {% endunless %}
+
+      <!-- Quantity -->
+      <div class="qty-row">
+        <span class="qty-label">Cantidad</span>
+        <div class="qty-ctrl">
+          <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepDown()">−</button>
+          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-num" style="min-width:40px; text-align:center; font-size:.9rem; font-weight:700; border:none; outline:none; -moz-appearance:textfield;">
+          <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepUp()">+</button>
+        </div>
+      </div>
+
+      <!-- Action buttons -->
+      <div class="action-btns">
+        <button type="submit" name="add" id="AddToCart" class="btn-addcart" {% unless product.available %}disabled="disabled"{% endunless %}>
+          <span id="AddToCartText">
+            {% if product.available %}🛒 Agregar al carrito{% else %}Agotado{% endif %}
+          </span>
+        </button>
+        {% if product.available %}
+          <!-- Checkout dinamico Shopify -->
+          {{ form | payment_button }}
+        {% endif %}
+        <button type="button" class="btn-wish" id="WishBtn"
+                data-wish-id="{{ product.id }}"
+                data-wish-title="{{ product.title | escape }}"
+                data-wish-img="{% if product.featured_image %}{{ product.featured_image | img_url: 'medium' }}{% endif %}"
+                data-wish-price="{{ product.price | money }}"
+                data-wish-url="{{ product.url }}"
+                onclick="toggleWish(this)"
+                aria-label="Guardar en favoritos">♡</button>
+      </div>
+
+    </form>
+
+    <!-- Trust -->
+    <div class="trust-row">
+      <div class="trust-chip"><span class="trust-chip-icon">🚚</span><span class="trust-chip-text">Envío gratis<br>sobre $49</span></div>
+      <div class="trust-chip"><span class="trust-chip-icon">↩️</span><span class="trust-chip-text">Devolución<br>30 días</span></div>
+      <div class="trust-chip"><span class="trust-chip-icon">🔒</span><span class="trust-chip-text">Pago<br>seguro SSL</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- TABS (Extractos dinámicos del producto) -->
+<div class="tabs-section">
+  <div class="tabs-header">
+    <button class="tab-btn active" onclick="setTab(this,'desc')">Descripción</button>
+    <button class="tab-btn" onclick="setTab(this,'specs')">Especificaciones</button>
+    <button class="tab-btn" onclick="setTab(this,'reviews')" id="reviewsTab">Reseñas</button>
+  </div>
+
+  <div class="tab-panel active" id="panel-desc">
+    <div class="desc-grid">
+      <div class="desc-text" style="font-size: .9rem; line-height: 1.8; color: var(--muted); margin-bottom: 16px;">
+        {{ product.description }}
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-specs">
+    <div class="desc-text">
+       <p>El formato del peso del producto es {{ product.weight | weight_with_unit }}. Otras especificaciones se añadirían vía Metafields.</p>
+    </div>
+  </div>
+
+  <div class="tab-panel" id="panel-reviews">
+      <p style="font-size: .9rem; color: var(--muted);">Las reseñas se configuran mediante aplicaciones en Shopify como Product Reviews o Loox.</p>
+  </div>
+</div>
+
+<script>
+// ── Cambio de imagen por thumbnail ──
+function setThumb(el, imageUrl) {
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  const mainImage = document.getElementById('FeaturedImage');
+  if (mainImage) {
+    mainImage.style.opacity = '0';
+    setTimeout(() => {
+      mainImage.src = imageUrl;
+      mainImage.style.opacity = '1';
+    }, 150);
+  }
+}
+
+// Transición suave de imagen
+const fi = document.getElementById('FeaturedImage');
+if (fi) fi.style.transition = 'opacity 0.2s ease';
+
+// ── Cambio de tabs ──
+function setTab(btn, id) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + id).classList.add('active');
+}
+
+// ── Selección de variante ──
+function selectOpt(label, optName, value) {
+  // Desmarcar hermanos
+  const group = label.closest('.color-opts');
+  group.querySelectorAll('.color-dot').forEach(l => l.classList.remove('selected'));
+  label.classList.add('selected');
+  // Actualizar label visible del nombre de opción
+  const nameEl = document.getElementById(optName + '-Name');
+  if (nameEl) nameEl.textContent = value;
+}
+
+// ── Feedback visual del botón Agregar al carrito ──
+const cartForm = document.getElementById('AddToCartForm');
+if (cartForm) {
+  cartForm.addEventListener('submit', function() {
+    const btn  = document.getElementById('AddToCart');
+    const text = document.getElementById('AddToCartText');
+    if (!btn || btn.disabled) return;
+    btn.disabled = true;
+    text.textContent = '✅ ¡Agregado!';
+    btn.style.background = 'var(--red)';
+    setTimeout(() => {
+      btn.disabled = false;
+      text.textContent = '🛒 Agregar al carrito';
+      btn.style.background = '';
+    }, 2500);
+  });
+}
+
+// ── Sincronizar estado del botón de favoritos al cargar ──
+(function() {
+  const btn = document.getElementById('WishBtn');
+  if (!btn) return;
+  const id = btn.dataset.wishId;
+  let list = [];
+  try { list = JSON.parse(localStorage.getItem('elcartero_wishlist') || '[]'); } catch(e) {}
+  if (list.some(p => String(p.id) === String(id))) {
+    btn.classList.add('active');
+    btn.textContent = '♥';
+  }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "settings": []
+}
+{% endschema %}

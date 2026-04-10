@@ -1,0 +1,72 @@
+<nav>
+  <a href="{{ routes.root_url }}" class="nav-brand">
+    <div class="nav-brand-icon">📬</div>
+    <div class="nav-brand-name">{{ shop.name }}</div>
+  </a>
+  <ul class="nav-menu">
+    {% for link in linklists.main-menu.links %}
+      <li><a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <div class="nav-right">
+    <form action="{{ routes.search_url }}" class="nav-search-box" method="get" role="search">
+      <span style="color:var(--muted);font-size:0.9rem;">🔍</span>
+      <input type="text" name="q" placeholder="Buscar productos..." value="{{ search.terms | escape }}">
+    </form>
+    <button onclick="wlTogglePanel()" class="icon-btn" aria-label="Mis favoritos" style="position:relative; background:none; border:none; cursor:pointer; font-size:1.2rem; padding:6px;">
+      ♡
+      <span class="badge wish-badge" style="display:none;">0</span>
+    </button>
+    <a href="/cart" class="icon-btn" aria-label="Carrito de compras">
+      🛒
+      {% if cart.item_count > 0 %}
+        <span class="badge" id="cartBadge">{{ cart.item_count }}</span>
+      {% endif %}
+    </a>
+    <!-- Botón hamburguesa (visible solo en móvil) -->
+    <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menú" aria-expanded="false"
+            onclick="toggleMobileNav()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Overlay de navegación móvil -->
+<div class="mobile-nav" id="mobileNav" role="dialog" aria-label="Menú de navegación">
+  <button class="mobile-nav-close" aria-label="Cerrar menú" onclick="toggleMobileNav()">×</button>
+  {% for link in linklists.main-menu.links %}
+    <a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a>
+  {% endfor %}
+  <a href="/cart" class="mobile-nav-red">🛒 Carrito
+    {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}
+  </a>
+</div>
+
+<script>
+  function toggleMobileNav() {
+    const btn = document.getElementById('hamburgerBtn');
+    const nav = document.getElementById('mobileNav');
+    const isOpen = nav.classList.contains('open');
+    btn.classList.toggle('open');
+    nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', !isOpen);
+    document.body.style.overflow = isOpen ? '' : 'hidden';
+  }
+  // Cerrar al hacer clic en un link del menú
+  document.getElementById('mobileNav').querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      if (document.getElementById('mobileNav').classList.contains('open')) {
+        toggleMobileNav();
+      }
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": []
+}
+{% endschema %}
