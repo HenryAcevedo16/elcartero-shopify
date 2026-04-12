@@ -19,10 +19,6 @@
            style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
            {{ block.shopify_attributes }}>
           <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
-          <span class="cat-chip" style="background:var(--cat-accent,#22c244);color:#fff;">
-            {% assign col = collections[block.settings.collection] %}
-            {% if col != blank %}{{ col.all_products_count }}+{% else %}0+{% endif %}
-          </span>
         <div class="cat-emoji-wrap">{{ block.settings.emoji | default: '✨' }}</div>
           <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
           <p class="cat-card-count">{{ block.settings.subtitle }}</p>
@@ -33,7 +29,6 @@
       <!-- Fallback: 4 categorías estáticas -->
       <a href="/collections/all?filter.p.product_type=Electr%C3%B3nica" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0f4ff;--cat-accent:#3b5bdb;--cat-glow:#bac8ff;">
         <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#bac8ff,transparent 70%);"></div>
-        <span class="cat-chip" style="background:#3b5bdb;color:#fff;">Ver</span>
         <div class="cat-emoji-wrap">⚡</div>
         <p class="cat-card-name">Electrónica</p>
         <p class="cat-card-count">Gadgets, cámaras y accesorios</p>
@@ -41,7 +36,6 @@
       </a>
       <a href="/collections/all?filter.p.product_type=Belleza" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;">
         <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#fbb6d8,transparent 70%);"></div>
-        <span class="cat-chip" style="background:#e91e8c;color:#fff;">Ver</span>
         <div class="cat-emoji-wrap">💄</div>
         <p class="cat-card-name">Belleza</p>
         <p class="cat-card-count">Skincare, maquillaje y cuidado personal</p>
@@ -49,7 +43,6 @@
       </a>
       <a href="/collections/all?filter.p.product_type=Salud" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;">
         <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b7f5c8,transparent 70%);"></div>
-        <span class="cat-chip" style="background:#22c244;color:#fff;">Ver</span>
         <div class="cat-emoji-wrap">💊</div>
         <p class="cat-card-name">Salud</p>
         <p class="cat-card-count">Vitaminas, suplementos y más</p>
@@ -57,7 +50,6 @@
       </a>
       <a href="/collections/all?filter.p.product_type=Hogar" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#f5a623;--cat-glow:#ffe082;">
         <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffe082,transparent 70%);"></div>
-        <span class="cat-chip" style="background:#f5a623;color:#fff;">Ver</span>
         <div class="cat-emoji-wrap">🏠</div>
         <p class="cat-card-name">Hogar</p>
         <p class="cat-card-count">Organización, cocina y decoración</p>
@@ -65,7 +57,6 @@
       </a>
       <a href="/collections/all?filter.p.product_type=Viajes%20y%20equipaje" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e0f7fa;--cat-accent:#00acc1;--cat-glow:#b2ebf2;">
         <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b2ebf2,transparent 70%);"></div>
-        <span class="cat-chip" style="background:#00acc1;color:#fff;">Ver</span>
         <div class="cat-emoji-wrap">🧳</div>
         <p class="cat-card-name">Viajes</p>
         <p class="cat-card-count">Maletas, estuches y accesorios</p>
