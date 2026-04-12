@@ -62,17 +62,23 @@
       <span class="hcm-tag">
         {% if featured != blank %}{{ section.settings.card_tag }}{% else %}Más vendido{% endif %}
       </span>
-      <p class="hcm-name">
-        {{ featured.title | default: 'Auriculares Wireless Pro' }}
-      </p>
+      <a href="{% if featured != blank %}{{ featured.url }}{% else %}/collections/all{% endif %}" style="text-decoration:none; color:inherit;">
+        <p class="hcm-name">
+          {{ featured.title | default: 'Auriculares Wireless Pro' }}
+        </p>
+      </a>
       <div class="hcm-footer">
         <span class="hcm-price">
           {% if featured != blank %}{{ featured.price | money }}{% else %}$89.99{% endif %}
         </span>
         {% if featured != blank %}
-          <a href="{{ featured.url }}" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none">+</a>
+          <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;display:flex;">
+            <input type="hidden" name="id" value="{{ featured.variants.first.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="hcm-add" style="display:flex;justify-content:center;align-items:center;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:1.4rem;">+</button>
+          </form>
         {% else %}
-          <a href="/collections/all" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none">+</a>
+          <a href="/collections/all" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none;background:var(--red);color:#fff;">+</a>
         {% endif %}
       </div>
     </div>
