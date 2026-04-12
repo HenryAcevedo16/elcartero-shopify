@@ -46,22 +46,22 @@
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
       <ul class="cat-list">
-        <li><a href="javascript:filterCategory('all')" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
+        <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
           🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
         </a></li>
-        <li><a href="javascript:filterCategory('Electr%C3%B3nica')" {% if request.query_string contains 'Electr' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electr%C3%B3nica" {% if request.query_string contains 'Electr' %}class="active"{% endif %}>
           ⚡ Electrónica
         </a></li>
-        <li><a href="javascript:filterCategory('Salud')" {% if request.query_string contains 'Salud' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" {% if request.query_string contains 'Salud' %}class="active"{% endif %}>
           💊 Salud
         </a></li>
-        <li><a href="javascript:filterCategory('Belleza')" {% if request.query_string contains 'Belleza' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza" {% if request.query_string contains 'Belleza' %}class="active"{% endif %}>
           ✨ Belleza
         </a></li>
-        <li><a href="javascript:filterCategory('Hogar')" {% if request.query_string contains 'Hogar' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Hogar" {% if request.query_string contains 'Hogar' %}class="active"{% endif %}>
           🏠 Hogar
         </a></li>
-        <li><a href="javascript:filterCategory('Moda')" {% if request.query_string contains 'Moda' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Moda" {% if request.query_string contains 'Moda' %}class="active"{% endif %}>
           👗 Moda
         </a></li>
       </ul>
