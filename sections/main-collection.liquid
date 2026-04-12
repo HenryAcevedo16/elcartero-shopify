@@ -157,11 +157,11 @@
         {% for product in collection.products %}
           <div class="prod reveal d{{ forloop.index | modulo: 4 | plus: 1 }}" style="position:relative;">
             <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
-            <div class="prod-thumb" style="background: linear-gradient(135deg, #f5f0e8, #e8e0d0);">
+            <div class="prod-thumb" style="background: #ffffff;">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: 'medium' }}"
+                <img src="{{ product.featured_image | img_url: '600x' }}"
                      alt="{{ product.title }}"
-                     style="width:100%; height:100%; object-fit:cover; display:block;">
+                     style="width:100%; height:100%; object-fit:contain; display:block;">
               {% else %}
                 <span>📦</span>
               {% endif %}

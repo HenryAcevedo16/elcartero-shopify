@@ -15,10 +15,10 @@
 
       <div class="prod reveal" style="position:relative;">
         <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
-        <a href="{{ product.url }}" class="prod-thumb" style="background: linear-gradient(135deg, #f5f0e8, #e8e0d0); text-decoration:none; display:flex;">
+        <a href="{{ product.url }}" class="prod-thumb" style="background: #ffffff; text-decoration:none; display:flex;">
           <!-- Fallback de imagen usando emojis por ahora, o product.featured_image -->
           {% if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:contain;display:block;">
           {% else %}
             <span>📦</span>
           {% endif %}
