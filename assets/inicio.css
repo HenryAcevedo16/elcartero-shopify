@@ -237,43 +237,7 @@
 }
 .view-all:hover { color: var(--red); border-color: var(--red); gap: 12px; }
 
-/* ── CATEGORIES ── */
-.cats-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
-.cat-card {
-  border-radius: var(--radius); padding: 28px 16px 22px;
-  text-align: center; cursor: pointer;
-  transition: transform 0.3s cubic-bezier(0.34,1.4,0.64,1), box-shadow 0.3s;
-  position: relative; overflow: hidden;
-}
-.cat-card:hover { transform: translateY(-8px); box-shadow: 0 20px 48px rgba(0,0,0,0.1); }
-.cc-elec   { background: linear-gradient(160deg,#0f0c2a,#1a1560); }
-.cc-salud  { background: linear-gradient(160deg,#0a2218,#0e3d28); }
-.cc-belleza{ background: linear-gradient(160deg,#2a0a14,#4a1028); }
-.cc-hogar  { background: linear-gradient(160deg,#2a1f0a,#453210); }
-.cc-tech   { background: linear-gradient(160deg,#0a1a2a,#102848); }
-.cat-glow {
-  position: absolute; border-radius: 50%;
-  width: 80px; height: 80px; top: -20px; right: -20px;
-  opacity: 0.25; filter: blur(20px);
-}
-.cc-elec .cat-glow   { background: #5c6bc0; }
-.cc-salud .cat-glow  { background: #4caf50; }
-.cc-belleza .cat-glow{ background: #e91e63; }
-.cc-hogar .cat-glow  { background: #ff9800; }
-.cc-tech .cat-glow   { background: #00bcd4; }
-.cat-emoji-wrap {
-  width: 56px; height: 56px; border-radius: 16px;
-  background: rgba(255,255,255,0.1);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 1.8rem; margin: 0 auto 14px;
-}
-.cat-card-name { font-size: 0.82rem; font-weight: 700; color: rgba(255,255,255,0.9); margin-bottom: 4px; }
-.cat-card-count { font-size: 0.65rem; font-weight: 500; color: rgba(255,255,255,0.4); }
-.cat-chip {
-  position: absolute; top: 10px; right: 10px;
-  background: rgba(255,255,255,0.12); border-radius: 6px; padding: 2px 8px;
-  font-size: 0.6rem; font-weight: 700; color: rgba(255,255,255,0.7);
-}
+/* ── CATEGORIES (Removed for new blocks) ── */
 
 /* ── PRODUCTS ── */
 .products-wrap {
