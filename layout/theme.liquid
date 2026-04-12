@@ -283,22 +283,37 @@
               badge.innerText = cart.item_count;
             }
           });
-          // Mostrar SweetAlert2
-          Swal.fire({
-            title: '¡Producto agregado al carrito!',
-            text: '¿Qué deseas hacer ahora?',
-            icon: 'success',
-            showCancelButton: true,
-            confirmButtonColor: '#22c244',
-            cancelButtonColor: '#1a2e1e',
-            confirmButtonText: 'Finalizar compra →',
-            cancelButtonText: 'Seguir comprando',
-            reverseButtons: true
-          }).then((result) => {
-            if (result.isConfirmed) {
-              window.location.href = '/cart';
-            }
-          });
+          // Mostrar alerta según el contexto de origen
+          const isPDP = form.getAttribute('data-type') === 'pdp';
+          
+          if (isPDP) {
+            Swal.fire({
+              title: '¡Producto agregado al carrito!',
+              text: '¿Qué deseas hacer ahora?',
+              icon: 'success',
+              showCancelButton: true,
+              confirmButtonColor: '#22c244',
+              cancelButtonColor: '#1a2e1e',
+              confirmButtonText: 'Finalizar compra →',
+              cancelButtonText: 'Seguir comprando',
+              reverseButtons: true
+            }).then((result) => {
+              if (result.isConfirmed) {
+                window.location.href = '/cart';
+              }
+            });
+          } else {
+            Swal.fire({
+              title: '¡Agregado al carrito!',
+              icon: 'success',
+              toast: true,
+              position: 'bottom-end',
+              showConfirmButton: false,
+              timer: 1800,
+              background: '#22c244',
+              color: '#fff'
+            });
+          }
         })
         .catch(err => {
           console.error("Error adding to cart:", err);
