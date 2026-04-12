@@ -75,6 +75,9 @@
     </div>
 
     <!-- BOTONES -->
+    <div style="margin-bottom: 16px; text-align: right;">
+      <button onclick="vaciarCarrito()" style="color: #e74c3c; background: none; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 0;">🗑 Vaciar todo el carrito</button>
+    </div>
     <div style="display:flex; gap:12px; flex-wrap:wrap;">
       <a href="/collections/all" class="btn-sec"
          style="flex:1; min-width:160px; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
@@ -267,8 +270,24 @@ function ajaxQty(line, qty) {
   })
   .then(r => r.json())
   .then(cart => {
-    // Si el carrito quedó vacío o se quitó un item, recargar
-    if (cart.item_count === 0 || qty === 0) { location.reload(); return; }
+    // Si el carrito quedó vacío o se quitó un item, recargar con alerta
+    if (cart.item_count === 0 || qty === 0) {
+      if (typeof Swal !== 'undefined') {
+        Swal.fire({
+          title: 'Producto retirado',
+          icon: 'info',
+          toast: true,
+          position: 'bottom-end',
+          showConfirmButton: false,
+          timer: 1000,
+          background: '#fff',
+          color: '#1a2e1e'
+        }).then(() => location.reload());
+      } else {
+        location.reload();
+      }
+      return;
+    }
 
     // Actualizar cantidad visible
     const qtyEl = document.getElementById('qty-' + line);
@@ -308,6 +327,33 @@ function ajaxQty(line, qty) {
 // Convierte centavos a formato de dinero: 4500 → "$45.00"
 function formatMoney(cents) {
   return '$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+// ── Vaciar Carrito ─────────────────────────────
+function vaciarCarrito() {
+  if (typeof Swal !== 'undefined') {
+    Swal.fire({
+      title: '¿Vaciar carrito?',
+      text: "Se eliminarán todos los productos de tu orden.",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#e74c3c',
+      cancelButtonColor: '#f5f0e8',
+      confirmButtonText: 'Sí, vaciar',
+      cancelButtonText: '<span style="color:#1a2e1e;font-weight:600;">Cancelar</span>',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+          .then(() => location.reload());
+      }
+    });
+  } else {
+    if (confirm("¿Vaciar todo el carrito?")) {
+      fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+        .then(() => location.reload());
+    }
+  }
 }
 
 // ── Abrir / cerrar modal ───────────────────────
