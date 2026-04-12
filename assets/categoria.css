@@ -43,10 +43,6 @@
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
 }
-.prods-grid .prod-thumb {
-  aspect-ratio: unset;
-  height: 160px;
-}
 
 /* ── SIDEBAR ── */
 .sidebar { position: sticky; top: 90px; height: fit-content; }
