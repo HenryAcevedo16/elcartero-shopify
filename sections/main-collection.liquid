@@ -71,71 +71,84 @@
       </ul>
     </div>
 
-    <!-- Rango de precio -->
-    <div class="sidebar-card reveal d1">
-      <p class="sb-title">Precio</p>
-      <form action="{{ request.path }}" method="get" id="priceFilterForm">
-        {%- if request.query_string contains 'sort_by' -%}
-          <input type="hidden" name="sort_by" value="{{ request.query_string | split: 'sort_by=' | last | split: '&' | first }}">
-        {%- endif -%}
-        <div class="price-range">
-          <div class="range-inputs">
-            <input class="range-inp" type="number" placeholder="$ Mín" id="priceMin"
-                   name="filter.v.price.gte" min="0"
-                   value="{% if request.query_string contains 'filter.v.price.gte' %}{{ request.query_string | split: 'filter.v.price.gte=' | last | split: '&' | first }}{% endif %}">
-            <span class="range-sep">—</span>
-            <input class="range-inp" type="number" placeholder="$ Máx" id="priceMax"
-                   name="filter.v.price.lte" min="0"
-                   value="{% if request.query_string contains 'filter.v.price.lte' %}{{ request.query_string | split: 'filter.v.price.lte=' | last | split: '&' | first }}{% endif %}">
-          </div>
-          <input class="range-slider" type="range" min="0" max="500" value="500"
-                 oninput="document.getElementById('priceMax').value = this.value">
+    <!-- ══ FILTROS NATIVOS (Shopify Search & Discovery) ══ -->
+    <form id="FacetFiltersForm" class="filter-form" action="{{ request.path }}" method="get">
+      {%- if request.query_string contains 'sort_by' -%}
+        <input type="hidden" name="sort_by" value="{{ request.query_string | split: 'sort_by=' | last | split: '&' | first }}">
+      {%- endif -%}
+
+      {%- for filter in collection.filters -%}
+        <div class="sidebar-card reveal d{{ forloop.index | plus: 1 }}">
+          <p class="sb-title">{{ filter.label }}</p>
+
+          {%- case filter.type -%}
+            {%- when 'boolean' or 'list' -%}
+              <div class="check-list">
+                {%- for filter_value in filter.values -%}
+                  <label class="check-item">
+                    <input type="checkbox"
+                           name="{{ filter_value.param_name }}"
+                           value="{{ filter_value.value }}"
+                           id="Filter-{{ filter.param_name | escape }}-{{ forloop.index }}"
+                           {% if filter_value.active -%}checked{%- endif %}
+                           {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                           onchange="this.form.submit()">
+                    <span>{{ filter_value.label | escape }}</span>
+                    <span class="check-cnt">({{ filter_value.count }})</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+
+            {%- when 'price_range' -%}
+              {% liquid
+                assign max_price_amount = filter.range_max | money_without_currency | replace: ',', '' | split: '.' | first
+                if max_price_amount == blank or max_price_amount == '0'
+                  assign max_price_amount = 5000
+                endif
+              %}
+              <div class="price-range">
+                <div class="range-inputs">
+                  <input class="range-inp" type="number" placeholder="$ 0"
+                         name="{{ filter.min_value.param_name }}" id="Filter-{{ filter.min_value.param_name | escape }}"
+                         {%- if filter.min_value.value -%}
+                           value="{{ filter.min_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}"
+                         {%- endif -%}
+                         min="0" max="{{ max_price_amount }}"
+                         onchange="this.form.submit()">
+                  <span class="range-sep">—</span>
+                  <input class="range-inp" type="number" placeholder="$ {{ max_price_amount }}"
+                         name="{{ filter.max_value.param_name }}" id="Filter-{{ filter.max_value.param_name | escape }}"
+                         {%- if filter.max_value.value -%}
+                           value="{{ filter.max_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}"
+                         {%- endif -%}
+                         min="0" max="{{ max_price_amount }}"
+                         onchange="this.form.submit()">
+                </div>
+                <input class="range-slider" type="range" min="0" max="{{ max_price_amount }}"
+                       value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}{% else %}{{ max_price_amount }}{% endif %}"
+                       oninput="document.getElementById('Filter-{{ filter.max_value.param_name | escape }}').value = this.value;"
+                       onchange="this.form.submit()">
+              </div>
+          {%- endcase -%}
         </div>
-      </form>
-    </div>
+      {%- endfor -%}
 
-    <!-- Marca (dinámica) -->
-    <div class="sidebar-card reveal d2">
-      <p class="sb-title">Marca</p>
-      <div class="check-list">
-        {%- if collection.all_vendors.size > 0 -%}
-          {%- for vendor in collection.all_vendors limit: 8 -%}
-            <label class="check-item">
-              <input type="checkbox"
-                     onchange="filterVendor('{{ vendor | escape }}')"
-                     {% if request.query_string contains vendor %}checked{% endif %}>
-              <span>{{ vendor }}</span>
-            </label>
-          {%- endfor -%}
-        {%- else -%}
-          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Las marcas aparecerán cuando tengas productos.</p>
+      <div style="margin-top:16px;">
+        {%- assign has_active_filters = false -%}
+        {%- for filter in collection.filters -%}
+          {%- if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value -%}
+            {%- assign has_active_filters = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- if has_active_filters -%}
+          <button class="btn-clear reveal" type="button" onclick="window.location.href='{{ collection.url }}'">Limpiar todos los filtros</button>
         {%- endif -%}
       </div>
-    </div>
-
-    <!-- Tipo de producto (dinámico) -->
-    <div class="sidebar-card reveal d3">
-      <p class="sb-title">Tipo de producto</p>
-      <div class="check-list">
-        {%- if collection.all_types.size > 0 -%}
-          {%- for type in collection.all_types limit: 8 -%}
-            {%- if type != blank -%}
-              <label class="check-item">
-                <input type="checkbox"
-                       onchange="filterType('{{ type | escape }}')"
-                       {% if request.query_string contains type %}checked{% endif %}>
-                <span>{{ type }}</span>
-              </label>
-            {%- endif -%}
-          {%- endfor -%}
-        {%- else -%}
-          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Los tipos aparecen cuando configures el campo "Tipo" en tus productos.</p>
-        {%- endif -%}
-      </div>
-    </div>
-
-    <button class="btn-apply reveal d4" type="submit" form="priceFilterForm">Aplicar filtros</button>
-    <button class="btn-clear reveal d4" type="button" onclick="clearFilters()">Limpiar filtros</button>
+      <noscript>
+        <button type="submit" class="btn-apply" style="margin-top:10px;">Aplicar</button>
+      </noscript>
+    </form>
 
   </aside>
 
