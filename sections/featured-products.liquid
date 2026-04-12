@@ -13,11 +13,12 @@
     {% assign collection = collections[section.settings.collection] %}
     {% for product in collection.products limit: section.settings.product_limit %}
 
-      <div class="prod reveal">
+      <div class="prod reveal" style="position:relative;">
+        <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
         <a href="{{ product.url }}" class="prod-thumb" style="background: linear-gradient(135deg, #f5f0e8, #e8e0d0); text-decoration:none; display:flex;">
           <!-- Fallback de imagen usando emojis por ahora, o product.featured_image -->
           {% if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" style="width:100%; height:100%; object-fit:contain;">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover;display:block;">
           {% else %}
             <span>📦</span>
           {% endif %}
@@ -32,7 +33,8 @@
                   data-wish-price="{{ product.price | money }}"
                   data-wish-url="{{ product.url }}"
                   onclick="toggleWish(this)"
-                  aria-label="Guardar en favoritos">♡</button>
+                  aria-label="Guardar en favoritos"
+                  style="position:relative;z-index:2;">♡</button>
         </a>
         
         <div class="prod-info">
@@ -50,7 +52,7 @@
               {% endif %}
               <span class="prod-price-now">{{ product.price | money }}</span>
             </div>
-            <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;">
+            <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;position:relative;z-index:2;">
               <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
               <input type="hidden" name="quantity" value="1" />
               <button type="submit" class="prod-cart-btn">+</button>
@@ -91,13 +93,13 @@
       "type": "text",
       "id": "eyebrow",
       "label": "Eyebrow Text",
-      "default": "Destacados"
+      "default": "Novedades"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "Más vendidos"
+      "default": "Productos nuevos"
     },
     {
       "type": "collection",

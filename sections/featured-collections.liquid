@@ -10,45 +10,62 @@
   </div>
 
   <div class="cats-grid">
-    {% for block in section.blocks %}
-      {% assign collection = collections[block.settings.collection] %}
-      <a href="{{ collection.url | default: block.settings.fallback_url | default: '#' }}"
-         class="cat-card reveal"
-         style="
-           text-decoration:none;
-           color:inherit;
-           --cat-bg: {{ block.settings.color_bg }};
-           --cat-accent: {{ block.settings.color_accent }};
-           --cat-glow: {{ block.settings.color_glow }};
-         "
-         {{ block.shopify_attributes }}>
-        <div class="cat-glow" style="background: radial-gradient(circle at 30% 30%, var(--cat-glow, rgba(34,194,68,0.25)), transparent 70%);"></div>
-
-        <!-- Badge con contador de productos -->
-        <span class="cat-chip" style="background: var(--cat-accent, #22c244); color:#fff;">
-          {% if collection != blank %}
-            {{ collection.all_products_count }}+
-          {% else %}
-            0+
-          {% endif %}
-        </span>
-
-        <!-- Emoji grande -->
-        <div class="cat-emoji-wrap" style="font-size: 3rem; margin: 20px 0 14px;">
-          {{ block.settings.emoji | default: '✨' }}
-        </div>
-
-        <!-- Nombre: primero el título de la colección real, si no el del bloque -->
-        <p class="cat-card-name">
-          {{ collection.title | default: block.settings.name | default: 'Categoría' }}
-        </p>
-        <p class="cat-card-count">{{ block.settings.subtitle }}</p>
-
-        <!-- Flecha -->
-        <div class="cat-arrow" style="color: var(--cat-accent, #22c244);">→</div>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
+        {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
+        <a href="{{ cat_url }}"
+           class="cat-card reveal"
+           style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
+           {{ block.shopify_attributes }}>
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
+          <span class="cat-chip" style="background:var(--cat-accent,#22c244);color:#fff;">
+            {% assign col = collections[block.settings.collection] %}
+            {% if col != blank %}{{ col.all_products_count }}+{% else %}0+{% endif %}
+          </span>
+          <div class="cat-emoji-wrap" style="font-size:3rem;margin:20px 0 14px;">{{ block.settings.emoji | default: '✨' }}</div>
+          <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
+          <p class="cat-card-count">{{ block.settings.subtitle }}</p>
+          <div class="cat-arrow" style="color:var(--cat-accent,#22c244);">→</div>
+        </a>
+      {% endfor %}
+    {% else %}
+      <!-- Fallback: 4 categorías estáticas -->
+      <a href="/collections/all?filter.p.product_type=Electr%C3%B3nica" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0f4ff;--cat-accent:#3b5bdb;--cat-glow:#bac8ff;">
+        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#bac8ff,transparent 70%);"></div>
+        <span class="cat-chip" style="background:#3b5bdb;color:#fff;">Ver</span>
+        <div class="cat-emoji-wrap" style="font-size:3rem;margin:20px 0 14px;">⚡</div>
+        <p class="cat-card-name">Electrónica</p>
+        <p class="cat-card-count">Gadgets, cámaras y accesorios</p>
+        <div class="cat-arrow" style="color:#3b5bdb;">→</div>
       </a>
-    {% endfor %}
+      <a href="/collections/all?filter.p.product_type=Belleza" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;">
+        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#fbb6d8,transparent 70%);"></div>
+        <span class="cat-chip" style="background:#e91e8c;color:#fff;">Ver</span>
+        <div class="cat-emoji-wrap" style="font-size:3rem;margin:20px 0 14px;">💄</div>
+        <p class="cat-card-name">Belleza</p>
+        <p class="cat-card-count">Skincare, maquillaje y cuidado personal</p>
+        <div class="cat-arrow" style="color:#e91e8c;">→</div>
+      </a>
+      <a href="/collections/all?filter.p.product_type=Salud" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;">
+        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b7f5c8,transparent 70%);"></div>
+        <span class="cat-chip" style="background:#22c244;color:#fff;">Ver</span>
+        <div class="cat-emoji-wrap" style="font-size:3rem;margin:20px 0 14px;">💊</div>
+        <p class="cat-card-name">Salud</p>
+        <p class="cat-card-count">Vitaminas, suplementos y más</p>
+        <div class="cat-arrow" style="color:#22c244;">→</div>
+      </a>
+      <a href="/collections/all?filter.p.product_type=Hogar" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#f5a623;--cat-glow:#ffe082;">
+        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffe082,transparent 70%);"></div>
+        <span class="cat-chip" style="background:#f5a623;color:#fff;">Ver</span>
+        <div class="cat-emoji-wrap" style="font-size:3rem;margin:20px 0 14px;">🏠</div>
+        <p class="cat-card-name">Hogar</p>
+        <p class="cat-card-count">Organización, cocina y decoración</p>
+        <div class="cat-arrow" style="color:#f5a623;">→</div>
+      </a>
+    {% endif %}
   </div>
+
 </section>
 
 <style>
@@ -194,6 +211,12 @@
           "default": "Ver productos"
         },
         {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Valor del filtro (product_type)",
+          "info": "El tipo de producto exacto configurado en Shopify. Ej: Electrónica"
+        },
+        {
           "type": "color",
           "id": "color_bg",
           "label": "Color de fondo",
@@ -221,20 +244,20 @@
         {
           "type": "categoria",
           "settings": {
-            "name": "Salud & Bienestar",
-            "fallback_url": "/collections/salud",
-            "emoji": "💊",
-            "subtitle": "Vitaminas, suplementos y más",
-            "color_bg": "#f0faf3",
-            "color_accent": "#22c244",
-            "color_glow": "#b7f5c8"
+            "name": "Electrónica",
+            "filter_value": "Electrónica",
+            "emoji": "⚡",
+            "subtitle": "Gadgets, cámaras y accesorios",
+            "color_bg": "#f0f4ff",
+            "color_accent": "#3b5bdb",
+            "color_glow": "#bac8ff"
           }
         },
         {
           "type": "categoria",
           "settings": {
             "name": "Belleza",
-            "fallback_url": "/collections/belleza",
+            "filter_value": "Belleza",
             "emoji": "💄",
             "subtitle": "Skincare, maquillaje y cuidado personal",
             "color_bg": "#fff0f6",
@@ -245,20 +268,20 @@
         {
           "type": "categoria",
           "settings": {
-            "name": "Tecnología",
-            "fallback_url": "/collections/tecnologia",
-            "emoji": "🎧",
-            "subtitle": "Gadgets, accesorios y electrónica",
-            "color_bg": "#f0f4ff",
-            "color_accent": "#3b5bdb",
-            "color_glow": "#bac8ff"
+            "name": "Salud",
+            "filter_value": "Salud",
+            "emoji": "💊",
+            "subtitle": "Vitaminas, suplementos y más",
+            "color_bg": "#f0faf3",
+            "color_accent": "#22c244",
+            "color_glow": "#b7f5c8"
           }
         },
         {
           "type": "categoria",
           "settings": {
-            "name": "Hogar & Deco",
-            "fallback_url": "/collections/hogar",
+            "name": "Hogar",
+            "filter_value": "Hogar",
             "emoji": "🏠",
             "subtitle": "Organización, cocina y decoración",
             "color_bg": "#fff8e1",

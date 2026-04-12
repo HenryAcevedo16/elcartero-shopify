@@ -50,22 +50,22 @@
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
       <ul class="cat-list">
-        <li><a href="/collections/all" {% if collection.handle == 'all' %}class="active"{% endif %}>
-          🛒 Todos <span class="cnt">{{ collection.all_products_count | default: '—' }}</span>
+        <li><a href="javascript:filterCategory('all')" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
+          🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
         </a></li>
-        <li><a href="/collections/electronica" {% if collection.handle == 'electronica' %}class="active"{% endif %}>
+        <li><a href="javascript:filterCategory('Electr%C3%B3nica')" {% if request.query_string contains 'Electr' %}class="active"{% endif %}>
           ⚡ Electrónica
         </a></li>
-        <li><a href="/collections/salud" {% if collection.handle == 'salud' %}class="active"{% endif %}>
+        <li><a href="javascript:filterCategory('Salud')" {% if request.query_string contains 'Salud' %}class="active"{% endif %}>
           💊 Salud
         </a></li>
-        <li><a href="/collections/belleza" {% if collection.handle == 'belleza' %}class="active"{% endif %}>
+        <li><a href="javascript:filterCategory('Belleza')" {% if request.query_string contains 'Belleza' %}class="active"{% endif %}>
           ✨ Belleza
         </a></li>
-        <li><a href="/collections/hogar" {% if collection.handle == 'hogar' %}class="active"{% endif %}>
+        <li><a href="javascript:filterCategory('Hogar')" {% if request.query_string contains 'Hogar' %}class="active"{% endif %}>
           🏠 Hogar
         </a></li>
-        <li><a href="/collections/moda" {% if collection.handle == 'moda' %}class="active"{% endif %}>
+        <li><a href="javascript:filterCategory('Moda')" {% if request.query_string contains 'Moda' %}class="active"{% endif %}>
           👗 Moda
         </a></li>
       </ul>
@@ -74,41 +74,68 @@
     <!-- Rango de precio -->
     <div class="sidebar-card reveal d1">
       <p class="sb-title">Precio</p>
-      <div class="price-range">
-        <div class="range-inputs">
-          <input class="range-inp" type="number" placeholder="$ Mín" id="priceMin" min="0">
-          <span class="range-sep">—</span>
-          <input class="range-inp" type="number" placeholder="$ Máx" id="priceMax" min="0">
+      <form action="{{ request.path }}" method="get" id="priceFilterForm">
+        {%- if request.query_string contains 'sort_by' -%}
+          <input type="hidden" name="sort_by" value="{{ request.query_string | split: 'sort_by=' | last | split: '&' | first }}">
+        {%- endif -%}
+        <div class="price-range">
+          <div class="range-inputs">
+            <input class="range-inp" type="number" placeholder="$ Mín" id="priceMin"
+                   name="filter.v.price.gte" min="0"
+                   value="{% if request.query_string contains 'filter.v.price.gte' %}{{ request.query_string | split: 'filter.v.price.gte=' | last | split: '&' | first }}{% endif %}">
+            <span class="range-sep">—</span>
+            <input class="range-inp" type="number" placeholder="$ Máx" id="priceMax"
+                   name="filter.v.price.lte" min="0"
+                   value="{% if request.query_string contains 'filter.v.price.lte' %}{{ request.query_string | split: 'filter.v.price.lte=' | last | split: '&' | first }}{% endif %}">
+          </div>
+          <input class="range-slider" type="range" min="0" max="500" value="500"
+                 oninput="document.getElementById('priceMax').value = this.value">
         </div>
-        <input class="range-slider" type="range" min="0" max="500" value="500"
-               oninput="document.getElementById('priceMax').value = this.value">
-      </div>
+      </form>
     </div>
 
-    <!-- Marca (demo) -->
+    <!-- Marca (dinámica) -->
     <div class="sidebar-card reveal d2">
       <p class="sb-title">Marca</p>
       <div class="check-list">
-        <label class="check-item"><input type="checkbox"> <span>Apple</span><span class="check-cnt">(48)</span></label>
-        <label class="check-item"><input type="checkbox"> <span>Samsung</span><span class="check-cnt">(62)</span></label>
-        <label class="check-item"><input type="checkbox"> <span>Sony</span><span class="check-cnt">(35)</span></label>
-        <label class="check-item"><input type="checkbox"> <span>JBL</span><span class="check-cnt">(27)</span></label>
-        <label class="check-item"><input type="checkbox"> <span>Xiaomi</span><span class="check-cnt">(44)</span></label>
+        {%- if collection.all_vendors.size > 0 -%}
+          {%- for vendor in collection.all_vendors limit: 8 -%}
+            <label class="check-item">
+              <input type="checkbox"
+                     onchange="filterVendor('{{ vendor | escape }}')"
+                     {% if request.query_string contains vendor %}checked{% endif %}>
+              <span>{{ vendor }}</span>
+            </label>
+          {%- endfor -%}
+        {%- else -%}
+          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Las marcas aparecerán cuando tengas productos.</p>
+        {%- endif -%}
       </div>
     </div>
 
-    <!-- Valoración (demo) -->
+    <!-- Tipo de producto (dinámico) -->
     <div class="sidebar-card reveal d3">
-      <p class="sb-title">Valoración</p>
-      <div style="display:flex;flex-direction:column;gap:8px;">
-        <div class="star-row"><span class="stars-gold">★★★★★</span><span class="star-val">5 estrellas (124)</span></div>
-        <div class="star-row"><span class="stars-gold">★★★★</span><span style="color:var(--sand);">★</span><span class="star-val">4+ (203)</span></div>
-        <div class="star-row"><span class="stars-gold">★★★</span><span style="color:var(--sand);">★★</span><span class="star-val">3+ (89)</span></div>
+      <p class="sb-title">Tipo de producto</p>
+      <div class="check-list">
+        {%- if collection.all_types.size > 0 -%}
+          {%- for type in collection.all_types limit: 8 -%}
+            {%- if type != blank -%}
+              <label class="check-item">
+                <input type="checkbox"
+                       onchange="filterType('{{ type | escape }}')"
+                       {% if request.query_string contains type %}checked{% endif %}>
+                <span>{{ type }}</span>
+              </label>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          <p style="font-size:.78rem;color:var(--muted);line-height:1.5;">Los tipos aparecen cuando configures el campo "Tipo" en tus productos.</p>
+        {%- endif -%}
       </div>
     </div>
 
-    <button class="btn-apply reveal d4" onclick="showToast('✅ Filtros aplicados')">Aplicar filtros</button>
-    <button class="btn-clear reveal d4" onclick="clearFilters()">Limpiar filtros</button>
+    <button class="btn-apply reveal d4" type="submit" form="priceFilterForm">Aplicar filtros</button>
+    <button class="btn-clear reveal d4" type="button" onclick="clearFilters()">Limpiar filtros</button>
 
   </aside>
 
@@ -128,7 +155,8 @@
       {% if collection.products_count > 0 %}
         {% comment %} ── PRODUCTOS REALES DE SHOPIFY ── {% endcomment %}
         {% for product in collection.products %}
-          <div class="prod reveal d{{ forloop.index | modulo: 4 | plus: 1 }}">
+          <div class="prod reveal d{{ forloop.index | modulo: 4 | plus: 1 }}" style="position:relative;">
+            <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
             <div class="prod-thumb" style="background: linear-gradient(135deg, #f5f0e8, #e8e0d0);">
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: 'medium' }}"
@@ -147,7 +175,8 @@
                       data-wish-price="{{ product.price | money }}"
                       data-wish-url="{{ product.url }}"
                       onclick="toggleWish(this)"
-                      aria-label="Guardar en favoritos">♡</button>
+                      aria-label="Guardar en favoritos"
+                      style="position:relative;z-index:2;">♡</button>
             </div>
             <div class="prod-info">
               <p class="prod-cat">{{ product.type | default: collection.title }}</p>
@@ -163,7 +192,7 @@
                   {% endif %}
                   <span class="prod-price-now">{{ product.price | money }}</span>
                 </div>
-                <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;">
+                <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;position:relative;z-index:2;">
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <button type="submit" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %}>+</button>
@@ -297,13 +326,46 @@ function sortProducts(select) {
   window.location.href = url.toString();
 }
 
-// ── CLEAR FILTERS ────────────────────────────────
+// ── FILTER BY VENDOR ─────────────────────────────
+function filterVendor(vendor) {
+  const url = new URL(window.location.href);
+  const current = url.searchParams.getAll('filter.p.vendor');
+  url.searchParams.delete('filter.p.vendor');
+  if (current.includes(vendor)) {
+    current.filter(v => v !== vendor).forEach(v => url.searchParams.append('filter.p.vendor', v));
+  } else {
+    [...current, vendor].forEach(v => url.searchParams.append('filter.p.vendor', v));
+  }
+  window.location.href = url.toString();
+}
+
+// ── FILTER BY PRODUCT TYPE ────────────────────────
+function filterType(type) {
+  const url = new URL(window.location.href);
+  const current = url.searchParams.getAll('filter.p.product_type');
+  url.searchParams.delete('filter.p.product_type');
+  if (current.includes(type)) {
+    current.filter(t => t !== type).forEach(t => url.searchParams.append('filter.p.product_type', t));
+  } else {
+    [...current, type].forEach(t => url.searchParams.append('filter.p.product_type', t));
+  }
+  window.location.href = url.toString();
+}
+
+// ── CLEAR FILTERS ─────────────────────────────────
 function clearFilters() {
-  document.querySelectorAll('.check-item input').forEach(i => i.checked = false);
-  document.getElementById('priceMin').value = '';
-  document.getElementById('priceMax').value = '';
-  document.querySelector('.range-slider').value = 500;
-  showToast('Filtros eliminados');
+  window.location.href = '{{ request.path }}';
+}
+
+// ── FILTER BY CATEGORY (product_type) ────────────────
+function filterCategory(type) {
+  const url = new URL(window.location.href);
+  if (type === 'all') {
+    url.searchParams.delete('filter.p.product_type');
+  } else {
+    url.searchParams.set('filter.p.product_type', decodeURIComponent(type));
+  }
+  window.location.href = url.toString();
 }
 
 // ── TOAST ────────────────────────────────────────

@@ -16,8 +16,8 @@
       {{ section.settings.subheading }}
     </p>
     <div class="hero-btns">
-      <a href="{{ section.settings.btn_1_link }}" class="btn-main">{{ section.settings.btn_1_text }}</a>
-      <a href="{{ section.settings.btn_2_link }}" class="btn-sec">{{ section.settings.btn_2_text }}</a>
+      <a href="{{ section.settings.btn_1_link | default: '/collections/all' }}" class="btn-main">{{ section.settings.btn_1_text }}</a>
+      <a href="{{ section.settings.btn_2_link | default: '/collections/all' }}" class="btn-sec">{{ section.settings.btn_2_text }}</a>
     </div>
     <!-- CHIPS DE CONFIANZA (sin stats falsas para tienda nueva) -->
     <div class="hero-stats" style="gap:16px; flex-wrap:wrap;">
@@ -120,7 +120,7 @@
       "type": "text",
       "id": "btn_1_text",
       "label": "Primary Button Text",
-      "default": "Explorar tienda →"
+      "default": "Ver productos →"
     },
     {
       "type": "url",

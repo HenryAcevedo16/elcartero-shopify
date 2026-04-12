@@ -246,6 +246,18 @@ let productosStr = "";
 {% endfor %}
 productosStr = productosStr.replace(/,\s*$/, '');
 
+// Items con variant_id para crear la orden en Shopify
+const cartItems = [
+  {% for item in cart.items %}
+    {
+      variant_id: {{ item.variant_id }},
+      quantity:   {{ item.quantity }},
+      title:      "{{ item.product.title | escape }}",
+      price:      "{{ item.price | money_without_currency }}"
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+];
+
 // ── AJAX: cambiar cantidad sin recargar página ──
 function ajaxQty(line, qty) {
   fetch('/cart/change.js', {
@@ -370,6 +382,7 @@ async function enviarPedido() {
     notas:      document.getElementById('fNotas').value.trim(),
     productos:  productosStr,
     total:      shopifyTotal,
+    items:      cartItems,   // ← variant_ids para crear la orden en Shopify
     estado:     'Pendiente'
   };
 
@@ -378,14 +391,14 @@ async function enviarPedido() {
       await fetch(SHEETS_URL, {
         method:  'POST',
         mode:    'no-cors',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'text/plain' }, // text/plain es CORS-safe con no-cors
         body:    JSON.stringify({ ...payload, _token: 'EC2026RD' })
       });
     }
     mostrarExito(orderNum);
   } catch (err) {
     console.error('Error al enviar pedido:', err);
-    mostrarExito(orderNum); // Mostrar éxito igual — la petición no-cors siempre llega
+    mostrarExito(orderNum);
   }
 }
 
@@ -393,12 +406,21 @@ function mostrarExito(orderNum) {
   document.getElementById('modalOrderNum').textContent = orderNum;
   document.getElementById('formModal').classList.remove('show');
   document.getElementById('successModal').classList.add('show');
+
+  // Vaciar carrito de Shopify
+  fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+    .then(() => {
+      // Actualizar badge del header a 0
+      const badge = document.getElementById('cart-badge');
+      if (badge) { badge.textContent = '0'; badge.style.display = 'none'; }
+    })
+    .catch(err => console.warn('No se pudo vaciar el carrito:', err));
 }
 </script>
 
 {% schema %}
 {
-  "name": "Cart — Formulario de Pedido",
+  "name": "Carrito de Compras",
   "settings": []
 }
 {% endschema %}
