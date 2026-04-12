@@ -44,6 +44,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
   {{ content_for_header }}
 
   <!-- Estilos Globales -->
@@ -280,17 +283,30 @@
               badge.innerText = cart.item_count;
             }
           });
-          // Mostrar Toast de éxito
-          const toast = document.getElementById('toast');
-          if (toast) {
-            toast.textContent = '🛒 ¡Agregado al carrito!';
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
-          }
+          // Mostrar SweetAlert2
+          Swal.fire({
+            title: '¡Producto agregado al carrito!',
+            text: '¿Qué deseas hacer ahora?',
+            icon: 'success',
+            showCancelButton: true,
+            confirmButtonColor: '#22c244',
+            cancelButtonColor: '#1a2e1e',
+            confirmButtonText: 'Finalizar compra →',
+            cancelButtonText: 'Seguir comprando',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/cart';
+            }
+          });
         })
         .catch(err => {
           console.error("Error adding to cart:", err);
-          alert("Ocurrió un error al agregar el producto.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Upps...',
+            text: 'Ocurrió un error al agregar el producto.'
+          });
         });
       }
     });
