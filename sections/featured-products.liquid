@@ -1,3 +1,4 @@
+{{ 'inicio.css' | asset_url | stylesheet_tag }}
 <div class="products-wrap">
   <div class="row-header reveal">
     <div>
@@ -10,8 +11,13 @@
   </div>
 
   <div class="prods-grid">
+    {% assign current_product_handle = product.handle %}
     {% assign collection = collections[section.settings.collection] %}
-    {% for product in collection.products limit: section.settings.product_limit %}
+    {% assign count = 0 %}
+    {% for product in collection.products %}
+      {% if template contains 'product' and product.handle == current_product_handle %}
+        {% continue %}
+      {% endif %}
 
       <div class="prod reveal" style="position:relative;">
         <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
@@ -60,6 +66,8 @@
           </div>
         </div>
       </div>
+      {% assign count = count | plus: 1 %}
+      {% if count >= section.settings.product_limit %}{% break %}{% endif %}
 
     {% else %}
       <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--muted); border-radius: 16px; border: 1.5px dashed var(--sand); background: #fafafa;">
