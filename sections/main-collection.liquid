@@ -18,11 +18,7 @@
   <div class="ph-left">
     <h1>{{ collection.title | default: '🛒 Catálogo' }}</h1>
     <p>
-      {% if collection.products_count > 0 %}
-        {{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %} encontrados
-      {% else %}
-        Productos de demostración — integración con Effi próximamente
-      {% endif %}
+      {{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %} encontrado{% if collection.products_count != 1 %}s{% endif %}
     </p>
   </div>
   <div class="ph-right">
@@ -155,12 +151,7 @@
   <!-- ══ ÁREA DE PRODUCTOS ══ -->
   <main>
 
-    <!-- Banner demo -->
-    {% if collection.products_count == 0 %}
-      <div style="background:var(--cream); border:1.5px dashed var(--sand); border-radius:16px; padding:12px 18px; margin-bottom:20px; font-size:.82rem; color:var(--muted); display:flex; align-items:center; gap:10px;">
-        👋 <span><strong style="color:var(--dark);">Modo demostración</strong> — Estos productos son de ejemplo. Cuando conectes Effi se reemplazarán automáticamente.</span>
-      </div>
-    {% endif %}
+
 
     <!-- Grid de productos -->
     <div class="prods-grid" id="prodGrid">
@@ -216,48 +207,12 @@
         {% endfor %}
 
       {% else %}
-        {% comment %} ── PRODUCTOS DE DEMOSTRACIÓN ── {% endcomment %}
-
-        {% assign demo_products = "🎧|Auriculares Bluetooth Pro Max|Cancelación activa de ruido. Hasta 30h de batería. Compatible iOS y Android.|$129.00|$83.99|−35%|lb-hot|pth-1|⚡ Electrónica,⌚|Smartwatch Fitness Pro Series 5|GPS integrado, monitor de salud 24/7 y resistente al agua.|$119.00||Nuevo|lb-new|pth-2|⚡ Electrónica,📱|Cargador Inalámbrico 15W|Carga rápida Qi. Diseño ultradelgado para todos los dispositivos.|$35.00|$28.00|−20%|lb-off|pth-3|⚡ Electrónica,🖥️|Monitor Curvo 27'' 144Hz|Resolución QHD, panel IPS. Perfecto para gaming y diseño.|$249.00||Nueva|lb-new|pth-4|⚡ Electrónica,🎮|Control Gaming Inalámbrico RGB|Compatible PC/PS/móvil. Vibración háptica y 20h de batería.|$65.00|$55.25|−15%|lb-hot|pth-5|⚡ Electrónica,💊|Pack Vitaminas C + D3 — 60 días|Refuerza tu sistema inmunológico. Sin azúcar, sin gluten.|$34.99||Nuevo|lb-new|pth-2|💊 Salud,🏋️|Proteína Whey Chocolate 2kg|Fórmula avanzada con aminoácidos esenciales. 25g de proteína por dosis.|$69.99||·|lb-new|pth-7|💊 Salud,💄|Sérum Facial Vitamina C 30ml|Ilumina y unifica el tono. Dermatológicamente testado.|$61.00|$52.00|−15%|lb-off|pth-3|✨ Belleza,🧴|Crema Hidratante 24h SPF 50|Protección solar y cuidado intensivo. Para todo tipo de piel.|$44.00|$37.40|−15%|lb-off|pth-6|✨ Belleza,☕|Cafetera Espresso Automática|Presión de 15 bares. Incluye espumador y cápsula de prueba gratis.|$95.00|$76.00|−20%|lb-hot|pth-4|🏠 Hogar,💡|Bombillos LED Smart WiFi Pack x4|16M de colores, compatible con Alexa y Google Home.|$48.00|$36.00|−25%|lb-hot|pth-6|🏠 Hogar,🧹|Robot Aspirador Silencioso|Mapeo inteligente 3D. Control desde app. Autonomía 90min.|$189.00|$149.00|−21%|lb-hot|pth-5|🏠 Hogar" | split: "," %}
-
-        {% for item in demo_products %}
-          {% assign parts = item | split: "|" %}
-          {% if parts.size >= 9 %}
-          <div class="prod reveal">
-            <div class="prod-thumb {{ parts[7] }}">
-              <span style="font-size:3.5rem;">{{ parts[0] }}</span>
-              {% if parts[5] != '' and parts[5] != '·' %}
-                <span class="prod-label {{ parts[6] }}">{{ parts[5] }}</span>
-              {% endif %}
-              <button class="prod-wish-btn"
-                      data-wish-id="demo-{{ forloop.index }}"
-                      data-wish-title="{{ parts[1] }}"
-                      data-wish-img=""
-                      data-wish-price="{{ parts[3] }}"
-                      onclick="toggleWish(this)"
-                      aria-label="Guardar">♡</button>
-            </div>
-            <div class="prod-info">
-              <p class="prod-cat" style="color:var(--red);">{{ parts[8] }}</p>
-              <div class="prod-stars"><span class="stars-y">★★★★★</span></div>
-              <p class="prod-name">{{ parts[1] }}</p>
-              <p class="prod-desc" style="display:none; font-size:.78rem; color:var(--muted); line-height:1.5; margin-bottom:10px;">{{ parts[2] }}</p>
-              <div class="prod-bottom">
-                <div class="prod-price-block">
-                  {% if parts[4] != '' %}
-                    <span class="prod-price-old">{{ parts[3] }}</span>
-                    <span class="prod-price-now">{{ parts[4] }}</span>
-                  {% else %}
-                    <span class="prod-price-now">{{ parts[3] }}</span>
-                  {% endif %}
-                </div>
-                <button class="prod-cart-btn" onclick="showToast('🛒 Producto de demo — próximamente disponible')">+</button>
-              </div>
-            </div>
-          </div>
-          {% endif %}
-        {% endfor %}
-
+        <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: var(--muted); border-radius: 20px; border: 1.5px dashed var(--sand); background: var(--white); margin: 20px 0;">
+          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;">🔍</span>
+          <h3 style="font-size: 1.3rem; color: var(--dark); font-weight: 800; margin-bottom: 8px;">No se encontraron productos</h3>
+          <p style="font-size: 0.9rem;">Intenta con otros filtros o explora nuestras categorías principales.</p>
+          <button onclick="window.location.href='{{ routes.all_products_collection_url }}'" style="margin-top: 24px; background: var(--dark); color: white; border: none; padding: 12px 28px; border-radius: 12px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem;">Limpiar búsqueda</button>
+        </div>
       {% endif %}
 
     </div><!-- /prodGrid -->
@@ -286,17 +241,6 @@
         {% else %}
           <button class="pg-btn arrow" disabled>›</button>
         {% endif %}
-      </div>
-    {% elsif collection.products_count == 0 %}
-      <!-- Paginación demo -->
-      <div class="pagination reveal">
-        <button class="pg-btn arrow">‹</button>
-        <button class="pg-btn on">1</button>
-        <button class="pg-btn" onclick="showToast('Más productos con la integración de Effi')">2</button>
-        <button class="pg-btn" onclick="showToast('Más productos con la integración de Effi')">3</button>
-        <span class="pg-dots">...</span>
-        <button class="pg-btn" onclick="showToast('Más productos con la integración de Effi')">12</button>
-        <button class="pg-btn arrow">›</button>
       </div>
     {% endif %}
 

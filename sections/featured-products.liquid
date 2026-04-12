@@ -62,25 +62,11 @@
       </div>
 
     {% else %}
-      <!-- Fallback visual si no se ha seleccionado ninguna colección en Shopify aún -->
-      {% for i in (1..4) %}
-        <div class="prod reveal">
-          <div class="prod-thumb" style="background:#f5f0e8;">
-            <span>🛒</span>
-          </div>
-          <div class="prod-info">
-            <p class="prod-cat">Categoría</p>
-            <p class="prod-stars"><span class="stars-y">★★★★★</span> (0)</p>
-            <p class="prod-name">Producto de Ejemplo {{ i }}</p>
-            <div class="prod-bottom">
-              <div class="prod-price-block">
-                <span class="prod-price-now">$99.99</span>
-              </div>
-              <button class="prod-cart-btn">+</button>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
+      <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--muted); border-radius: 16px; border: 1.5px dashed var(--sand); background: #fafafa;">
+        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🛍️</span>
+        <h3 style="font-size: 1.1rem; color: var(--dark); margin-bottom: 6px;">Colección vacía</h3>
+        <p style="font-size: 0.9rem;">Pronto añadiremos productos a esta colección.</p>
+      </div>
     {% endfor %}
   </div>
 </div>
