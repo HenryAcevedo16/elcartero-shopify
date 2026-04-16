@@ -65,11 +65,59 @@
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
             }
+          },
+          "categoria_dypVqb": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
+              "collection": "",
+              "name": "Belleza y Cuidado personal",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_UAz3ar": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/cuanto-ejercicio-hacer-dia-1.jpg",
+              "collection": "",
+              "name": "Ejercisio y Recreacion",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_wjUxFf": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/giang-duong-I9Nh-aw_i2s-unsplash.jpg",
+              "collection": "",
+              "name": "Tecnologia",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
           }
         },
         "block_order": [
           "categoria_HYUPLK",
-          "categoria_UNg4rT"
+          "categoria_UNg4rT",
+          "categoria_dypVqb",
+          "categoria_UAz3ar",
+          "categoria_wjUxFf"
         ],
         "settings": {
           "eyebrow": "Explorar por categoría",
