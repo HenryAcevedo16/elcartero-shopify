@@ -50,10 +50,26 @@
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
             }
+          },
+          "categoria_UNg4rT": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/brytny-com-C4rXIFSzEXk-unsplash.jpg",
+              "collection": "",
+              "name": "Bebe",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
           }
         },
         "block_order": [
-          "categoria_HYUPLK"
+          "categoria_HYUPLK",
+          "categoria_UNg4rT"
         ],
         "settings": {
           "eyebrow": "Explorar por categoría",
