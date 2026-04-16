@@ -170,6 +170,21 @@
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
             }
+          },
+          "categoria_ykKKtK": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/alice-donovan-rouse-z9F_yK4Nmf8-unsplash.jpg",
+              "collection": "",
+              "name": "Viajes",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
           }
         },
         "block_order": [
@@ -181,7 +196,8 @@
           "categoria_DBgFGb",
           "categoria_N7EMrf",
           "categoria_FkRC3H",
-          "categoria_cKTTWB"
+          "categoria_cKTTWB",
+          "categoria_ykKKtK"
         ],
         "settings": {
           "eyebrow": "Explorar por categoría",
