@@ -1,0 +1,370 @@
+{% comment %}
+  MAIN COLLECTION — Catálogo estilo Amazon
+  - Sidebar con filtros (categorías, precio, marca, valoración)
+  - Header con ordenación y toggle grid/lista
+  - Grid de productos reales desde Shopify
+  - Fallback: 12 productos de demostración cuando la colección está vacía
+{% endcomment %}
+
+{% paginate collection.products by section.settings.products_per_page %}
+
+<div class="breadcrumb">
+  <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
+  <span class="current">{{ collection.title | default: 'Catálogo' }}</span>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="ph-left">
+    <h1>{{ collection.title | default: '🛒 Catálogo' }}</h1>
+    <p>
+      {{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %} encontrado{% if collection.products_count != 1 %}s{% endif %}
+    </p>
+  </div>
+  <div class="ph-right">
+    <select class="sort-select" onchange="sortProducts(this)">
+      <option value="">Más relevantes</option>
+      <option value="price-asc">Precio: menor a mayor</option>
+      <option value="price-desc">Precio: mayor a menor</option>
+      <option value="rating">Mejor valorados</option>
+      <option value="newest">Más nuevos</option>
+    </select>
+    <div class="view-toggle">
+      <button class="vtbtn on" onclick="setView('grid', this)" title="Vista cuadrícula">⊞</button>
+      <button class="vtbtn" onclick="setView('list', this)" title="Vista lista">☰</button>
+    </div>
+  </div>
+</div>
+
+<!-- LAYOUT PRINCIPAL -->
+<div class="cat-layout">
+
+  <!-- ══ SIDEBAR ══ -->
+  <aside class="sidebar">
+
+    <!-- Categorías -->
+    <div class="sidebar-card reveal">
+      <p class="sb-title">Categorías</p>
+      <ul class="cat-list">
+        <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
+          🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" {% if request.query_string contains 'automotriz' %}class="active"{% endif %}>
+          🚗 Automotriz
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" {% if request.query_string contains 'bebe' %}class="active"{% endif %}>
+          🍼 Bebé
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal" {% if request.query_string contains 'belleza' %}class="active"{% endif %}>
+          💄 Belleza y cuidado personal
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion" {% if request.query_string contains 'deporte' %}class="active"{% endif %}>
+          ⚽ Deporte y recreación
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos" {% if request.query_string contains 'electrodomesticos' %}class="active"{% endif %}>
+          🔌 Electrodomésticos
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion" {% if request.query_string contains 'herramientas' %}class="active"{% endif %}>
+          🛠️ Herramientas y construcción
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar" {% if request.query_string contains 'hogar' %}class="active"{% endif %}>
+          🏠 Hogar
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud" {% if request.query_string contains 'salud' %}class="active"{% endif %}>
+          💊 Salud
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia" {% if request.query_string contains 'tecnologia' %}class="active"{% endif %}>
+          💻 Tecnología
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje" {% if request.query_string contains 'viajes' %}class="active"{% endif %}>
+          🧳 Viajes y equipaje
+        </a></li>
+      </ul>
+    </div>
+
+    <!-- ══ FILTROS NATIVOS (Shopify Search & Discovery) ══ -->
+    <form id="FacetFiltersForm" class="filter-form" action="{{ request.path }}" method="get">
+      {%- if request.query_string contains 'sort_by' -%}
+        <input type="hidden" name="sort_by" value="{{ request.query_string | split: 'sort_by=' | last | split: '&' | first }}">
+      {%- endif -%}
+
+      {%- for filter in collection.filters -%}
+        <div class="sidebar-card reveal d{{ forloop.index | plus: 1 }}">
+          <p class="sb-title">{{ filter.label }}</p>
+
+          {%- case filter.type -%}
+            {%- when 'boolean' or 'list' -%}
+              <div class="check-list">
+                {%- for filter_value in filter.values -%}
+                  <label class="check-item">
+                    <input type="checkbox"
+                           name="{{ filter_value.param_name }}"
+                           value="{{ filter_value.value }}"
+                           id="Filter-{{ filter.param_name | escape }}-{{ forloop.index }}"
+                           {% if filter_value.active -%}checked{%- endif %}
+                           {% if filter_value.count == 0 and filter_value.active == false -%}disabled{%- endif %}
+                           onchange="this.form.submit()">
+                    <span>{{ filter_value.label | escape }}</span>
+                    <span class="check-cnt">({{ filter_value.count }})</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+
+            {%- when 'price_range' -%}
+              {% liquid
+                assign max_price_amount = filter.range_max | money_without_currency | replace: ',', '' | split: '.' | first
+                if max_price_amount == blank or max_price_amount == '0'
+                  assign max_price_amount = 5000
+                endif
+              %}
+              <div class="price-range">
+                <div class="range-inputs">
+                  <input class="range-inp" type="number" placeholder="$ 0"
+                         name="{{ filter.min_value.param_name }}" id="Filter-{{ filter.min_value.param_name | escape }}"
+                         {%- if filter.min_value.value -%}
+                           value="{{ filter.min_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}"
+                         {%- endif -%}
+                         min="0" max="{{ max_price_amount }}"
+                         onchange="this.form.submit()">
+                  <span class="range-sep">—</span>
+                  <input class="range-inp" type="number" placeholder="$ {{ max_price_amount }}"
+                         name="{{ filter.max_value.param_name }}" id="Filter-{{ filter.max_value.param_name | escape }}"
+                         {%- if filter.max_value.value -%}
+                           value="{{ filter.max_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}"
+                         {%- endif -%}
+                         min="0" max="{{ max_price_amount }}"
+                         onchange="this.form.submit()">
+                </div>
+                <input class="range-slider" type="range" min="0" max="{{ max_price_amount }}"
+                       value="{% if filter.max_value.value %}{{ filter.max_value.value | money_without_currency | replace: ',', '' | split: '.' | first }}{% else %}{{ max_price_amount }}{% endif %}"
+                       oninput="document.getElementById('Filter-{{ filter.max_value.param_name | escape }}').value = this.value;"
+                       onchange="this.form.submit()">
+              </div>
+          {%- endcase -%}
+        </div>
+      {%- endfor -%}
+
+      <div style="margin-top:16px;">
+        {%- assign has_active_filters = false -%}
+        {%- for filter in collection.filters -%}
+          {%- if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value -%}
+            {%- assign has_active_filters = true -%}
+          {%- endif -%}
+        {%- endfor -%}
+        
+        {%- if has_active_filters -%}
+          <button class="btn-clear reveal" type="button" onclick="window.location.href='{{ collection.url }}'">Limpiar todos los filtros</button>
+        {%- endif -%}
+      </div>
+      <noscript>
+        <button type="submit" class="btn-apply" style="margin-top:10px;">Aplicar</button>
+      </noscript>
+    </form>
+
+  </aside>
+
+  <!-- ══ ÁREA DE PRODUCTOS ══ -->
+  <main>
+
+
+
+    <!-- Grid de productos -->
+    <div class="prods-grid" id="prodGrid">
+
+      {% if collection.products_count > 0 %}
+        {% comment %} ── PRODUCTOS REALES DE SHOPIFY ── {% endcomment %}
+        {% for product in collection.products %}
+          <div class="prod reveal d{{ forloop.index | modulo: 4 | plus: 1 }}" style="position:relative;">
+            <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
+            <div class="prod-thumb" style="background: #ffffff;">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | img_url: '600x' }}"
+                     alt="{{ product.title }}"
+                     style="width:100%; height:100%; object-fit:contain; display:block;">
+              {% else %}
+                <span>📦</span>
+              {% endif %}
+              {% if product.compare_at_price > product.price %}
+                <span class="prod-label lb-hot">Oferta</span>
+              {% endif %}
+              <button class="prod-wish-btn"
+                      data-wish-id="{{ product.id }}"
+                      data-wish-title="{{ product.title | escape }}"
+                      data-wish-img="{% if product.featured_image %}{{ product.featured_image | img_url: 'medium' }}{% endif %}"
+                      data-wish-price="{{ product.price | money }}"
+                      data-wish-url="{{ product.url }}"
+                      onclick="toggleWish(this)"
+                      aria-label="Guardar en favoritos"
+                      style="position:relative;z-index:2;">♡</button>
+            </div>
+            <div class="prod-info">
+              <p class="prod-cat">{{ product.type | default: collection.title }}</p>
+              <div class="prod-stars"><span class="stars-y">★★★★★</span></div>
+              <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
+                <p class="prod-name">{{ product.title }}</p>
+              </a>
+              <p class="prod-desc" style="display:none; font-size:.78rem; color:var(--muted); line-height:1.5; margin-bottom:10px;">{{ product.description | strip_html | truncate: 100 }}</p>
+              <div class="prod-bottom">
+                <div class="prod-price-block">
+                  {% if product.compare_at_price > product.price %}
+                    <span class="prod-price-old">{{ product.compare_at_price | money }}</span>
+                  {% endif %}
+                  <span class="prod-price-now">{{ product.price | money }}</span>
+                </div>
+                <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;position:relative;z-index:2;">
+                  <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %}>+</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      {% else %}
+        <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: var(--muted); border-radius: 20px; border: 1.5px dashed var(--sand); background: var(--white); margin: 20px 0;">
+          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;">🔍</span>
+          <h3 style="font-size: 1.3rem; color: var(--dark); font-weight: 800; margin-bottom: 8px;">No se encontraron productos</h3>
+          <p style="font-size: 0.9rem;">Intenta con otros filtros o explora nuestras categorías principales.</p>
+          <button onclick="window.location.href='{{ routes.all_products_collection_url }}'" style="margin-top: 24px; background: var(--dark); color: white; border: none; padding: 12px 28px; border-radius: 12px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem;">Limpiar búsqueda</button>
+        </div>
+      {% endif %}
+
+    </div><!-- /prodGrid -->
+
+    <!-- Paginación (solo con productos reales) -->
+    {% if collection.products_count > 0 and paginate.pages > 1 %}
+      <div class="pagination reveal">
+        {% if paginate.previous %}
+          <a href="{{ paginate.previous.url }}" class="pg-btn arrow">‹</a>
+        {% else %}
+          <button class="pg-btn arrow" disabled>‹</button>
+        {% endif %}
+        {% for part in paginate.parts %}
+          {% if part.is_link %}
+            <a href="{{ part.url }}" class="pg-btn">{{ part.title }}</a>
+          {% else %}
+            {% if part.title == '…' %}
+              <span class="pg-dots">…</span>
+            {% else %}
+              <span class="pg-btn on">{{ part.title }}</span>
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+        {% if paginate.next %}
+          <a href="{{ paginate.next.url }}" class="pg-btn arrow">›</a>
+        {% else %}
+          <button class="pg-btn arrow" disabled>›</button>
+        {% endif %}
+      </div>
+    {% endif %}
+
+  </main>
+</div><!-- /cat-layout -->
+
+<script>
+// ── GRID / LIST VIEW ─────────────────────────────
+function setView(type, btn) {
+  document.querySelectorAll('.vtbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  const grid = document.getElementById('prodGrid');
+  if (type === 'list') {
+    grid.classList.add('list-view');
+    grid.querySelectorAll('.prod-desc').forEach(d => d.style.display = 'block');
+    grid.querySelectorAll('.prod-cart-btn').forEach(b => { b.textContent = '🛒 Agregar'; });
+  } else {
+    grid.classList.remove('list-view');
+    grid.querySelectorAll('.prod-desc').forEach(d => d.style.display = 'none');
+    grid.querySelectorAll('.prod-cart-btn').forEach(b => { b.textContent = '+'; });
+  }
+}
+
+// ── SORT ─────────────────────────────────────────
+function sortProducts(select) {
+  const val = select.value;
+  const sortMap = {
+    'price-asc':  'price-ascending',
+    'price-desc': 'price-descending',
+    'newest':     'created-descending',
+    'rating':     'best-selling',
+    '':           'manual'
+  };
+  const url = new URL(window.location.href);
+  if (val === '') {
+    url.searchParams.delete('sort_by');
+  } else {
+    url.searchParams.set('sort_by', sortMap[val]);
+  }
+  window.location.href = url.toString();
+}
+
+// ── FILTER BY VENDOR ─────────────────────────────
+function filterVendor(vendor) {
+  const url = new URL(window.location.href);
+  const current = url.searchParams.getAll('filter.p.vendor');
+  url.searchParams.delete('filter.p.vendor');
+  if (current.includes(vendor)) {
+    current.filter(v => v !== vendor).forEach(v => url.searchParams.append('filter.p.vendor', v));
+  } else {
+    [...current, vendor].forEach(v => url.searchParams.append('filter.p.vendor', v));
+  }
+  window.location.href = url.toString();
+}
+
+// ── FILTER BY PRODUCT TYPE ────────────────────────
+function filterType(type) {
+  const url = new URL(window.location.href);
+  const current = url.searchParams.getAll('filter.p.product_type');
+  url.searchParams.delete('filter.p.product_type');
+  if (current.includes(type)) {
+    current.filter(t => t !== type).forEach(t => url.searchParams.append('filter.p.product_type', t));
+  } else {
+    [...current, type].forEach(t => url.searchParams.append('filter.p.product_type', t));
+  }
+  window.location.href = url.toString();
+}
+
+// ── CLEAR FILTERS ─────────────────────────────────
+function clearFilters() {
+  window.location.href = '{{ request.path }}';
+}
+
+// ── FILTER BY CATEGORY (product_type) ────────────────
+function filterCategory(type) {
+  const url = new URL(window.location.href);
+  if (type === 'all') {
+    url.searchParams.delete('filter.p.product_type');
+  } else {
+    url.searchParams.set('filter.p.product_type', decodeURIComponent(type));
+  }
+  window.location.href = url.toString();
+}
+
+// ── TOAST ────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+</script>
+
+{% endpaginate %}
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "label": "Productos por página",
+      "min": 8,
+      "max": 24,
+      "step": 4,
+      "default": 12
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,175 @@
+{% comment %} Política de Devoluciones — El Cartero RD {% endcomment %}
+
+{{ 'pedido.css' | asset_url | stylesheet_tag }}
+
+<div class="breadcrumb">
+  <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
+  <span class="current">Política de Devoluciones</span>
+</div>
+
+<section class="wrap" style="max-width:820px; margin:0 auto; padding-bottom:80px;">
+
+  <div class="row-header reveal" style="margin-bottom:36px;">
+    <div>
+      <p class="section-eyebrow">Legal</p>
+      <h1 class="section-title">Política de Devoluciones</h1>
+      <p style="color:var(--muted); font-size:0.85rem; margin-top:-28px;">
+        Última actualización: {{ 'now' | date: "%d de %B de %Y" }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Badge de garantía destacado -->
+  <div class="reveal" style="background:var(--dark); border-radius:20px; padding:28px 32px; margin-bottom:32px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+    <div style="font-size:2.5rem; flex-shrink:0;">🛡️</div>
+    <div>
+      <div style="color:white; font-size:1.1rem; font-weight:800; margin-bottom:6px;">Garantía de devolución de 30 días</div>
+      <div style="color:rgba(255,255,255,0.55); font-size:0.85rem; line-height:1.6;">
+        Si no estás satisfecho con tu compra, tienes hasta <strong style="color:rgba(255,255,255,0.85);">30 días calendario</strong> desde la fecha de entrega para solicitar una devolución.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-section reveal" style="padding:36px; border-radius:20px; display:flex; flex-direction:column; gap:32px;">
+
+    <!-- Sección 1 -->
+    <div>
+      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">1</span>
+        ¿Cuándo puedes devolver un producto?
+      </h2>
+      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted); margin-bottom:10px;">Aceptamos devoluciones en los siguientes casos:</p>
+      <div style="display:flex; flex-direction:column; gap:10px;">
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#d4f0da; color:#1a7c33; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✓ Aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">Producto llegó <strong style="color:var(--dark);">dañado o defectuoso</strong> desde fábrica.</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#d4f0da; color:#1a7c33; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✓ Aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">Recibiste un producto <strong style="color:var(--dark);">diferente al que ordenaste</strong> (modelo, color o talla incorrecta).</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#d4f0da; color:#1a7c33; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✓ Aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">El producto <strong style="color:var(--dark);">no funciona</strong> correctamente desde el primer día de uso.</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#fde8e8; color:#c0392b; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✗ No aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">Producto en perfecto estado que simplemente ya no quieres (cambio de opinión sin defecto).</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#fde8e8; color:#c0392b; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✗ No aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">Daños causados por uso indebido, caída, agua o modificaciones del producto.</p>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="background:#fde8e8; color:#c0392b; border-radius:8px; padding:4px 10px; font-size:0.72rem; font-weight:700; flex-shrink:0; margin-top:2px;">✗ No aplica</span>
+          <p style="font-size:0.88rem; line-height:1.7; color:var(--muted); margin:0;">Productos de higiene personal, ropa interior o artículos íntimos (por razones sanitarias).</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección 2 -->
+    <div>
+      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:16px; display:flex; align-items:center; gap:10px;">
+        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">2</span>
+        Cómo solicitar una devolución (3 pasos)
+      </h2>
+
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="display:flex; gap:16px; align-items:flex-start; background:var(--bg); border-radius:14px; padding:18px;">
+          <div style="background:var(--dark); color:white; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; flex-shrink:0;">1</div>
+          <div>
+            <div style="font-weight:700; font-size:0.9rem; color:var(--dark); margin-bottom:4px;">Contáctanos por WhatsApp o email</div>
+            <div style="font-size:0.83rem; color:var(--muted); line-height:1.6;">
+              Escríbenos al <strong style="color:var(--dark);">+1 (809) 326-9319</strong> o a <a href="mailto:soporte@elcarterord.store" style="color:var(--dark); font-weight:700;">soporte@elcarterord.store</a> dentro de los 30 días de la entrega. Incluye tu número de pedido y una breve descripción del problema.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:16px; align-items:flex-start; background:var(--bg); border-radius:14px; padding:18px;">
+          <div style="background:var(--dark); color:white; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; flex-shrink:0;">2</div>
+          <div>
+            <div style="font-weight:700; font-size:0.9rem; color:var(--dark); margin-bottom:4px;">Envíanos fotos del producto</div>
+            <div style="font-size:0.83rem; color:var(--muted); line-height:1.6;">
+              Para agilizar el proceso, adjunta fotos claras del producto que muestren el daño o el error. Evaluaremos tu caso en un máximo de <strong style="color:var(--dark);">48 horas hábiles</strong>.
+            </div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:16px; align-items:flex-start; background:var(--bg); border-radius:14px; padding:18px;">
+          <div style="background:var(--red); color:white; width:32px; height:32px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:0.85rem; flex-shrink:0;">3</div>
+          <div>
+            <div style="font-weight:700; font-size:0.9rem; color:var(--dark); margin-bottom:4px;">Coordinamos la solución</div>
+            <div style="font-size:0.83rem; color:var(--muted); line-height:1.6;">
+              Si la devolución aplica, coordinamos la recogida del producto por nuestra cuenta y procedemos con el reembolso o cambio, según tu preferencia.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección 3 -->
+    <div>
+      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">3</span>
+        Reembolsos
+      </h2>
+      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+        Una vez verificada y aprobada la devolución, el reembolso se procesará de la siguiente manera:
+      </p>
+      <ul style="font-size:0.88rem; line-height:1.8; color:var(--muted); padding-left:20px; margin-top:10px; display:flex; flex-direction:column; gap:4px;">
+        <li><strong style="color:var(--dark);">Pago contra entrega:</strong> se realiza por transferencia bancaria o en efectivo acordado, en un plazo de <strong style="color:var(--dark);">3 a 5 días hábiles</strong> después de recibir el producto devuelto.</li>
+        <li><strong style="color:var(--dark);">Cambio por otro producto:</strong> coordinamos el envío del producto de reemplazo sin costo adicional para el cliente.</li>
+      </ul>
+    </div>
+
+    <!-- Sección 4 -->
+    <div>
+      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">4</span>
+        Gastos de envío en devoluciones
+      </h2>
+      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+        Si el error es de nuestra parte (producto defectuoso, equivocado o dañado en tránsito), <strong style="color:var(--dark);">nosotros cubrimos el costo de recogida y reenvío</strong>. Si la devolución es por un motivo no imputable a nosotros, los costos de envío corren por cuenta del cliente.
+      </p>
+    </div>
+
+    <!-- Sección 5 -->
+    <div>
+      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
+        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">5</span>
+        Cambios de producto
+      </h2>
+      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+        Si recibiste el producto correcto pero deseas cambiarlo por otro (diferente modelo o talla), contáctanos dentro de los 30 días. El cambio está sujeto a disponibilidad de inventario. Los gastos de envío del cambio pueden aplicar.
+      </p>
+    </div>
+
+    <!-- CTA contacto -->
+    <div style="background:var(--cream); border-radius:16px; padding:24px 28px; display:flex; align-items:center; gap:20px; flex-wrap:wrap;">
+      <div style="flex:1; min-width:200px;">
+        <div style="font-weight:700; font-size:0.95rem; color:var(--dark); margin-bottom:4px;">¿Necesitas hacer una devolución?</div>
+        <div style="font-size:0.83rem; color:var(--muted);">Estamos aquí para ayudarte. Respuesta rápida garantizada.</div>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a href="https://wa.me/18093269319?text=Hola,%20quiero%20hacer%20una%20devoluci%C3%B3n%20de%20mi%20pedido"
+           target="_blank" rel="noopener"
+           class="btn-main" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+          💬 WhatsApp
+        </a>
+        <a href="mailto:soporte@elcarterord.store?subject=Solicitud%20de%20devoluci%C3%B3n"
+           class="btn-sec" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px; white-space:nowrap;">
+          📧 Email
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+{% schema %}
+{
+  "name": "Política de Devoluciones",
+  "settings": []
+}
+{% endschema %}

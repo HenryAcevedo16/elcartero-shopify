@@ -1,0 +1,74 @@
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">
+        <div class="footer-brand-icon">📬</div>
+        <div class="footer-brand-name">{{ shop.name }}</div>
+      </div>
+      <p class="footer-desc">{{ section.settings.store_description }}</p>
+    </div>
+    
+    {% for block in section.blocks %}
+      {% if block.type == 'link_list' %}
+        <div>
+          <p class="fcol-title">{{ block.settings.title }}</p>
+          <ul class="fcol-links">
+            {% for link in linklists[block.settings.menu].links %}
+              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+    {% endfor %}
+
+  </div>
+
+  <!-- Links legales fijos -->
+  <div style="border-top:1px solid rgba(255,255,255,0.07); padding:24px 0 0; margin-top:0; display:flex; gap:24px; flex-wrap:wrap;">
+    <a href="/pages/politica-de-privacidad" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Política de Privacidad</a>
+    <a href="/pages/politica-de-devoluciones" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Devoluciones</a>
+    <a href="/pages/contacto" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Contacto</a>
+    <a href="/collections/all" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Tienda</a>
+  </div>
+
+  <div class="footer-bottom">
+    <p class="footer-copy">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.</p>
+    <div class="footer-pays">
+      <span class="pay">💵 CONTRA ENTREGA</span>
+      <span class="pay">🚚 ENVÍO GRATIS</span>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "store_description",
+      "label": "Store Description",
+      "default": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_list",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu Menu"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

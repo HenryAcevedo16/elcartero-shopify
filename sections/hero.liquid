@@ -1,0 +1,190 @@
+<section class="hero">
+  <div class="hero-bg-shape hbs1"></div>
+  <div class="hero-bg-shape hbs2"></div>
+
+  <div class="hero-left">
+    <div class="hero-pill">
+      <div class="hero-pill-dot">🎉</div>
+      <span>{{ section.settings.pill_text }}</span>
+    </div>
+    <h1 class="hero-h1">
+      Tu tienda<br>
+      de <span class="red">todo</span> lo<br>
+      que <span class="underline-word">necesitas</span>
+    </h1>
+    <p class="hero-sub">
+      {{ section.settings.subheading }}
+    </p>
+    <div class="hero-btns">
+      <a href="{{ section.settings.btn_1_link | default: '/collections/all' }}" class="btn-main">{{ section.settings.btn_1_text }}</a>
+      <a href="{{ section.settings.btn_2_link | default: '/collections/all' }}" class="btn-sec">{{ section.settings.btn_2_text }}</a>
+    </div>
+    <!-- CHIPS DE CONFIANZA (sin stats falsas para tienda nueva) -->
+    <div class="hero-stats" style="gap:16px; flex-wrap:wrap;">
+      <div class="wl-chip" style="background:var(--cream); border-radius:50px; padding:8px 16px; display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <path d="M19 8h-3V5a1 1 0 00-1-1H3a1 1 0 00-1 1v12a1 1 0 001 1h1.1a3 3 0 005.8 0h4.2a3 3 0 005.8 0H21a1 1 0 001-1v-6l-3-3zM6 18a1 1 0 110-2 1 1 0 010 2zm11 0a1 1 0 110-2 1 1 0 010 2zm1-5h-2V9h1.5l1.5 1.5V13z" fill="#f5c518"/>
+          <path d="M4 14v-2h12v2H4z" fill="#1a2e1e" opacity="0.1"/>
+        </svg>
+        Entrega en 2–3 días
+      </div>
+      <div class="wl-chip" style="background:var(--cream); border-radius:50px; padding:8px 16px; display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:600;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" style="flex-shrink:0;">
+          <rect x="2" y="6" width="20" height="12" rx="2" fill="#22c244"/>
+          <circle cx="12" cy="12" r="3" fill="#ffffff" opacity="0.9"/>
+          <path d="M5 9a2 2 0 002-2H4a2 2 0 00-2 2v2a2 2 0 002 2V9h1zM19 15a2 2 0 00-2 2h3a2 2 0 002-2v-2a2 2 0 00-2-2v2h-1z" fill="#ffffff" opacity="0.6"/>
+        </svg>
+        Pago contra entrega
+      </div>
+      <div class="wl-chip" style="background:var(--cream); border-radius:50px; padding:8px 16px; display:inline-flex; align-items:center; gap:6px; font-size:.78rem; font-weight:600;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="flex-shrink:0;">
+          <circle cx="12" cy="12" r="12" fill="#25D366"/>
+          <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4a8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.1-.3.2-.5a.5.5 0 0 0 0-.5L9.3 8c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.3A3.4 3.4 0 0 0 6.1 10a6 6 0 0 0 1.2 3.1 13.7 13.7 0 0 0 5.2 4.6 6.3 6.3 0 0 0 2.3.7 3 3 0 0 0 2-.7 2.8 2.8 0 0 0 .8-1.7c0-.3-.2-.4-.4-.5z" fill="#fff"/>
+        </svg>
+        Confirmación por WhatsApp
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    {% assign featured = all_products[section.settings.featured_product] %}
+    <div class="hero-card-main">
+      <a href="{% if featured != blank %}{{ featured.url }}{% else %}/collections/all{% endif %}"
+         style="display:block; text-decoration:none; cursor:pointer;">
+        <div class="hcm-img{% unless featured != blank and featured.featured_image %} no-image{% endunless %}">
+          {% if featured != blank and featured.featured_image %}
+            <img src="{{ featured.featured_image | img_url: '600x600', crop: 'center' }}" alt="{{ featured.title }}">
+          {% else %}
+            🎧
+          {% endif %}
+        </div>
+      </a>
+      <span class="hcm-tag">
+        {% if featured != blank %}{{ section.settings.card_tag }}{% else %}Más vendido{% endif %}
+      </span>
+      <a href="{% if featured != blank %}{{ featured.url }}{% else %}/collections/all{% endif %}" style="text-decoration:none; color:inherit;">
+        <p class="hcm-name">
+          {{ featured.title | default: 'Auriculares Wireless Pro' }}
+        </p>
+      </a>
+      <div class="hcm-footer">
+        <span class="hcm-price">
+          {% if featured != blank %}{{ featured.price | money }}{% else %}$89.99{% endif %}
+        </span>
+        {% if featured != blank %}
+          <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;display:flex;">
+            <input type="hidden" name="id" value="{{ featured.variants.first.id }}">
+            <input type="hidden" name="quantity" value="1">
+            <button type="submit" class="hcm-add" style="display:flex;justify-content:center;align-items:center;background:var(--red);color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:1.4rem;">+</button>
+          </form>
+        {% else %}
+          <a href="/collections/all" class="hcm-add" style="display:flex;justify-content:center;align-items:center;text-decoration:none;background:var(--red);color:#fff;">+</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="hero-card-sm hcs1" style="left:-60px;">
+      <div class="hcs-icon green">💊</div>
+      <div class="hcs-info">
+        <span class="hcs-name">{{ section.settings.card_sm1_name | default: 'Vitaminas C+D' }}</span>
+        <span class="hcs-price">{{ section.settings.card_sm1_price | default: '$24.99' }}</span>
+      </div>
+    </div>
+    <div class="hero-card-sm hcs2">
+      <div class="hcs-icon pink">💄</div>
+      <div class="hcs-info">
+        <span class="hcs-name">{{ section.settings.card_sm2_name | default: 'Sérum Facial' }}</span>
+        <span class="hcs-price">{{ section.settings.card_sm2_price | default: '$38.00' }}</span>
+      </div>
+    </div>
+    <div class="hero-badge-delivery">
+      <span class="hbd-icon">🚚</span>
+      <div class="hbd-text">
+        <span class="hbd-main">Envío express</span>
+        <span class="hbd-sub">Llega mañana</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "pill_text",
+      "label": "Pill Notification Text",
+      "default": "Nuevos productos cada semana"
+    },
+    {
+      "type": "textarea",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "Electrónica, salud, belleza, hogar y mucho más. Encuentra todo en un solo lugar con los mejores precios y envío rápido a tu puerta."
+    },
+    {
+      "type": "text",
+      "id": "btn_1_text",
+      "label": "Primary Button Text",
+      "default": "Ver productos →"
+    },
+    {
+      "type": "url",
+      "id": "btn_1_link",
+      "label": "Primary Button Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_text",
+      "label": "Secondary Button Text",
+      "default": "Ver ofertas 🔥"
+    },
+    {
+      "type": "url",
+      "id": "btn_2_link",
+      "label": "Secondary Button Link"
+    },
+    {
+      "type": "product",
+      "id": "featured_product",
+      "label": "Producto destacado (tarjeta principal)"
+    },
+    {
+      "type": "text",
+      "id": "card_tag",
+      "label": "Etiqueta del producto",
+      "default": "Más vendido"
+    },
+    {
+      "type": "text",
+      "id": "card_sm1_name",
+      "label": "Tarjeta pequeña 1 — Nombre",
+      "default": "Vitaminas C+D"
+    },
+    {
+      "type": "text",
+      "id": "card_sm1_price",
+      "label": "Tarjeta pequeña 1 — Precio",
+      "default": "$24.99"
+    },
+    {
+      "type": "text",
+      "id": "card_sm2_name",
+      "label": "Tarjeta pequeña 2 — Nombre",
+      "default": "Sérum Facial"
+    },
+    {
+      "type": "text",
+      "id": "card_sm2_price",
+      "label": "Tarjeta pequeña 2 — Precio",
+      "default": "$38.00"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner",
+      "category": "Image"
+    }
+  ]
+}
+{% endschema %}

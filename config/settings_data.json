@@ -1,0 +1,66 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "colors_accent_1": "#22c244",
+    "colors_accent_2": "#1a2e1e",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "hero": {
+        "type": "hero",
+        "settings": {
+          "pill_text": "Nuevos productos cada semana",
+          "subheading": "Electrónica, salud, belleza, hogar y mucho más. Encuentra todo en un solo lugar con los mejores precios y envío rápido a tu puerta.",
+          "btn_1_text": "Ver productos →",
+          "btn_1_link": "",
+          "btn_2_text": "Ver ofertas 🔥",
+          "btn_2_link": "",
+          "featured_product": "faja-de-maternidad-con-tirantas-ajustables",
+          "card_tag": "Más vendido",
+          "card_sm1_name": "Vitaminas C+D",
+          "card_sm1_price": "$24.99",
+          "card_sm2_name": "Sérum Facial",
+          "card_sm2_price": "$38.00"
+        }
+      },
+      "featured-collections": {
+        "type": "featured-collections",
+        "settings": {
+          "eyebrow": "Explorar por categoría",
+          "title": "¿Qué buscas hoy?",
+          "btn_text": "Ver todas",
+          "btn_link": ""
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "eyebrow": "Novedades",
+          "title": "Productos nuevos",
+          "collection": "electronics",
+          "product_limit": 4,
+          "btn_text": "Ver todo",
+          "btn_link": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "store_description": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
+        }
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {}
+}

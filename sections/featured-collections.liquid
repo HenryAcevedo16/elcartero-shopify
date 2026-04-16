@@ -1,0 +1,382 @@
+<section class="wrap">
+  <div class="row-header reveal">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="view-all">
+      {{ section.settings.btn_text | default: 'Ver todos los productos' }} &rarr;
+    </a>
+  </div>
+
+  <div class="cats-carousel-wrapper">
+    <button class="cats-nav-btn cats-prev" aria-label="Anterior" onclick="scrollCats(-1)">❮</button>
+    
+    <div class="cats-grid" id="cats-scroll-container">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign modulo_index = forloop.index | modulo: 5 %}
+          {% assign is_large = false %}
+          {% if modulo_index == 0 %}{% assign is_large = true %}{% endif %}
+          
+          {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
+          {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
+          <a href="{{ cat_url }}"
+             class="cat-card reveal {% if is_large %}cat-card-large{% endif %}"
+             style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};"
+             {{ block.shopify_attributes }}>
+            
+            {% if block.settings.image != blank %}
+              <div class="cat-image-wrap">
+                <img src="{{ block.settings.image | img_url: '400x' }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              </div>
+            {% else %}
+              <div class="cat-emoji-wrap">{{ block.settings.emoji | default: '✨' }}</div>
+            {% endif %}
+
+            <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
+          </a>
+        {% endfor %}
+      {% else %}
+        <!-- Fallback dinámico rápido -->
+        {% assign fallback_cats = "Microfono,Altavoces,Teclados,Mouses,Audifonos,Controles,Mousepads,Accesorios,Paquetes,Edicion Especial" | split: "," %}
+        {% for cat_name in fallback_cats %}
+          {% assign modulo_index = forloop.index | modulo: 5 %}
+          {% assign is_large = false %}
+          {% if modulo_index == 0 %}{% assign is_large = true %}{% endif %}
+          <a href="#" class="cat-card reveal {% if is_large %}cat-card-large{% endif %}" style="text-decoration:none;color:inherit;--cat-bg:#f4f4f4;">
+            <div class="cat-emoji-wrap">📦</div>
+            <p class="cat-card-name">{{ cat_name }}</p>
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <button class="cats-nav-btn cats-next" aria-label="Siguiente" onclick="scrollCats(1)">❯</button>
+  </div>
+  
+  <!-- Contenedor para los puntos (dots) -->
+  <div class="cats-dots" id="cats-dots-container"></div>
+
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('cats-scroll-container');
+    const dotsContainer = document.getElementById('cats-dots-container');
+    if(!container || !dotsContainer) return;
+    
+    function updateDots() {
+      const scrollWidth = container.scrollWidth - container.clientWidth;
+      if (scrollWidth <= 0) {
+        dotsContainer.innerHTML = '';
+        return;
+      }
+      
+      const dotCount = Math.max(2, Math.ceil(container.scrollWidth / (container.clientWidth * 0.8)));
+      
+      if (dotsContainer.children.length !== dotCount) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < dotCount; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'cat-dot';
+          dot.addEventListener('click', () => {
+            const goTo = (scrollWidth / (dotCount - 1)) * i;
+            container.scrollTo({left: goTo, behavior: 'smooth'});
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      const progress = container.scrollLeft / scrollWidth || 0;
+      let activeIndex = Math.round(progress * (dotCount - 1));
+      activeIndex = Math.max(0, Math.min(activeIndex, dotCount - 1));
+
+      Array.from(dotsContainer.children).forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIndex);
+      });
+    }
+
+    container.addEventListener('scroll', updateDots);
+    window.addEventListener('resize', updateDots);
+    
+    setTimeout(updateDots, 150);
+  });
+
+  function scrollCats(direction) {
+    const container = document.getElementById('cats-scroll-container');
+    if(container) {
+      const scrollAmount = (140 + 16) * 2 * direction; 
+      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  }
+</script>
+
+<style>
+  .cats-carousel-wrapper {
+    position: relative;
+    margin-top: 32px;
+  }
+  
+  .cats-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #1a1a1a;
+    transition: all 0.2s;
+  }
+  .cats-nav-btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  .cats-prev { left: -18px; }
+  .cats-next { right: -18px; }
+
+  @media (max-width: 900px) {
+    .cats-prev, .cats-next { display: none; }
+  }
+
+  .cats-grid {
+    display: grid;
+    grid-template-rows: 140px 140px;
+    grid-auto-flow: column;
+    grid-auto-columns: 140px;
+    gap: 16px;
+    padding: 10px 0 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cats-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-card {
+    grid-column: span 1;
+    grid-row: span 1;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    background: var(--cat-bg, #f4f4f4);
+    border-radius: 8px; /* Cuadrado similar a la imagen */
+    padding: 16px 12px;
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.2s, background 0.2s;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.02);
+  }
+
+  .cat-card:hover {
+    transform: translateY(-4px);
+    background: #e9e9e9;
+  }
+
+  .cat-card-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    background: #eaeaea; /* Un gris sutil para diferenciar o el mismo */
+  }
+
+  .cat-image-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .cat-image-wrap img {
+    max-width: 90%;
+    max-height: 70px;
+    object-fit: contain;
+  }
+
+  .cat-card-large .cat-image-wrap img {
+    max-width: 85%;
+    max-height: 180px;
+  }
+
+  .cat-emoji-wrap {
+    font-size: 3.5rem;
+    line-height: 1;
+    margin-bottom: auto;
+    margin-top: auto;
+  }
+
+  .cat-card-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0;
+    letter-spacing: -0.01em;
+  }
+  
+  .cat-card-large .cat-card-name {
+    font-size: 1rem;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-bottom: 8px;
+  }
+
+  /* Dots styles */
+  .cats-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .cat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-dot.active {
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cat-dot.active::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #1a1a1a;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 500px) {
+    .cats-grid {
+      grid-auto-columns: 130px;
+      grid-template-rows: 130px 130px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Categorías Destacadas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño arriba",
+      "default": "Explorar por categoría"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "¿Qué buscas hoy?"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto del botón",
+      "default": "Ver todas"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Enlace del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "categoria",
+      "name": "Categoría",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen de Categoría"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección de Shopify"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre (si no hay colección)",
+          "default": "Categoría"
+        },
+        {
+          "type": "url",
+          "id": "fallback_url",
+          "label": "Enlace (si no hay colección)"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Ver productos"
+        },
+        {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Valor del filtro (product_type)"
+        },
+        {
+          "type": "color",
+          "id": "color_bg",
+          "label": "Color de fondo",
+          "default": "#f0faf3"
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Color del badge",
+          "default": "#22c244"
+        },
+        {
+          "type": "color",
+          "id": "color_glow",
+          "label": "Color del resplandor",
+          "default": "#b7f5c8"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorías Destacadas"
+    }
+  ]
+}
+{% endschema %}

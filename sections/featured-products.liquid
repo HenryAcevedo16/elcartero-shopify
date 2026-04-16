@@ -1,0 +1,131 @@
+{{ 'inicio.css' | asset_url | stylesheet_tag }}
+<div class="products-wrap">
+  <div class="row-header reveal">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    {% if section.settings.btn_link != blank %}
+      <a href="{{ section.settings.btn_link }}" class="view-all">{{ section.settings.btn_text }} &rarr;</a>
+    {% endif %}
+  </div>
+
+  <div class="prods-grid">
+    {% assign current_product_handle = product.handle %}
+    {% assign collection = collections[section.settings.collection] %}
+    {% assign count = 0 %}
+    {% for product in collection.products %}
+      {% if template contains 'product' and product.handle == current_product_handle %}
+        {% continue %}
+      {% endif %}
+
+      <div class="prod reveal" style="position:relative;">
+        <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
+        <a href="{{ product.url }}" class="prod-thumb" style="background: #ffffff; text-decoration:none; display:flex;">
+          <!-- Fallback de imagen usando emojis por ahora, o product.featured_image -->
+          {% if product.featured_image %}
+            <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:contain;display:block;">
+          {% else %}
+            <span>📦</span>
+          {% endif %}
+          
+          {% if product.compare_at_price > product.price %}
+            <span class="prod-label lb-hot">Oferta</span>
+          {% endif %}
+          <button class="prod-wish-btn"
+                  data-wish-id="{{ product.id }}"
+                  data-wish-title="{{ product.title | escape }}"
+                  data-wish-img="{% if product.featured_image %}{{ product.featured_image | img_url: 'medium' }}{% endif %}"
+                  data-wish-price="{{ product.price | money }}"
+                  data-wish-url="{{ product.url }}"
+                  onclick="toggleWish(this)"
+                  aria-label="Guardar en favoritos"
+                  style="position:relative;z-index:2;">♡</button>
+        </a>
+        
+        <div class="prod-info">
+          <p class="prod-cat">{{ collection.title }}</p>
+          <p class="prod-stars"><span class="stars-y">★★★★★</span></p>
+          
+          <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
+             <p class="prod-name">{{ product.title }}</p>
+          </a>
+          
+          <div class="prod-bottom">
+            <div class="prod-price-block">
+              {% if product.compare_at_price > product.price %}
+                <span class="prod-price-old">{{ product.compare_at_price | money }}</span>
+              {% endif %}
+              <span class="prod-price-now">{{ product.price | money }}</span>
+            </div>
+            <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;position:relative;z-index:2;">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+              <input type="hidden" name="quantity" value="1" />
+              <button type="submit" class="prod-cart-btn">+</button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% assign count = count | plus: 1 %}
+      {% if count >= section.settings.product_limit %}{% break %}{% endif %}
+
+    {% else %}
+      <div style="grid-column: 1 / -1; padding: 40px; text-align: center; color: var(--muted); border-radius: 16px; border: 1.5px dashed var(--sand); background: #fafafa;">
+        <span style="font-size: 2.5rem; display: block; margin-bottom: 12px;">🛍️</span>
+        <h3 style="font-size: 1.1rem; color: var(--dark); margin-bottom: 6px;">Colección vacía</h3>
+        <p style="font-size: 0.9rem;">Pronto añadiremos productos a esta colección.</p>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Featured Products",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow Text",
+      "default": "Novedades"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Productos nuevos"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection to Display"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "label": "Maximum products to show",
+      "default": 8
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button Text",
+      "default": "Ver todo"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Products",
+      "category": "Products"
+    }
+  ]
+}
+{% endschema %}
