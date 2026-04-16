@@ -125,6 +125,21 @@
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
             }
+          },
+          "categoria_N7EMrf": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/benjamin-lehman-EJU7A__krX0-unsplash.jpg",
+              "collection": "",
+              "name": "Herramientas y construccion",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
           }
         },
         "block_order": [
@@ -133,7 +148,8 @@
           "categoria_dypVqb",
           "categoria_UAz3ar",
           "categoria_wjUxFf",
-          "categoria_DBgFGb"
+          "categoria_DBgFGb",
+          "categoria_N7EMrf"
         ],
         "settings": {
           "eyebrow": "Explorar por categoría",
