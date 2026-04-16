@@ -178,8 +178,11 @@
   function scrollCats(direction) {
     const container = document.getElementById('cats-scroll-container');
     if(container) {
-      const scrollAmount = (200 + 16) * 2 * direction; 
-      container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const firstCard = container.querySelector('.cat-card:not(.cat-card-large)') || container.querySelector('.cat-card');
+      if (firstCard) {
+        const scrollAmount = (firstCard.offsetWidth + 16) * 2 * direction; 
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
     }
   }
 </script>
@@ -223,9 +226,10 @@
     display: grid;
     grid-template-rows: 240px 240px;
     grid-auto-flow: column;
-    grid-auto-columns: 200px;
+    /* Calcula exactamente 5 columnas restando los 4 espacios de 16px */
+    grid-auto-columns: calc((100% - 64px) / 5);
     gap: 16px;
-    padding: 10px 0 20px;
+    padding: 10px 0 30px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
