@@ -1,4 +1,4 @@
-<section class="wrap featured-cat-wrap">
+<section class="wrap">
   <div class="row-header reveal">
     <div>
       <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -180,7 +180,9 @@
     if(container) {
       const firstCard = container.querySelector('.cat-card:not(.cat-card-large)') || container.querySelector('.cat-card');
       if (firstCard) {
-        const scrollAmount = (firstCard.offsetWidth + 16) * 2 * direction; 
+        const gapString = window.getComputedStyle(container).columnGap;
+        const gap = parseFloat(gapString) || 16;
+        const scrollAmount = (firstCard.offsetWidth + gap) * 2 * direction; 
         container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
       }
     }
@@ -188,11 +190,6 @@
 </script>
 
 <style>
-  .featured-cat-wrap {
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-  
   .cats-carousel-wrapper {
     position: relative;
     margin-top: 32px;
@@ -231,9 +228,11 @@
     display: grid;
     grid-template-rows: 240px 240px;
     grid-auto-flow: column;
-    /* Calcula exactamente 6 columnas restando 5 espacios de 16px (16*5=80) */
-    grid-auto-columns: calc((100% - 80px) / 6);
-    gap: 16px;
+    /* La columna escala pero NUNCA supera los 220px */
+    grid-auto-columns: min(220px, calc((100% - 80px) / 6));
+    row-gap: 16px;
+    /* El gap aumenta dinámicamente en monitores anchos para rellenar el 100% de la pantalla */
+    column-gap: max(16px, calc((100% - 1320px) / 5));
     padding: 10px 0 30px;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
