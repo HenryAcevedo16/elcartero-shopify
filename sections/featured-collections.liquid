@@ -1,4 +1,4 @@
-<section class="wrap featured-cat-wrap">
+<section class="wrap">
   <div class="row-header reveal">
     <div>
       <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
@@ -188,11 +188,6 @@
 </script>
 
 <style>
-  .featured-cat-wrap {
-    max-width: 1300px;
-    margin: 0 auto;
-  }
-  
   .cats-carousel-wrapper {
     position: relative;
     margin-top: 32px;
@@ -231,8 +226,8 @@
     display: grid;
     grid-template-rows: 240px 240px;
     grid-auto-flow: column;
-    /* Calcula exactamente 6 columnas restando 5 espacios de 16px (16*5=80) */
-    grid-auto-columns: calc((100% - 80px) / 6);
+    /* Tamaño fijo de columna para que no se estiren al infinito */
+    grid-auto-columns: 220px;
     gap: 16px;
     padding: 10px 0 30px;
     overflow-x: auto;
