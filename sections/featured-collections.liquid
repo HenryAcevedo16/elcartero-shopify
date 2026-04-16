@@ -9,73 +9,178 @@
     {% endif %}
   </div>
 
-  <div class="cats-grid">
-    {% if section.blocks.size > 0 %}
-      {% for block in section.blocks %}
-        {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
-        {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
-        <a href="{{ cat_url }}"
-           class="cat-card reveal"
-           style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
-           {{ block.shopify_attributes }}>
-          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
-        <div class="cat-emoji-wrap">{{ block.settings.emoji | default: '✨' }}</div>
-          <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
-          <p class="cat-card-count">{{ block.settings.subtitle }}</p>
-          <div class="cat-arrow" style="color:var(--cat-accent,#22c244);">→</div>
+  <div class="cats-carousel-wrapper">
+    <button class="cats-nav-btn cats-prev" aria-label="Anterior" onclick="scrollCats(-1)">❮</button>
+    
+    <div class="cats-grid" id="cats-scroll-container">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
+          {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
+          <a href="{{ cat_url }}"
+             class="cat-card reveal"
+             style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
+             {{ block.shopify_attributes }}>
+            <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
+          <div class="cat-emoji-wrap">{{ block.settings.emoji | default: '✨' }}</div>
+            <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
+            <p class="cat-card-count">{{ block.settings.subtitle }}</p>
+            <div class="cat-arrow" style="color:var(--cat-accent,#22c244);">→</div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <!-- Fallback: 10 categorías estáticas -->
+        <a href="/collections/all?filter.p.product_type=Automotriz" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fef0f0;--cat-accent:#f44336;--cat-glow:#ffcdd2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffcdd2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🚗</div>
+          <p class="cat-card-name">Automotriz</p>
+          <p class="cat-card-count">Autos y Motos</p>
+          <div class="cat-arrow" style="color:#f44336;">→</div>
         </a>
-      {% endfor %}
-    {% else %}
-      <!-- Fallback: 4 categorías estáticas -->
-      <a href="/collections/all?filter.p.product_type=Electr%C3%B3nica" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0f4ff;--cat-accent:#3b5bdb;--cat-glow:#bac8ff;">
-        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#bac8ff,transparent 70%);"></div>
-        <div class="cat-emoji-wrap">⚡</div>
-        <p class="cat-card-name">Electrónica</p>
-        <p class="cat-card-count">Gadgets, cámaras y accesorios</p>
-        <div class="cat-arrow" style="color:#3b5bdb;">→</div>
-      </a>
-      <a href="/collections/all?filter.p.product_type=Belleza" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;">
-        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#fbb6d8,transparent 70%);"></div>
-        <div class="cat-emoji-wrap">💄</div>
-        <p class="cat-card-name">Belleza</p>
-        <p class="cat-card-count">Skincare, maquillaje y cuidado personal</p>
-        <div class="cat-arrow" style="color:#e91e8c;">→</div>
-      </a>
-      <a href="/collections/all?filter.p.product_type=Salud" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;">
-        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b7f5c8,transparent 70%);"></div>
-        <div class="cat-emoji-wrap">💊</div>
-        <p class="cat-card-name">Salud</p>
-        <p class="cat-card-count">Vitaminas, suplementos y más</p>
-        <div class="cat-arrow" style="color:#22c244;">→</div>
-      </a>
-      <a href="/collections/all?filter.p.product_type=Hogar" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#f5a623;--cat-glow:#ffe082;">
-        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffe082,transparent 70%);"></div>
-        <div class="cat-emoji-wrap">🏠</div>
-        <p class="cat-card-name">Hogar</p>
-        <p class="cat-card-count">Organización, cocina y decoración</p>
-        <div class="cat-arrow" style="color:#f5a623;">→</div>
-      </a>
-      <a href="/collections/all?filter.p.product_type=Viajes%20y%20equipaje" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e0f7fa;--cat-accent:#00acc1;--cat-glow:#b2ebf2;">
-        <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b2ebf2,transparent 70%);"></div>
-        <div class="cat-emoji-wrap">🧳</div>
-        <p class="cat-card-name">Viajes</p>
-        <p class="cat-card-count">Maletas, estuches y accesorios</p>
-        <div class="cat-arrow" style="color:#00acc1;">→</div>
-      </a>
-    {% endif %}
+
+        <a href="/collections/all?filter.p.product_type=Beb%C3%A9" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f3e5f5;--cat-accent:#9c27b0;--cat-glow:#e1bee7;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#e1bee7,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🍼</div>
+          <p class="cat-card-name">Bebé</p>
+          <p class="cat-card-count">Cuidado y Accesorios</p>
+          <div class="cat-arrow" style="color:#9c27b0;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Belleza%20y%20cuidado%20personal" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#fbb6d8,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💄</div>
+          <p class="cat-card-name">Belleza</p>
+          <p class="cat-card-count">Skincare y maquillaje</p>
+          <div class="cat-arrow" style="color:#e91e8c;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Deporte%20y%20recreaci%C3%B3n" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e8f5e9;--cat-accent:#4caf50;--cat-glow:#c8e6c9;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#c8e6c9,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">⚽</div>
+          <p class="cat-card-name">Deportes</p>
+          <p class="cat-card-count">Recreación al aire libre</p>
+          <div class="cat-arrow" style="color:#4caf50;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Electrodom%C3%A9sticos" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e3f2fd;--cat-accent:#2196f3;--cat-glow:#bbdefb;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#bbdefb,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🔌</div>
+          <p class="cat-card-name">Electrodomésticos</p>
+          <p class="cat-card-count">Equipos para el hogar</p>
+          <div class="cat-arrow" style="color:#2196f3;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Herramientas%20y%20construcci%C3%B3n" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#ff9800;--cat-glow:#ffecb3;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffecb3,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🛠️</div>
+          <p class="cat-card-name">Herramientas</p>
+          <p class="cat-card-count">Ferretería y construcción</p>
+          <div class="cat-arrow" style="color:#ff9800;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Hogar" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff3e0;--cat-accent:#ff5722;--cat-glow:#ffe0b2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffe0b2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🏠</div>
+          <p class="cat-card-name">Hogar</p>
+          <p class="cat-card-count">Organización y decoración</p>
+          <div class="cat-arrow" style="color:#ff5722;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Salud" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b7f5c8,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💊</div>
+          <p class="cat-card-name">Salud</p>
+          <p class="cat-card-count">Vitaminas y bienestar</p>
+          <div class="cat-arrow" style="color:#22c244;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Tecnolog%C3%ADa" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#ede7f6;--cat-accent:#673ab7;--cat-glow:#d1c4e9;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#d1c4e9,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💻</div>
+          <p class="cat-card-name">Tecnología</p>
+          <p class="cat-card-count">Computación y gadgets</p>
+          <div class="cat-arrow" style="color:#673ab7;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=Viajes%20y%20equipaje" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e0f7fa;--cat-accent:#00acc1;--cat-glow:#b2ebf2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b2ebf2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🧳</div>
+          <p class="cat-card-name">Viajes</p>
+          <p class="cat-card-count">Maletas y estuches</p>
+          <div class="cat-arrow" style="color:#00acc1;">→</div>
+        </a>
+      {% endif %}
+    </div>
+
+    <button class="cats-nav-btn cats-next" aria-label="Siguiente" onclick="scrollCats(1)">❯</button>
   </div>
 
 </section>
 
+<script>
+  function scrollCats(direction) {
+    const container = document.getElementById('cats-scroll-container');
+    const scrollAmount = 260 * direction;
+    container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  }
+</script>
+
 <style>
-  .cats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+  .cats-carousel-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
     margin-top: 32px;
+  }
+  
+  .cats-nav-btn {
+    position: absolute;
+    z-index: 10;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    border: 1px solid rgba(0,0,0,0.06);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--dark, #1a2e1e);
+    transition: transform 0.2s, background 0.2s;
+  }
+  .cats-nav-btn:hover {
+    background: var(--dark, #1a2e1e);
+    color: white;
+    transform: scale(1.05);
+  }
+  .cats-prev { left: -24px; }
+  .cats-next { right: -24px; }
+
+  @media (max-width: 900px) {
+    .cats-prev, .cats-next { display: none; }
+  }
+
+  .cats-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 10px 0 20px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cats-grid::-webkit-scrollbar {
+    display: none;
   }
 
   .cat-card {
+    flex: 0 0 calc(20% - 16px);
+    min-width: 220px;
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -105,20 +210,6 @@
   }
 
   .cat-card > * { position: relative; z-index: 1; }
-
-  .cat-chip {
-    position: absolute;
-    top: 18px;
-    right: 18px;
-    display: inline-flex;
-    align-items: center;
-    padding: 4px 12px;
-    border-radius: 999px;
-    font-size: 0.68rem;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-  }
 
   .cat-emoji-wrap {
     font-size: 4rem;
@@ -156,13 +247,6 @@
   .cat-card:hover .cat-arrow {
     transform: translateX(6px);
   }
-
-  @media (max-width: 640px) {
-    .cats-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-    }
-  }
 </style>
 
 {% schema %}
@@ -197,7 +281,7 @@
     {
       "type": "categoria",
       "name": "Categoría",
-      "limit": 6,
+      "limit": 10,
       "settings": [
         {
           "type": "collection",
@@ -230,8 +314,7 @@
         {
           "type": "text",
           "id": "filter_value",
-          "label": "Valor del filtro (product_type)",
-          "info": "El tipo de producto exacto configurado en Shopify. Ej: Electrónica"
+          "label": "Valor del filtro (product_type)"
         },
         {
           "type": "color",
@@ -256,69 +339,7 @@
   ],
   "presets": [
     {
-      "name": "Categorías Destacadas",
-      "blocks": [
-        {
-          "type": "categoria",
-          "settings": {
-            "name": "Electrónica",
-            "filter_value": "Electrónica",
-            "emoji": "⚡",
-            "subtitle": "Gadgets, cámaras y accesorios",
-            "color_bg": "#f0f4ff",
-            "color_accent": "#3b5bdb",
-            "color_glow": "#bac8ff"
-          }
-        },
-        {
-          "type": "categoria",
-          "settings": {
-            "name": "Belleza",
-            "filter_value": "Belleza",
-            "emoji": "💄",
-            "subtitle": "Skincare, maquillaje y cuidado personal",
-            "color_bg": "#fff0f6",
-            "color_accent": "#e91e8c",
-            "color_glow": "#fbb6d8"
-          }
-        },
-        {
-          "type": "categoria",
-          "settings": {
-            "name": "Salud",
-            "filter_value": "Salud",
-            "emoji": "💊",
-            "subtitle": "Vitaminas, suplementos y más",
-            "color_bg": "#f0faf3",
-            "color_accent": "#22c244",
-            "color_glow": "#b7f5c8"
-          }
-        },
-        {
-          "type": "categoria",
-          "settings": {
-            "name": "Hogar",
-            "filter_value": "Hogar",
-            "emoji": "🏠",
-            "subtitle": "Organización, cocina y decoración",
-            "color_bg": "#fff8e1",
-            "color_accent": "#f5a623",
-            "color_glow": "#ffe082"
-          }
-        },
-        {
-          "type": "categoria",
-          "settings": {
-            "name": "Viajes",
-            "filter_value": "Viajes y equipaje",
-            "emoji": "🧳",
-            "subtitle": "Maletas, estuches y accesorios",
-            "color_bg": "#e0f7fa",
-            "color_accent": "#00acc1",
-            "color_glow": "#b2ebf2"
-          }
-        }
-      ]
+      "name": "Categorías Destacadas"
     }
   ]
 }
