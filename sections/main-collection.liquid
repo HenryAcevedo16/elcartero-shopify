@@ -49,20 +49,35 @@
         <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
           🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electr%C3%B3nica" {% if request.query_string contains 'Electr' %}class="active"{% endif %}>
-          ⚡ Electrónica
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Automotriz" {% if request.query_string contains 'Automotriz' %}class="active"{% endif %}>
+          🚗 Automotriz
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" {% if request.query_string contains 'Salud' %}class="active"{% endif %}>
-          💊 Salud
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Beb%C3%A9" {% if request.query_string contains 'Beb' %}class="active"{% endif %}>
+          🍼 Bebé
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza" {% if request.query_string contains 'Belleza' %}class="active"{% endif %}>
-          ✨ Belleza
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza%20y%20cuidado%20personal" {% if request.query_string contains 'Belleza' %}class="active"{% endif %}>
+          💄 Belleza y cuidado personal
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Deporte%20y%20recreaci%C3%B3n" {% if request.query_string contains 'Deporte' %}class="active"{% endif %}>
+          ⚽ Deporte y recreación
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electrodom%C3%A9sticos" {% if request.query_string contains 'Electrodom' %}class="active"{% endif %}>
+          🔌 Electrodomésticos
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Herramientas%20y%20construcci%C3%B3n" {% if request.query_string contains 'Herramientas' %}class="active"{% endif %}>
+          🛠️ Herramientas y construcción
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Hogar" {% if request.query_string contains 'Hogar' %}class="active"{% endif %}>
           🏠 Hogar
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Moda" {% if request.query_string contains 'Moda' %}class="active"{% endif %}>
-          👗 Moda
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" {% if request.query_string contains 'Salud' %}class="active"{% endif %}>
+          💊 Salud
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Tecnolog%C3%ADa" {% if request.query_string contains 'Tecnolog' %}class="active"{% endif %}>
+          💻 Tecnología
+        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Viajes%20y%20equipaje" {% if request.query_string contains 'Viajes' %}class="active"{% endif %}>
+          🧳 Viajes y equipaje
         </a></li>
       </ul>
     </div>
