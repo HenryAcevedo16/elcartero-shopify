@@ -35,6 +35,26 @@
       },
       "featured-collections": {
         "type": "featured-collections",
+        "blocks": {
+          "categoria_HYUPLK": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/vladislav-klapin-pMRBBWD7Xyk-unsplash.jpg",
+              "collection": "",
+              "name": "Automotriz",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          }
+        },
+        "block_order": [
+          "categoria_HYUPLK"
+        ],
         "settings": {
           "eyebrow": "Explorar por categoría",
           "title": "¿Qué buscas hoy?",
@@ -57,6 +77,12 @@
         "type": "footer",
         "settings": {
           "store_description": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
+        }
+      },
+      "main-collection": {
+        "type": "main-collection",
+        "settings": {
+          "products_per_page": 12
         }
       }
     },
