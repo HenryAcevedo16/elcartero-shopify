@@ -180,7 +180,7 @@
               {% if product.featured_image %}
                 <img src="{{ product.featured_image | img_url: '600x' }}"
                      alt="{{ product.title }}"
-                     style="width:100%; height:100%; object-fit:contain; display:block;">
+                     style="width:100%; height:100%; object-fit:cover; display:block;">
               {% else %}
                 <span>📦</span>
               {% endif %}
@@ -194,8 +194,7 @@
                       data-wish-price="{{ product.price | money }}"
                       data-wish-url="{{ product.url }}"
                       onclick="toggleWish(this)"
-                      aria-label="Guardar en favoritos"
-                      style="position:relative;z-index:2;">♡</button>
+                      aria-label="Guardar en favoritos">♡</button>
             </div>
             <div class="prod-info">
               <p class="prod-cat">{{ product.type | default: collection.title }}</p>
