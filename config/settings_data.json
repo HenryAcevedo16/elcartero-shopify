@@ -155,6 +155,21 @@
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
             }
+          },
+          "categoria_cKTTWB": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/elsa-olofsson-vSFhQdcvyuA-unsplash.jpg",
+              "collection": "",
+              "name": "Salud",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
           }
         },
         "block_order": [
@@ -165,7 +180,8 @@
           "categoria_wjUxFf",
           "categoria_DBgFGb",
           "categoria_N7EMrf",
-          "categoria_FkRC3H"
+          "categoria_FkRC3H",
+          "categoria_cKTTWB"
         ],
         "settings": {
           "eyebrow": "Explorar por categoría",
