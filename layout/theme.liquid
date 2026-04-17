@@ -29,11 +29,11 @@
   <meta property="og:description" content="{{ page_description | default: shop.description | escape }}">
   <meta property="og:url" content="{{ canonical_url }}">
   {%- if product.featured_image -%}
-    <meta property="og:image" content="{{ product.featured_image | img_url: '1200x630' }}">
+    <meta property="og:image" content="{{ product.featured_image | image_url: width: 1200, height: 630, crop: 'center' }}">
   {%- elsif collection.image -%}
-    <meta property="og:image" content="{{ collection.image | img_url: '1200x630' }}">
+    <meta property="og:image" content="{{ collection.image | image_url: width: 1200, height: 630, crop: 'center' }}">
   {%- elsif settings.share_image -%}
-    <meta property="og:image" content="{{ settings.share_image | img_url: '1200x630' }}">
+    <meta property="og:image" content="{{ settings.share_image | image_url: width: 1200, height: 630, crop: 'center' }}">
   {%- endif -%}
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="{{ page_title | escape }}">

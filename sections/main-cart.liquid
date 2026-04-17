@@ -457,7 +457,7 @@ function mostrarExito(orderNum) {
   fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
     .then(() => {
       // Actualizar badge del header a 0
-      const badge = document.getElementById('cart-badge');
+      const badge = document.getElementById('cartBadge');
       if (badge) { badge.textContent = '0'; badge.style.display = 'none'; }
     })
     .catch(err => console.warn('No se pudo vaciar el carrito:', err));

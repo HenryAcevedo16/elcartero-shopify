@@ -29,7 +29,7 @@
             
             {% if block.settings.image != blank %}
               <div class="cat-image-wrap">
-                <img src="{{ block.settings.image | img_url: '600x' }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
               </div>
               <div class="cat-info">
             {% else %}

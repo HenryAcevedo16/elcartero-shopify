@@ -24,7 +24,7 @@
         <a href="{{ product.url }}" class="prod-thumb" style="background: #ffffff; text-decoration:none; display:flex;">
           <!-- Fallback de imagen usando emojis por ahora, o product.featured_image -->
           {% if product.featured_image %}
-            <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+            <img src="{{ product.featured_image | image_url: width: 600 }}" alt="{{ product.title }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
           {% else %}
             <span>📦</span>
           {% endif %}
@@ -35,7 +35,7 @@
           <button class="prod-wish-btn"
                   data-wish-id="{{ product.id }}"
                   data-wish-title="{{ product.title | escape }}"
-                  data-wish-img="{% if product.featured_image %}{{ product.featured_image | img_url: 'medium' }}{% endif %}"
+                  data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
                   data-wish-price="{{ product.price | money }}"
                   data-wish-url="{{ product.url }}"
                   onclick="toggleWish(this)"
@@ -44,7 +44,7 @@
         
         <div class="prod-info">
           <p class="prod-cat">{{ collection.title }}</p>
-          <p class="prod-stars"><span class="stars-y">★★★★★</span></p>
+
           
           <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
              <p class="prod-name">{{ product.title }}</p>
