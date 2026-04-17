@@ -67,11 +67,11 @@
   .fan-title { font-size: 1.2rem; font-weight: 700; margin: 0; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
   
   /* C1: Leftmost */
-  .fc-1 { transform: rotate(-10deg) translateX(-150%); z-index: 10; }
-  .fc-1:hover { transform: rotate(0) translateX(-150%) translateY(-40px) !important; }
+  .fc-1 { transform: rotate(-12deg) translateX(-180%); z-index: 10; }
+  .fc-1:hover { transform: rotate(0) translateX(-180%) translateY(-40px) !important; }
   /* C2: Left */
-  .fc-2 { transform: rotate(-5deg) translateX(-75%); z-index: 20; }
-  .fc-2:hover { transform: rotate(0) translateX(-75%) translateY(-40px) !important; }
+  .fc-2 { transform: rotate(-6deg) translateX(-95%); z-index: 20; }
+  .fc-2:hover { transform: rotate(0) translateX(-95%) translateY(-40px) !important; }
   /* C3: Center */
   .fc-3 { 
     width: 270px; height: 370px; z-index: 40; 
@@ -86,14 +86,14 @@
   }
   .fc-3:hover::before { opacity: 0.5; }
   .fc-3 img { z-index: 0; position:relative; }
-  .fc-3 .fan-card-content { z-index: 2; position:relative; }
+  .fc-3 .fan-card-content { z-index: 2; }
 
   /* C4: Right */
-  .fc-4 { transform: rotate(5deg) translateX(75%); z-index: 20; }
-  .fc-4:hover { transform: rotate(0) translateX(75%) translateY(-40px) !important; }
+  .fc-4 { transform: rotate(6deg) translateX(95%); z-index: 20; }
+  .fc-4:hover { transform: rotate(0) translateX(95%) translateY(-40px) !important; }
   /* C5: Rightmost */
-  .fc-5 { transform: rotate(10deg) translateX(150%); z-index: 10; }
-  .fc-5:hover { transform: rotate(0) translateX(150%) translateY(-40px) !important; }
+  .fc-5 { transform: rotate(12deg) translateX(180%); z-index: 10; }
+  .fc-5:hover { transform: rotate(0) translateX(180%) translateY(-40px) !important; }
 
   /* GRID ALIGNMENT FOR BOTTOM SECTION */
   .hero-bottom-grid {
@@ -135,8 +135,8 @@
     .fan-card { width: 170px; height: 260px; }
     .fc-3 { width: 210px; height: 300px; }
     .fc-3 .fan-title { font-size: 1.3rem; }
-    .fc-1 { transform: rotate(-8deg) translateX(-120%); }
-    .fc-5 { transform: rotate(8deg) translateX(120%); }
+    .fc-1 { transform: rotate(-8deg) translateX(-140%); }
+    .fc-5 { transform: rotate(8deg) translateX(140%); }
     .hero-bottom-grid { padding: 0 24px; }
   }
   
@@ -152,16 +152,16 @@
     .fc-3 .fan-title { font-size: 1.1rem; }
     .fan-card-content { padding: 40px 12px 16px; }
     .fan-title { font-size: 0.9rem; }
-    .fc-1 { transform: rotate(-6deg) translateX(-110%); }
-    .fc-2 { transform: rotate(-3deg) translateX(-55%); }
-    .fc-4 { transform: rotate(3deg) translateX(55%); }
-    .fc-5 { transform: rotate(6deg) translateX(110%); }
+    .fc-1 { transform: rotate(-6deg) translateX(-130%); }
+    .fc-2 { transform: rotate(-4deg) translateX(-70%); }
+    .fc-4 { transform: rotate(4deg) translateX(70%); }
+    .fc-5 { transform: rotate(6deg) translateX(130%); }
   }
   
   @media (max-width: 480px) {
     .fc-1, .fc-5 { display: none; } /* On very small screens, only show 3 to avoid overflow */
-    .fc-2 { transform: rotate(-6deg) translateX(-90%); }
-    .fc-4 { transform: rotate(6deg) translateX(90%); }
+    .fc-2 { transform: rotate(-6deg) translateX(-100%); }
+    .fc-4 { transform: rotate(6deg) translateX(100%); }
   }
 </style>
 

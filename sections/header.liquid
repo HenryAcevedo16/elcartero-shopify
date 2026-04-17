@@ -62,6 +62,16 @@
 </div>
 
 <script>
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 10) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
   function toggleMobileNav() {
     const btn = document.getElementById('hamburgerBtn');
     const nav = document.getElementById('mobileNav');
