@@ -2,8 +2,14 @@
   <div class="footer-grid">
     <div>
       <div class="footer-brand">
+      {%- if settings.logo != blank -%}
+        <img src="{{ settings.logo | image_url: width: settings.logo_max_width }}" 
+             alt="{{ shop.name }}" 
+             style="width: {{ settings.logo_max_width }}px; height: auto;">
+      {%- else -%}
         <div class="footer-brand-icon">📬</div>
         <div class="footer-brand-name">{{ shop.name }}</div>
+      {%- endif -%}
       </div>
       <p class="footer-desc">{{ section.settings.store_description }}</p>
     </div>
