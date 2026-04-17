@@ -446,26 +446,35 @@
 
   @media (max-width: 600px) {
     .cats-grid {
-      /* Usa vw en lugar de % para solucionar el bug de iOS Safari que aplasta las columnas a rayas */
-      grid-auto-columns: calc(50vw - 28px);
-      grid-template-rows: 200px 200px;
+      /* Explicit sizing to bypass Safari auto-sizing bugs completely */
+      grid-auto-columns: 43vw;
+      grid-template-rows: 190px 190px;
+      gap: 12px;
+    }
+    .cat-card {
+      width: 43vw !important;
+      min-width: 43vw !important;
+      max-width: 43vw !important;
+      height: 190px !important;
     }
     .cat-card-large {
       grid-column: span 1 !important;
       grid-row: span 1 !important;
-      padding: 24px 16px !important;
-      max-width: none !important;
+      padding: 20px 12px !important;
     }
-    .cat-card-large .cat-card-name {
-      font-size: 1.1rem;
-      margin-bottom: 6px;
+    .cat-card-large .cat-card-name,
+    .cat-card .cat-card-name {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
     }
-    .cat-card-large .cat-card-count {
-      font-size: 0.8rem;
-      margin-bottom: 16px;
+    .cat-card-large .cat-card-count,
+    .cat-card .cat-card-count {
+      font-size: 0.75rem;
+      margin-bottom: 12px;
     }
-    .cat-card-large:not(.has-image) .cat-image-wrap img {
-      max-height: 100px;
+    .cat-card-large:not(.has-image) .cat-image-wrap img,
+    .cat-card:not(.has-image) .cat-image-wrap img {
+      max-height: 85px;
     }
   }
 </style>
