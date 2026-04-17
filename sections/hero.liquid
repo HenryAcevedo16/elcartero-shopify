@@ -1,15 +1,16 @@
 <style>
   .hero-red-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 80px 0 0; /* Space for navbar */
+    max-width: 1360px; /* Alineado con el contenido general */
+    width: calc(100% - 64px); /* Espacio lateral en móviles/tablet */
+    margin: 100px auto 40px; /* 100px = justo debajo del navbar (80px) + 20px respiro */
     position: relative;
     background: radial-gradient(circle at 50% 50%, #ff3b42 0%, #a60005 60%, #5e0000 100%);
-    border-radius: 0;
+    border-radius: 50px;
     overflow: hidden;
     color: white;
     padding: 70px 20px 50px;
     text-align: center;
+    box-shadow: 0 40px 80px rgba(138,0,3,0.35);
   }
   
   .hero-pill-badge {
@@ -111,16 +112,37 @@
   .fc-5 { transform: rotate(10deg) translateX(150%); z-index: 10; }
   .fc-5:hover { transform: rotate(0) translateX(150%) translateY(-40px) !important; }
 
-  .hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; padding: 20px 4%; max-width: 1800px; margin: 0 auto; text-align: left; }
-  .hero-desc { max-width: 50%; font-size: 1.05rem; color: rgba(255,255,255,0.85); line-height: 1.6; margin: 0; }
-  @media (max-width: 768px) {
-    .hero-bottom { flex-direction: column; align-items: center; text-align: center; gap: 24px; padding: 20px; }
-    .hero-desc { max-width: 100%; }
+  /* GRID ALIGNMENT FOR BOTTOM SECTION */
+  .hero-bottom-grid {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr; /* Centrar absoluto el texto, empujar el boton a la derecha */
+    align-items: center;
+    width: 100%;
+    padding: 0 40px;
+    max-width: 1200px;
+    margin: 0 auto;
   }
+  
+  .hero-desc {
+    grid-column: 2;
+    max-width: 600px;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .hero-btn-container {
+    grid-column: 3;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
   .hero-btn-white {
     background: white; color: #0F172A;
-    padding: 18px 42px; border-radius: 50px;
-    font-weight: 800; font-size: 1rem;
+    padding: 16px 36px; border-radius: 50px;
+    font-weight: 800; font-size: 0.95rem;
     text-decoration: none;
     display: inline-flex; align-items: center; justify-content: center;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
@@ -133,12 +155,15 @@
     .fc-3 .fan-title { font-size: 1.3rem; }
     .fc-1 { transform: rotate(-8deg) translateX(-120%); }
     .fc-5 { transform: rotate(8deg) translateX(120%); }
+    .hero-bottom-grid { padding: 0 20px; }
   }
   
   @media (max-width: 768px) {
-    .hero-red-container { margin: 80px 0 0; border-radius: 0; padding: 50px 16px 40px; }
+    .hero-red-container { margin: 90px 16px 30px; border-radius: 40px; padding: 50px 16px 40px; width: calc(100% - 32px); }
     .hero-red-container h1 { font-size: 2.2rem; margin-bottom: 40px; }
-    .hero-desc { font-size: 0.9rem; }
+    .hero-bottom-grid { grid-template-columns: 1fr; gap: 24px; }
+    .hero-desc { grid-column: 1; max-width: 100%; font-size: 0.95rem; }
+    .hero-btn-container { grid-column: 1; justify-content: center; }
     .fan-container { height: 280px; perspective: 800px; margin-bottom: 30px; }
     .fan-card { width: 130px; height: 190px; }
     .fc-3 { width: 150px; height: 210px; }
@@ -203,13 +228,16 @@
     {%- endif -%}
   </div>
 
-  <div class="hero-bottom">
+  <div class="hero-bottom-grid">
+    <div></div> <!-- Empty left column for center alignment -->
     <p class="hero-desc">
       {{ section.settings.subheading }}
     </p>
-    <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="hero-btn-white">
-      {{ section.settings.btn_text }}
-    </a>
+    <div class="hero-btn-container">
+      <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="hero-btn-white">
+        {{ section.settings.btn_text }}
+      </a>
+    </div>
   </div>
 </div>
 
