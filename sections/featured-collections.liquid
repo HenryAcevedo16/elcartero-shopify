@@ -22,7 +22,7 @@
           {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
           {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
           <a href="{{ cat_url }}"
-             class="cat-card reveal {% if block.settings.image != blank %}has-image{% endif %}"
+             class="cat-card reveal {% if is_large %}cat-card-large{% endif %} {% if block.settings.image != blank %}has-image{% endif %}"
              style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
              {{ block.shopify_attributes }}>
             <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
@@ -183,7 +183,7 @@
   function scrollCats(direction) {
     const container = document.getElementById('cats-scroll-container');
     if(container) {
-      const firstCard = container.querySelector('.cat-card');
+      const firstCard = container.querySelector('.cat-card:not(.cat-card-large)') || container.querySelector('.cat-card');
       if (firstCard) {
         const scrollAmount = (firstCard.offsetWidth + 16) * 2 * direction; 
         container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
@@ -232,7 +232,7 @@
     grid-template-rows: 240px 240px;
     grid-auto-flow: column;
     /* Escala las cartas suavemente para rellenar el 100% sin crear excesos de margen lateral */
-    grid-auto-columns: calc((100% - 64px) / 5);
+    grid-auto-columns: calc((100% - 80px) / 6);
     gap: 16px;
     padding: 10px 0 30px;
     overflow-x: auto;
@@ -270,7 +270,15 @@
     box-shadow: 0 20px 48px rgba(0,0,0,0.08);
   }
 
-
+  .cat-card-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 40px 32px;
+    /* Evita que las tarjetas grandes sean exageradas en monitores ultra-anchos */
+    max-width: 480px;
+    width: 100%;
+    justify-self: center;
+  }
 
   .cat-card .cat-glow {
     position: absolute;
@@ -347,7 +355,10 @@
     color: #ffffff !important;
   }
 
-
+  .cat-card-large:not(.has-image) .cat-image-wrap img {
+    max-width: 90%;
+    max-height: 280px;
+  }
 
   .cat-emoji-wrap {
     font-size: 4rem;
@@ -361,29 +372,30 @@
   }
 
   .cat-card-name {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: var(--dark, #1a2e1e);
     margin: 0 0 6px;
     letter-spacing: -0.02em;
-    line-height: 1.2;
+    line-height: 1.25;
   }
   
   .cat-card-large .cat-card-name {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    line-height: 1.25;
   }
 
   .cat-card-count {
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--muted, #6b8f72);
     margin: 0 0 16px;
     line-height: 1.4;
   }
 
   .cat-card-large .cat-card-count {
-    font-size: 1rem;
-    margin-bottom: 24px;
+    font-size: 0.95rem;
+    margin-bottom: 20px;
   }
 
   .cat-arrow {
@@ -435,7 +447,24 @@
   @media (max-width: 600px) {
     .cats-grid {
       grid-auto-columns: calc((100% - 16px) / 2);
-      grid-template-rows: 220px 220px;
+      grid-template-rows: 200px 200px;
+    }
+    .cat-card-large {
+      grid-column: span 1;
+      grid-row: span 1;
+      padding: 24px 16px;
+      max-width: none;
+    }
+    .cat-card-large .cat-card-name {
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+    }
+    .cat-card-large .cat-card-count {
+      font-size: 0.8rem;
+      margin-bottom: 16px;
+    }
+    .cat-card-large:not(.has-image) .cat-image-wrap img {
+      max-height: 100px;
     }
   }
 </style>
