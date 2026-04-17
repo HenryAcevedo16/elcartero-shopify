@@ -18,19 +18,50 @@
       },
       "hero": {
         "type": "hero",
+        "blocks": {
+          "collection_MVXjUf": {
+            "type": "collection",
+            "settings": {
+              "collection": "belleza"
+            }
+          },
+          "collection_wPDzpz": {
+            "type": "collection",
+            "settings": {
+              "collection": "electrodomesticos"
+            }
+          },
+          "collection_NPRUDb": {
+            "type": "collection",
+            "settings": {
+              "collection": "tecnologia"
+            }
+          },
+          "collection_YKaF69": {
+            "type": "collection",
+            "settings": {
+              "collection": "hogar"
+            }
+          },
+          "collection_G4m3Fa": {
+            "type": "collection",
+            "settings": {
+              "collection": "salud"
+            }
+          }
+        },
+        "block_order": [
+          "collection_MVXjUf",
+          "collection_wPDzpz",
+          "collection_NPRUDb",
+          "collection_YKaF69",
+          "collection_G4m3Fa"
+        ],
         "settings": {
           "pill_text": "Nuevos productos cada semana",
           "subheading": "Electrónica, salud, belleza, hogar y mucho más. Encuentra todo en un solo lugar con los mejores precios y envío rápido a tu puerta.",
-          "btn_1_text": "Ver productos →",
-          "btn_1_link": "",
-          "btn_2_text": "Ver ofertas 🔥",
-          "btn_2_link": "",
-          "featured_product": "faja-de-maternidad-con-tirantas-ajustables",
-          "card_tag": "Más vendido",
-          "card_sm1_name": "Vitaminas C+D",
-          "card_sm1_price": "$24.99",
-          "card_sm2_name": "Sérum Facial",
-          "card_sm2_price": "$38.00"
+          "btn_text": "Ver productos →",
+          "btn_link": ""
         }
       },
       "featured-collections": {
