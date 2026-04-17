@@ -11,17 +11,17 @@
 html { scroll-behavior: smooth; }
 
 :root {
-  --bg:      #f0f7f1;
+  --bg:      #ffffff;
   --white:   #ffffff;
-  --dark:    #1a2e1e;
-  --red:     #22c244;
+  --dark:    #0F172A;
+  --red:     #DC2626;
   --yellow:  #f5c518;
-  --cream:   #e8f5eb;
-  --sand:    #d4edda;
-  --muted:   #6b8f72;
+  --cream:   #FEF2F2;
+  --sand:    #F1F5F9;
+  --muted:   #64748B;
   --radius:  18px;
   --shadow:  0 4px 24px rgba(0,0,0,0.07);
-  --shadow-hover: 0 20px 48px rgba(34,194,68,0.15);
+  --shadow-hover: 0 20px 48px rgba(220,38,38,0.15);
 }
 
 body {
@@ -35,12 +35,12 @@ body {
 /* ── NAVBAR ── */
 nav {
   position: fixed; top: 0; left: 0; right: 0;
-  z-index: 900; height: 70px;
+  z-index: 900; height: 80px;
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 48px;
-  background: rgba(240,247,241,0.94);
+  background: rgba(255,255,255,0.85);
   backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(34,194,68,0.15);
+  border-bottom: 1px solid rgba(15,23,42,0.08); /* sutil borde inferior */
 }
 .nav-brand {
   display: flex; align-items: center; gap: 10px;
@@ -64,7 +64,8 @@ nav {
 .nav-right { display: flex; align-items: center; gap: 10px; }
 .nav-search-box {
   display: flex; align-items: center; gap: 8px;
-  background: var(--sand); border-radius: 50px; padding: 8px 14px;
+  background: transparent; border-radius: 50px; padding: 6px 14px;
+  border: 1px solid var(--muted);
 }
 .nav-search-box input {
   background: none; border: none; outline: none;
@@ -73,12 +74,12 @@ nav {
 }
 .nav-search-box input::placeholder { color: var(--muted); }
 .icon-btn {
-  width: 40px; height: 40px; border-radius: 12px;
-  background: var(--sand); border: none; cursor: pointer;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--dark); cursor: pointer;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; transition: background 0.2s, transform 0.2s; position: relative;
+  font-size: 1.1rem; color: var(--dark); transition: background 0.2s, color 0.2s, transform 0.2s; position: relative;
 }
-.icon-btn:hover { background: var(--dark); color: white; transform: scale(1.08); }
+.icon-btn:hover { background: var(--dark); color: white; transform: scale(1.05); }
 .badge {
   position: absolute; top: -4px; right: -4px;
   background: var(--red); color: white; border-radius: 50%;
