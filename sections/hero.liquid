@@ -1,6 +1,6 @@
 <style>
   .hero-red-container {
-    margin: 80px 48px 40px; /* 80px exacto = pegado al 100% justo debajo del navbar */
+    margin: 40px 48px 40px; /* Reducido para subir más cerca del navbar */
     width: auto;
     max-width: none;
     position: relative;
@@ -12,23 +12,6 @@
     padding: 70px 20px 50px;
     text-align: center;
   }
-  
-  .hero-pill-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.25);
-    border-radius: 50px;
-    padding: 8px 20px;
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 28px;
-    backdrop-filter: blur(12px);
-  }
-  .hero-pill-dot { width: 6px; height: 6px; background: white; border-radius: 50%; box-shadow: 0 0 8px white; }
   
   .hero-red-container h1 {
     font-size: clamp(2.8rem, 6vw, 4.8rem);
@@ -158,7 +141,7 @@
   }
   
   @media (max-width: 768px) {
-    .hero-red-container { margin: 90px 20px 30px; border-radius: 40px; padding: 50px 16px 40px; width: auto; }
+    .hero-red-container { margin: 50px 20px 30px; border-radius: 40px; padding: 50px 16px 40px; width: auto; }
     .hero-red-container h1 { font-size: 2.2rem; margin-bottom: 40px; }
     .hero-bottom-grid { grid-template-columns: 1fr; gap: 24px; }
     .hero-desc { grid-column: 1; max-width: 100%; font-size: 0.95rem; }
@@ -183,10 +166,6 @@
 </style>
 
 <div class="hero-red-container">
-  <div class="hero-pill-badge">
-    <div class="hero-pill-dot"></div>
-    {{ section.settings.pill_text }}
-  </div>
 
   <h1>Tu tienda de <strong>todo</strong><br>lo que necesitas.</h1>
 
