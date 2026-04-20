@@ -28,6 +28,7 @@
   </ul>
   <div class="nav-right">
     <form action="{{ routes.search_url }}" class="nav-search-box" method="get" role="search" style="background:#fff; padding:6px 16px;">
+      <input type="hidden" name="type" value="product">
       <input type="text" name="q" placeholder="Buscar producto" value="{{ search.terms | escape }}" style="width:130px; font-weight:400;">
     </form>
     <button onclick="wlTogglePanel()" class="icon-btn" aria-label="Mis favoritos" style="border:1px solid #1E293B;">

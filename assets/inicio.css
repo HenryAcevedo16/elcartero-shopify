@@ -232,7 +232,7 @@
 
 /* ── PRODUCTS ── */
 .products-wrap {
-  background: var(--cream); border-radius: 32px;
+  background: var(--cream);
   padding: 36px 40px;
 }
 .filter-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 36px; }
@@ -362,7 +362,7 @@
 @media (max-width: 960px) {
   .hero { grid-template-columns: 1fr; padding-top: 90px; }
   .hero-right { display: none; }
-  .cats-grid { grid-template-columns: repeat(3, 1fr); }
+
   .prods-grid { grid-template-columns: 1fr 1fr; }
   .banners { grid-template-columns: 1fr; padding: 0 20px 60px; gap: 14px; }
   .features { grid-template-columns: 1fr 1fr; margin: 0 20px 60px; }

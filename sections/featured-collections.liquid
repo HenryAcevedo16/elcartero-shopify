@@ -444,6 +444,12 @@
     border-radius: 50%;
   }
 
+  @media (max-width: 1050px) {
+    .cats-grid {
+      grid-auto-columns: calc((100% - 32px) / 3);
+    }
+  }
+
   @media (max-width: 600px) {
     .cats-grid {
       /* Explicit sizing to bypass Safari auto-sizing bugs completely */

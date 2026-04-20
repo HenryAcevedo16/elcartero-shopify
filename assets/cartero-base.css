@@ -199,21 +199,39 @@ nav.scrolled {
   font-size: 0.92rem; font-weight: 700; margin-bottom: 14px;
   line-height: 1.35; color: var(--dark);
 }
-.prod-bottom { display: flex; align-items: center; justify-content: space-between; }
+.prod-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: 4px; }
+.prod-bottom.amazon-style { flex-direction: column; width: 100%; align-items: flex-start; gap: 8px; margin-top: 0; }
 .prod-price-block { display: flex; flex-direction: column; gap: 2px; }
 .prod-price-old {
   font-size: 0.72rem; font-weight: 500;
   color: var(--muted); text-decoration: line-through;
 }
-.prod-price-now { font-size: 1.15rem; font-weight: 800; color: var(--dark); letter-spacing: -0.03em; }
+.prod-price-now { font-size: 1.25rem; font-weight: 800; color: var(--dark); letter-spacing: -0.03em; line-height:1; }
+.prod-shipping { font-size: 0.8rem; font-weight: 600; color: var(--dark); line-height: 1; margin: 2px 0 6px 0; }
+
 .prod-cart-btn {
   width: 40px; height: 40px; border-radius: 12px;
   background: var(--dark); color: white; border: none;
   font-size: 1.4rem; cursor: pointer; font-weight: 300;
   display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s, transform 0.2s; line-height: 1;
+  transition: background 0.2s, transform 0.2s; line-height: 1; padding: 0;
 }
 .prod-cart-btn:hover { background: var(--red); transform: rotate(90deg); }
+
+.prod-actions {
+  display: flex; gap: 6px; width: 100%; margin-top: 2px;
+}
+.prod-actions .prod-cart-btn, .prod-actions .prod-buy-btn {
+  flex: 1; height: 38px; border-radius: 12px;
+  font-size: 0.78rem; cursor: pointer; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  line-height: 1; border: none; padding: 0 4px; text-align: center; width: auto;
+}
+.prod-actions .prod-cart-btn { background: transparent; color: var(--dark); border: 1.5px solid var(--muted); }
+.prod-actions .prod-cart-btn:hover { border-color: var(--dark); background: var(--sand); transform: translateY(-2px); }
+.prod-actions .prod-buy-btn { background: var(--dark); color: white; }
+.prod-actions .prod-buy-btn:hover { background: var(--red); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(220,38,38,0.2); }
 
 /* ── FORM INPUTS (shared) ── */
 .form-label {

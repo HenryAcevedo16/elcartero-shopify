@@ -6,7 +6,7 @@
   - Fallback: 12 productos de demostración cuando la colección está vacía
 {% endcomment %}
 
-{% paginate collection.products by section.settings.products_per_page %}
+{% paginate search.results by section.settings.products_per_page %}
 
 <div class="breadcrumb">
   <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
@@ -18,7 +18,7 @@
   <div class="ph-left">
     <h1>{{ collection.title | default: '🛒 Catálogo' }}</h1>
     <p>
-      {{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %} encontrado{% if collection.products_count != 1 %}s{% endif %}
+      {{ search.results_count }} producto{% if search.results_count != 1 %}s{% endif %} encontrado{% if search.results_count != 1 %}s{% endif %}
     </p>
   </div>
   <div class="ph-right">
@@ -77,7 +77,7 @@
       <p class="sb-title">Categorías</p>
       <ul class="cat-list">
         <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
-          🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
+          🛍 Todos <span class="cnt">{{ search.results_count }}</span>
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" {% if request.query_string contains 'automotriz' %}class="active"{% endif %}>
           🚗 Automotriz
@@ -118,7 +118,7 @@
         <input type="hidden" name="sort_by" value="{{ request.query_string | split: 'sort_by=' | last | split: '&' | first }}">
       {%- endif -%}
 
-      {%- for filter in collection.filters -%}
+      {%- for filter in search.filters -%}
         <div class="sidebar-card reveal d{{ forloop.index | plus: 1 }}">
           <p class="sb-title">{{ filter.label }}</p>
 
@@ -176,7 +176,7 @@
 
       <div style="margin-top:16px;">
         {%- assign has_active_filters = false -%}
-        {%- for filter in collection.filters -%}
+        {%- for filter in search.filters -%}
           {%- if filter.active_values.size > 0 or filter.min_value.value or filter.max_value.value -%}
             {%- assign has_active_filters = true -%}
           {%- endif -%}
@@ -201,9 +201,9 @@
     <!-- Grid de productos -->
     <div class="prods-grid" id="prodGrid">
 
-      {% if collection.products_count > 0 %}
+      {% if search.results_count > 0 %}
         {% comment %} ── PRODUCTOS REALES DE SHOPIFY ── {% endcomment %}
-        {% for product in collection.products %}
+        {% for product in search.results %}
           <div class="prod reveal d{{ forloop.index | modulo: 4 | plus: 1 }}" style="position:relative;">
             <a href="{{ product.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ product.title | escape }}"></a>
             <div class="prod-thumb" style="background: #ffffff;">
@@ -267,7 +267,7 @@
     </div><!-- /prodGrid -->
 
     <!-- Paginación (solo con productos reales) -->
-    {% if collection.products_count > 0 and paginate.pages > 1 %}
+    {% if search.results_count > 0 and paginate.pages > 1 %}
       <div class="pagination reveal">
         {% if paginate.previous %}
           <a href="{{ paginate.previous.url }}" class="pg-btn arrow">‹</a>
