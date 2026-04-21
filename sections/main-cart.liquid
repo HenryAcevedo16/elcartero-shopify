@@ -1,267 +1,524 @@
 {% comment %} CART PAGE — El Cartero {% endcomment %}
 {{ 'pedido.css' | asset_url | stylesheet_tag }}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<div class="breadcrumb">
+<style>
+.cart-layout {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 1600px;
+  margin: 40px auto 100px auto;
+  height: 720px;
+  align-items: stretch;
+  background: transparent;
+  padding: 0 40px;
+}
+.cart-sidebar {
+  width: 340px;
+  min-width: 340px;
+  background: linear-gradient(180deg, #ed3e4c 0%, #8b111a 100%);
+  border-radius: 24px;
+  padding: 40px 32px;
+  color: #fff;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+.cart-sidebar-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  margin: 0;
+  line-height: 1.2;
+}
+.cart-sidebar-subtitle {
+  font-size: 0.95rem;
+  opacity: 0.9;
+  margin-top: 6px;
+  margin-bottom: 40px;
+}
+.cart-steps {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.cart-step {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 16px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+  transition: background 0.3s;
+}
+.cart-step.active {
+  background: rgba(255,255,255,0.2);
+}
+.step-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: transparent;
+  flex-shrink: 0;
+}
+.step-icon.completed {
+  background: #fff;
+  color: #ed3e4c;
+  border-color: #fff;
+}
+.step-text {
+  font-weight: 600;
+  font-size: 1rem;
+}
+.step-connector {
+  width: 1px;
+  height: 28px;
+  background: rgba(255,255,255,0.4);
+  margin-left: 31.5px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  z-index: 1;
+}
+
+.cart-sidebar-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 24px;
+  margin-top: 48px;
+}
+.cart-sidebar-card h3 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin: 0 0 16px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-transform: uppercase;
+}
+.cart-sidebar-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.cart-sidebar-card li {
+  font-size: 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.4;
+}
+.cart-sidebar-card li::before {
+  content: '•';
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.btn-submit {
+  transition: background-color 0.3s ease;
+}
+.btn-submit:hover {
+  background-color: #1a7c33 !important;
+}
+
+/* MAIN CONTENT */
+.cart-main {
+  flex: 1;
+  padding: 0 0 40px 20px;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ORDER ITEMS SCROLL */
+.order-items {
+  max-height: 380px;
+  overflow-y: auto;
+  padding-right: 16px;
+}
+.order-items::-webkit-scrollbar {
+  width: 6px;
+}
+.order-items::-webkit-scrollbar-track {
+  background: transparent;
+}
+.order-items::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+/* FORM OVERRIDES */
+.form-label {
+  font-weight: 800 !important;
+  color: #111 !important;
+  font-size: 0.95rem !important;
+  margin-bottom: 8px !important;
+  text-transform: none !important;
+  display: block;
+}
+.form-inp {
+  background: #f5f5f5 !important;
+  border: 2px solid transparent !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #111 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  font-family: inherit !important;
+}
+.form-inp.input-error {
+  border-color: #dc2626 !important;
+  background-color: #fef2f2 !important;
+}
+.form-inp::placeholder {
+  color: #aaa !important;
+}
+
+.view-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+.view-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #111;
+  margin: 0;
+}
+.view-subtitle {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 8px;
+}
+
+/* TABLE DETAIL */
+.order-detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 40px;
+}
+.order-detail-table th {
+  text-align: left;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #111;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #f0f0f0;
+}
+.order-detail-table td {
+  padding: 20px 0;
+  vertical-align: middle;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.9rem;
+  color: #333;
+}
+.status-badge {
+  background: #e0e0e0;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #555;
+  display: inline-block;
+}
+
+@media (max-width: 900px) {
+  .cart-layout {
+    flex-direction: column;
+    height: auto;
+  }
+  .cart-sidebar {
+    width: 100%;
+  }
+  .cart-main {
+    padding: 24px 0;
+    overflow-y: visible;
+  }
+}
+</style>
+
+<div class="breadcrumb" style="max-width:1200px; margin:0 auto; padding:20px;">
   <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
   <span class="current">Tu carrito</span>
 </div>
 
 {% if cart.item_count > 0 %}
+<div class="cart-layout">
+  <!-- SIDEBAR -->
+  <aside class="cart-sidebar">
+    <h2 class="cart-sidebar-title">Cartero Cart</h2>
+    <p class="cart-sidebar-subtitle">Encuentra tus productos aquí</p>
 
-  <!-- ===== VISTA DEL CARRITO ===== -->
-  <div style="max-width:720px; margin: 32px auto; padding: 0 20px;">
-
-    <h1 class="section-title" style="margin-bottom:24px;">
-      🛒 Tu carrito
-      <span style="font-size:1rem; font-weight:500; color:var(--muted);">({{ cart.item_count }} artículo{% if cart.item_count > 1 %}s{% endif %})</span>
-    </h1>
-
-    <!-- ITEMS -->
-    <div class="order-items" style="margin-bottom:24px;">
-      {% for item in cart.items %}
-        <div class="oi" style="align-items:center;">
-          <div class="oi-img" style="background-image:url('{{ item.image | img_url: 'small' }}'); background-size:cover; background-color:#f5f0e8; background-position:center; flex-shrink:0;">
-            <span class="oi-qty">{{ item.quantity }}</span>
-          </div>
-          <div class="oi-info" style="flex:1;">
-            <a href="{{ item.url }}" style="text-decoration:none; color:inherit;">
-              <div class="oi-name">{{ item.product.title }}</div>
-            </a>
-            {% unless item.product.has_only_default_variant %}
-              <div class="oi-variant">{{ item.variant.title }}</div>
-            {% endunless %}
-            <div style="display:flex; gap:14px; align-items:center; margin-top:6px;">
-              <button onclick="ajaxQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})"
-                 style="font-size:1.1rem; color:var(--muted); background:none; border:none; cursor:pointer; line-height:1; padding:0;">−</button>
-              <span id="qty-{{ forloop.index }}" style="font-size:0.85rem; font-weight:700; min-width:16px; text-align:center;">{{ item.quantity }}</span>
-              <button onclick="ajaxQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})"
-                 style="font-size:1.1rem; color:var(--muted); background:none; border:none; cursor:pointer; line-height:1; padding:0;">+</button>
-              <button onclick="ajaxQty({{ forloop.index }}, 0)"
-                 style="font-size:0.7rem; color:#e74c3c; background:none; border:none; cursor:pointer; text-decoration:underline; margin-left:8px;">Quitar</button>
-            </div>
-          </div>
-          <span class="oi-price" style="flex-shrink:0; font-weight:700; margin-left:12px;">{{ item.line_price | money }}</span>
-        </div>
-      {% endfor %}
-    </div>
-
-    <!-- TOTALES -->
-    <div class="sum-divider"></div>
-    <div class="sum-row">
-      <span class="sum-label">Subtotal</span>
-      <span class="sum-val">{{ cart.total_price | money }}</span>
-    </div>
-    <div class="sum-row">
-      <span class="sum-label">Envío</span>
-      <span class="sum-val green">Gratis / A coordinar</span>
-    </div>
-    <div class="sum-row" style="align-items:flex-start;">
-      <span class="sum-label">⏱ Tiempo de entrega</span>
-      <span class="sum-val" style="text-align:right; font-weight:700;">2 – 3 días hábiles<br><span style="font-size:.7rem; font-weight:400; color:var(--muted);">Desde la confirmación del pedido</span></span>
-    </div>
-    <div class="sum-divider"></div>
-    <div class="sum-total-row" style="margin-bottom:24px;">
-      <span class="sum-total-label">Total estimado</span>
-      <span class="sum-total-val">{{ cart.total_price | money }}</span>
-    </div>
-
-    <!-- CHIP ENTREGA -->
-    <div class="cod-chip" style="margin-bottom:28px;">
-      <span class="cod-icon">🚚</span>
-      <div>
-        <div class="cod-text">Entrega en 2 – 3 días hábiles</div>
-        <div class="cod-sub">Confirmamos tu pedido por WhatsApp · Pago contra entrega</div>
+    <div class="cart-steps">
+      <div class="cart-step active" id="step1-nav">
+        <div class="step-icon">1</div>
+        <div class="step-text">Productos agregados</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="cart-step" id="step2-nav">
+        <div class="step-icon">2</div>
+        <div class="step-text">Confirmar pedido</div>
+      </div>
+      <div class="step-connector"></div>
+      <div class="cart-step" id="step3-nav">
+        <div class="step-icon">3</div>
+        <div class="step-text">Detalle de la compra</div>
       </div>
     </div>
 
-    <!-- BOTONES -->
-    <div style="margin-bottom: 16px; text-align: right;">
-      <button onclick="vaciarCarrito()" style="color: #e74c3c; background: none; border: none; cursor: pointer; font-size: 0.85rem; font-weight: 600; text-decoration: none; padding: 0;">🗑 Vaciar todo el carrito</button>
+    <div class="cart-sidebar-card">
+      <h3>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M21 11.5L16 11.5L16 6.5C16 5.39543 15.1046 4.5 14 4.5L5 4.5C3.89543 4.5 3 5.39543 3 6.5L3 17.5C3 18.6046 3.89543 19.5 5 19.5L19 19.5C20.1046 19.5 21 18.6046 21 17.5L21 11.5Z" fill="white"/>
+          <circle cx="7.5" cy="19.5" r="2.5" fill="white"/>
+          <circle cx="16.5" cy="19.5" r="2.5" fill="white"/>
+        </svg>
+        ENVÍO GRATIS
+      </h3>
+      <ul>
+        <li>Entrega en 1 - 3 días hábiles</li>
+        <li>Confirmamos tu pedido por WhatsApp</li>
+        <li>Pago contra entrega</li>
+      </ul>
     </div>
-    <div style="display:flex; gap:12px; flex-wrap:wrap;">
-      <a href="/collections/all" class="btn-sec"
-         style="flex:1; min-width:160px; text-align:center; text-decoration:none; display:flex; align-items:center; justify-content:center;">
-        ← Seguir comprando
-      </a>
-      <button onclick="abrirFormulario()" class="btn-submit"
-              style="flex:2; min-width:200px; margin:0;">
-        ✅ Confirmar pedido &mdash; {{ cart.total_price | money }}
-      </button>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="cart-main">
+    
+    <!-- STEP 1: CART -->
+    <div id="view-step1" class="cart-view active">
+      <div class="view-header">
+        <h2 class="view-title">Bienvenido a tu carrito!</h2>
+      </div>
+
+      <div class="order-items" style="margin-bottom:40px;">
+        {% for item in cart.items %}
+          <div class="oi" style="display:flex; align-items:center; border-bottom: 1px solid #f0f0f0; padding: 16px 0;">
+            <div class="oi-img" style="background-image:url('{{ item.image | img_url: 'small' }}'); background-size:cover; background-position:center; width:60px; height:60px; border-radius:8px; flex-shrink:0; position:relative;">
+              <span class="oi-qty" style="position:absolute; top:-6px; right:-6px; background:#111; color:#fff; font-size:0.7rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">{{ item.quantity }}</span>
+            </div>
+            <div class="oi-info" style="flex:1; margin-left: 20px;">
+              <a href="{{ item.url }}" style="text-decoration:none; color:#111; font-weight:800; font-size:0.85rem; text-transform:uppercase;">
+                {{ item.product.title }}
+              </a>
+              {% unless item.product.has_only_default_variant %}
+                <div class="oi-variant" style="font-size:0.8rem; color:#666;">{{ item.variant.title }}</div>
+              {% endunless %}
+              <div style="display:flex; gap:16px; align-items:center; margin-top:8px;">
+                <div style="display:flex; align-items:center; gap:12px;">
+                  <button onclick="ajaxQty({{ forloop.index }}, {{ item.quantity | minus: 1 }})" style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;">−</button>
+                  <span id="qty-{{ forloop.index }}" style="font-weight:700; font-size:0.95rem;">{{ item.quantity }}</span>
+                  <button onclick="ajaxQty({{ forloop.index }}, {{ item.quantity | plus: 1 }})" style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;">+</button>
+                </div>
+                <button onclick="ajaxQty({{ forloop.index }}, 0)" style="border:none; background:none; cursor:pointer; font-size:0.8rem; color:#e74c3c; text-decoration:none;">Quitar</button>
+              </div>
+            </div>
+            <span class="oi-price" style="font-weight:800; font-size:0.95rem; margin-left:16px;">{{ item.line_price | money }}</span>
+          </div>
+        {% endfor %}
+      </div>
+
+      <div style="margin-top: 24px;">
+        <div class="sum-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+          <span class="sum-label" style="color:#666;">Subtotal</span>
+          <span class="sum-val" style="font-weight:700; color:#111;">{{ cart.total_price | money }}</span>
+        </div>
+        <div class="sum-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
+          <span class="sum-label" style="color:#666;">Envío</span>
+          <span class="sum-val green" style="font-weight:700; color:#1a7c33;">Gratis / A coordinar</span>
+        </div>
+        <div class="sum-row" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; font-size:0.9rem;">
+          <span class="sum-label" style="color:#666; display:flex; align-items:center; gap:6px;">⏱ Tiempo de entrega</span>
+          <span class="sum-val" style="text-align:right; font-weight:700; color:#111;">2 – 3 días hábiles<br><span style="font-size:.75rem; font-weight:400; color:#999;">Desde la confirmación del pedido</span></span>
+        </div>
+        <div style="height:1px; background:#f0f0f0; margin-bottom:24px;"></div>
+        <div class="sum-total-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
+          <span class="sum-total-label" style="font-size:1.1rem; font-weight:800;">Total estimado</span>
+          <span class="sum-total-val" style="font-size:1.6rem; font-weight:900; color:#111;">{{ cart.total_price | money }}</span>
+        </div>
+      </div>
+
+      <div style="text-align: right; margin-bottom: 16px;">
+        <button onclick="vaciarCarrito()" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:0.85rem; font-weight:700; padding:0;">🗑 Vaciar todo el carrito</button>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <a href="/collections/all" style="color:#7b2cbf; text-decoration:none; font-weight:700; font-size:0.95rem;">← Seguir comprando</a>
+        <button onclick="goToStep(2)" class="btn-submit" style="background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; margin:0; width: 100%; max-width: 400px;">
+          Confirmar pedido
+        </button>
+      </div>
     </div>
 
-  </div>
+    <!-- STEP 2: CHECKOUT FORM -->
+    <div id="view-step2" class="cart-view" style="display: none;">
+      <div class="view-header">
+        <h2 class="view-title">Datos de entrega</h2>
+        <p class="view-subtitle">Rellena los campos para continuar con el pedido</p>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" for="fNombre">Nombre</label>
+          <input class="form-inp" id="fNombre" type="text" placeholder="Omar" autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fApellido">Apellido</label>
+          <input class="form-inp" id="fApellido" type="text" placeholder="Canela" autocomplete="family-name">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fWhatsapp">Whatsapp/Teléfono</label>
+          <input class="form-inp" id="fWhatsapp" type="tel" placeholder="+1 (809) 000-0000" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fEmail">Correo electrónico</label>
+          <input class="form-inp" id="fEmail" type="email" placeholder="maria@correo.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fPais">País</label>
+          <select class="form-select form-inp" id="fPais" autocomplete="country" style="width:100%; height:48px;">
+            <option>República Dominicana</option>
+            <option>Estados Unidos</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fDireccion">Dirección</label>
+          <input class="form-inp" id="fDireccion" type="text" placeholder="Calle Principal #123, Apto 4B" autocomplete="street-address">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fCiudad">Ciudad</label>
+          <input class="form-inp" id="fCiudad" type="text" placeholder="Santo Domingo" autocomplete="address-level2">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="fProvincia">Provincia / Estado</label>
+          <input class="form-inp" id="fProvincia" type="text" placeholder="Distrito Nacional" autocomplete="address-level1">
+        </div>
+        <div class="form-group span2">
+          <label class="form-label" for="fNotas">Notas del pedido (Opcional)</label>
+          <textarea class="form-inp" id="fNotas" placeholder="Ej: Dejar con el portero, llamar antes de llegar" style="height: 100px; resize: none;"></textarea>
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:40px;">
+        <div style="display: flex; gap: 16px; align-items: center;">
+          <button onclick="goToStep(1)" style="background:transparent; color:#666; border:none; padding:16px 20px; font-weight:700; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center;">
+            ← Regresar
+          </button>
+          <button class="btn-submit" id="submitBtn" onclick="enviarPedido()" style="width:auto; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; margin:0; display:inline-flex; align-items:center;">
+            <span class="btn-label" id="btnLabel">Completar pedido ></span>
+            <div class="spinner" style="display:none;"></div>
+          </button>
+        </div>
+        <div style="text-align:right;">
+          <div style="font-size:0.95rem; color:#111; margin-bottom:0; font-weight:700;">Total a pagar</div>
+          <div class="sum-total-val" id="step2-total" style="font-size:1.8rem; font-weight:900; color:#111; line-height: 1;">{{ cart.total_price | money }}</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3: SUCCESS DETAIL -->
+    <div id="view-step3" class="cart-view" style="display: none;">
+      <div class="view-header">
+        <h2 class="view-title">Datos de entrega</h2>
+        <p class="view-subtitle">Puedes consultar el status de tus pedidos en Tracking</p>
+      </div>
+
+      <table class="order-detail-table">
+        <thead>
+          <tr>
+            <th>No. de pedido</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="order-detail-tbody">
+          <!-- Filled via JS -->
+        </tbody>
+      </table>
+
+      <div style="margin-top: 40px;">
+        <a href="/collections/all" class="btn-submit" style="display:inline-block; width: max-content; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; text-decoration:none; text-align:center;">
+          ＜ Seguir comprando
+        </a>
+      </div>
+    </div>
+
+  </main>
+</div>
 
 {% else %}
-
   <!-- CARRITO VACÍO -->
   <div style="text-align:center; padding:80px 20px; max-width:400px; margin:0 auto;">
     <div style="font-size:4rem; margin-bottom:16px;">🛒</div>
     <h2 style="font-size:1.4rem; font-weight:700; margin-bottom:12px;">Tu carrito está vacío</h2>
     <p style="color:var(--muted); margin-bottom:28px;">¡Agrega algunos productos para empezar!</p>
-    <a href="/collections/all" class="btn-main" style="text-decoration:none;">Explorar tienda →</a>
+    <a href="/collections/all" class="btn-main" style="text-decoration:none; padding: 14px 32px; border-radius: 12px; background: #dc2626; color: #fff; font-weight: 800;">Explorar tienda →</a>
   </div>
-
 {% endif %}
 
-
-<!-- ===================================================== -->
-<!-- MODAL: FORMULARIO DE DATOS DE ENTREGA                 -->
-<!-- ===================================================== -->
-<div class="modal-overlay" id="formModal">
-  <div class="modal" style="max-width:500px; width:92%; max-height:90vh; overflow-y:auto; padding:28px;">
-
-    <!-- CABECERA -->
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:22px;">
-      <h2 style="font-size:1.15rem; font-weight:700; margin:0;">📋 Datos de entrega</h2>
-      <button onclick="cerrarFormulario()"
-              style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:var(--muted); line-height:1; padding:4px 8px;">
-        ×
-      </button>
-    </div>
-
-    <!-- CAMPOS -->
-    <div class="form-grid">
-
-      <div class="form-group">
-        <label class="form-label" for="fNombre">Nombre *</label>
-        <input class="form-inp" id="fNombre" type="text" placeholder="María" autocomplete="given-name">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="fApellido">Apellido *</label>
-        <input class="form-inp" id="fApellido" type="text" placeholder="González" autocomplete="family-name">
-      </div>
-
-      <div class="form-group span2">
-        <label class="form-label" for="fWhatsapp">WhatsApp / Teléfono *</label>
-        <input class="form-inp" id="fWhatsapp" type="tel" placeholder="+1 (809) 000-0000" autocomplete="tel">
-        <span style="font-size:.7rem; color:var(--muted); margin-top:4px; display:block;">
-          Te contactamos aquí para coordinar entrega y pago
-        </span>
-      </div>
-
-      <div class="form-group span2">
-        <label class="form-label" for="fEmail">Correo electrónico *</label>
-        <input class="form-inp" id="fEmail" type="email" placeholder="maria@correo.com" autocomplete="email">
-      </div>
-
-      <div class="form-group span2">
-        <label class="form-label" for="fPais">País *</label>
-        <select class="form-select" id="fPais" autocomplete="country">
-          <option>República Dominicana</option>
-          <option>México</option>
-          <option>Colombia</option>
-          <option>Venezuela</option>
-          <option>Argentina</option>
-          <option>España</option>
-          <option>Estados Unidos</option>
-        </select>
-      </div>
-
-      <div class="form-group span2">
-        <label class="form-label" for="fDireccion">Dirección *</label>
-        <input class="form-inp" id="fDireccion" type="text" placeholder="Calle Principal #123, Apto 4B" autocomplete="street-address">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="fCiudad">Ciudad *</label>
-        <input class="form-inp" id="fCiudad" type="text" placeholder="Santo Domingo" autocomplete="address-level2">
-      </div>
-
-      <div class="form-group">
-        <label class="form-label" for="fProvincia">Provincia / Estado</label>
-        <input class="form-inp" id="fProvincia" type="text" placeholder="Distrito Nacional" autocomplete="address-level1">
-      </div>
-
-      <div class="form-group span2">
-        <label class="form-label" for="fNotas">Notas del pedido <span style="font-weight:400; color:var(--muted);">(opcional)</span></label>
-        <textarea class="form-textarea" id="fNotas" placeholder="Ej: Dejar con el portero, llamar antes de llegar..."></textarea>
-      </div>
-
-    </div>
-
-    <!-- TOTAL + BOTÓN ENVIAR -->
-    <div style="margin-top:20px; padding-top:18px; border-top:1px solid rgba(0,0,0,.08);">
-      <div class="sum-total-row" style="margin-bottom:16px;">
-        <span class="sum-total-label">Total a pagar</span>
-        <span class="sum-total-val">{{ cart.total_price | money }}</span>
-      </div>
-      <button class="btn-submit" id="submitBtn" onclick="enviarPedido()" style="width:100%; margin:0;">
-        <span class="btn-label" id="btnLabel">✅ Completar pedido</span>
-        <div class="spinner"></div>
-      </button>
-      <p class="submit-note" style="margin-top:10px;">
-        Recibirás la confirmación por WhatsApp y correo.
-      </p>
-    </div>
-
-  </div>
-</div>
-
-
-<!-- ===================================================== -->
-<!-- MODAL: PEDIDO CONFIRMADO (ÉXITO)                      -->
-<!-- ===================================================== -->
-<div class="modal-overlay" id="successModal">
-  <div class="modal" style="max-width:420px; width:92%; text-align:center;">
-    <span class="modal-icon">🎉</span>
-    <h2 class="modal-title">¡Pedido <span>confirmado!</span></h2>
-    <p class="modal-sub">Tu orden fue registrada. Te contactaremos por WhatsApp en breve.</p>
-    <div class="modal-order-box">
-      <div class="mob-item">
-        <div class="mob-label">Número de pedido</div>
-        <div class="mob-val" id="modalOrderNum"></div>
-      </div>
-    </div>
-    <div class="whatsapp-notice">
-      <span class="wa-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="28" height="28">
-          <circle cx="12" cy="12" r="12" fill="#25D366"/>
-          <path d="M17.5 14.4c-.3-.1-1.7-.8-2-.9-.3-.1-.5-.1-.7.2-.2.2-.7.9-.9 1.1-.2.2-.3.2-.6.1-.3-.1-1.2-.4-2.3-1.4a8.6 8.6 0 0 1-1.6-2c-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.2.1-.3.2-.5a.5.5 0 0 0 0-.5L9.3 8c-.2-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.8.3A3.4 3.4 0 0 0 6.1 10a6 6 0 0 0 1.2 3.1 13.7 13.7 0 0 0 5.2 4.6 6.3 6.3 0 0 0 2.3.7 3 3 0 0 0 2-.7 2.8 2.8 0 0 0 .8-1.7c0-.3-.2-.4-.4-.5z" fill="#fff"/>
-        </svg>
-      </span>
-      <div class="wa-text">
-        <strong>¡Te contactaremos por WhatsApp!</strong>
-        <p>Mantén tu celular a mano.</p>
-      </div>
-    </div>
-    <div class="modal-actions">
-      <a href="/" class="modal-btn-main"
-         style="display:flex; justify-content:center; align-items:center; text-decoration:none;">
-        🏠 Volver al inicio
-      </a>
-    </div>
-  </div>
-</div>
-
-
-<!-- ===================================================== -->
-<!-- SCRIPT DEL CARRITO                                    -->
-<!-- ===================================================== -->
 <script>
 const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw53U4Px15aRNAxwTsM3Q2d9t1kXeS41JMro7CO4lV0oHF-AHJnYOpZhcr70Sa0uHPc/exec';
 
-// ── Datos de Shopify inyectados en build-time ──
 let shopifyTotal = "{{ cart.total_price | money }}";
-let productosStr = "";
-{% for item in cart.items %}
-  productosStr += "{{ item.product.title | escape }} x{{ item.quantity }}, ";
-{% endfor %}
-productosStr = productosStr.replace(/,\s*$/, '');
 
-// Items con variant_id para crear la orden en Shopify
-const cartItems = [
+let cartItems = [
   {% for item in cart.items %}
     {
       variant_id: {{ item.variant_id }},
       quantity:   {{ item.quantity }},
       title:      "{{ item.product.title | escape }}",
-      price:      "{{ item.price | money_without_currency }}"
+      price:      "{{ item.line_price | money }}",
+      image:      "{{ item.image | img_url: 'small' }}"
     }{% unless forloop.last %},{% endunless %}
   {% endfor %}
 ];
 
-// ── AJAX: cambiar cantidad sin recargar página ──
+function formatMoney(cents) {
+  return 'RD$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}
+
+function goToStep(step) {
+  document.getElementById('view-step1').style.display = 'none';
+  document.getElementById('view-step2').style.display = 'none';
+  document.getElementById('view-step3').style.display = 'none';
+  document.getElementById('view-step' + step).style.display = 'block';
+  
+  const stepsNav = [
+    document.getElementById('step1-nav'),
+    document.getElementById('step2-nav'),
+    document.getElementById('step3-nav')
+  ];
+  
+  stepsNav.forEach((nav, idx) => {
+    const s = idx + 1;
+    nav.classList.remove('active');
+    const icon = nav.querySelector('.step-icon');
+    
+    if (s < step) {
+      icon.classList.add('completed');
+      icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+    } else if (s === step) {
+      nav.classList.add('active');
+      icon.classList.remove('completed');
+      icon.innerHTML = s;
+    } else {
+      icon.classList.remove('completed');
+      icon.innerHTML = s;
+    }
+  });
+}
+
 function ajaxQty(line, qty) {
   fetch('/cart/change.js', {
     method: 'POST',
@@ -270,34 +527,16 @@ function ajaxQty(line, qty) {
   })
   .then(r => r.json())
   .then(cart => {
-    // Si el carrito quedó vacío o se quitó un item, recargar con alerta
     if (cart.item_count === 0 || qty === 0) {
-      if (typeof Swal !== 'undefined') {
-        Swal.fire({
-          title: 'Producto retirado',
-          icon: 'info',
-          toast: true,
-          position: 'bottom-end',
-          showConfirmButton: false,
-          timer: 1000,
-          background: '#fff',
-          color: '#1a2e1e'
-        }).then(() => location.reload());
-      } else {
-        location.reload();
-      }
+      location.reload();
       return;
     }
-
-    // Actualizar cantidad visible
     const qtyEl = document.getElementById('qty-' + line);
     if (qtyEl) qtyEl.textContent = qty;
-
-    // Actualizar badge del header
+    
     const badge = document.getElementById('cartBadge');
     if (badge) badge.textContent = cart.item_count;
 
-    // Actualizar precios de línea y total en pantalla
     cart.items.forEach((item, i) => {
       const priceEls = document.querySelectorAll('.oi-price');
       if (priceEls[i]) {
@@ -305,162 +544,164 @@ function ajaxQty(line, qty) {
       }
     });
 
-    // Actualizar totales
-    const totalEls = document.querySelectorAll('.sum-val, .sum-total-val');
-    totalEls.forEach(el => {
-      if (el.classList.contains('green')) return; // No tocar el de "Gratis"
-      el.textContent = formatMoney(cart.total_price);
-    });
+    const totalEls = document.querySelectorAll('.sum-val:not(.green), .sum-total-val, #step1-total, #step2-total');
+    totalEls.forEach(el => el.textContent = formatMoney(cart.total_price));
 
-    // Actualizar el botón de confirmar pedido
-    const confirmBtnLabel = document.querySelector('.btn-submit .btn-label');
-    if (confirmBtnLabel && !document.getElementById('successModal').classList.contains('show')) {
-      confirmBtnLabel.textContent = '\u2705 Confirmar pedido — ' + formatMoney(cart.total_price);
-    }
-
-    // Actualizar la variable global para el formulario
     shopifyTotal = formatMoney(cart.total_price);
+    
+    // Update JS array for Step 3
+    cartItems = cart.items.map(item => ({
+      variant_id: item.variant_id,
+      quantity: item.quantity,
+      title: item.product_title || item.title,
+      price: formatMoney(item.line_price),
+      image: item.image
+    }));
   })
   .catch(() => location.reload());
 }
 
-// Convierte centavos a formato de dinero: 4500 → "$45.00"
-function formatMoney(cents) {
-  return '$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-// ── Vaciar Carrito ─────────────────────────────
 function vaciarCarrito() {
-  if (typeof Swal !== 'undefined') {
-    Swal.fire({
-      title: '¿Vaciar carrito?',
-      text: "Se eliminarán todos los productos de tu orden.",
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#e74c3c',
-      cancelButtonColor: '#f5f0e8',
-      confirmButtonText: 'Sí, vaciar',
-      cancelButtonText: '<span style="color:#1a2e1e;font-weight:600;">Cancelar</span>',
-      reverseButtons: true
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
-          .then(() => location.reload());
-      }
-    });
-  } else {
-    if (confirm("¿Vaciar todo el carrito?")) {
-      fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
-        .then(() => location.reload());
-    }
+  if (confirm("¿Vaciar todo el carrito?")) {
+    fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+      .then(() => location.reload());
   }
 }
 
-// ── Abrir / cerrar modal ───────────────────────
-function abrirFormulario() {
-  document.getElementById('formModal').classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
-function cerrarFormulario() {
-  document.getElementById('formModal').classList.remove('show');
-  document.body.style.overflow = '';
-}
 
-// Cerrar al hacer clic en el fondo oscuro
-document.getElementById('formModal').addEventListener('click', function(e) {
-  if (e.target === this) cerrarFormulario();
-});
-
-// ── Validación ─────────────────────────────────
-function marcarError(id, hasError) {
-  const el = document.getElementById(id);
-  el.classList.toggle('error', hasError);
-  el.classList.toggle('valid', !hasError && el.value.trim() !== '');
-}
-
-function validarForm() {
-  const requeridos = ['fNombre', 'fApellido', 'fWhatsapp', 'fDireccion', 'fCiudad'];
-  let ok = true;
-  requeridos.forEach(id => {
-    const empty = !document.getElementById(id).value.trim();
-    marcarError(id, empty);
-    if (empty) ok = false;
-  });
-  const emailVal = document.getElementById('fEmail').value;
-  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
-  marcarError('fEmail', !emailOk);
-  if (!emailOk) ok = false;
-  return ok;
-}
-
-// ── Generador de número de pedido ─────────────
 function generarNum() {
   return '#EC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
 }
 
-// ── Envío del pedido ───────────────────────────
 async function enviarPedido() {
-  if (!validarForm()) {
-    // Scroll al primer campo con error
-    const errEl = document.querySelector('#formModal .error');
-    if (errEl) errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (cartItems.length === 0) return;
+
+  const inputs = {
+    nombre: document.getElementById('fNombre'),
+    apellido: document.getElementById('fApellido'),
+    email: document.getElementById('fEmail'),
+    telefono: document.getElementById('fWhatsapp'),
+    direccion: document.getElementById('fDireccion'),
+    ciudad: document.getElementById('fCiudad'),
+    provincia: document.getElementById('fProvincia')
+  };
+
+  const regexLetras = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const regexNumeros = /^[\d\+\-\s\(\)]+$/;
+
+  let hasError = false;
+
+  Object.values(inputs).forEach(input => {
+    input.classList.remove('input-error');
+  });
+
+  for (const [key, input] of Object.entries(inputs)) {
+    const val = input.value.trim();
+    if (!val) {
+      input.classList.add('input-error');
+      hasError = true;
+    } else {
+      if ((key === 'nombre' || key === 'apellido' || key === 'ciudad' || key === 'provincia') && !regexLetras.test(val)) {
+        input.classList.add('input-error');
+        hasError = true;
+      }
+      if (key === 'email' && !regexEmail.test(val)) {
+        input.classList.add('input-error');
+        hasError = true;
+      }
+      if (key === 'telefono' && !regexNumeros.test(val)) {
+        input.classList.add('input-error');
+        hasError = true;
+      }
+    }
+  }
+
+  if (hasError) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Faltan datos',
+      text: 'Por favor, revisa los campos en rojo y asegúrate de llenarlos correctamente.',
+      confirmButtonColor: '#dc2626',
+      confirmButtonText: 'Entendido'
+    });
     return;
   }
 
-  const btn   = document.getElementById('submitBtn');
+  const btn = document.getElementById('submitBtn');
   const label = document.getElementById('btnLabel');
-  btn.classList.add('loading');
-  btn.disabled = true;
+  const spinner = btn.querySelector('.spinner');
+  
+  btn.style.opacity = '0.7';
+  btn.style.pointerEvents = 'none';
   label.textContent = 'Enviando...';
+  if(spinner) spinner.style.display = 'block';
 
   const orderNum = generarNum();
-  const payload  = {
+  let productosStr = "";
+  cartItems.forEach(item => {
+    productosStr += item.title + " x" + item.quantity + ", ";
+  });
+
+  const payload = {
     orderNum,
-    fecha:      new Date().toLocaleString('es-DO'),
-    nombre:     document.getElementById('fNombre').value.trim(),
-    apellido:   document.getElementById('fApellido').value.trim(),
-    email:      document.getElementById('fEmail').value.trim(),
-    telefono:   document.getElementById('fWhatsapp').value.trim(),
-    pais:       document.getElementById('fPais').value,
-    direccion:  document.getElementById('fDireccion').value.trim(),
-    ciudad:     document.getElementById('fCiudad').value.trim(),
-    provincia:  document.getElementById('fProvincia').value.trim(),
-    notas:      document.getElementById('fNotas').value.trim(),
-    productos:  productosStr,
-    total:      shopifyTotal,
-    items:      cartItems,   // ← variant_ids para crear la orden en Shopify
-    estado:     'Pendiente'
+    fecha: new Date().toLocaleString('es-DO'),
+    nombre: document.getElementById('fNombre').value.trim(),
+    apellido: document.getElementById('fApellido').value.trim(),
+    email: document.getElementById('fEmail').value.trim(),
+    telefono: document.getElementById('fWhatsapp').value.trim(),
+    pais: document.getElementById('fPais').value,
+    direccion: document.getElementById('fDireccion').value.trim(),
+    ciudad: document.getElementById('fCiudad').value.trim(),
+    provincia: document.getElementById('fProvincia').value.trim(),
+    notas: document.getElementById('fNotas').value.trim(),
+    productos: productosStr,
+    total: shopifyTotal,
+    items: cartItems,
+    estado: 'Pendiente'
   };
 
   try {
-    if (SHEETS_URL && SHEETS_URL !== 'TU_URL_DE_APPS_SCRIPT_AQUI') {
-      await fetch(SHEETS_URL, {
-        method:  'POST',
-        mode:    'no-cors',
-        headers: { 'Content-Type': 'text/plain' }, // text/plain es CORS-safe con no-cors
-        body:    JSON.stringify({ ...payload, _token: 'EC2026RD' })
-      });
-    }
+    await fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ ...payload, _token: 'EC2026RD' })
+    });
     mostrarExito(orderNum);
   } catch (err) {
-    console.error('Error al enviar pedido:', err);
     mostrarExito(orderNum);
   }
 }
 
 function mostrarExito(orderNum) {
-  document.getElementById('modalOrderNum').textContent = orderNum;
-  document.getElementById('formModal').classList.remove('show');
-  document.getElementById('successModal').classList.add('show');
+  const tbody = document.getElementById('order-detail-tbody');
+  tbody.innerHTML = '';
+  
+  cartItems.forEach(item => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><strong>${orderNum}</strong></td>
+      <td>
+        <div style="display:flex; align-items:center; gap:16px;">
+          <img src="${item.image}" alt="" style="width: 50px; height: 50px; object-fit:cover; border-radius: 8px; flex-shrink:0;">
+          <span style="max-width: 250px; line-height: 1.4; font-size: 0.85rem; font-weight:700;">${item.title}</span>
+        </div>
+      </td>
+      <td style="font-weight: 700; color:#555;">${item.quantity}</td>
+      <td style="font-weight: 700;">${item.price}</td>
+      <td><span class="status-badge">Orden creada</span></td>
+    `;
+    tbody.appendChild(tr);
+  });
 
-  // Vaciar carrito de Shopify
   fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
     .then(() => {
-      // Actualizar badge del header a 0
       const badge = document.getElementById('cartBadge');
       if (badge) { badge.textContent = '0'; badge.style.display = 'none'; }
-    })
-    .catch(err => console.warn('No se pudo vaciar el carrito:', err));
+    });
+
+  goToStep(3);
 }
 </script>
 
