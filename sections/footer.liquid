@@ -1,50 +1,221 @@
-<footer>
-  <div class="footer-grid">
-    <div>
-      <div class="footer-brand">
-      {%- if settings.logo != blank -%}
-        <img src="{{ settings.logo | image_url: width: settings.logo_max_width }}" 
-             alt="{{ shop.name }}" 
-             style="width: {{ settings.logo_max_width }}px; height: auto;">
-      {%- else -%}
-        <div class="footer-brand-icon">📬</div>
-        <div class="footer-brand-name">{{ shop.name }}</div>
-      {%- endif -%}
+<footer class="elcartero-footer">
+  <div class="footer-inner">
+
+    <!-- Fila superior: tagline izquierda + descripción derecha -->
+    <div class="footer-top">
+      <p class="footer-tagline">Envío gratis - Pago contra entrega</p>
+      <p class="footer-description">{{ section.settings.store_description | default: 'Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido.' }}</p>
+    </div>
+
+    <!-- Fila media: botones nav izquierda + redes sociales derecha -->
+    <div class="footer-mid">
+      <div class="footer-nav">
+        <a href="/collections/all" class="footer-btn">Catálogo</a>
+        <a href="/pages/contacto" class="footer-btn">Contáctanos</a>
+        <a href="/account" class="footer-btn">Ordenes</a>
       </div>
-      <p class="footer-desc">{{ section.settings.store_description }}</p>
+      <div class="footer-social">
+        <a href="{{ settings.social_whatsapp_link | default: '#' }}" target="_blank" rel="noopener" aria-label="WhatsApp" class="footer-social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+            <path d="M20.52 3.48A11.93 11.93 0 0 0 12 0C5.37 0 0 5.37 0 12c0 2.11.55 4.17 1.6 5.98L0 24l6.18-1.62A11.94 11.94 0 0 0 12 24c6.63 0 12-5.37 12-12 0-3.2-1.25-6.21-3.48-8.52zM12 22c-1.85 0-3.66-.5-5.23-1.44l-.37-.22-3.67.96.98-3.58-.24-.38A9.93 9.93 0 0 1 2 12C2 6.48 6.48 2 12 2c2.67 0 5.18 1.04 7.07 2.93A9.93 9.93 0 0 1 22 12c0 5.52-4.48 10-10 10zm5.44-7.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.44-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.41.25-.69.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35z"/>
+          </svg>
+        </a>
+        <a href="{{ settings.social_instagram_link | default: '#' }}" target="_blank" rel="noopener" aria-label="Instagram" class="footer-social-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20" height="20">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+          </svg>
+        </a>
+      </div>
     </div>
-    
-    {% for block in section.blocks %}
-      {% if block.type == 'link_list' %}
-        <div>
-          <p class="fcol-title">{{ block.settings.title }}</p>
-          <ul class="fcol-links">
-            {% for link in linklists[block.settings.menu].links %}
-              <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-            {% endfor %}
-          </ul>
-        </div>
-      {% endif %}
-    {% endfor %}
 
-  </div>
-
-  <!-- Links legales fijos -->
-  <div style="border-top:1px solid rgba(255,255,255,0.07); padding:24px 0 0; margin-top:0; display:flex; gap:24px; flex-wrap:wrap;">
-    <a href="/pages/politica-de-privacidad" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Política de Privacidad</a>
-    <a href="/pages/politica-de-devoluciones" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Devoluciones</a>
-    <a href="/pages/contacto" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Contacto</a>
-    <a href="/collections/all" style="font-size:0.75rem; color:rgba(255,255,255,0.3); text-decoration:none; transition:color 0.2s;" onmouseover="this.style.color='rgba(255,255,255,0.7)'" onmouseout="this.style.color='rgba(255,255,255,0.3)'">Tienda</a>
-  </div>
-
-  <div class="footer-bottom">
-    <p class="footer-copy">&copy; {{ 'now' | date: "%Y" }} {{ shop.name }}. Todos los derechos reservados.</p>
-    <div class="footer-pays">
-      <span class="pay">💵 CONTRA ENTREGA</span>
-      <span class="pay">🚚 ENVÍO GRATIS</span>
+    <!-- Logo grande centrado -->
+    <div class="footer-logo-wrap">
+      <svg viewBox="0 0 1487 272" fill="currentColor" class="footer-logo-svg">
+          <path d="M55.5 55.25l0 21.74999 55 0 0 41.75001-55 0 0 25 62.5 0 0 44.25-118 0 0-177 118 0 0 44.25-62.5 0z m136.41602 90.75l53.5 0 0 42-109 0 0-177 55.5 0 0 135z m421.84765 15.25l-59 0-8.75 26.75-58.25 0 64.75-177 64 0 64.5 177-58.5 0-8.75-26.75z m-13.5-41.75001l-16-49.25-16 49.25 32 0z m179.85938 68.50001l-33.25-63.5-0.25 0 0 63.5-55.5 0 0-177 82.5 0c14.33331 0 26.58331 2.58333 36.75 7.74999 10.16668 5.00001 17.75 11.91667 22.75 20.75 5.16668 8.66666 7.75 18.5 7.75 29.50001 0 11.83333-3.33332 22.33333-10 31.49999-6.5 9.16667-15.91669 15.75-28.25 19.75l38.5 67.75001-61 0z m-33.5-100.5l22 0c5.33331 0 9.33331-1.16666 12-3.5 2.66668-2.5 4-6.33334 4-11.5 0-4.66666-1.41669-8.33334-4.25-11.00001-2.66669-2.66666-6.58332-3.99999-11.75-3.99999l-22 0 0 30z m248.48047-76.5l0 44-47 0 0 133-55.5 0 0-133-46.5 0 0-44 149 0z m68.05268 44.25l0 21.74999 55 0 0 41.75001-55 0 0 25 62.5 0 0 44.25-118 0 0-177 118 0 0 44.25-62.5 0z m169.9161 132.75l-33.25-63.5-0.25 0 0 63.5-55.5 0 0-177 82.5 0c14.3333 0 26.5833 2.58333 36.75 7.74999 10.1666 5.00001 17.75 11.91667 22.75 20.75 5.1666 8.66666 7.75 18.5 7.75 29.50001 0 11.83333-3.3334 22.33333-10 31.49999-6.5 9.16667-15.9167 15.75-28.25 19.75l38.5 67.75001-61 0z m-33.5-100.5l22 0c5.3333 0 9.3333-1.16666 12-3.5 2.6666-2.5 4-6.33334 4-11.5 0-4.66666-1.4167-8.33334-4.25-11.00001-2.6667-2.66666-6.5834-3.99999-11.75-3.99999l-22 0 0 30z m195.7304 102.25c-16.6666 0-32-3.91667-46-11.75-13.8333-7.83333-24.8333-18.66667-33-32.5-8.1666-13.83334-12.25-29.41667-12.25-46.75001 0-17.33334 4.0834-32.91666 12.25-46.75 8.1667-13.83334 19.1667-24.58333 33-32.25 14-7.83333 29.3334-11.75 46-11.75 16.6667 0 31.9167 3.91667 45.75 11.75 13.8334 7.66667 24.75 18.41667 32.75 32.25 8.1667 13.83334 12.25 29.41666 12.25 46.75 0 17.33334-4.0833 32.91667-12.25 46.75001-8 13.83333-19 24.66667-33 32.5-13.8333 7.83333-29 11.75-45.5 11.75z m0-51.75c11 0 19.5-3.5 25.5-10.5 6-7.16667 9-16.75001 9-28.75001 0-12.16666-3-21.74999-9-28.75-6-7.16667-14.5-10.75-25.5-10.75-11.1666 0-19.75 3.58333-25.75 10.75-6 7.00001-9 16.58334-9 28.75 0 12 3 21.58334 9 28.75001 6 7 14.5834 10.5 25.75 10.5z m-1012.8027-138c43.3866 0 79.67944 30.36356 88.79297 71l-61.19141 0c-5.56061-11.96701-15.83905-20-27.60156-20-17.6731 0-32 18.13247-32 40.5 0 22.36753 14.3269 40.5 32 40.5 11.76251 0 22.04095-8.03299 27.60156-20l60.96192 0c-2.64749 11.20771-7.36905 21.61349-13.73438 30.79297l-74.8291 129.20703-74.81836-129.18555c-10.2027-14.70459-16.18164-32.56133-16.18164-51.81445 0-50.25791 40.7421-91 91-91z"/>
+      </svg>
     </div>
+
+    <!-- Fila inferior: copyright + links legales -->
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; {{ 'now' | date: '%Y' }} {{ shop.name }}. Todos los derechos reservados.</p>
+      <div class="footer-legal">
+        <a href="/pages/politica-de-privacidad">Política y Privacidad</a>
+        <a href="/pages/devoluciones">Devoluciones</a>
+      </div>
+    </div>
+
   </div>
 </footer>
+
+<style>
+.elcartero-footer {
+  background-color: #0d1224;
+  border-radius: 60px 60px 0 0;
+  color: #fff;
+  font-family: 'Poppins', sans-serif;
+  padding: 60px 80px 40px;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.footer-inner {
+  max-width: 1800px;
+  margin: 0 auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.footer-tagline {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.44px;
+  margin: 0;
+  max-width: 480px;
+}
+
+.footer-description {
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.44px;
+  text-align: right;
+  margin: 0;
+  max-width: 420px;
+}
+
+.footer-mid {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.footer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 36px;
+  border-radius: 50px;
+  border: 1px solid #919191;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.4px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.footer-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: #fff;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+}
+
+.footer-social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255,255,255,0.2);
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.footer-social-icon:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.footer-logo-wrap {
+  text-align: center;
+  padding: 20px 0 30px;
+}
+
+.footer-logo-svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 24px;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.footer-copy {
+  font-size: 18px;
+  color: #cfcfcf;
+  margin: 0;
+  letter-spacing: -0.36px;
+}
+
+.footer-legal {
+  display: flex;
+  gap: 32px;
+}
+
+.footer-legal a {
+  font-size: 18px;
+  color: #cfcfcf;
+  text-decoration: none;
+  letter-spacing: -0.36px;
+}
+
+.footer-legal a:hover {
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .elcartero-footer {
+    padding: 40px 24px 32px;
+    border-radius: 40px 40px 0 0;
+  }
+
+  .footer-top,
+  .footer-mid,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .footer-description {
+    text-align: left;
+  }
+
+  .footer-legal {
+    gap: 20px;
+  }
+
+  .footer-social {
+    align-self: flex-end;
+  }
+}
+</style>
 
 {% schema %}
 {
@@ -54,26 +225,12 @@
       "type": "textarea",
       "id": "store_description",
       "label": "Store Description",
-      "default": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
+      "default": "Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
     }
   ],
-  "blocks": [
+  "presets": [
     {
-      "type": "link_list",
-      "name": "Menu Column",
-      "settings": [
-        {
-          "type": "text",
-          "id": "title",
-          "label": "Column Title",
-          "default": "Links"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Menu Menu"
-        }
-      ]
+      "name": "Footer"
     }
   ]
 }
