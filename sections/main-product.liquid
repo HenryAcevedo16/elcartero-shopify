@@ -122,9 +122,9 @@
           </span>
         </button>
         {% if product.available %}
-          <a href="/checkout" class="btn-red" style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;">
+          <button type="button" onclick="const f=document.getElementById('AddToCartForm'); f.classList.remove('ajax-cart-form'); sessionStorage.setItem('cart_step', '2'); let r=document.createElement('input'); r.type='hidden'; r.name='return_to'; r.value='/cart'; f.appendChild(r); f.submit();" class="btn-red" style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;">
             ⚡ Comprar ahora
-          </a>
+          </button>
         {% endif %}
         <button type="button" class="btn-wish" id="WishBtn"
                 data-wish-id="{{ product.id }}"

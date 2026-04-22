@@ -87,7 +87,7 @@
   display: flex; align-items: center; justify-content: center; gap: 10px;
   margin-top: 4px;
 }
-.btn-submit:hover { background: #18a336; transform: translateY(-2px); }
+.btn-submit:hover { background: #b91c1c; transform: translateY(-2px); }
 .btn-submit:disabled { background: var(--muted); cursor: not-allowed; transform: none; }
 .btn-submit .spinner {
   width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.3);
