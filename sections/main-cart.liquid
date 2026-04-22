@@ -9,7 +9,11 @@
   width: 100%;
   max-width: 1600px;
   margin: 40px auto 160px auto;
+<<<<<<< HEAD
   height: 780px;
+=======
+  min-height: 780px;
+>>>>>>> 727a22d (UI Updates and layout improvements)
   align-items: stretch;
   background: transparent;
   padding: 0 40px;
@@ -41,13 +45,16 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  width: 100%;
 }
 .cart-step {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 8px 16px;
+  padding: 12px 16px;
   border-radius: 12px;
+  margin-left: -16px;
+  margin-right: -16px;
   position: relative;
   z-index: 2;
   transition: background 0.3s;
@@ -59,12 +66,12 @@
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 2px solid #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 600;
-  font-size: 0.9rem;
+  font-weight: 700;
+  font-size: 0.95rem;
   background: transparent;
   flex-shrink: 0;
 }
@@ -75,15 +82,15 @@
 }
 .step-text {
   font-weight: 600;
-  font-size: 1rem;
+  font-size: 1.05rem;
 }
 .step-connector {
-  width: 1px;
-  height: 28px;
+  width: 2px;
+  height: 24px;
   background: rgba(255,255,255,0.4);
-  margin-left: 31.5px;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-left: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   z-index: 1;
 }
 
@@ -136,7 +143,11 @@
   padding: 0 0 40px 20px;
   background: transparent;
   box-shadow: none;
+<<<<<<< HEAD
   overflow-y: auto;
+=======
+  overflow-y: visible;
+>>>>>>> 727a22d (UI Updates and layout improvements)
 }
 
 /* ORDER ITEMS SCROLL */
@@ -150,17 +161,27 @@
 .order-items::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
 
 /* FORM OVERRIDES */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 20px;
+}
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+
 .form-label {
-  font-weight: 800 !important;
-  color: #111 !important;
+  font-weight: 600 !important;
+  color: #000 !important;
   font-size: 0.95rem !important;
   margin-bottom: 8px !important;
   text-transform: none !important;
   display: block;
 }
 .form-inp {
-  background: #f5f5f5 !important;
-  border: 2px solid transparent !important;
+  background: #f4f4f4 !important;
+  border: none !important;
   border-radius: 8px !important;
   padding: 14px 16px !important;
   font-size: 0.95rem !important;
@@ -169,17 +190,26 @@
   width: 100% !important;
   box-sizing: border-box;
   font-family: inherit !important;
+<<<<<<< HEAD
   transition: border-color 0.15s !important;
 }
 .form-inp:focus {
   outline: none !important;
   border-color: #dc2626 !important;
+=======
+  transition: box-shadow 0.15s !important;
+}
+.form-inp:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px #dc2626 !important;
+>>>>>>> 727a22d (UI Updates and layout improvements)
   background: #fff !important;
 }
 .form-inp.input-error {
-  border-color: #dc2626 !important;
+  box-shadow: 0 0 0 2px #dc2626 !important;
   background-color: #fef2f2 !important;
 }
+<<<<<<< HEAD
 .form-inp::placeholder { color: #aaa !important; }
 
 /* País readonly */
@@ -197,6 +227,26 @@
   align-items: center;
   gap: 8px;
   cursor: not-allowed;
+=======
+.form-inp::placeholder { color: #a3a3a3 !important; }
+
+/* País readonly */
+.pais-field {
+  background: #f4f4f4 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  padding: 14px 16px !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+  color: #777 !important;
+  width: 100% !important;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  cursor: default;
+>>>>>>> 727a22d (UI Updates and layout improvements)
 }
 
 /* ── CUSTOM PROVINCE DROPDOWN ── */
@@ -207,8 +257,13 @@
   justify-content: space-between;
   width: 100%;
   box-sizing: border-box;
+<<<<<<< HEAD
   background: #f5f5f5;
   border: 2px solid transparent;
+=======
+  background: #f4f4f4;
+  border: none;
+>>>>>>> 727a22d (UI Updates and layout improvements)
   border-radius: 8px;
   padding: 14px 16px;
   font-size: 0.95rem;
@@ -217,12 +272,21 @@
   font-family: inherit;
   cursor: pointer;
   text-align: left;
+<<<<<<< HEAD
   transition: border-color 0.15s, background 0.15s;
 }
 .prov-trigger.is-placeholder { color: #aaa; }
 .prov-trigger:focus { outline: none; border-color: #dc2626; background: #fff; }
 .prov-trigger.input-error { border-color: #dc2626 !important; background: #fef2f2 !important; }
 .prov-trigger.open { border-color: #dc2626; background: #fff; }
+=======
+  transition: box-shadow 0.15s, background 0.15s;
+}
+.prov-trigger.is-placeholder { color: #a3a3a3; }
+.prov-trigger:focus { outline: none; box-shadow: 0 0 0 2px #dc2626; background: #fff; }
+.prov-trigger.input-error { box-shadow: 0 0 0 2px #dc2626 !important; background: #fef2f2 !important; }
+.prov-trigger.open { box-shadow: 0 0 0 2px #dc2626; background: #fff; }
+>>>>>>> 727a22d (UI Updates and layout improvements)
 .prov-arrow { transition: transform 0.2s; color: #999; flex-shrink: 0; margin-left: 8px; }
 .prov-trigger.open .prov-arrow { transform: rotate(180deg); }
 
@@ -396,7 +460,11 @@
 
   .cart-main { padding: 24px 0; overflow-y: visible; }
   .form-grid { grid-template-columns: 1fr !important; }
+<<<<<<< HEAD
   .form-group.span2 { grid-column: span 1 !important; }
+=======
+  .col-4, .col-6, .col-8, .col-12 { grid-column: span 12 !important; }
+>>>>>>> 727a22d (UI Updates and layout improvements)
 }
 </style>
 
@@ -521,35 +589,66 @@
       </div>
 
       <div class="form-grid">
-        <div class="form-group">
+        <div class="form-group col-6">
           <label class="form-label" for="fNombre">Nombre</label>
           <input class="form-inp" id="fNombre" type="text" placeholder="Omar" autocomplete="given-name" oninput="this.classList.remove('input-error')">
         </div>
-        <div class="form-group">
+        <div class="form-group col-6">
           <label class="form-label" for="fApellido">Apellido</label>
           <input class="form-inp" id="fApellido" type="text" placeholder="Canela" autocomplete="family-name" oninput="this.classList.remove('input-error')">
         </div>
+<<<<<<< HEAD
         <div class="form-group">
           <label class="form-label" for="fWhatsapp">Whatsapp / Teléfono</label>
+=======
+        <div class="form-group col-6">
+          <label class="form-label" for="fWhatsapp">Whatsapp/Teléfono</label>
+>>>>>>> 727a22d (UI Updates and layout improvements)
           <input class="form-inp" id="fWhatsapp" type="tel" placeholder="+1 (809) 000-0000" autocomplete="tel" oninput="this.classList.remove('input-error')">
         </div>
-        <div class="form-group">
+        <div class="form-group col-6">
           <label class="form-label" for="fEmail">Correo electrónico</label>
           <input class="form-inp" id="fEmail" type="email" placeholder="maria@correo.com" autocomplete="email" oninput="this.classList.remove('input-error')">
         </div>
+<<<<<<< HEAD
         <div class="form-group">
           <label class="form-label">País</label>
           <div class="pais-field">🇩🇴 República Dominicana</div>
+=======
+        <div class="form-group col-4">
+          <label class="form-label">País</label>
+          <div class="pais-field">
+            República Dominicana
+            <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </div>
+>>>>>>> 727a22d (UI Updates and layout improvements)
           <input type="hidden" id="fPais" value="República Dominicana">
         </div>
-        <div class="form-group">
+        <div class="form-group col-8">
           <label class="form-label" for="fDireccion">Dirección</label>
           <input class="form-inp" id="fDireccion" type="text" placeholder="Calle Principal #123, Apto 4B" autocomplete="street-address" oninput="this.classList.remove('input-error')">
         </div>
-        <div class="form-group">
+        <div class="form-group col-4">
+          <label class="form-label" for="fProvinciaBtn">Provincia / Estado</label>
+          <div class="prov-wrap" id="provinciaWrap">
+            <button type="button" class="prov-trigger is-placeholder" id="fProvinciaBtn" onclick="toggleProv()" aria-haspopup="listbox">
+              <span id="provLabel">Distrito Nacional</span>
+              <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <input type="hidden" id="fProvincia" value="Distrito Nacional">
+            <div class="prov-dropdown" id="provDropdown" role="listbox">
+              <div class="prov-search-wrap">
+                <input class="prov-search" id="provSearch" type="text" placeholder="Buscar provincia..." oninput="filterProv(this.value)" autocomplete="off">
+              </div>
+              <div class="prov-list" id="provList"></div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-4">
           <label class="form-label" for="fCiudad">Ciudad</label>
           <input class="form-inp" id="fCiudad" type="text" placeholder="Santo Domingo" autocomplete="address-level2" oninput="this.classList.remove('input-error')">
         </div>
+<<<<<<< HEAD
         <div class="form-group">
           <label class="form-label" for="fProvinciaBtn">Provincia</label>
           <div class="prov-wrap" id="provinciaWrap">
@@ -563,12 +662,27 @@
                 <input class="prov-search" id="provSearch" type="text" placeholder="Buscar provincia..." oninput="filterProv(this.value)" autocomplete="off">
               </div>
               <div class="prov-list" id="provList"></div>
+=======
+        <div class="form-group col-4">
+          <label class="form-label" for="fMunicipioBtn">Municipio</label>
+          <div class="prov-wrap" id="municipioWrap">
+            <button type="button" class="prov-trigger is-placeholder" id="fMunicipioBtn" onclick="toggleMun()" aria-haspopup="listbox">
+              <span id="munLabel">Selecciona un municipio</span>
+              <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </button>
+            <input type="hidden" id="fMunicipio" value="">
+            <div class="prov-dropdown" id="munDropdown" role="listbox">
+              <div class="prov-search-wrap">
+                <input class="prov-search" id="munSearch" type="text" placeholder="Buscar municipio..." oninput="filterMun(this.value)" autocomplete="off">
+              </div>
+              <div class="prov-list" id="munList"></div>
+>>>>>>> 727a22d (UI Updates and layout improvements)
             </div>
           </div>
         </div>
-        <div class="form-group span2">
+        <div class="form-group col-12">
           <label class="form-label" for="fNotas">Notas del pedido (Opcional)</label>
-          <textarea class="form-inp" id="fNotas" placeholder="Ej: Dejar con el portero, llamar antes de llegar" style="height: 100px; resize: none;"></textarea>
+          <input class="form-inp" id="fNotas" type="text" placeholder="Ej: Dejar con el portero, llamar antes de llegar" oninput="this.classList.remove('input-error')">
         </div>
       </div>
 
@@ -810,6 +924,10 @@ async function enviarPedido() {
 
   Object.values(inputs).forEach(input => input.classList.remove('input-error'));
   document.getElementById('fProvinciaBtn').classList.remove('input-error');
+<<<<<<< HEAD
+=======
+  document.getElementById('fMunicipioBtn').classList.remove('input-error');
+>>>>>>> 727a22d (UI Updates and layout improvements)
 
   for (const [key, input] of Object.entries(inputs)) {
     const val = input.value.trim();
@@ -838,6 +956,15 @@ async function enviarPedido() {
     hasError = true;
   }
 
+<<<<<<< HEAD
+=======
+  // Validar municipio
+  if (!document.getElementById('fMunicipio').value.trim()) {
+    document.getElementById('fMunicipioBtn').classList.add('input-error');
+    hasError = true;
+  }
+
+>>>>>>> 727a22d (UI Updates and layout improvements)
   if (hasError) {
     Swal.fire({
       icon: 'error',
@@ -872,6 +999,10 @@ async function enviarPedido() {
     direccion: document.getElementById('fDireccion').value.trim(),
     ciudad:    document.getElementById('fCiudad').value.trim(),
     provincia: document.getElementById('fProvincia').value.trim(),
+<<<<<<< HEAD
+=======
+    municipio: document.getElementById('fMunicipio').value.trim(),
+>>>>>>> 727a22d (UI Updates and layout improvements)
     notas:     document.getElementById('fNotas').value.trim(),
     productos: productosStr,
     total:     shopifyTotal,
@@ -928,6 +1059,7 @@ function mostrarExito(orderNum) {
 
 
 
+<<<<<<< HEAD
 /* ── CUSTOM PROVINCE DROPDOWN ── */
 var PROVINCIAS = [
   'Azua','Bahoruco','Barahona','Dajabón','Distrito Nacional','Duarte',
@@ -939,6 +1071,94 @@ var PROVINCIAS = [
   'Santiago','Santiago Rodríguez','Santo Domingo','Valverde'
 ];
 
+=======
+/* ── CUSTOM PROVINCE/MUNICIPIO DROPDOWN ── */
+var PROVINCIAS = [
+  "Distrito Nacional",
+  "Azua",
+  "Baoruco",
+  "Barahona",
+  "Dajabón",
+  "Duarte",
+  "El Seibo",
+  "Elías Piña",
+  "Espaillat",
+  "Hato Mayor",
+  "Hermanas Mirabal",
+  "Independencia",
+  "La Altagracia",
+  "La Romana",
+  "La Vega",
+  "María Trinidad Sánchez",
+  "Monseñor Nouel",
+  "Montecristi",
+  "Monte Plata",
+  "Pedernales",
+  "Peravia",
+  "Puerto Plata",
+  "Samaná",
+  "San Cristóbal",
+  "San José de Ocoa",
+  "San Juan",
+  "San Pedro de Macorís",
+  "Sánchez Ramírez",
+  "Santiago",
+  "Santiago Rodríguez",
+  "Santo Domingo",
+  "Valverde",
+];
+
+var MUNICIPIOS_POR_PROVINCIA = {
+  "Distrito Nacional": ["Distrito Nacional"],
+  "Azua": ["Azua de Compostela", "Barro Arriba", "Clavellina", "Emma Balaguer Viuda Vallejo", "Las Barías-La Estancia", "Las Lomas", "Los Jovillos", "Puerto Viejo", "Sabana Yegua", "Tábara Arriba"],
+  "Baoruco": ["Neiba", "Galván", "Los Ríos", "Tamayo", "Santana", "Uvilla"],
+  "Barahona": ["El Cachón", "La Guázara", "Villa Central", "Enriquillo", "Fundación", "Jaquimeyes", "La Ciénaga", "Las Salinas", "Paraíso", "Polo", "Vicente Noble"],
+  "Dajabón": ["Cañongo", "El Pino", "Loma de Cabrera", "Partido", "Restauración"],
+  "Duarte": ["San Francisco de Macorís", "Jaya", "La Peña", "Presidente Don Antonio Guzmán", "Las Guáranas", "Pimentel", "Villa Riva"],
+  "El Seibo": ["Pedro Sánchez", "San Francisco-Vicentillo", "Santa Lucía"],
+  "Elías Piña": ["Comendador", "Sabana Larga", "El Llano", "Hondo Valle", "Juan Santiago", "Pedro Santana"],
+  "Espaillat": ["Moca", "El Higüerito", "José Contreras", "Juan López", "La Ortega", "Las Lagunas", "Monte de la Jagua", "San Víctor"],
+  "Hato Mayor": ["Hato Mayor del Rey", "Mata Palacio", "Yerba Buena"],
+  "Hermanas Mirabal": ["Salcedo", "Tenares", "Villa Tapia"],
+  "Independencia": ["Jimaní", "El Limón", "Duvergé", "La Descubierta", "Mella", "Postrer Río"],
+  "La Altagracia": ["Higüey", "Lagunas de Nisibón", "Verón-Punta Cana"],
+  "La Romana": ["Caleta", "Guaymate", "Villa Hermosa"],
+  "La Vega": ["La Concepción de La Vega", "Río Verde Arriba", "Jarabacoa", "Jima Abajo"],
+  "María Trinidad Sánchez": ["Nagua", "Las Gordas", "San José de Matanzas", "Río San Juan"],
+  "Monseñor Nouel": ["Bonao", "La Salvia-Los Quemados", "Jayaco", "Juma Bejucal", "Sabana del Puerto"],
+  "Montecristi": ["Palo Verde", "Hatillo Palma", "Villa Elisa", "Las Matas de Santa Cruz", "Pepillo Salcedo", "Villa Vásquez"],
+  "Monte Plata": ["Boyá", "Chirino", "Don Juan"],
+  "Pedernales": ["José Francisco Peña Gómez", "Juancho"],
+  "Peravia": ["Baní", "El Carretón", "El Limonal", "Las Barías", "Matanzas", "Paya", "Sabana Buey", "Villa Fundación", "Villa Sombrero"],
+  "Puerto Plata": ["Maimón", "Yásica Arriba", "Guananico", "Imbert", "Los Hidalgos", "Luperón", "Sosúa", "Villa Isabela", "Villa Montellano"],
+  "Samaná": ["Arroyo Barril", "El Limón", "Las Galeras"],
+  "San Cristóbal": ["Hato Damas", "Bajos de Haina", "Cambita Garabito", "Los Cacaos", "Sabana Grande de Palenque", "San Gregorio de Nigua", "Villa Altagracia", "Yaguate"],
+  "San José de Ocoa": ["El Naranjal", "El Pinar", "La Ciénaga", "Nizao-Las Auyamas"],
+  "San Juan": ["San Juan de la Maguana", "Guanito", "Hato del Padre", "Hato Nuevo", "La Jagua", "Las Charcas de María Nova", "Pedro Corto", "Sabana Alta", "Sabaneta"],
+  "San Pedro de Macorís": ["El Puerto", "Gautier"],
+  "Sánchez Ramírez": ["Cotuí", "Comedero Arriba", "Quita Sueño", "La Mata"],
+  "Santiago": ["Baitoa", "Hato del Yaque", "La Canela", "Pedro García", "San Francisco de Jacagua", "Sabana Iglesia", "Tamboril"],
+  "Santiago Rodríguez": ["San Ignacio de Sabaneta", "Los Almácigos", "Monción"],
+  "Santo Domingo": ["Santo Domingo Este", "Boca Chica", "Los Alcarrizos", "Pedro Brand", "San Antonio de Guerra", "Santo Domingo Norte", "Santo Domingo Oeste"],
+  "Valverde": ["Mao", "Guatapanal", "Jaibón (Pueblo Nuevo)", "Paradero"]
+};
+
+var provinciaSeleccionada = 'Distrito Nacional';
+
+function onProvinceSelect(value) {
+  provinciaSeleccionada = value;
+  // Reset municipio
+  document.getElementById('fMunicipio').value = '';
+  document.getElementById('munLabel').textContent = 'Selecciona un municipio';
+  document.getElementById('fMunicipioBtn').classList.add('is-placeholder');
+  // Cerrar ambos dropdowns
+  document.getElementById('provDropdown').classList.remove('open');
+  document.getElementById('munDropdown').classList.remove('open');
+  document.getElementById('fProvinciaBtn').classList.remove('open');
+  document.getElementById('fMunicipioBtn').classList.remove('open');
+}
+
+>>>>>>> 727a22d (UI Updates and layout improvements)
 function renderProvList(filter) {
   var list = document.getElementById('provList');
   if (!list) return;
@@ -991,6 +1211,11 @@ document.addEventListener('click', function(e) {
     if (label) label.textContent = value;
     if (btn) btn.classList.remove('is-placeholder', 'input-error', 'open');
     if (dd)  dd.classList.remove('open');
+<<<<<<< HEAD
+=======
+    // **FIX**: Llamar onProvinceSelect para cargar municipios
+    onProvinceSelect(value);
+>>>>>>> 727a22d (UI Updates and layout improvements)
     renderProvList('');
     return;
   }
@@ -1001,8 +1226,85 @@ document.addEventListener('click', function(e) {
     if (dd2)  dd2.classList.remove('open');
     if (btn2) btn2.classList.remove('open');
   }
+<<<<<<< HEAD
 });
 
+=======
+
+  // ── Delegación para Municipio ── **FIX**: Detectar items de municipio correctamente
+  var itemMun = e.target.closest('.prov-item');
+  if (itemMun && itemMun.hasAttribute('data-value') && itemMun.closest('#munDropdown')) {
+    var valueMun = itemMun.getAttribute('data-value');
+    var hiddenInputMun = document.getElementById('fMunicipio');
+    var labelMun  = document.getElementById('munLabel');
+    var btnMun    = document.getElementById('fMunicipioBtn');
+    var ddMun     = document.getElementById('munDropdown');
+    if (hiddenInputMun) hiddenInputMun.value = valueMun;
+    if (labelMun) labelMun.textContent = valueMun;
+    if (btnMun) btnMun.classList.remove('is-placeholder', 'input-error', 'open');
+    if (ddMun)  ddMun.classList.remove('open');
+    renderMunList('');
+    return;
+  }
+  var wrapMun = document.getElementById('municipioWrap');
+  if (wrapMun && !wrapMun.contains(e.target)) {
+    var dd2Mun  = document.getElementById('munDropdown');
+    var btn2Mun = document.getElementById('fMunicipioBtn');
+    if (dd2Mun)  dd2Mun.classList.remove('open');
+    if (btn2Mun) btn2Mun.classList.remove('open');
+  }
+});
+
+/* ── CUSTOM MUNICIPIO DROPDOWN ── */
+var MUNICIPIOS = [];
+
+function renderMunList(filter) {
+  var list = document.getElementById('munList');
+  if (!list) return;
+  
+  var q = (filter || '').toLowerCase().trim();
+  var current = document.getElementById('fMunicipio').value || '';
+  var municipiosDisponibles = MUNICIPIOS_POR_PROVINCIA[provinciaSeleccionada] || [];
+  
+  var filtered = q ? municipiosDisponibles.filter(function(m){ 
+    return m.toLowerCase().indexOf(q) !== -1; 
+  }) : municipiosDisponibles;
+  
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="prov-empty">' + (q ? 'Sin resultados' : 'Selecciona una provincia primero') + '</div>';
+    return;
+  }
+  
+  list.innerHTML = '';
+  filtered.forEach(function(m) {
+    var div = document.createElement('div');
+    div.className = 'prov-item mun-item' + (m === current ? ' selected' : '');
+    div.setAttribute('data-value', m);
+    div.textContent = m;
+    list.appendChild(div);
+  });
+}
+
+function toggleMun() {
+  var btn = document.getElementById('fMunicipioBtn');
+  var dd  = document.getElementById('munDropdown');
+  var search = document.getElementById('munSearch');
+  if (!btn || !dd) return;
+  var isOpen = dd.classList.contains('open');
+  if (isOpen) {
+    dd.classList.remove('open');
+    btn.classList.remove('open');
+  } else {
+    dd.classList.add('open');
+    btn.classList.add('open');
+    renderMunList('');
+    if (search) { search.value = ''; setTimeout(function(){ search.focus(); }, 60); }
+  }
+}
+
+function filterMun(val) { renderMunList(val); }
+
+>>>>>>> 727a22d (UI Updates and layout improvements)
 // ── Redirección Directa a Paso 2 (Desde Comprar Ahora) ──
 (function() {
   if (sessionStorage.getItem('cart_step')) {

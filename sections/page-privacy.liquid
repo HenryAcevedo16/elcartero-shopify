@@ -2,42 +2,122 @@
 
 {{ 'pedido.css' | asset_url | stylesheet_tag }}
 
-<div class="breadcrumb">
+<style>
+  .privacy-breadcrumb {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 20px 0;
+  }
+  .privacy-wrap {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 0 80px 0;
+  }
+  .privacy-header {
+    margin-bottom: 36px;
+  }
+  .privacy-card {
+    padding: 36px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .privacy-section-title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    line-height: 1.4;
+  }
+  .privacy-num {
+    background: var(--cream);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--dark);
+    flex-shrink: 0;
+  }
+  .privacy-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+  .privacy-list {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .privacy-breadcrumb {
+      padding: 16px 20px;
+    }
+    .privacy-wrap {
+      padding: 0 20px 60px 20px;
+    }
+    .privacy-card {
+      padding: 24px 20px;
+      border-radius: 16px;
+      gap: 24px;
+    }
+    .privacy-text, .privacy-list {
+      font-size: 0.9rem;
+    }
+    .privacy-section-title {
+      font-size: 1.1rem;
+    }
+  }
+</style>
+
+<div class="breadcrumb privacy-breadcrumb">
   <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
   <span class="current">Política de Privacidad</span>
 </div>
 
-<section class="wrap" style="max-width:820px; margin:0 auto; padding-bottom:80px;">
+<section class="wrap privacy-wrap">
 
-  <div class="row-header reveal" style="margin-bottom:36px;">
+  <div class="row-header reveal privacy-header">
     <div>
       <p class="section-eyebrow">Legal</p>
       <h1 class="section-title">Política de Privacidad</h1>
-      <p style="color:var(--muted); font-size:0.85rem; margin-top:-28px;">
+      <p style="color:var(--muted); font-size:0.9rem; margin-top:-24px;">
         Última actualización: {{ 'now' | date: "%d de %B de %Y" }}
       </p>
     </div>
   </div>
 
-  <div class="form-section reveal" style="padding:36px; border-radius:20px; display:flex; flex-direction:column; gap:32px;">
+  <div class="form-section reveal privacy-card">
 
     <!-- Intro -->
     <div>
-      <p style="font-size:0.9rem; line-height:1.8; color:var(--muted);">
+      <p class="privacy-text">
         En <strong style="color:var(--dark);">{{ shop.name }}</strong> (en adelante "El Cartero RD"), nos comprometemos a proteger la privacidad de nuestros clientes. Esta política describe cómo recopilamos, usamos y protegemos tu información personal cuando realizas una compra o te contactas con nosotros.
       </p>
     </div>
 
     <!-- Sección 1 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">1</span>
-        Información que recopilamos
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">1</span>
+        <span>Información que recopilamos</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted); margin-bottom:10px;">
+      <p class="privacy-text" style="margin-bottom:10px;">
         Cuando realizas un pedido en nuestra tienda, recopilamos la siguiente información:
       </p>
-      <ul style="font-size:0.88rem; line-height:1.8; color:var(--muted); padding-left:20px; display:flex; flex-direction:column; gap:4px;">
+      <ul class="privacy-list">
         <li><strong style="color:var(--dark);">Datos personales:</strong> nombre completo, correo electrónico, número de teléfono/WhatsApp.</li>
         <li><strong style="color:var(--dark);">Datos de entrega:</strong> dirección, ciudad, provincia y país.</li>
         <li><strong style="color:var(--dark);">Datos del pedido:</strong> productos seleccionados, cantidades y total.</li>
@@ -47,11 +127,11 @@
 
     <!-- Sección 2 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">2</span>
-        Cómo usamos tu información
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">2</span>
+        <span>Cómo usamos tu información</span>
       </h2>
-      <ul style="font-size:0.88rem; line-height:1.8; color:var(--muted); padding-left:20px; display:flex; flex-direction:column; gap:4px;">
+      <ul class="privacy-list">
         <li>Procesar y coordinar la entrega de tu pedido por WhatsApp.</li>
         <li>Enviarte la confirmación y actualizaciones del estado de tu orden.</li>
         <li>Atender consultas, quejas o solicitudes de devolución.</li>
@@ -62,14 +142,14 @@
 
     <!-- Sección 3 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">3</span>
-        Compartir tu información
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">3</span>
+        <span>Compartir tu información</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+      <p class="privacy-text">
         <strong style="color:var(--dark);">No vendemos ni alquilamos</strong> tu información personal a terceros. Podemos compartirla únicamente con:
       </p>
-      <ul style="font-size:0.88rem; line-height:1.8; color:var(--muted); padding-left:20px; margin-top:8px; display:flex; flex-direction:column; gap:4px;">
+      <ul class="privacy-list" style="margin-top:8px;">
         <li>Servicios de mensajería y logística para coordinar entregas.</li>
         <li>Plataformas tecnológicas de confianza (Shopify, Google) para operar la tienda.</li>
         <li>Autoridades cuando sea requerido por ley.</li>
@@ -78,57 +158,57 @@
 
     <!-- Sección 4 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">4</span>
-        Cookies
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">4</span>
+        <span>Cookies</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+      <p class="privacy-text">
         Nuestra tienda utiliza cookies de Shopify para recordar tu carrito y mejorar tu experiencia. También usamos cookies analíticas para entender cómo los visitantes navegan el sitio. Puedes desactivar las cookies en la configuración de tu navegador, aunque algunas funciones pueden verse afectadas.
       </p>
     </div>
 
     <!-- Sección 5 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">5</span>
-        Seguridad de tus datos
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">5</span>
+        <span>Seguridad de tus datos</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+      <p class="privacy-text">
         Tomamos medidas razonables para proteger tu información mediante el uso de plataformas seguras (Shopify, HTTPS) y acceso restringido a los datos de pedidos. Sin embargo, ningún sistema de transmisión por Internet es 100% seguro.
       </p>
     </div>
 
     <!-- Sección 6 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">6</span>
-        Tus derechos
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">6</span>
+        <span>Tus derechos</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted); margin-bottom:8px;">Tienes derecho a:</p>
-      <ul style="font-size:0.88rem; line-height:1.8; color:var(--muted); padding-left:20px; display:flex; flex-direction:column; gap:4px;">
+      <p class="privacy-text" style="margin-bottom:8px;">Tienes derecho a:</p>
+      <ul class="privacy-list">
         <li>Acceder, corregir o eliminar tu información personal.</li>
         <li>Darte de baja del newsletter en cualquier momento.</li>
         <li>Solicitar que no usemos tus datos para fines de marketing.</li>
       </ul>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted); margin-top:10px;">
+      <p class="privacy-text" style="margin-top:10px;">
         Para ejercer cualquiera de estos derechos, contáctanos a <a href="mailto:soporte@elcarterord.store" style="color:var(--dark); font-weight:700;">soporte@elcarterord.store</a> o por WhatsApp al <strong style="color:var(--dark);">+1 (809) 326-9319</strong>.
       </p>
     </div>
 
     <!-- Sección 7 -->
     <div>
-      <h2 style="font-size:1.1rem; font-weight:800; color:var(--dark); margin-bottom:12px; display:flex; align-items:center; gap:10px;">
-        <span style="background:var(--cream); width:32px; height:32px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:700; color:var(--dark); flex-shrink:0;">7</span>
-        Cambios a esta política
+      <h2 class="privacy-section-title">
+        <span class="privacy-num">7</span>
+        <span>Cambios a esta política</span>
       </h2>
-      <p style="font-size:0.88rem; line-height:1.8; color:var(--muted);">
+      <p class="privacy-text">
         Podemos actualizar esta política en cualquier momento. Los cambios se publicarán en esta página con la fecha de actualización. Te recomendamos revisarla periódicamente.
       </p>
     </div>
 
     <!-- CTA contacto -->
     <div style="background:var(--cream); border-radius:16px; padding:24px; text-align:center; margin-top:8px;">
-      <p style="font-size:0.88rem; color:var(--muted); margin-bottom:16px;">¿Tienes preguntas sobre tu privacidad?</p>
+      <p class="privacy-text" style="margin-bottom:16px; font-weight: 500;">¿Tienes preguntas sobre tu privacidad?</p>
       <a href="/pages/contacto" class="btn-main" style="text-decoration:none;">Contáctanos →</a>
     </div>
 
