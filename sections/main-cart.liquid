@@ -989,8 +989,7 @@
 {% endif %}
 
 <script>
-  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw53U4Px15aRNAxwTsM3Q2d9t1kXeS41JMro7CO4lV0oHF-AHJnYOpZhcr70Sa0uHPc/exec';
-
+ const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxbr-2lE2ln0u_GFdWVZTRrOfc0eI-HHfsPes7TiuGs6S2ZJdjRzAthSD7L13Yv3V21/exec';
   let shopifyTotal = "{{ cart.total_price | money }}";
 
   let cartItems = [
@@ -1240,7 +1239,7 @@
       productos: productosStr,
       total:     shopifyTotal,
       items:     cartItems,
-      estado:    'Pendiente'
+      estado:    'Orden creada'
     };
 
     try {
