@@ -3,469 +3,539 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
-.cart-layout {
-  display: flex;
-  gap: 40px;
-  width: 100%;
-  max-width: 1600px;
-  margin: 40px auto 160px auto;
-<<<<<<< HEAD
-  height: 780px;
-=======
-  min-height: 780px;
->>>>>>> 727a22d (UI Updates and layout improvements)
-  align-items: stretch;
-  background: transparent;
-  padding: 0 40px;
-}
-.cart-sidebar {
-  width: 340px;
-  min-width: 340px;
-  background: linear-gradient(180deg, #ed3e4c 0%, #8b111a 100%);
-  border-radius: 24px;
-  padding: 40px 32px;
-  color: #fff;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-}
-.cart-sidebar-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  margin: 0;
-  line-height: 1.2;
-}
-.cart-sidebar-subtitle {
-  font-size: 0.95rem;
-  opacity: 0.9;
-  margin-top: 6px;
-  margin-bottom: 40px;
-}
-.cart-steps {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  width: 100%;
-}
-.cart-step {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  margin-left: -16px;
-  margin-right: -16px;
-  position: relative;
-  z-index: 2;
-  transition: background 0.3s;
-}
-.cart-step.active {
-  background: rgba(255,255,255,0.2);
-}
-.step-icon {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 0.95rem;
-  background: transparent;
-  flex-shrink: 0;
-}
-.step-icon.completed {
-  background: #fff;
-  color: #ed3e4c;
-  border-color: #fff;
-}
-.step-text {
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-.step-connector {
-  width: 2px;
-  height: 24px;
-  background: rgba(255,255,255,0.4);
-  margin-left: 15px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  z-index: 1;
-}
-
-.cart-sidebar-card {
-  background: rgba(255,255,255,0.15);
-  border-radius: 20px;
-  padding: 24px;
-  margin-top: 48px;
-}
-.cart-sidebar-card h3 {
-  font-size: 1.05rem;
-  font-weight: 800;
-  margin: 0 0 16px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-transform: uppercase;
-}
-.cart-sidebar-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-.cart-sidebar-card li {
-  font-size: 0.85rem;
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  line-height: 1.4;
-}
-.cart-sidebar-card li::before {
-  content: '•';
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.btn-submit {
-  transition: background-color 0.3s ease;
-}
-.btn-submit:hover {
-  background-color: #b91c1c !important;
-}
-
-/* MAIN CONTENT */
-.cart-main {
-  flex: 1;
-  padding: 0 0 40px 20px;
-  background: transparent;
-  box-shadow: none;
-<<<<<<< HEAD
-  overflow-y: auto;
-=======
-  overflow-y: visible;
->>>>>>> 727a22d (UI Updates and layout improvements)
-}
-
-/* ORDER ITEMS SCROLL */
-.order-items {
-  max-height: 380px;
-  overflow-y: auto;
-  padding-right: 16px;
-}
-.order-items::-webkit-scrollbar { width: 6px; }
-.order-items::-webkit-scrollbar-track { background: transparent; }
-.order-items::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
-
-/* FORM OVERRIDES */
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 20px;
-}
-.col-4 { grid-column: span 4; }
-.col-6 { grid-column: span 6; }
-.col-8 { grid-column: span 8; }
-.col-12 { grid-column: span 12; }
-
-.form-label {
-  font-weight: 600 !important;
-  color: #000 !important;
-  font-size: 0.95rem !important;
-  margin-bottom: 8px !important;
-  text-transform: none !important;
-  display: block;
-}
-.form-inp {
-  background: #f4f4f4 !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 14px 16px !important;
-  font-size: 0.95rem !important;
-  font-weight: 500 !important;
-  color: #111 !important;
-  width: 100% !important;
-  box-sizing: border-box;
-  font-family: inherit !important;
-<<<<<<< HEAD
-  transition: border-color 0.15s !important;
-}
-.form-inp:focus {
-  outline: none !important;
-  border-color: #dc2626 !important;
-=======
-  transition: box-shadow 0.15s !important;
-}
-.form-inp:focus {
-  outline: none !important;
-  box-shadow: 0 0 0 2px #dc2626 !important;
->>>>>>> 727a22d (UI Updates and layout improvements)
-  background: #fff !important;
-}
-.form-inp.input-error {
-  box-shadow: 0 0 0 2px #dc2626 !important;
-  background-color: #fef2f2 !important;
-}
-<<<<<<< HEAD
-.form-inp::placeholder { color: #aaa !important; }
-
-/* País readonly */
-.pais-field {
-  background: #f0f0f0 !important;
-  border: 2px solid transparent !important;
-  border-radius: 8px !important;
-  padding: 14px 16px !important;
-  font-size: 0.95rem !important;
-  font-weight: 600 !important;
-  color: #555 !important;
-  width: 100% !important;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: not-allowed;
-=======
-.form-inp::placeholder { color: #a3a3a3 !important; }
-
-/* País readonly */
-.pais-field {
-  background: #f4f4f4 !important;
-  border: none !important;
-  border-radius: 8px !important;
-  padding: 14px 16px !important;
-  font-size: 0.95rem !important;
-  font-weight: 500 !important;
-  color: #777 !important;
-  width: 100% !important;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 8px;
-  cursor: default;
->>>>>>> 727a22d (UI Updates and layout improvements)
-}
-
-/* ── CUSTOM PROVINCE DROPDOWN ── */
-.prov-wrap { position: relative; }
-.prov-trigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  box-sizing: border-box;
-<<<<<<< HEAD
-  background: #f5f5f5;
-  border: 2px solid transparent;
-=======
-  background: #f4f4f4;
-  border: none;
->>>>>>> 727a22d (UI Updates and layout improvements)
-  border-radius: 8px;
-  padding: 14px 16px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  color: #111;
-  font-family: inherit;
-  cursor: pointer;
-  text-align: left;
-<<<<<<< HEAD
-  transition: border-color 0.15s, background 0.15s;
-}
-.prov-trigger.is-placeholder { color: #aaa; }
-.prov-trigger:focus { outline: none; border-color: #dc2626; background: #fff; }
-.prov-trigger.input-error { border-color: #dc2626 !important; background: #fef2f2 !important; }
-.prov-trigger.open { border-color: #dc2626; background: #fff; }
-=======
-  transition: box-shadow 0.15s, background 0.15s;
-}
-.prov-trigger.is-placeholder { color: #a3a3a3; }
-.prov-trigger:focus { outline: none; box-shadow: 0 0 0 2px #dc2626; background: #fff; }
-.prov-trigger.input-error { box-shadow: 0 0 0 2px #dc2626 !important; background: #fef2f2 !important; }
-.prov-trigger.open { box-shadow: 0 0 0 2px #dc2626; background: #fff; }
->>>>>>> 727a22d (UI Updates and layout improvements)
-.prov-arrow { transition: transform 0.2s; color: #999; flex-shrink: 0; margin-left: 8px; }
-.prov-trigger.open .prov-arrow { transform: rotate(180deg); }
-
-.prov-dropdown {
-  display: none;
-  position: absolute;
-  bottom: calc(100% + 6px);
-  left: 0; right: 0;
-  background: #fff;
-  border: 1.5px solid #e4e4e7;
-  border-radius: 12px;
-  box-shadow: 0 -8px 32px rgba(0,0,0,0.12);
-  z-index: 9999;
-  overflow: hidden;
-}
-.prov-dropdown.open { display: block; }
-.prov-search-wrap { padding: 10px 12px 6px; border-bottom: 1px solid #f4f4f5; }
-.prov-search {
-  width: 100%; box-sizing: border-box;
-  border: 1.5px solid #e4e4e7; border-radius: 8px;
-  padding: 8px 12px; font-size: 0.88rem; font-family: inherit;
-  outline: none; color: #111; background: #fafafa;
-  transition: border-color 0.15s;
-}
-.prov-search:focus { border-color: #dc2626; background: #fff; }
-.prov-list { max-height: 200px; overflow-y: auto; padding: 6px; }
-.prov-list::-webkit-scrollbar { width: 4px; }
-.prov-list::-webkit-scrollbar-thumb { background: #d4d4d8; border-radius: 4px; }
-.prov-item {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: 10px 12px; border-radius: 8px;
-  font-size: 0.92rem; color: #111; cursor: pointer;
-  transition: background 0.1s;
-}
-.prov-item:hover { background: #f5f5f5; }
-.prov-item.selected { font-weight: 700; }
-.prov-item.selected::after { content: '✓'; color: #dc2626; font-weight: 700; }
-.prov-empty { padding: 16px 12px; text-align: center; color: #aaa; font-size: 0.85rem; }
-
-.view-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-.view-title {
-  font-size: 1.8rem;
-  font-weight: 800;
-  color: #111;
-  margin: 0;
-}
-.view-subtitle {
-  font-size: 0.95rem;
-  color: #666;
-  margin-top: 8px;
-}
-
-/* TABLE DETAIL */
-.order-detail-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 40px;
-}
-.order-detail-table th {
-  text-align: left;
-  font-size: 0.9rem;
-  font-weight: 800;
-  color: #111;
-  padding-bottom: 16px;
-  border-bottom: 2px solid #f0f0f0;
-}
-.order-detail-table td {
-  padding: 20px 0;
-  vertical-align: middle;
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 0.9rem;
-  color: #333;
-}
-.status-badge {
-  background: #e0e0e0;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: #555;
-  display: inline-block;
-}
-
-.step2-bottom {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 40px;
-  gap: 20px;
-}
-.step2-bottom-btns {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-}
-.step2-bottom-total {
-  text-align: right;
-  flex-shrink: 0;
-}
-
-@media (max-width: 900px) {
-  .cart-layout { flex-direction: column; height: auto; }
-  .cart-sidebar { width: 100%; }
-  
-  .step2-bottom {
-    flex-direction: column-reverse;
+  .cart-layout {
+    display: flex;
+    gap: 40px;
+    width: 100%;
+    max-width: 1600px;
+    margin: 40px auto 160px auto;
+    min-height: 780px;
     align-items: stretch;
-    gap: 20px;
-    background: #fdfdfd;
-    border: 1.5px solid #eaeaea;
-    padding: 20px;
-    border-radius: 16px;
-    margin-top: 30px;
+    background: transparent;
+    padding: 0 40px;
   }
-  .step2-bottom-total {
+  .cart-sidebar {
+    width: 340px;
+    min-width: 340px;
+    background: linear-gradient(180deg, #ed3e4c 0%, #8b111a 100%);
+    border-radius: 24px;
+    padding: 40px 32px;
+    color: #fff;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-sidebar-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 0;
+    line-height: 1.2;
+  }
+  .cart-sidebar-subtitle {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    margin-top: 6px;
+    margin-bottom: 40px;
+  }
+  .cart-steps {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 100%;
+  }
+  .cart-step {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-left: -16px;
+    margin-right: -16px;
+    position: relative;
+    z-index: 2;
+    transition: background 0.3s;
+  }
+  .cart-step.active {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .step-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: transparent;
+    flex-shrink: 0;
+  }
+  .step-icon.completed {
+    background: #fff;
+    color: #ed3e4c;
+    border-color: #fff;
+  }
+  .step-text {
+    font-weight: 600;
+    font-size: 1.05rem;
+  }
+  .step-connector {
+    width: 2px;
+    height: 24px;
+    background: rgba(255, 255, 255, 0.4);
+    margin-left: 15px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    z-index: 1;
+  }
+
+  .cart-sidebar-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 24px;
+    margin-top: 48px;
+  }
+  .cart-sidebar-card h3 {
+    font-size: 1.05rem;
+    font-weight: 800;
+    margin: 0 0 16px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-transform: uppercase;
+  }
+  .cart-sidebar-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .cart-sidebar-card li {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.4;
+  }
+  .cart-sidebar-card li::before {
+    content: '•';
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .btn-submit {
+    transition: background-color 0.3s ease;
+  }
+  .btn-submit:hover {
+    background-color: #b91c1c !important;
+  }
+
+  /* MAIN CONTENT */
+  .cart-main {
+    flex: 1;
+    padding: 0 0 40px 20px;
+    background: transparent;
+    box-shadow: none;
+    overflow-y: visible;
+  }
+
+  /* ORDER ITEMS SCROLL */
+  .order-items {
+    max-height: 380px;
+    overflow-y: auto;
+    padding-right: 16px;
+  }
+  .order-items::-webkit-scrollbar {
+    width: 6px;
+  }
+  .order-items::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .order-items::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 4px;
+  }
+
+  /* FORM OVERRIDES */
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+  }
+  .col-4 {
+    grid-column: span 4;
+  }
+  .col-6 {
+    grid-column: span 6;
+  }
+  .col-8 {
+    grid-column: span 8;
+  }
+  .col-12 {
+    grid-column: span 12;
+  }
+
+  .form-label {
+    font-weight: 600 !important;
+    color: #000 !important;
+    font-size: 0.95rem !important;
+    margin-bottom: 8px !important;
+    text-transform: none !important;
+    display: block;
+  }
+  .form-inp {
+    background: #f4f4f4 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 14px 16px !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #111 !important;
+    width: 100% !important;
+    box-sizing: border-box;
+    font-family: inherit !important;
+    transition: box-shadow 0.15s !important;
+  }
+  .form-inp:focus {
+    outline: none !important;
+    box-shadow: 0 0 0 2px #dc2626 !important;
+    background: #fff !important;
+  }
+  .form-inp.input-error {
+    box-shadow: 0 0 0 2px #dc2626 !important;
+    background-color: #fef2f2 !important;
+  }
+  .form-inp::placeholder {
+    color: #a3a3a3 !important;
+  }
+
+  /* País readonly */
+  .pais-field {
+    background: #f4f4f4 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    padding: 14px 16px !important;
+    font-size: 0.95rem !important;
+    font-weight: 500 !important;
+    color: #777 !important;
+    width: 100% !important;
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    border-bottom: 2px dashed #f0f0f0;
-    padding-bottom: 16px;
-  }
-  .step2-bottom-total > div:first-child {
-    font-size: 1.05rem !important;
-    color: #444 !important;
-    font-weight: 600 !important;
-  }
-  .step2-bottom-total .sum-total-val {
-    font-size: 1.7rem !important;
-    color: #dc2626 !important;
-  }
-  
-  .step2-bottom-btns {
-    flex-direction: column;
-    width: 100%;
-    gap: 12px;
-  }
-  .step2-bottom-btns .btn-submit {
-    width: 100% !important;
-    justify-content: center;
-    padding: 18px 20px !important;
-    font-size: 1.1rem !important;
-  }
-  .step2-bottom-btns button:first-child {
-    width: 100%;
-    justify-content: center;
-    padding: 12px !important;
+    gap: 8px;
+    cursor: default;
   }
 
-  /* ORDER DETAIL TABLE MOBILE */
-  .order-detail-table thead { display: none; }
-  .order-detail-table, .order-detail-table tbody, .order-detail-table tr, .order-detail-table td {
-    display: block; width: 100%; box-sizing: border-box;
+  /* ── CUSTOM PROVINCE DROPDOWN ── */
+  .prov-wrap {
+    position: relative;
   }
-  .order-detail-table tr {
-    background: #fdfdfd; border: 1.5px solid #eaeaea; border-radius: 12px;
-    margin-bottom: 16px; padding: 16px; display: flex; flex-direction: column; gap: 8px;
+  .prov-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    background: #f4f4f4;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #111;
+    font-family: inherit;
+    cursor: pointer;
+    text-align: left;
+    transition: box-shadow 0.15s, background 0.15s;
+  }
+  .prov-trigger.is-placeholder {
+    color: #a3a3a3;
+  }
+  .prov-trigger:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #dc2626;
+    background: #fff;
+  }
+  .prov-trigger.input-error {
+    box-shadow: 0 0 0 2px #dc2626 !important;
+    background: #fef2f2 !important;
+  }
+  .prov-trigger.open {
+    box-shadow: 0 0 0 2px #dc2626;
+    background: #fff;
+  }
+  .prov-arrow {
+    transition: transform 0.2s;
+    color: #999;
+    flex-shrink: 0;
+    margin-left: 8px;
+  }
+  .prov-trigger.open .prov-arrow {
+    transform: rotate(180deg);
+  }
+
+  .prov-dropdown {
+    display: none;
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1.5px solid #e4e4e7;
+    border-radius: 12px;
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+    z-index: 9999;
+    overflow: hidden;
+  }
+  .prov-dropdown.open {
+    display: block;
+  }
+  .prov-search-wrap {
+    padding: 10px 12px 6px;
+    border-bottom: 1px solid #f4f4f5;
+  }
+  .prov-search {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1.5px solid #e4e4e7;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    font-family: inherit;
+    outline: none;
+    color: #111;
+    background: #fafafa;
+    transition: border-color 0.15s;
+  }
+  .prov-search:focus {
+    border-color: #dc2626;
+    background: #fff;
+  }
+  .prov-list {
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 6px;
+  }
+  .prov-list::-webkit-scrollbar {
+    width: 4px;
+  }
+  .prov-list::-webkit-scrollbar-thumb {
+    background: #d4d4d8;
+    border-radius: 4px;
+  }
+  .prov-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    color: #111;
+    cursor: pointer;
+    transition: background 0.1s;
+  }
+  .prov-item:hover {
+    background: #f5f5f5;
+  }
+  .prov-item.selected {
+    font-weight: 700;
+  }
+  .prov-item.selected::after {
+    content: '✓';
+    color: #dc2626;
+    font-weight: 700;
+  }
+  .prov-empty {
+    padding: 16px 12px;
+    text-align: center;
+    color: #aaa;
+    font-size: 0.85rem;
+  }
+
+  .view-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .view-title {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #111;
+    margin: 0;
+  }
+  .view-subtitle {
+    font-size: 0.95rem;
+    color: #666;
+    margin-top: 8px;
+  }
+
+  /* TABLE DETAIL */
+  .order-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+  }
+  .order-detail-table th {
+    text-align: left;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #111;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #f0f0f0;
   }
   .order-detail-table td {
-    text-align: right; padding: 4px 0; border: none !important;
-    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 0;
+    vertical-align: middle;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+    color: #333;
   }
-  .order-detail-table td::before {
-    content: attr(data-label); font-weight: 700; color: #666; font-size: 0.85rem; text-align: left;
+  .status-badge {
+    background: #e0e0e0;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #555;
+    display: inline-block;
   }
-  .order-detail-table td > div { justify-content: flex-end; text-align: right; }
-  #view-step3 .btn-submit { width: 100% !important; box-sizing: border-box; margin-top: 10px; padding: 16px !important; }
 
-  .cart-main { padding: 24px 0; overflow-y: visible; }
-  .form-grid { grid-template-columns: 1fr !important; }
-<<<<<<< HEAD
-  .form-group.span2 { grid-column: span 1 !important; }
-=======
-  .col-4, .col-6, .col-8, .col-12 { grid-column: span 12 !important; }
->>>>>>> 727a22d (UI Updates and layout improvements)
-}
+  .step2-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 40px;
+    gap: 20px;
+  }
+  .step2-bottom-btns {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .step2-bottom-total {
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 900px) {
+    .cart-layout {
+      flex-direction: column;
+      height: auto;
+    }
+    .cart-sidebar {
+      width: 100%;
+    }
+
+    .step2-bottom {
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 20px;
+      background: #fdfdfd;
+      border: 1.5px solid #eaeaea;
+      padding: 20px;
+      border-radius: 16px;
+      margin-top: 30px;
+    }
+    .step2-bottom-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      border-bottom: 2px dashed #f0f0f0;
+      padding-bottom: 16px;
+    }
+    .step2-bottom-total > div:first-child {
+      font-size: 1.05rem !important;
+      color: #444 !important;
+      font-weight: 600 !important;
+    }
+    .step2-bottom-total .sum-total-val {
+      font-size: 1.7rem !important;
+      color: #000000ff !important;
+    }
+
+    .step2-bottom-btns {
+      flex-direction: column;
+      width: 100%;
+      gap: 12px;
+    }
+    .step2-bottom-btns .btn-submit {
+      width: 100% !important;
+      justify-content: center;
+      padding: 18px 20px !important;
+      font-size: 1.1rem !important;
+    }
+    .step2-bottom-btns button:first-child {
+      width: 100%;
+      justify-content: center;
+      padding: 12px !important;
+    }
+
+    /* ORDER DETAIL TABLE MOBILE */
+    .order-detail-table thead {
+      display: none;
+    }
+    .order-detail-table,
+    .order-detail-table tbody,
+    .order-detail-table tr,
+    .order-detail-table td {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .order-detail-table tr {
+      background: #fdfdfd;
+      border: 1.5px solid #eaeaea;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .order-detail-table td {
+      text-align: right;
+      padding: 4px 0;
+      border: none !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .order-detail-table td::before {
+      content: attr(data-label);
+      font-weight: 700;
+      color: #666;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .order-detail-table td > div {
+      justify-content: flex-end;
+      text-align: right;
+    }
+    #view-step3 .btn-submit {
+      width: 100% !important;
+      box-sizing: border-box;
+      margin-top: 10px;
+      padding: 16px !important;
+    }
+
+    .cart-main {
+      padding: 24px 0;
+      overflow-y: visible;
+    }
+    .form-grid {
+      grid-template-columns: 1fr !important;
+    }
+    .col-4,
+    .col-6,
+    .col-8,
+    .col-12 {
+      grid-column: span 12 !important;
+    }
+  }
 </style>
 
 <div class="breadcrumb" style="max-width:1200px; margin:0 auto; padding:20px;">
@@ -474,267 +544,434 @@
 </div>
 
 {% if cart.item_count > 0 %}
-<div class="cart-layout">
-  <!-- SIDEBAR -->
-  <aside class="cart-sidebar">
-    <h2 class="cart-sidebar-title">Cartero Cart</h2>
-    <p class="cart-sidebar-subtitle">Encuentra tus productos aquí</p>
+  <div class="cart-layout">
+    <!-- SIDEBAR -->
+    <aside class="cart-sidebar">
+      <h2 class="cart-sidebar-title">Cartero Cart</h2>
+      <p class="cart-sidebar-subtitle">Encuentra tus productos aquí</p>
 
-    <div class="cart-steps">
-      <div class="cart-step active" id="step1-nav">
-        <div class="step-icon">1</div>
-        <div class="step-text">Productos agregados</div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="cart-step" id="step2-nav">
-        <div class="step-icon">2</div>
-        <div class="step-text">Confirmar pedido</div>
-      </div>
-      <div class="step-connector"></div>
-      <div class="cart-step" id="step3-nav">
-        <div class="step-icon">3</div>
-        <div class="step-text">Detalle de la compra</div>
-      </div>
-    </div>
-
-    <div class="cart-sidebar-card">
-      <h3>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M21 11.5L16 11.5L16 6.5C16 5.39543 15.1046 4.5 14 4.5L5 4.5C3.89543 4.5 3 5.39543 3 6.5L3 17.5C3 18.6046 3.89543 19.5 5 19.5L19 19.5C20.1046 19.5 21 18.6046 21 17.5L21 11.5Z" fill="white"/>
-          <circle cx="7.5" cy="19.5" r="2.5" fill="white"/>
-          <circle cx="16.5" cy="19.5" r="2.5" fill="white"/>
-        </svg>
-        ENVÍO GRATIS
-      </h3>
-      <ul>
-        <li>Entrega en 1 - 3 días hábiles</li>
-        <li>Confirmamos tu pedido por WhatsApp</li>
-        <li>Pago contra entrega</li>
-      </ul>
-    </div>
-  </aside>
-
-  <!-- CONTENT -->
-  <main class="cart-main">
-
-    <!-- STEP 1: CART -->
-    <div id="view-step1" class="cart-view">
-      <div class="view-header">
-        <h2 class="view-title">Bienvenido a tu carrito!</h2>
+      <div class="cart-steps">
+        <div class="cart-step active" id="step1-nav">
+          <div class="step-icon">1</div>
+          <div class="step-text">Productos agregados</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="cart-step" id="step2-nav">
+          <div class="step-icon">2</div>
+          <div class="step-text">Confirmar pedido</div>
+        </div>
+        <div class="step-connector"></div>
+        <div class="cart-step" id="step3-nav">
+          <div class="step-icon">3</div>
+          <div class="step-text">Detalle de la compra</div>
+        </div>
       </div>
 
-      <div class="order-items" style="margin-bottom:40px;">
-        {% for item in cart.items %}
-          <div class="oi" style="display:flex; align-items:center; border-bottom: 1px solid #f0f0f0; padding: 16px 0;">
-            <div class="oi-img" style="background-image:url('{{ item.image | img_url: 'small' }}'); background-size:cover; background-position:center; width:60px; height:60px; border-radius:8px; flex-shrink:0; position:relative;">
-              <span class="oi-qty" style="position:absolute; top:-6px; right:-6px; background:#111; color:#fff; font-size:0.7rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;">{{ item.quantity }}</span>
-            </div>
-            <div class="oi-info" style="flex:1; margin-left: 20px;">
-              <a href="{{ item.url }}" style="text-decoration:none; color:#111; font-weight:800; font-size:0.85rem; text-transform:uppercase;">
-                {{ item.product.title }}
-              </a>
-              {% unless item.product.has_only_default_variant %}
-                <div class="oi-variant" style="font-size:0.8rem; color:#666;">{{ item.variant.title }}</div>
-              {% endunless %}
-              <div style="display:flex; gap:16px; align-items:center; margin-top:8px;">
-                <div style="display:flex; align-items:center; gap:12px;">
-                  <button data-qty-btn onclick="changeQty({{ forloop.index }}, -1)" style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;">−</button>
-                  <span id="qty-{{ forloop.index }}" style="font-weight:700; font-size:0.95rem;">{{ item.quantity }}</span>
-                  <button data-qty-btn onclick="changeQty({{ forloop.index }}, 1)" style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;">+</button>
+      <div class="cart-sidebar-card">
+        <h3>
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21 11.5L16 11.5L16 6.5C16 5.39543 15.1046 4.5 14 4.5L5 4.5C3.89543 4.5 3 5.39543 3 6.5L3 17.5C3 18.6046 3.89543 19.5 5 19.5L19 19.5C20.1046 19.5 21 18.6046 21 17.5L21 11.5Z" fill="white"/>
+            <circle cx="7.5" cy="19.5" r="2.5" fill="white"/>
+            <circle cx="16.5" cy="19.5" r="2.5" fill="white"/>
+          </svg>
+          ENVÍO GRATIS
+        </h3>
+        <ul>
+          <li>Entrega en 1 - 3 días hábiles</li>
+          <li>Confirmamos tu pedido por WhatsApp</li>
+          <li>Pago contra entrega</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- CONTENT -->
+    <main class="cart-main">
+      <!-- STEP 1: CART -->
+      <div id="view-step1" class="cart-view">
+        <div class="view-header">
+          <h2 class="view-title">Bienvenido a tu carrito!</h2>
+        </div>
+
+        <div class="order-items" style="margin-bottom:40px;">
+          {% for item in cart.items %}
+            <div
+              class="oi"
+              style="display:flex; align-items:center; border-bottom: 1px solid #f0f0f0; padding: 16px 0;"
+            >
+              <div
+                class="oi-img"
+                style="background-image:url('{{ item.image | img_url: 'small' }}'); background-size:cover; background-position:center; width:60px; height:60px; border-radius:8px; flex-shrink:0; position:relative;"
+              >
+                <span
+                  class="oi-qty"
+                  style="position:absolute; top:-6px; right:-6px; background:#111; color:#fff; font-size:0.7rem; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold;"
+                >
+                  {{- item.quantity -}}
+                </span>
+              </div>
+              <div class="oi-info" style="flex:1; margin-left: 20px;">
+                <a
+                  href="{{ item.url }}"
+                  style="text-decoration:none; color:#111; font-weight:800; font-size:0.85rem; text-transform:uppercase;"
+                >
+                  {{ item.product.title }}
+                </a>
+                {% unless item.product.has_only_default_variant %}
+                  <div class="oi-variant" style="font-size:0.8rem; color:#666;">{{ item.variant.title }}</div>
+                {% endunless %}
+                <div style="display:flex; gap:16px; align-items:center; margin-top:8px;">
+                  <div style="display:flex; align-items:center; gap:12px;">
+                    <button
+                      data-qty-btn
+                      onclick="changeQty({{ forloop.index }}, -1)"
+                      style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;"
+                    >
+                      −
+                    </button>
+                    <span id="qty-{{ forloop.index }}" style="font-weight:700; font-size:0.95rem;">
+                      {{- item.quantity -}}
+                    </span>
+                    <button
+                      data-qty-btn
+                      onclick="changeQty({{ forloop.index }}, 1)"
+                      style="border:none; background:none; cursor:pointer; font-size:1.2rem; color:#666; padding:0;"
+                    >
+                      +
+                    </button>
+                  </div>
+                  <button
+                    data-qty-btn
+                    onclick="changeQty({{ forloop.index }}, -999)"
+                    style="border:none; background:none; cursor:pointer; font-size:0.8rem; color:#e74c3c; text-decoration:none;"
+                  >
+                    Quitar
+                  </button>
                 </div>
-                <button data-qty-btn onclick="changeQty({{ forloop.index }}, -999)" style="border:none; background:none; cursor:pointer; font-size:0.8rem; color:#e74c3c; text-decoration:none;">Quitar</button>
               </div>
+              <span class="oi-price" style="font-weight:800; font-size:0.95rem; margin-left:16px;">
+                {{- item.line_price | money -}}
+              </span>
             </div>
-            <span class="oi-price" style="font-weight:800; font-size:0.95rem; margin-left:16px;">{{ item.line_price | money }}</span>
+          {% endfor %}
+        </div>
+
+        <div style="margin-top: 24px;">
+          <div
+            class="sum-row"
+            style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;"
+          >
+            <span class="sum-label" style="color:#666;">Subtotal</span>
+            <span id="step1-subtotal" class="sum-val" style="font-weight:700; color:#111;">
+              {{- cart.total_price | money -}}
+            </span>
           </div>
-        {% endfor %}
-      </div>
-
-      <div style="margin-top: 24px;">
-        <div class="sum-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
-          <span class="sum-label" style="color:#666;">Subtotal</span>
-          <span id="step1-subtotal" class="sum-val" style="font-weight:700; color:#111;">{{ cart.total_price | money }}</span>
-        </div>
-        <div class="sum-row" style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;">
-          <span class="sum-label" style="color:#666;">Envío</span>
-          <span class="sum-val green" style="font-weight:700; color:#1a7c33;">Gratis / A coordinar</span>
-        </div>
-        <div class="sum-row" style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; font-size:0.9rem;">
-          <span class="sum-label" style="color:#666; display:flex; align-items:center; gap:6px;">⏱ Tiempo de entrega</span>
-          <span class="sum-val" style="text-align:right; font-weight:700; color:#111;">2 – 3 días hábiles<br><span style="font-size:.75rem; font-weight:400; color:#999;">Desde la confirmación del pedido</span></span>
-        </div>
-        <div style="height:1px; background:#f0f0f0; margin-bottom:24px;"></div>
-        <div class="sum-total-row" style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;">
-          <span class="sum-total-label" style="font-size:1.1rem; font-weight:800;">Total estimado</span>
-          <span class="sum-total-val" style="font-size:1.6rem; font-weight:900; color:#111;">{{ cart.total_price | money }}</span>
-        </div>
-      </div>
-
-      <div style="text-align: right; margin-bottom: 16px;">
-        <button onclick="vaciarCarrito()" style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:0.85rem; font-weight:700; padding:0;">🗑 Vaciar todo el carrito</button>
-      </div>
-      <div style="display: flex; justify-content: space-between; align-items: center;">
-        <a href="/collections/all" style="color:#7b2cbf; text-decoration:none; font-weight:700; font-size:0.95rem;">← Seguir comprando</a>
-        <button onclick="goToStep(2)" class="btn-submit" style="background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; margin:0; width: 100%; max-width: 400px;">
-          Confirmar pedido
-        </button>
-      </div>
-    </div>
-
-    <!-- STEP 2: CHECKOUT FORM -->
-    <div id="view-step2" class="cart-view" style="display: none;">
-      <div class="view-header">
-        <h2 class="view-title">Datos de entrega</h2>
-        <p class="view-subtitle">Rellena los campos para continuar con el pedido</p>
-      </div>
-
-      <div class="form-grid">
-        <div class="form-group col-6">
-          <label class="form-label" for="fNombre">Nombre</label>
-          <input class="form-inp" id="fNombre" type="text" placeholder="Omar" autocomplete="given-name" oninput="this.classList.remove('input-error')">
-        </div>
-        <div class="form-group col-6">
-          <label class="form-label" for="fApellido">Apellido</label>
-          <input class="form-inp" id="fApellido" type="text" placeholder="Canela" autocomplete="family-name" oninput="this.classList.remove('input-error')">
-        </div>
-<<<<<<< HEAD
-        <div class="form-group">
-          <label class="form-label" for="fWhatsapp">Whatsapp / Teléfono</label>
-=======
-        <div class="form-group col-6">
-          <label class="form-label" for="fWhatsapp">Whatsapp/Teléfono</label>
->>>>>>> 727a22d (UI Updates and layout improvements)
-          <input class="form-inp" id="fWhatsapp" type="tel" placeholder="+1 (809) 000-0000" autocomplete="tel" oninput="this.classList.remove('input-error')">
-        </div>
-        <div class="form-group col-6">
-          <label class="form-label" for="fEmail">Correo electrónico</label>
-          <input class="form-inp" id="fEmail" type="email" placeholder="maria@correo.com" autocomplete="email" oninput="this.classList.remove('input-error')">
-        </div>
-<<<<<<< HEAD
-        <div class="form-group">
-          <label class="form-label">País</label>
-          <div class="pais-field">🇩🇴 República Dominicana</div>
-=======
-        <div class="form-group col-4">
-          <label class="form-label">País</label>
-          <div class="pais-field">
-            República Dominicana
-            <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          <div
+            class="sum-row"
+            style="display:flex; justify-content:space-between; margin-bottom:12px; font-size:0.9rem;"
+          >
+            <span class="sum-label" style="color:#666;">Envío</span>
+            <span class="sum-val green" style="font-weight:700; color:#1a7c33;">Gratis / A coordinar</span>
           </div>
->>>>>>> 727a22d (UI Updates and layout improvements)
-          <input type="hidden" id="fPais" value="República Dominicana">
-        </div>
-        <div class="form-group col-8">
-          <label class="form-label" for="fDireccion">Dirección</label>
-          <input class="form-inp" id="fDireccion" type="text" placeholder="Calle Principal #123, Apto 4B" autocomplete="street-address" oninput="this.classList.remove('input-error')">
-        </div>
-        <div class="form-group col-4">
-          <label class="form-label" for="fProvinciaBtn">Provincia / Estado</label>
-          <div class="prov-wrap" id="provinciaWrap">
-            <button type="button" class="prov-trigger is-placeholder" id="fProvinciaBtn" onclick="toggleProv()" aria-haspopup="listbox">
-              <span id="provLabel">Distrito Nacional</span>
-              <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <input type="hidden" id="fProvincia" value="Distrito Nacional">
-            <div class="prov-dropdown" id="provDropdown" role="listbox">
-              <div class="prov-search-wrap">
-                <input class="prov-search" id="provSearch" type="text" placeholder="Buscar provincia..." oninput="filterProv(this.value)" autocomplete="off">
-              </div>
-              <div class="prov-list" id="provList"></div>
-            </div>
+          <div
+            class="sum-row"
+            style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:24px; font-size:0.9rem;"
+          >
+            <span class="sum-label" style="color:#666; display:flex; align-items:center; gap:6px;"
+              >⏱ Tiempo de entrega</span
+            >
+            <span class="sum-val" style="text-align:right; font-weight:700; color:#111;"
+              >2 – 3 días hábiles<br>
+              <span style="font-size:.75rem; font-weight:400; color:#999;">Desde la confirmación del pedido</span></span
+            >
+          </div>
+          <div style="height:1px; background:#f0f0f0; margin-bottom:24px;"></div>
+          <div
+            class="sum-total-row"
+            style="display:flex; justify-content:space-between; align-items:center; margin-bottom:40px;"
+          >
+            <span class="sum-total-label" style="font-size:1.1rem; font-weight:800;">Total estimado</span>
+            <span class="sum-total-val" style="font-size:1.6rem; font-weight:900; color:#111;">
+              {{- cart.total_price | money -}}
+            </span>
           </div>
         </div>
-        <div class="form-group col-4">
-          <label class="form-label" for="fCiudad">Ciudad</label>
-          <input class="form-inp" id="fCiudad" type="text" placeholder="Santo Domingo" autocomplete="address-level2" oninput="this.classList.remove('input-error')">
-        </div>
-<<<<<<< HEAD
-        <div class="form-group">
-          <label class="form-label" for="fProvinciaBtn">Provincia</label>
-          <div class="prov-wrap" id="provinciaWrap">
-            <button type="button" class="prov-trigger is-placeholder" id="fProvinciaBtn" onclick="toggleProv()" aria-haspopup="listbox">
-              <span id="provLabel">Selecciona una provincia</span>
-              <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <input type="hidden" id="fProvincia" value="">
-            <div class="prov-dropdown" id="provDropdown" role="listbox">
-              <div class="prov-search-wrap">
-                <input class="prov-search" id="provSearch" type="text" placeholder="Buscar provincia..." oninput="filterProv(this.value)" autocomplete="off">
-              </div>
-              <div class="prov-list" id="provList"></div>
-=======
-        <div class="form-group col-4">
-          <label class="form-label" for="fMunicipioBtn">Municipio</label>
-          <div class="prov-wrap" id="municipioWrap">
-            <button type="button" class="prov-trigger is-placeholder" id="fMunicipioBtn" onclick="toggleMun()" aria-haspopup="listbox">
-              <span id="munLabel">Selecciona un municipio</span>
-              <svg class="prov-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
-            <input type="hidden" id="fMunicipio" value="">
-            <div class="prov-dropdown" id="munDropdown" role="listbox">
-              <div class="prov-search-wrap">
-                <input class="prov-search" id="munSearch" type="text" placeholder="Buscar municipio..." oninput="filterMun(this.value)" autocomplete="off">
-              </div>
-              <div class="prov-list" id="munList"></div>
->>>>>>> 727a22d (UI Updates and layout improvements)
-            </div>
-          </div>
-        </div>
-        <div class="form-group col-12">
-          <label class="form-label" for="fNotas">Notas del pedido (Opcional)</label>
-          <input class="form-inp" id="fNotas" type="text" placeholder="Ej: Dejar con el portero, llamar antes de llegar" oninput="this.classList.remove('input-error')">
-        </div>
-      </div>
 
-      <div class="step2-bottom">
-        <div class="step2-bottom-btns">
-          <button onclick="goToStep(1)" style="background:transparent; color:#666; border:none; padding:16px 20px; font-weight:700; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center;">
-            ← Regresar
-          </button>
-          <button class="btn-submit" id="submitBtn" onclick="enviarPedido()" style="width:auto; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; margin:0; display:inline-flex; align-items:center;">
-            <span class="btn-label" id="btnLabel">Completar pedido ›</span>
-            <div class="spinner" style="display:none;"></div>
+        <div style="text-align: right; margin-bottom: 16px;">
+          <button
+            onclick="vaciarCarrito()"
+            style="color:#e74c3c; background:none; border:none; cursor:pointer; font-size:0.85rem; font-weight:700; padding:0;"
+          >
+            🗑 Vaciar todo el carrito
           </button>
         </div>
-        <div class="step2-bottom-total">
-          <div style="font-size:0.95rem; color:#111; margin-bottom:0; font-weight:700;">Total a pagar</div>
-          <div class="sum-total-val" id="step2-total" style="font-size:1.8rem; font-weight:900; color:#111; line-height: 1;">{{ cart.total_price | money }}</div>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <a href="/collections/all" style="color:#7b2cbf; text-decoration:none; font-weight:700; font-size:0.95rem;"
+            >← Seguir comprando</a
+          >
+          <button
+            onclick="goToStep(2)"
+            class="btn-submit"
+            style="background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center; justify-content:center; margin:0; width: 100%; max-width: 400px;"
+          >
+            Confirmar pedido
+          </button>
         </div>
       </div>
-    </div>
 
-    <!-- STEP 3: SUCCESS DETAIL -->
-    <div id="view-step3" class="cart-view" style="display: none;">
-      <div class="view-header">
-        <div style="font-size:2.5rem; margin-bottom:6px;">🎉</div>
-        <h2 class="view-title" style="color:#16a34a;">¡Pedido recibido!</h2>
-        <p class="view-subtitle">Te contactaremos por WhatsApp para confirmar tu entrega</p>
+      <!-- STEP 2: CHECKOUT FORM -->
+      <div id="view-step2" class="cart-view" style="display: none;">
+        <div class="view-header">
+          <h2 class="view-title">Datos de entrega</h2>
+          <p class="view-subtitle">Rellena los campos para continuar con el pedido</p>
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group col-6">
+            <label class="form-label" for="fNombre">Nombre</label>
+            <input
+              class="form-inp"
+              id="fNombre"
+              type="text"
+              placeholder="Omar"
+              autocomplete="given-name"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-6">
+            <label class="form-label" for="fApellido">Apellido</label>
+            <input
+              class="form-inp"
+              id="fApellido"
+              type="text"
+              placeholder="Canela"
+              autocomplete="family-name"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-6">
+            <label class="form-label" for="fWhatsapp">Whatsapp/Teléfono</label>
+            <input
+              class="form-inp"
+              id="fWhatsapp"
+              type="tel"
+              placeholder="+1 (809) 000-0000"
+              autocomplete="tel"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-6">
+            <label class="form-label" for="fEmail">Correo electrónico</label>
+            <input
+              class="form-inp"
+              id="fEmail"
+              type="email"
+              placeholder="maria@correo.com"
+              autocomplete="email"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label">País</label>
+            <div class="pais-field">
+              República Dominicana
+              <svg
+                class="prov-arrow"
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </div>
+            <input type="hidden" id="fPais" value="República Dominicana">
+          </div>
+          <div class="form-group col-8">
+            <label class="form-label" for="fDireccion">Dirección</label>
+            <input
+              class="form-inp"
+              id="fDireccion"
+              type="text"
+              placeholder="Calle Principal #123, Apto 4B"
+              autocomplete="street-address"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label" for="fProvinciaBtn">Provincia / Estado</label>
+            <div class="prov-wrap" id="provinciaWrap">
+              <button
+                type="button"
+                class="prov-trigger is-placeholder"
+                id="fProvinciaBtn"
+                onclick="toggleProv()"
+                aria-haspopup="listbox"
+              >
+                <span id="provLabel">Distrito Nacional</span>
+                <svg
+                  class="prov-arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <input type="hidden" id="fProvincia" value="Distrito Nacional">
+              <div class="prov-dropdown" id="provDropdown" role="listbox">
+                <div class="prov-search-wrap">
+                  <input
+                    class="prov-search"
+                    id="provSearch"
+                    type="text"
+                    placeholder="Buscar provincia..."
+                    oninput="filterProv(this.value)"
+                    autocomplete="off"
+                  >
+                </div>
+                <div class="prov-list" id="provList"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label" for="fCiudad">Ciudad</label>
+            <input
+              class="form-inp"
+              id="fCiudad"
+              type="text"
+              placeholder="Santo Domingo"
+              autocomplete="address-level2"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+          <div class="form-group col-4">
+            <label class="form-label" for="fMunicipioBtn">Municipio</label>
+            <div class="prov-wrap" id="municipioWrap">
+              <button
+                type="button"
+                class="prov-trigger is-placeholder"
+                id="fMunicipioBtn"
+                onclick="toggleMun()"
+                aria-haspopup="listbox"
+              >
+                <span id="munLabel">Selecciona un municipio</span>
+                <svg
+                  class="prov-arrow"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </button>
+              <input type="hidden" id="fMunicipio" value="">
+              <div class="prov-dropdown" id="munDropdown" role="listbox">
+                <div class="prov-search-wrap">
+                  <input
+                    class="prov-search"
+                    id="munSearch"
+                    type="text"
+                    placeholder="Buscar municipio..."
+                    oninput="filterMun(this.value)"
+                    autocomplete="off"
+                  >
+                </div>
+                <div class="prov-list" id="munList"></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group col-12">
+            <label class="form-label" for="fNotas">Notas del pedido (Opcional)</label>
+            <input
+              class="form-inp"
+              id="fNotas"
+              type="text"
+              placeholder="Ej: Dejar con el portero, llamar antes de llegar"
+              oninput="this.classList.remove('input-error')"
+            >
+          </div>
+        </div>
+
+        <div class="step2-bottom">
+          <div class="step2-bottom-btns">
+            <button
+              onclick="goToStep(1)"
+              style="background:transparent; color:#666; border:none; padding:16px 20px; font-weight:700; font-size:1rem; cursor:pointer; display:inline-flex; align-items:center;"
+            >
+              ← Regresar
+            </button>
+            <button
+              class="btn-submit"
+              id="submitBtn"
+              onclick="enviarPedido()"
+              style="width:auto; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; margin:0; display:inline-flex; align-items:center;"
+            >
+              <span class="btn-label" id="btnLabel">Completar pedido ›</span>
+              <div class="spinner" style="display:none;"></div>
+            </button>
+          </div>
+          <div class="step2-bottom-total">
+            <div style="font-size:0.95rem; color:#111; margin-bottom:0; font-weight:700;">Total a pagar</div>
+            <div
+              class="sum-total-val"
+              id="step2-total"
+              style="font-size:1.8rem; font-weight:900; color:#111; line-height: 1;"
+            >
+              {{ cart.total_price | money }}
+            </div>
+          </div>
+        </div>
       </div>
 
-      <table class="order-detail-table">
-        <thead>
-          <tr>
-            <th>No. de pedido</th>
-            <th>Producto</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody id="order-detail-tbody">
-          <!-- Filled via JS -->
-        </tbody>
-      </table>
+      <!-- STEP 3: SUCCESS DETAIL -->
+      <div id="view-step3" class="cart-view" style="display: none;">
+        <div class="view-header">
+          <div style="font-size:2.5rem; margin-bottom:6px;">🎉</div>
+          <h2 class="view-title" style="color:#16a34a;">¡Pedido recibido!</h2>
+          <p class="view-subtitle">Te contactaremos por WhatsApp para confirmar tu entrega</p>
+        </div>
 
-      <div style="margin-top: 40px;">
-        <a href="/collections/all" class="btn-submit" style="display:inline-block; width: max-content; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; text-decoration:none; text-align:center;">
-          ← Seguir comprando
-        </a>
+        <table class="order-detail-table">
+          <thead>
+            <tr>
+              <th>No. de pedido</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Precio</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="order-detail-tbody">
+            <!-- Filled via JS -->
+          </tbody>
+        </table>
+
+        <div style="margin-top: 40px;">
+          <a
+            href="/collections/all"
+            class="btn-submit"
+            style="display:inline-block; width: max-content; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; text-decoration:none; text-align:center;"
+          >
+            ← Seguir comprando
+          </a>
+        </div>
       </div>
-    </div>
-
-  </main>
-</div>
+    </main>
+  </div>
 
 {% else %}
   <!-- CARRITO VACÍO -->
@@ -742,592 +979,566 @@
     <div style="font-size:4rem; margin-bottom:16px;">🛒</div>
     <h2 style="font-size:1.4rem; font-weight:700; margin-bottom:12px;">Tu carrito está vacío</h2>
     <p style="color:var(--muted); margin-bottom:28px;">¡Agrega algunos productos para empezar!</p>
-    <a href="/collections/all" class="btn-main" style="text-decoration:none; padding: 14px 32px; border-radius: 12px; background: #dc2626; color: #fff; font-weight: 800;">Explorar tienda →</a>
+    <a
+      href="/collections/all"
+      class="btn-main"
+      style="text-decoration:none; padding: 14px 32px; border-radius: 12px; background: #dc2626; color: #fff; font-weight: 800;"
+      >Explorar tienda →</a
+    >
   </div>
 {% endif %}
 
 <script>
-const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw53U4Px15aRNAxwTsM3Q2d9t1kXeS41JMro7CO4lV0oHF-AHJnYOpZhcr70Sa0uHPc/exec';
+  const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbw53U4Px15aRNAxwTsM3Q2d9t1kXeS41JMro7CO4lV0oHF-AHJnYOpZhcr70Sa0uHPc/exec';
 
-let shopifyTotal = "{{ cart.total_price | money }}";
+  let shopifyTotal = "{{ cart.total_price | money }}";
 
-let cartItems = [
-  {% for item in cart.items %}
-    {
-      variant_id: {{ item.variant_id }},
-      quantity:   {{ item.quantity }},
-      title:      "{{ item.product.title | escape }}",
-      price:      "{{ item.line_price | money }}",
-      image:      "{{ item.image | img_url: 'small' }}"
-    }{% unless forloop.last %},{% endunless %}
-  {% endfor %}
-];
-
-function formatMoney(cents) {
-  return 'RD$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
-
-function goToStep(step) {
-  document.getElementById('view-step1').style.display = 'none';
-  document.getElementById('view-step2').style.display = 'none';
-  document.getElementById('view-step3').style.display = 'none';
-  document.getElementById('view-step' + step).style.display = 'block';
-
-  // FIX #5: Reset submitBtn cuando el usuario vuelve al step 1 o 2
-  if (step === 1 || step === 2) {
-    var btn = document.getElementById('submitBtn');
-    var lbl = document.getElementById('btnLabel');
-    if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
-    if (lbl) lbl.textContent = 'Completar pedido ›';
-    var spin = btn && btn.querySelector('.spinner');
-    if (spin) spin.style.display = 'none';
-  }
-
-  const stepsNav = [
-    document.getElementById('step1-nav'),
-    document.getElementById('step2-nav'),
-    document.getElementById('step3-nav')
+  let cartItems = [
+    {% for item in cart.items %}
+      {
+        variant_id: {{ item.variant_id }},
+        quantity:   {{ item.quantity }},
+        title:      "{{ item.product.title | escape }}",
+        price:      "{{ item.line_price | money }}",
+        image:      "{{ item.image | img_url: 'small' }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
   ];
 
-  stepsNav.forEach((nav, idx) => {
-    const s = idx + 1;
-    nav.classList.remove('active');
-    const icon = nav.querySelector('.step-icon');
+  function formatMoney(cents) {
+    return 'RD$' + (cents / 100).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
-    if (s < step) {
-      icon.classList.add('completed');
-      icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
-    } else if (s === step) {
-      nav.classList.add('active');
-      icon.classList.remove('completed');
-      icon.innerHTML = s;
-    } else {
-      icon.classList.remove('completed');
-      icon.innerHTML = s;
+  function goToStep(step) {
+    document.getElementById('view-step1').style.display = 'none';
+    document.getElementById('view-step2').style.display = 'none';
+    document.getElementById('view-step3').style.display = 'none';
+    document.getElementById('view-step' + step).style.display = 'block';
+
+    // FIX #5: Reset submitBtn cuando el usuario vuelve al step 1 o 2
+    if (step === 1 || step === 2) {
+      var btn = document.getElementById('submitBtn');
+      var lbl = document.getElementById('btnLabel');
+      if (btn) { btn.style.opacity = '1'; btn.style.pointerEvents = 'auto'; }
+      if (lbl) lbl.textContent = 'Completar pedido ›';
+      var spin = btn && btn.querySelector('.spinner');
+      if (spin) spin.style.display = 'none';
     }
-  });
-}
 
-// Wrapper con delta — lee la cantidad actual del DOM
-function changeQty(line, delta) {
-  console.log('changeQty called with line:', line, 'delta:', delta);
-  var qtyEl = document.getElementById('qty-' + line);
-  var current = qtyEl ? (parseInt(qtyEl.textContent) || 1) : 1;
-  var newQty = delta <= -999 ? 0 : Math.max(0, current + delta);
-  console.log('Current qty:', current, 'New qty:', newQty);
-  ajaxQty(line, newQty);
-}
+    const stepsNav = [
+      document.getElementById('step1-nav'),
+      document.getElementById('step2-nav'),
+      document.getElementById('step3-nav')
+    ];
 
-function ajaxQty(line, qty) {
-  console.log('ajaxQty called logic started', line, qty);
-  // Deshabilitar botones durante el fetch para evitar race conditions
-  var allQtyBtns = document.querySelectorAll('[data-qty-btn]');
-  allQtyBtns.forEach(function(b) { b.disabled = true; b.style.opacity = '0.4'; });
-  fetch('/cart/change.js', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ line: line, quantity: qty })
-  })
-  .then(r => r.json())
-  .then(cart => {
-    console.log('cart change response:', cart);
-    if (cart.item_count === 0 || qty === 0) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true
+    stepsNav.forEach((nav, idx) => {
+      const s = idx + 1;
+      nav.classList.remove('active');
+      const icon = nav.querySelector('.step-icon');
+
+      if (s < step) {
+        icon.classList.add('completed');
+        icon.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>';
+      } else if (s === step) {
+        nav.classList.add('active');
+        icon.classList.remove('completed');
+        icon.innerHTML = s;
+      } else {
+        icon.classList.remove('completed');
+        icon.innerHTML = s;
+      }
+    });
+  }
+
+  // Wrapper con delta — lee la cantidad actual del DOM
+  function changeQty(line, delta) {
+    console.log('changeQty called with line:', line, 'delta:', delta);
+    var qtyEl = document.getElementById('qty-' + line);
+    var current = qtyEl ? (parseInt(qtyEl.textContent) || 1) : 1;
+    var newQty = delta <= -999 ? 0 : Math.max(0, current + delta);
+    console.log('Current qty:', current, 'New qty:', newQty);
+    ajaxQty(line, newQty);
+  }
+
+  function ajaxQty(line, qty) {
+    console.log('ajaxQty called logic started', line, qty);
+    // Deshabilitar botones durante el fetch para evitar race conditions
+    var allQtyBtns = document.querySelectorAll('[data-qty-btn]');
+    allQtyBtns.forEach(function(b) { b.disabled = true; b.style.opacity = '0.4'; });
+    fetch('/cart/change.js', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ line: line, quantity: qty })
+    })
+    .then(r => r.json())
+    .then(cart => {
+      console.log('cart change response:', cart);
+      if (cart.item_count === 0 || qty === 0) {
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 1500,
+          timerProgressBar: true
+        });
+        Toast.fire({
+          icon: 'success',
+          title: 'Producto eliminado del carrito'
+        });
+        setTimeout(() => location.reload(), 1500);
+        return;
+      }
+      const qtyEl = document.getElementById('qty-' + line);
+      if (qtyEl) qtyEl.textContent = qty;
+
+      const badge = document.getElementById('cartBadge');
+      if (badge) badge.textContent = cart.item_count;
+
+      if (cart.items) {
+        cart.items.forEach((item, i) => {
+          const priceEls = document.querySelectorAll('.oi-price');
+          if (priceEls[i]) priceEls[i].textContent = formatMoney(item.line_price);
+        });
+      }
+
+      // FIX #1: Usar IDs específicos para no sobreescribir el texto de "Tiempo de entrega"
+      const totalMoney = formatMoney(cart.total_price);
+      const step1Sub  = document.getElementById('step1-subtotal');
+      const step1Tot  = document.querySelector('.sum-total-val');
+      const step2Tot  = document.getElementById('step2-total');
+      if (step1Sub) step1Sub.textContent = totalMoney;
+      if (step1Tot) step1Tot.textContent = totalMoney;
+      if (step2Tot) step2Tot.textContent = totalMoney;
+
+      shopifyTotal = totalMoney;
+
+      // FIX #3: Normalizar imagen — usar URL limpia sin parámetros extra
+      if (cart.items) {
+        cartItems = cart.items.map(item => ({
+          variant_id: item.variant_id,
+          quantity: item.quantity,
+          title: item.product_title || item.title,
+          price: formatMoney(item.line_price),
+          image: item.featured_image ? item.featured_image.url : (item.image || '')
+        }));
+      }
+    })
+    .catch(err => {
+      console.error('AJAX Error:', err);
+      alert('Error al actualizar el carrito: ' + err.message);
+    })
+    .finally(() => {
+      console.log('AJAX finally block, re-enabling buttons');
+      // Re-habilitar los botones después de terminar la operación
+      var allQtyBtns = document.querySelectorAll('[data-qty-btn]');
+      allQtyBtns.forEach(function(b) { b.disabled = false; b.style.opacity = '1'; });
+    });
+  }
+
+  function vaciarCarrito() {
+    if (confirm("¿Vaciar todo el carrito?")) {
+      fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+        .then(() => location.reload());
+    }
+  }
+
+  function generarNum() {
+    return '#EC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
+  }
+
+  async function enviarPedido() {
+    if (cartItems.length === 0) return;
+
+    const inputs = {
+      nombre:    document.getElementById('fNombre'),
+      apellido:  document.getElementById('fApellido'),
+      email:     document.getElementById('fEmail'),
+      telefono:  document.getElementById('fWhatsapp'),
+      direccion: document.getElementById('fDireccion'),
+      ciudad:    document.getElementById('fCiudad')
+    };
+
+    const regexLetras  = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+    const regexEmail   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const regexNumeros = /^[\d\+\-\s\(\)]+$/;
+
+    let hasError = false;
+
+    Object.values(inputs).forEach(input => input.classList.remove('input-error'));
+    document.getElementById('fProvinciaBtn').classList.remove('input-error');
+    document.getElementById('fMunicipioBtn').classList.remove('input-error');
+
+    for (const [key, input] of Object.entries(inputs)) {
+      const val = input.value.trim();
+      if (!val) {
+        input.classList.add('input-error');
+        hasError = true;
+      } else {
+        if ((key === 'nombre' || key === 'apellido' || key === 'ciudad') && !regexLetras.test(val)) {
+          input.classList.add('input-error');
+          hasError = true;
+        }
+        if (key === 'email' && !regexEmail.test(val)) {
+          input.classList.add('input-error');
+          hasError = true;
+        }
+        if (key === 'telefono' && !regexNumeros.test(val)) {
+          input.classList.add('input-error');
+          hasError = true;
+        }
+      }
+    }
+
+    // Validar provincia
+    if (!document.getElementById('fProvincia').value.trim()) {
+      document.getElementById('fProvinciaBtn').classList.add('input-error');
+      hasError = true;
+    }
+
+    // Validar municipio
+    if (!document.getElementById('fMunicipio').value.trim()) {
+      document.getElementById('fMunicipioBtn').classList.add('input-error');
+      hasError = true;
+    }
+
+    if (hasError) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Faltan datos',
+        text: 'Por favor, revisa los campos en rojo y asegúrate de llenarlos correctamente.',
+        confirmButtonColor: '#dc2626',
+        confirmButtonText: 'Entendido'
       });
-      Toast.fire({
-        icon: 'success',
-        title: 'Producto eliminado del carrito'
-      });
-      setTimeout(() => location.reload(), 1500);
       return;
     }
-    const qtyEl = document.getElementById('qty-' + line);
-    if (qtyEl) qtyEl.textContent = qty;
 
-    const badge = document.getElementById('cartBadge');
-    if (badge) badge.textContent = cart.item_count;
+    const btn     = document.getElementById('submitBtn');
+    const label   = document.getElementById('btnLabel');
+    const spinner = btn.querySelector('.spinner');
 
-    if (cart.items) {
-      cart.items.forEach((item, i) => {
-        const priceEls = document.querySelectorAll('.oi-price');
-        if (priceEls[i]) priceEls[i].textContent = formatMoney(item.line_price);
+    btn.style.opacity = '0.7';
+    btn.style.pointerEvents = 'none';
+    label.textContent = 'Enviando...';
+    if (spinner) spinner.style.display = 'block';
+
+    const orderNum = generarNum();
+    let productosStr = cartItems.map(i => i.title + ' x' + i.quantity).join(', ');
+
+    const payload = {
+      orderNum,
+      fecha:     new Date().toLocaleString('es-DO'),
+      nombre:    document.getElementById('fNombre').value.trim(),
+      apellido:  document.getElementById('fApellido').value.trim(),
+      email:     document.getElementById('fEmail').value.trim(),
+      telefono:  document.getElementById('fWhatsapp').value.trim(),
+      pais:      document.getElementById('fPais').value,
+      direccion: document.getElementById('fDireccion').value.trim(),
+      ciudad:    document.getElementById('fCiudad').value.trim(),
+      provincia: document.getElementById('fProvincia').value.trim(),
+      municipio: document.getElementById('fMunicipio').value.trim(),
+      notas:     document.getElementById('fNotas').value.trim(),
+      productos: productosStr,
+      total:     shopifyTotal,
+      items:     cartItems,
+      estado:    'Pendiente'
+    };
+
+    try {
+      await fetch(SHEETS_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ ...payload, _token: 'EC2026RD' })
       });
+      mostrarExito(orderNum);
+    } catch (err) {
+      mostrarExito(orderNum);
     }
-
-    // FIX #1: Usar IDs específicos para no sobreescribir el texto de "Tiempo de entrega"
-    const totalMoney = formatMoney(cart.total_price);
-    const step1Sub  = document.getElementById('step1-subtotal');
-    const step1Tot  = document.querySelector('.sum-total-val');
-    const step2Tot  = document.getElementById('step2-total');
-    if (step1Sub) step1Sub.textContent = totalMoney;
-    if (step1Tot) step1Tot.textContent = totalMoney;
-    if (step2Tot) step2Tot.textContent = totalMoney;
-
-    shopifyTotal = totalMoney;
-
-    // FIX #3: Normalizar imagen — usar URL limpia sin parámetros extra
-    if (cart.items) {
-      cartItems = cart.items.map(item => ({
-        variant_id: item.variant_id,
-        quantity: item.quantity,
-        title: item.product_title || item.title,
-        price: formatMoney(item.line_price),
-        image: item.featured_image ? item.featured_image.url : (item.image || '')
-      }));
-    }
-  })
-  .catch(err => {
-    console.error('AJAX Error:', err);
-    alert('Error al actualizar el carrito: ' + err.message);
-  })
-  .finally(() => {
-    console.log('AJAX finally block, re-enabling buttons');
-    // Re-habilitar los botones después de terminar la operación
-    var allQtyBtns = document.querySelectorAll('[data-qty-btn]');
-    allQtyBtns.forEach(function(b) { b.disabled = false; b.style.opacity = '1'; });
-  });
-}
-
-function vaciarCarrito() {
-  if (confirm("¿Vaciar todo el carrito?")) {
-    fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
-      .then(() => location.reload());
   }
-}
 
-function generarNum() {
-  return '#EC-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000);
-}
+  function mostrarExito(orderNum) {
+    const tbody = document.getElementById('order-detail-tbody');
+    // FIX #2: Null-check antes de usar tbody
+    if (!tbody) { goToStep(3); return; }
+    tbody.innerHTML = '';
 
-async function enviarPedido() {
-  if (cartItems.length === 0) return;
+    cartItems.forEach(item => {
+      const tr = document.createElement('tr');
+      tr.innerHTML =
+        '<td data-label="No. de pedido"><strong>' + orderNum + '</strong></td>' +
+        '<td data-label="Producto">' +
+          '<div style="display:flex;align-items:center;gap:12px;">' +
+            '<span style="max-width:180px;line-height:1.3;font-size:0.85rem;font-weight:700;">' + item.title + '</span>' +
+            '<img src="' + (item.image || '') + '" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;">' +
+          '</div>' +
+        '</td>' +
+        '<td data-label="Cantidad" style="font-weight:700;color:#555;">' + item.quantity + '</td>' +
+        '<td data-label="Precio" style="font-weight:700;">' + item.price + '</td>' +
+        '<td data-label="Status"><span class="status-badge">Orden creada</span></td>';
+      tbody.appendChild(tr);
+    });
 
-  const inputs = {
-    nombre:    document.getElementById('fNombre'),
-    apellido:  document.getElementById('fApellido'),
-    email:     document.getElementById('fEmail'),
-    telefono:  document.getElementById('fWhatsapp'),
-    direccion: document.getElementById('fDireccion'),
-    ciudad:    document.getElementById('fCiudad')
+    goToStep(3);
+
+    // Limpiar carrito en background después de mostrar
+    setTimeout(function() {
+      fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
+        .then(function() {
+          var badge = document.getElementById('cartBadge');
+          if (badge) { badge.textContent = '0'; badge.style.display = 'none'; }
+        });
+    }, 500);
+  }
+
+
+
+  /* ── CUSTOM PROVINCE/MUNICIPIO DROPDOWN ── */
+  var PROVINCIAS = [
+    "Distrito Nacional",
+    "Azua",
+    "Baoruco",
+    "Barahona",
+    "Dajabón",
+    "Duarte",
+    "El Seibo",
+    "Elías Piña",
+    "Espaillat",
+    "Hato Mayor",
+    "Hermanas Mirabal",
+    "Independencia",
+    "La Altagracia",
+    "La Romana",
+    "La Vega",
+    "María Trinidad Sánchez",
+    "Monseñor Nouel",
+    "Montecristi",
+    "Monte Plata",
+    "Pedernales",
+    "Peravia",
+    "Puerto Plata",
+    "Samaná",
+    "San Cristóbal",
+    "San José de Ocoa",
+    "San Juan",
+    "San Pedro de Macorís",
+    "Sánchez Ramírez",
+    "Santiago",
+    "Santiago Rodríguez",
+    "Santo Domingo",
+    "Valverde",
+  ];
+
+  var MUNICIPIOS_POR_PROVINCIA = {
+    "Distrito Nacional": ["Distrito Nacional"],
+    "Azua": ["Azua de Compostela", "Barro Arriba", "Clavellina", "Emma Balaguer Viuda Vallejo", "Las Barías-La Estancia", "Las Lomas", "Los Jovillos", "Puerto Viejo", "Sabana Yegua", "Tábara Arriba"],
+    "Baoruco": ["Neiba", "Galván", "Los Ríos", "Tamayo", "Santana", "Uvilla"],
+    "Barahona": ["El Cachón", "La Guázara", "Villa Central", "Enriquillo", "Fundación", "Jaquimeyes", "La Ciénaga", "Las Salinas", "Paraíso", "Polo", "Vicente Noble"],
+    "Dajabón": ["Cañongo", "El Pino", "Loma de Cabrera", "Partido", "Restauración"],
+    "Duarte": ["San Francisco de Macorís", "Jaya", "La Peña", "Presidente Don Antonio Guzmán", "Las Guáranas", "Pimentel", "Villa Riva"],
+    "El Seibo": ["Pedro Sánchez", "San Francisco-Vicentillo", "Santa Lucía"],
+    "Elías Piña": ["Comendador", "Sabana Larga", "El Llano", "Hondo Valle", "Juan Santiago", "Pedro Santana"],
+    "Espaillat": ["Moca", "El Higüerito", "José Contreras", "Juan López", "La Ortega", "Las Lagunas", "Monte de la Jagua", "San Víctor"],
+    "Hato Mayor": ["Hato Mayor del Rey", "Mata Palacio", "Yerba Buena"],
+    "Hermanas Mirabal": ["Salcedo", "Tenares", "Villa Tapia"],
+    "Independencia": ["Jimaní", "El Limón", "Duvergé", "La Descubierta", "Mella", "Postrer Río"],
+    "La Altagracia": ["Higüey", "Lagunas de Nisibón", "Verón-Punta Cana"],
+    "La Romana": ["Caleta", "Guaymate", "Villa Hermosa"],
+    "La Vega": ["La Concepción de La Vega", "Río Verde Arriba", "Jarabacoa", "Jima Abajo"],
+    "María Trinidad Sánchez": ["Nagua", "Las Gordas", "San José de Matanzas", "Río San Juan"],
+    "Monseñor Nouel": ["Bonao", "La Salvia-Los Quemados", "Jayaco", "Juma Bejucal", "Sabana del Puerto"],
+    "Montecristi": ["Palo Verde", "Hatillo Palma", "Villa Elisa", "Las Matas de Santa Cruz", "Pepillo Salcedo", "Villa Vásquez"],
+    "Monte Plata": ["Boyá", "Chirino", "Don Juan"],
+    "Pedernales": ["José Francisco Peña Gómez", "Juancho"],
+    "Peravia": ["Baní", "El Carretón", "El Limonal", "Las Barías", "Matanzas", "Paya", "Sabana Buey", "Villa Fundación", "Villa Sombrero"],
+    "Puerto Plata": ["Maimón", "Yásica Arriba", "Guananico", "Imbert", "Los Hidalgos", "Luperón", "Sosúa", "Villa Isabela", "Villa Montellano"],
+    "Samaná": ["Arroyo Barril", "El Limón", "Las Galeras"],
+    "San Cristóbal": ["Hato Damas", "Bajos de Haina", "Cambita Garabito", "Los Cacaos", "Sabana Grande de Palenque", "San Gregorio de Nigua", "Villa Altagracia", "Yaguate"],
+    "San José de Ocoa": ["El Naranjal", "El Pinar", "La Ciénaga", "Nizao-Las Auyamas"],
+    "San Juan": ["San Juan de la Maguana", "Guanito", "Hato del Padre", "Hato Nuevo", "La Jagua", "Las Charcas de María Nova", "Pedro Corto", "Sabana Alta", "Sabaneta"],
+    "San Pedro de Macorís": ["El Puerto", "Gautier"],
+    "Sánchez Ramírez": ["Cotuí", "Comedero Arriba", "Quita Sueño", "La Mata"],
+    "Santiago": ["Baitoa", "Hato del Yaque", "La Canela", "Pedro García", "San Francisco de Jacagua", "Sabana Iglesia", "Tamboril"],
+    "Santiago Rodríguez": ["San Ignacio de Sabaneta", "Los Almácigos", "Monción"],
+    "Santo Domingo": ["Santo Domingo Este", "Boca Chica", "Los Alcarrizos", "Pedro Brand", "San Antonio de Guerra", "Santo Domingo Norte", "Santo Domingo Oeste"],
+    "Valverde": ["Mao", "Guatapanal", "Jaibón (Pueblo Nuevo)", "Paradero"]
   };
 
-  const regexLetras  = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-  const regexEmail   = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const regexNumeros = /^[\d\+\-\s\(\)]+$/;
+  var provinciaSeleccionada = 'Distrito Nacional';
 
-  let hasError = false;
+  function onProvinceSelect(value) {
+    provinciaSeleccionada = value;
+    // Reset municipio
+    document.getElementById('fMunicipio').value = '';
+    document.getElementById('munLabel').textContent = 'Selecciona un municipio';
+    document.getElementById('fMunicipioBtn').classList.add('is-placeholder');
+    // Cerrar ambos dropdowns
+    document.getElementById('provDropdown').classList.remove('open');
+    document.getElementById('munDropdown').classList.remove('open');
+    document.getElementById('fProvinciaBtn').classList.remove('open');
+    document.getElementById('fMunicipioBtn').classList.remove('open');
+  }
 
-  Object.values(inputs).forEach(input => input.classList.remove('input-error'));
-  document.getElementById('fProvinciaBtn').classList.remove('input-error');
-<<<<<<< HEAD
-=======
-  document.getElementById('fMunicipioBtn').classList.remove('input-error');
->>>>>>> 727a22d (UI Updates and layout improvements)
+  function renderProvList(filter) {
+    var list = document.getElementById('provList');
+    if (!list) return;
+    var q = (filter || '').toLowerCase().trim();
+    var current = (document.getElementById('fProvincia') || {}).value || '';
+    var filtered = q ? PROVINCIAS.filter(function(p){ return p.toLowerCase().indexOf(q) !== -1; }) : PROVINCIAS;
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="prov-empty">Sin resultados</div>';
+      return;
+    }
+    list.innerHTML = '';
+    filtered.forEach(function(p) {
+      var div = document.createElement('div');
+      div.className = 'prov-item' + (p === current ? ' selected' : '');
+      div.setAttribute('data-value', p);
+      div.textContent = p;
+      list.appendChild(div);
+    });
+  }
 
-  for (const [key, input] of Object.entries(inputs)) {
-    const val = input.value.trim();
-    if (!val) {
-      input.classList.add('input-error');
-      hasError = true;
+  function toggleProv() {
+    var btn = document.getElementById('fProvinciaBtn');
+    var dd  = document.getElementById('provDropdown');
+    var search = document.getElementById('provSearch');
+    if (!btn || !dd) return;
+    var isOpen = dd.classList.contains('open');
+    if (isOpen) {
+      dd.classList.remove('open');
+      btn.classList.remove('open');
     } else {
-      if ((key === 'nombre' || key === 'apellido' || key === 'ciudad') && !regexLetras.test(val)) {
-        input.classList.add('input-error');
-        hasError = true;
-      }
-      if (key === 'email' && !regexEmail.test(val)) {
-        input.classList.add('input-error');
-        hasError = true;
-      }
-      if (key === 'telefono' && !regexNumeros.test(val)) {
-        input.classList.add('input-error');
-        hasError = true;
-      }
+      dd.classList.add('open');
+      btn.classList.add('open');
+      renderProvList('');
+      if (search) { search.value = ''; setTimeout(function(){ search.focus(); }, 60); }
     }
   }
 
-  // Validar provincia
-  if (!document.getElementById('fProvincia').value.trim()) {
-    document.getElementById('fProvinciaBtn').classList.add('input-error');
-    hasError = true;
-  }
+  function filterProv(val) { renderProvList(val); }
 
-<<<<<<< HEAD
-=======
-  // Validar municipio
-  if (!document.getElementById('fMunicipio').value.trim()) {
-    document.getElementById('fMunicipioBtn').classList.add('input-error');
-    hasError = true;
-  }
+  // Delegación de eventos — click en items y cierre al click afuera
+  document.addEventListener('click', function(e) {
+    var item = e.target.closest ? e.target.closest('.prov-item') : null;
+    if (item && item.hasAttribute('data-value')) {
+      var value = item.getAttribute('data-value');
+      var hiddenInput = document.getElementById('fProvincia');
+      var label  = document.getElementById('provLabel');
+      var btn    = document.getElementById('fProvinciaBtn');
+      var dd     = document.getElementById('provDropdown');
+      if (hiddenInput) hiddenInput.value = value;
+      if (label) label.textContent = value;
+      if (btn) btn.classList.remove('is-placeholder', 'input-error', 'open');
+      if (dd)  dd.classList.remove('open');
+      // **FIX**: Llamar onProvinceSelect para cargar municipios
+      onProvinceSelect(value);
+      renderProvList('');
+      return;
+    }
+    var wrap = document.getElementById('provinciaWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      var dd2  = document.getElementById('provDropdown');
+      var btn2 = document.getElementById('fProvinciaBtn');
+      if (dd2)  dd2.classList.remove('open');
+      if (btn2) btn2.classList.remove('open');
+    }
 
->>>>>>> 727a22d (UI Updates and layout improvements)
-  if (hasError) {
-    Swal.fire({
-      icon: 'error',
-      title: 'Faltan datos',
-      text: 'Por favor, revisa los campos en rojo y asegúrate de llenarlos correctamente.',
-      confirmButtonColor: '#dc2626',
-      confirmButtonText: 'Entendido'
+    // ── Delegación para Municipio ── **FIX**: Detectar items de municipio correctamente
+    var itemMun = e.target.closest('.prov-item');
+    if (itemMun && itemMun.hasAttribute('data-value') && itemMun.closest('#munDropdown')) {
+      var valueMun = itemMun.getAttribute('data-value');
+      var hiddenInputMun = document.getElementById('fMunicipio');
+      var labelMun  = document.getElementById('munLabel');
+      var btnMun    = document.getElementById('fMunicipioBtn');
+      var ddMun     = document.getElementById('munDropdown');
+      if (hiddenInputMun) hiddenInputMun.value = valueMun;
+      if (labelMun) labelMun.textContent = valueMun;
+      if (btnMun) btnMun.classList.remove('is-placeholder', 'input-error', 'open');
+      if (ddMun)  ddMun.classList.remove('open');
+      renderMunList('');
+      return;
+    }
+    var wrapMun = document.getElementById('municipioWrap');
+    if (wrapMun && !wrapMun.contains(e.target)) {
+      var dd2Mun  = document.getElementById('munDropdown');
+      var btn2Mun = document.getElementById('fMunicipioBtn');
+      if (dd2Mun)  dd2Mun.classList.remove('open');
+      if (btn2Mun) btn2Mun.classList.remove('open');
+    }
+  });
+
+  /* ── CUSTOM MUNICIPIO DROPDOWN ── */
+  var MUNICIPIOS = [];
+
+  function renderMunList(filter) {
+    var list = document.getElementById('munList');
+    if (!list) return;
+
+    var q = (filter || '').toLowerCase().trim();
+    var current = document.getElementById('fMunicipio').value || '';
+    var municipiosDisponibles = MUNICIPIOS_POR_PROVINCIA[provinciaSeleccionada] || [];
+
+    var filtered = q ? municipiosDisponibles.filter(function(m){
+      return m.toLowerCase().indexOf(q) !== -1;
+    }) : municipiosDisponibles;
+
+    if (filtered.length === 0) {
+      list.innerHTML = '<div class="prov-empty">' + (q ? 'Sin resultados' : 'Selecciona una provincia primero') + '</div>';
+      return;
+    }
+
+    list.innerHTML = '';
+    filtered.forEach(function(m) {
+      var div = document.createElement('div');
+      div.className = 'prov-item mun-item' + (m === current ? ' selected' : '');
+      div.setAttribute('data-value', m);
+      div.textContent = m;
+      list.appendChild(div);
     });
-    return;
   }
 
-  const btn     = document.getElementById('submitBtn');
-  const label   = document.getElementById('btnLabel');
-  const spinner = btn.querySelector('.spinner');
-
-  btn.style.opacity = '0.7';
-  btn.style.pointerEvents = 'none';
-  label.textContent = 'Enviando...';
-  if (spinner) spinner.style.display = 'block';
-
-  const orderNum = generarNum();
-  let productosStr = cartItems.map(i => i.title + ' x' + i.quantity).join(', ');
-
-  const payload = {
-    orderNum,
-    fecha:     new Date().toLocaleString('es-DO'),
-    nombre:    document.getElementById('fNombre').value.trim(),
-    apellido:  document.getElementById('fApellido').value.trim(),
-    email:     document.getElementById('fEmail').value.trim(),
-    telefono:  document.getElementById('fWhatsapp').value.trim(),
-    pais:      document.getElementById('fPais').value,
-    direccion: document.getElementById('fDireccion').value.trim(),
-    ciudad:    document.getElementById('fCiudad').value.trim(),
-    provincia: document.getElementById('fProvincia').value.trim(),
-<<<<<<< HEAD
-=======
-    municipio: document.getElementById('fMunicipio').value.trim(),
->>>>>>> 727a22d (UI Updates and layout improvements)
-    notas:     document.getElementById('fNotas').value.trim(),
-    productos: productosStr,
-    total:     shopifyTotal,
-    items:     cartItems,
-    estado:    'Pendiente'
-  };
-
-  try {
-    await fetch(SHEETS_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify({ ...payload, _token: 'EC2026RD' })
-    });
-    mostrarExito(orderNum);
-  } catch (err) {
-    mostrarExito(orderNum);
-  }
-}
-
-function mostrarExito(orderNum) {
-  const tbody = document.getElementById('order-detail-tbody');
-  // FIX #2: Null-check antes de usar tbody
-  if (!tbody) { goToStep(3); return; }
-  tbody.innerHTML = '';
-
-  cartItems.forEach(item => {
-    const tr = document.createElement('tr');
-    tr.innerHTML =
-      '<td data-label="No. de pedido"><strong>' + orderNum + '</strong></td>' +
-      '<td data-label="Producto">' +
-        '<div style="display:flex;align-items:center;gap:12px;">' +
-          '<span style="max-width:180px;line-height:1.3;font-size:0.85rem;font-weight:700;">' + item.title + '</span>' +
-          '<img src="' + (item.image || '') + '" alt="" style="width:40px;height:40px;object-fit:cover;border-radius:6px;flex-shrink:0;">' +
-        '</div>' +
-      '</td>' +
-      '<td data-label="Cantidad" style="font-weight:700;color:#555;">' + item.quantity + '</td>' +
-      '<td data-label="Precio" style="font-weight:700;">' + item.price + '</td>' +
-      '<td data-label="Status"><span class="status-badge">Orden creada</span></td>';
-    tbody.appendChild(tr);
-  });
-
-  goToStep(3);
-
-  // Limpiar carrito en background después de mostrar
-  setTimeout(function() {
-    fetch('/cart/clear.js', { method: 'POST', headers: { 'Content-Type': 'application/json' } })
-      .then(function() {
-        var badge = document.getElementById('cartBadge');
-        if (badge) { badge.textContent = '0'; badge.style.display = 'none'; }
-      });
-  }, 500);
-}
-
-
-
-<<<<<<< HEAD
-/* ── CUSTOM PROVINCE DROPDOWN ── */
-var PROVINCIAS = [
-  'Azua','Bahoruco','Barahona','Dajabón','Distrito Nacional','Duarte',
-  'El Seibo','Elías Piña','Espaillat','Hato Mayor','Hermanas Mirabal',
-  'Independencia','La Altagracia','La Romana','La Vega',
-  'María Trinidad Sánchez','Monseñor Nouel','Monte Cristi','Monte Plata',
-  'Pedernales','Peravia','Puerto Plata','Samaná','Sánchez Ramírez',
-  'San Cristóbal','San José de Ocoa','San Juan','San Pedro de Macorís',
-  'Santiago','Santiago Rodríguez','Santo Domingo','Valverde'
-];
-
-=======
-/* ── CUSTOM PROVINCE/MUNICIPIO DROPDOWN ── */
-var PROVINCIAS = [
-  "Distrito Nacional",
-  "Azua",
-  "Baoruco",
-  "Barahona",
-  "Dajabón",
-  "Duarte",
-  "El Seibo",
-  "Elías Piña",
-  "Espaillat",
-  "Hato Mayor",
-  "Hermanas Mirabal",
-  "Independencia",
-  "La Altagracia",
-  "La Romana",
-  "La Vega",
-  "María Trinidad Sánchez",
-  "Monseñor Nouel",
-  "Montecristi",
-  "Monte Plata",
-  "Pedernales",
-  "Peravia",
-  "Puerto Plata",
-  "Samaná",
-  "San Cristóbal",
-  "San José de Ocoa",
-  "San Juan",
-  "San Pedro de Macorís",
-  "Sánchez Ramírez",
-  "Santiago",
-  "Santiago Rodríguez",
-  "Santo Domingo",
-  "Valverde",
-];
-
-var MUNICIPIOS_POR_PROVINCIA = {
-  "Distrito Nacional": ["Distrito Nacional"],
-  "Azua": ["Azua de Compostela", "Barro Arriba", "Clavellina", "Emma Balaguer Viuda Vallejo", "Las Barías-La Estancia", "Las Lomas", "Los Jovillos", "Puerto Viejo", "Sabana Yegua", "Tábara Arriba"],
-  "Baoruco": ["Neiba", "Galván", "Los Ríos", "Tamayo", "Santana", "Uvilla"],
-  "Barahona": ["El Cachón", "La Guázara", "Villa Central", "Enriquillo", "Fundación", "Jaquimeyes", "La Ciénaga", "Las Salinas", "Paraíso", "Polo", "Vicente Noble"],
-  "Dajabón": ["Cañongo", "El Pino", "Loma de Cabrera", "Partido", "Restauración"],
-  "Duarte": ["San Francisco de Macorís", "Jaya", "La Peña", "Presidente Don Antonio Guzmán", "Las Guáranas", "Pimentel", "Villa Riva"],
-  "El Seibo": ["Pedro Sánchez", "San Francisco-Vicentillo", "Santa Lucía"],
-  "Elías Piña": ["Comendador", "Sabana Larga", "El Llano", "Hondo Valle", "Juan Santiago", "Pedro Santana"],
-  "Espaillat": ["Moca", "El Higüerito", "José Contreras", "Juan López", "La Ortega", "Las Lagunas", "Monte de la Jagua", "San Víctor"],
-  "Hato Mayor": ["Hato Mayor del Rey", "Mata Palacio", "Yerba Buena"],
-  "Hermanas Mirabal": ["Salcedo", "Tenares", "Villa Tapia"],
-  "Independencia": ["Jimaní", "El Limón", "Duvergé", "La Descubierta", "Mella", "Postrer Río"],
-  "La Altagracia": ["Higüey", "Lagunas de Nisibón", "Verón-Punta Cana"],
-  "La Romana": ["Caleta", "Guaymate", "Villa Hermosa"],
-  "La Vega": ["La Concepción de La Vega", "Río Verde Arriba", "Jarabacoa", "Jima Abajo"],
-  "María Trinidad Sánchez": ["Nagua", "Las Gordas", "San José de Matanzas", "Río San Juan"],
-  "Monseñor Nouel": ["Bonao", "La Salvia-Los Quemados", "Jayaco", "Juma Bejucal", "Sabana del Puerto"],
-  "Montecristi": ["Palo Verde", "Hatillo Palma", "Villa Elisa", "Las Matas de Santa Cruz", "Pepillo Salcedo", "Villa Vásquez"],
-  "Monte Plata": ["Boyá", "Chirino", "Don Juan"],
-  "Pedernales": ["José Francisco Peña Gómez", "Juancho"],
-  "Peravia": ["Baní", "El Carretón", "El Limonal", "Las Barías", "Matanzas", "Paya", "Sabana Buey", "Villa Fundación", "Villa Sombrero"],
-  "Puerto Plata": ["Maimón", "Yásica Arriba", "Guananico", "Imbert", "Los Hidalgos", "Luperón", "Sosúa", "Villa Isabela", "Villa Montellano"],
-  "Samaná": ["Arroyo Barril", "El Limón", "Las Galeras"],
-  "San Cristóbal": ["Hato Damas", "Bajos de Haina", "Cambita Garabito", "Los Cacaos", "Sabana Grande de Palenque", "San Gregorio de Nigua", "Villa Altagracia", "Yaguate"],
-  "San José de Ocoa": ["El Naranjal", "El Pinar", "La Ciénaga", "Nizao-Las Auyamas"],
-  "San Juan": ["San Juan de la Maguana", "Guanito", "Hato del Padre", "Hato Nuevo", "La Jagua", "Las Charcas de María Nova", "Pedro Corto", "Sabana Alta", "Sabaneta"],
-  "San Pedro de Macorís": ["El Puerto", "Gautier"],
-  "Sánchez Ramírez": ["Cotuí", "Comedero Arriba", "Quita Sueño", "La Mata"],
-  "Santiago": ["Baitoa", "Hato del Yaque", "La Canela", "Pedro García", "San Francisco de Jacagua", "Sabana Iglesia", "Tamboril"],
-  "Santiago Rodríguez": ["San Ignacio de Sabaneta", "Los Almácigos", "Monción"],
-  "Santo Domingo": ["Santo Domingo Este", "Boca Chica", "Los Alcarrizos", "Pedro Brand", "San Antonio de Guerra", "Santo Domingo Norte", "Santo Domingo Oeste"],
-  "Valverde": ["Mao", "Guatapanal", "Jaibón (Pueblo Nuevo)", "Paradero"]
-};
-
-var provinciaSeleccionada = 'Distrito Nacional';
-
-function onProvinceSelect(value) {
-  provinciaSeleccionada = value;
-  // Reset municipio
-  document.getElementById('fMunicipio').value = '';
-  document.getElementById('munLabel').textContent = 'Selecciona un municipio';
-  document.getElementById('fMunicipioBtn').classList.add('is-placeholder');
-  // Cerrar ambos dropdowns
-  document.getElementById('provDropdown').classList.remove('open');
-  document.getElementById('munDropdown').classList.remove('open');
-  document.getElementById('fProvinciaBtn').classList.remove('open');
-  document.getElementById('fMunicipioBtn').classList.remove('open');
-}
-
->>>>>>> 727a22d (UI Updates and layout improvements)
-function renderProvList(filter) {
-  var list = document.getElementById('provList');
-  if (!list) return;
-  var q = (filter || '').toLowerCase().trim();
-  var current = (document.getElementById('fProvincia') || {}).value || '';
-  var filtered = q ? PROVINCIAS.filter(function(p){ return p.toLowerCase().indexOf(q) !== -1; }) : PROVINCIAS;
-  if (filtered.length === 0) {
-    list.innerHTML = '<div class="prov-empty">Sin resultados</div>';
-    return;
-  }
-  list.innerHTML = '';
-  filtered.forEach(function(p) {
-    var div = document.createElement('div');
-    div.className = 'prov-item' + (p === current ? ' selected' : '');
-    div.setAttribute('data-value', p);
-    div.textContent = p;
-    list.appendChild(div);
-  });
-}
-
-function toggleProv() {
-  var btn = document.getElementById('fProvinciaBtn');
-  var dd  = document.getElementById('provDropdown');
-  var search = document.getElementById('provSearch');
-  if (!btn || !dd) return;
-  var isOpen = dd.classList.contains('open');
-  if (isOpen) {
-    dd.classList.remove('open');
-    btn.classList.remove('open');
-  } else {
-    dd.classList.add('open');
-    btn.classList.add('open');
-    renderProvList('');
-    if (search) { search.value = ''; setTimeout(function(){ search.focus(); }, 60); }
-  }
-}
-
-function filterProv(val) { renderProvList(val); }
-
-// Delegación de eventos — click en items y cierre al click afuera
-document.addEventListener('click', function(e) {
-  var item = e.target.closest ? e.target.closest('.prov-item') : null;
-  if (item && item.hasAttribute('data-value')) {
-    var value = item.getAttribute('data-value');
-    var hiddenInput = document.getElementById('fProvincia');
-    var label  = document.getElementById('provLabel');
-    var btn    = document.getElementById('fProvinciaBtn');
-    var dd     = document.getElementById('provDropdown');
-    if (hiddenInput) hiddenInput.value = value;
-    if (label) label.textContent = value;
-    if (btn) btn.classList.remove('is-placeholder', 'input-error', 'open');
-    if (dd)  dd.classList.remove('open');
-<<<<<<< HEAD
-=======
-    // **FIX**: Llamar onProvinceSelect para cargar municipios
-    onProvinceSelect(value);
->>>>>>> 727a22d (UI Updates and layout improvements)
-    renderProvList('');
-    return;
-  }
-  var wrap = document.getElementById('provinciaWrap');
-  if (wrap && !wrap.contains(e.target)) {
-    var dd2  = document.getElementById('provDropdown');
-    var btn2 = document.getElementById('fProvinciaBtn');
-    if (dd2)  dd2.classList.remove('open');
-    if (btn2) btn2.classList.remove('open');
-  }
-<<<<<<< HEAD
-});
-
-=======
-
-  // ── Delegación para Municipio ── **FIX**: Detectar items de municipio correctamente
-  var itemMun = e.target.closest('.prov-item');
-  if (itemMun && itemMun.hasAttribute('data-value') && itemMun.closest('#munDropdown')) {
-    var valueMun = itemMun.getAttribute('data-value');
-    var hiddenInputMun = document.getElementById('fMunicipio');
-    var labelMun  = document.getElementById('munLabel');
-    var btnMun    = document.getElementById('fMunicipioBtn');
-    var ddMun     = document.getElementById('munDropdown');
-    if (hiddenInputMun) hiddenInputMun.value = valueMun;
-    if (labelMun) labelMun.textContent = valueMun;
-    if (btnMun) btnMun.classList.remove('is-placeholder', 'input-error', 'open');
-    if (ddMun)  ddMun.classList.remove('open');
-    renderMunList('');
-    return;
-  }
-  var wrapMun = document.getElementById('municipioWrap');
-  if (wrapMun && !wrapMun.contains(e.target)) {
-    var dd2Mun  = document.getElementById('munDropdown');
-    var btn2Mun = document.getElementById('fMunicipioBtn');
-    if (dd2Mun)  dd2Mun.classList.remove('open');
-    if (btn2Mun) btn2Mun.classList.remove('open');
-  }
-});
-
-/* ── CUSTOM MUNICIPIO DROPDOWN ── */
-var MUNICIPIOS = [];
-
-function renderMunList(filter) {
-  var list = document.getElementById('munList');
-  if (!list) return;
-  
-  var q = (filter || '').toLowerCase().trim();
-  var current = document.getElementById('fMunicipio').value || '';
-  var municipiosDisponibles = MUNICIPIOS_POR_PROVINCIA[provinciaSeleccionada] || [];
-  
-  var filtered = q ? municipiosDisponibles.filter(function(m){ 
-    return m.toLowerCase().indexOf(q) !== -1; 
-  }) : municipiosDisponibles;
-  
-  if (filtered.length === 0) {
-    list.innerHTML = '<div class="prov-empty">' + (q ? 'Sin resultados' : 'Selecciona una provincia primero') + '</div>';
-    return;
-  }
-  
-  list.innerHTML = '';
-  filtered.forEach(function(m) {
-    var div = document.createElement('div');
-    div.className = 'prov-item mun-item' + (m === current ? ' selected' : '');
-    div.setAttribute('data-value', m);
-    div.textContent = m;
-    list.appendChild(div);
-  });
-}
-
-function toggleMun() {
-  var btn = document.getElementById('fMunicipioBtn');
-  var dd  = document.getElementById('munDropdown');
-  var search = document.getElementById('munSearch');
-  if (!btn || !dd) return;
-  var isOpen = dd.classList.contains('open');
-  if (isOpen) {
-    dd.classList.remove('open');
-    btn.classList.remove('open');
-  } else {
-    dd.classList.add('open');
-    btn.classList.add('open');
-    renderMunList('');
-    if (search) { search.value = ''; setTimeout(function(){ search.focus(); }, 60); }
-  }
-}
-
-function filterMun(val) { renderMunList(val); }
-
->>>>>>> 727a22d (UI Updates and layout improvements)
-// ── Redirección Directa a Paso 2 (Desde Comprar Ahora) ──
-(function() {
-  if (sessionStorage.getItem('cart_step')) {
-    var strStep = sessionStorage.getItem('cart_step');
-    var s = parseInt(strStep, 10);
-    sessionStorage.removeItem('cart_step');
-    if (s && s >= 1 && s <= 3) {
-      // Remover animación para el salto inicial si la hay,
-      // esto asegura que entre directo sin flash.
-      var s1 = document.getElementById('step-1');
-      var s2 = document.getElementById('step-2');
-      if (s1 && s2) {
-         s1.style.transition = 'none';
-         s2.style.transition = 'none';
-         goToStep(s);
-         setTimeout(function() {
-           s1.style.transition = '';
-           s2.style.transition = '';
-         }, 50);
-      }
+  function toggleMun() {
+    var btn = document.getElementById('fMunicipioBtn');
+    var dd  = document.getElementById('munDropdown');
+    var search = document.getElementById('munSearch');
+    if (!btn || !dd) return;
+    var isOpen = dd.classList.contains('open');
+    if (isOpen) {
+      dd.classList.remove('open');
+      btn.classList.remove('open');
+    } else {
+      dd.classList.add('open');
+      btn.classList.add('open');
+      renderMunList('');
+      if (search) { search.value = ''; setTimeout(function(){ search.focus(); }, 60); }
     }
   }
-})();
+
+  function filterMun(val) { renderMunList(val); }
+
+  // ── Redirección Directa a Paso 2 (Desde Comprar Ahora) ──
+  (function() {
+    if (sessionStorage.getItem('cart_step')) {
+      var strStep = sessionStorage.getItem('cart_step');
+      var s = parseInt(strStep, 10);
+      sessionStorage.removeItem('cart_step');
+      if (s && s >= 1 && s <= 3) {
+        // Remover animación para el salto inicial si la hay,
+        // esto asegura que entre directo sin flash.
+        var s1 = document.getElementById('step-1');
+        var s2 = document.getElementById('step-2');
+        if (s1 && s2) {
+           s1.style.transition = 'none';
+           s2.style.transition = 'none';
+           goToStep(s);
+           setTimeout(function() {
+             s1.style.transition = '';
+             s2.style.transition = '';
+           }, 50);
+        }
+      }
+    }
+  })();
 </script>
 
 {% schema %}
