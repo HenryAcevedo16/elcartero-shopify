@@ -1419,32 +1419,8 @@
 
   // Delegación de eventos — click en items y cierre al click afuera
   document.addEventListener('click', function(e) {
-    var item = e.target.closest ? e.target.closest('.prov-item') : null;
-    if (item && item.hasAttribute('data-value')) {
-      var value = item.getAttribute('data-value');
-      var hiddenInput = document.getElementById('fProvincia');
-      var label  = document.getElementById('provLabel');
-      var btn    = document.getElementById('fProvinciaBtn');
-      var dd     = document.getElementById('provDropdown');
-      if (hiddenInput) hiddenInput.value = value;
-      if (label) label.textContent = value;
-      if (btn) btn.classList.remove('is-placeholder', 'input-error', 'open');
-      if (dd)  dd.classList.remove('open');
-      // **FIX**: Llamar onProvinceSelect para cargar municipios
-      onProvinceSelect(value);
-      renderProvList('');
-      return;
-    }
-    var wrap = document.getElementById('provinciaWrap');
-    if (wrap && !wrap.contains(e.target)) {
-      var dd2  = document.getElementById('provDropdown');
-      var btn2 = document.getElementById('fProvinciaBtn');
-      if (dd2)  dd2.classList.remove('open');
-      if (btn2) btn2.classList.remove('open');
-    }
-
-    // ── Delegación para Municipio ── **FIX**: Detectar items de municipio correctamente
-    var itemMun = e.target.closest('.prov-item');
+    // ── Delegación para Municipio (primero para evitar que `.prov-item` lo capture) ──
+    var itemMun = e.target.closest ? e.target.closest('.prov-item') : null;
     if (itemMun && itemMun.hasAttribute('data-value') && itemMun.closest('#munDropdown')) {
       var valueMun = itemMun.getAttribute('data-value');
       var hiddenInputMun = document.getElementById('fMunicipio');
@@ -1458,6 +1434,35 @@
       renderMunList('');
       return;
     }
+
+    // ── Delegación para Provincia ──
+    var item = e.target.closest ? e.target.closest('.prov-item') : null;
+    if (item && item.hasAttribute('data-value') && !item.closest('#munDropdown')) {
+      var value = item.getAttribute('data-value');
+      var hiddenInput = document.getElementById('fProvincia');
+      var label  = document.getElementById('provLabel');
+      var btn    = document.getElementById('fProvinciaBtn');
+      var dd     = document.getElementById('provDropdown');
+      if (hiddenInput) hiddenInput.value = value;
+      if (label) label.textContent = value;
+      if (btn) btn.classList.remove('is-placeholder', 'input-error', 'open');
+      if (dd)  dd.classList.remove('open');
+      // Llamar onProvinceSelect para cargar municipios
+      onProvinceSelect(value);
+      renderProvList('');
+      return;
+    }
+
+    // Cerrar provincia dropdown al click afuera
+    var wrap = document.getElementById('provinciaWrap');
+    if (wrap && !wrap.contains(e.target)) {
+      var dd2  = document.getElementById('provDropdown');
+      var btn2 = document.getElementById('fProvinciaBtn');
+      if (dd2)  dd2.classList.remove('open');
+      if (btn2) btn2.classList.remove('open');
+    }
+
+    // Cerrar municipio dropdown al click afuera
     var wrapMun = document.getElementById('municipioWrap');
     if (wrapMun && !wrapMun.contains(e.target)) {
       var dd2Mun  = document.getElementById('munDropdown');
