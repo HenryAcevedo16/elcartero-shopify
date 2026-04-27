@@ -224,7 +224,7 @@
                       data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
                       data-wish-price="{{ product.price | money }}"
                       data-wish-url="{{ product.url }}"
-                      onclick="toggleWish(this)"
+                      onclick="event.stopPropagation(); toggleWish(this)"
                       aria-label="Guardar en favoritos">♡</button>
             </div>
             <div class="prod-info">
