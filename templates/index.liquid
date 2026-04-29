@@ -1,31 +1,6 @@
 <!-- Estilos específicos de la página de inicio -->
 {{ 'inicio.css' | asset_url | stylesheet_tag }}
 
-<!-- STRIP / TICKER -->
-<div class="strip">
-  <div class="strip-track">
-    <div class="strip-item hi"><span>🔥 Envío gratis en todos tus pedidos</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Electrónica</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Salud &amp; Bienestar</span><span class="strip-dot"></span></div>
-    <div class="strip-item hi"><span>✨ Hasta 40% de descuento hoy</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Belleza</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Hogar &amp; Deco</span><span class="strip-dot"></span></div>
-    <div class="strip-item hi"><span>🔒 Pago contra entrega disponible</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Moda &amp; Ropa</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Tecnología</span><span class="strip-dot"></span></div>
-    <!-- Duplicado para loop sin cortes -->
-    <div class="strip-item hi"><span>🔥 Envío gratis en todos tus pedidos</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Electrónica</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Salud &amp; Bienestar</span><span class="strip-dot"></span></div>
-    <div class="strip-item hi"><span>✨ Hasta 40% de descuento hoy</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Belleza</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Hogar &amp; Deco</span><span class="strip-dot"></span></div>
-    <div class="strip-item hi"><span>🔒 Pago contra entrega disponible</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Moda &amp; Ropa</span><span class="strip-dot"></span></div>
-    <div class="strip-item"><span>Tecnología</span><span class="strip-dot"></span></div>
-  </div>
-</div>
-
 <!-- HERO -->
 {% section 'hero' %}
 
@@ -42,7 +17,7 @@
   <div class="banner banner-a reveal">
     <div class="bn-circle bnc1"></div>
     <div class="bn-circle bnc2"></div>
-    <p class="bn-tag">🔥 Oferta del día</p>
+    <p class="bn-tag">Oferta del día</p>
     <h2 class="bn-title">Hasta 40% OFF<br>en artículos electrónicos</h2>
     <p class="bn-sub">Los mejores gadgets, auriculares, smartwatches y cargadores. Solo por tiempo limitado.</p>
     <a href="/collections/electronica" class="bn-btn red" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">Ver ofertas →</a>
@@ -53,7 +28,7 @@
   <div class="banner banner-b reveal d2">
     <div class="bn-circle bnc1"></div>
     <div class="bn-circle bnc2"></div>
-    <p class="bn-tag">💊 Bienestar</p>
+    <p class="bn-tag">Bienestar</p>
     <h2 class="bn-title">Salud &amp;<br>Belleza</h2>
     <p class="bn-sub">Suplementos, skincare y todo para sentirte increíble cada día. Envío rápido a tu puerta.</p>
     <a href="/collections/salud-belleza" class="bn-btn dark" style="text-decoration:none; display:inline-flex; align-items:center; gap:8px;">Explorar →</a>
@@ -128,10 +103,10 @@
       {{ form.errors | default_errors }}
       <input type="hidden" name="customer[accepts_marketing]" value="true">
       <div class="nl-inputs-row">
-        <input class="nl-inp" type="text" name="customer[first_name]" placeholder="👤  Tu nombre completo">
-        <input class="nl-inp" type="email" name="customer[email]" placeholder="✉️  tu@correo.com" required>
+        <input class="nl-inp" type="text" name="customer[first_name]" placeholder="Tu nombre completo">
+        <input class="nl-inp" type="email" name="customer[email]" placeholder="tu@correo.com" required>
       </div>
-      <button type="submit" class="nl-cta">Quiero mis descuentos 🎉</button>
+      <button type="submit" class="nl-cta">Quiero mis descuentos</button>
     {% endform %}
   </div>
 </div>

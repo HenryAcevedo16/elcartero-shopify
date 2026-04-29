@@ -46,7 +46,7 @@
   {% for link in linklists.main-menu.links %}
     <a href="{{ link.url }}" {% if link.active %}class="active"{% endif %}>{{ link.title }}</a>
   {% endfor %}
-  <a href="/cart" class="mobile-nav-red">🛒 Carrito
+  <a href="/cart" class="mobile-nav-red">Carrito
     {% if cart.item_count > 0 %}({{ cart.item_count }}){% endif %}
   </a>
 </div>

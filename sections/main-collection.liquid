@@ -8,10 +8,7 @@
 
 {% paginate collection.products by section.settings.products_per_page %}
 
-<div class="breadcrumb">
-  <a href="{{ routes.root_url }}">Inicio</a><span>›</span>
-  <span class="current">{{ collection.title | default: 'Catálogo' }}</span>
-</div>
+
 
 <!-- PAGE HEADER -->
 <div class="page-header">
@@ -77,37 +74,37 @@
       <p class="sb-title">Categorías</p>
       <ul class="cat-list">
         <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
-          🛍 Todos <span class="cnt">{{ collection.products_count }}</span>
+          Todos <span class="cnt">{{ collection.products_count }}</span>
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" {% if request.query_string contains 'automotriz' %}class="active"{% endif %}>
-          🚗 Automotriz
+          Automotriz
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" {% if request.query_string contains 'bebe' %}class="active"{% endif %}>
-          🍼 Bebé
+          Bebé
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal" {% if request.query_string contains 'belleza' %}class="active"{% endif %}>
-          💄 Belleza y cuidado personal
+          Belleza y cuidado personal
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion" {% if request.query_string contains 'deporte' %}class="active"{% endif %}>
-          ⚽ Deporte y recreación
+          Deporte y recreación
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos" {% if request.query_string contains 'electrodomesticos' %}class="active"{% endif %}>
-          🔌 Electrodomésticos
+          Electrodomésticos
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion" {% if request.query_string contains 'herramientas' %}class="active"{% endif %}>
-          🛠️ Herramientas y construcción
+          Herramientas y construcción
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar" {% if request.query_string contains 'hogar' %}class="active"{% endif %}>
-          🏠 Hogar
+          Hogar
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud" {% if request.query_string contains 'salud' %}class="active"{% endif %}>
-          💊 Salud
+          Salud
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia" {% if request.query_string contains 'tecnologia' %}class="active"{% endif %}>
-          💻 Tecnología
+          Tecnología
         </a></li>
         <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje" {% if request.query_string contains 'viajes' %}class="active"{% endif %}>
-          🧳 Viajes y equipaje
+          Viajes y equipaje
         </a></li>
       </ul>
     </div>
@@ -246,7 +243,7 @@
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <div class="prod-actions">
-                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">🛒 Carrito</button>
+                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">Carrito</button>
                     <button type="button" class="prod-buy-btn" {% unless product.available %}disabled{% endunless %} onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ product.variants.first.id }}&quantity=1&return_to=/cart'">Comprar ahora</button>
                   </div>
                 </form>
