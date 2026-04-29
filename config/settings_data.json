@@ -102,7 +102,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Bebe",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -117,7 +117,7 @@
               "fallback_url": "shopify://collections/belleza",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Belleza y cuidado personal",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
