@@ -56,8 +56,9 @@
           "collection_G4m3Fa": {
             "type": "collection",
             "settings": {
-              "product_type": "",
+              "product_type": "Salud",
               "title": "",
+              "image": "shopify://shop_images/elsa-olofsson-vSFhQdcvyuA-unsplash.jpg",
               "collection": "salud"
             }
           }
