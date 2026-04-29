@@ -23,9 +23,10 @@
           "collection_MVXjUf": {
             "type": "collection",
             "settings": {
-              "product_type": "",
+              "product_type": "Belleza y cuidado personal",
               "title": "",
-              "collection": "belleza"
+              "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
+              "collection": "belleza-y-cuidado-personal"
             }
           },
           "collection_wPDzpz": {
