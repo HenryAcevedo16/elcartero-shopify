@@ -104,7 +104,7 @@
               "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
               "collection": "",
               "name": "Belleza y Cuidado personal",
-              "fallback_url": "",
+              "fallback_url": "shopify://collections/belleza",
               "emoji": "✨",
               "subtitle": "Ver productos",
               "filter_value": "",
@@ -251,9 +251,7 @@
       },
       "footer": {
         "type": "footer",
-        "settings": {
-          "store_description": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
-        }
+        "settings": {}
       },
       "main-collection": {
         "type": "main-collection",
