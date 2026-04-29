@@ -23,30 +23,40 @@
           "collection_MVXjUf": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "belleza"
             }
           },
           "collection_wPDzpz": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "electrodomesticos"
             }
           },
           "collection_NPRUDb": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "tecnologia"
             }
           },
           "collection_YKaF69": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "hogar"
             }
           },
           "collection_G4m3Fa": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "salud"
             }
           }
@@ -77,7 +87,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Automotriz",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
