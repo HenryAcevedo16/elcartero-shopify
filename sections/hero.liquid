@@ -173,11 +173,33 @@
     {%- if section.blocks.size > 0 -%}
       {% for block in section.blocks limit: 5 %}
         {% assign col = collections[block.settings.collection] %}
-        <a href="{% if col != blank %}{{ col.url }}{% else %}#{% endif %}" class="fan-card fc-{{ forloop.index }}" {{ block.shopify_attributes }}>
-          {% if col != blank and col.image %}
-            <img src="{{ col.image | image_url: width: 600, height: 800, crop: 'center' }}" alt="{{ col.title }}" loading="lazy">
-          {% elsif col != blank and col.products.first.featured_image %}
-            <img src="{{ col.products.first.featured_image | image_url: width: 600, height: 800, crop: 'center' }}" alt="{{ col.title }}" loading="lazy">
+        
+        {%- assign card_link = '#' -%}
+        {%- assign card_title = 'Categoría ' | append: forloop.index -%}
+        {%- assign card_image_url = '' -%}
+        
+        {%- if block.settings.product_type != blank -%}
+          {%- assign encoded_type = block.settings.product_type | url_encode -%}
+          {%- assign card_link = '/collections/all?filter.p.product_type=' | append: encoded_type -%}
+          {%- assign card_title = block.settings.title | default: block.settings.product_type -%}
+          {%- if block.settings.image != blank -%}
+            {%- assign card_image_url = block.settings.image | image_url: width: 600, height: 800, crop: 'center' -%}
+          {%- endif -%}
+        {%- elsif col != blank -%}
+          {%- assign card_link = col.url -%}
+          {%- assign card_title = block.settings.title | default: col.title -%}
+          {%- if block.settings.image != blank -%}
+             {%- assign card_image_url = block.settings.image | image_url: width: 600, height: 800, crop: 'center' -%}
+          {%- elsif col.image -%}
+            {%- assign card_image_url = col.image | image_url: width: 600, height: 800, crop: 'center' -%}
+          {%- elsif col.products.first.featured_image -%}
+            {%- assign card_image_url = col.products.first.featured_image | image_url: width: 600, height: 800, crop: 'center' -%}
+          {%- endif -%}
+        {%- endif -%}
+
+        <a href="{{ card_link }}" class="fan-card fc-{{ forloop.index }}" {{ block.shopify_attributes }}>
+          {% if card_image_url != blank %}
+            <img src="{{ card_image_url }}" alt="{{ card_title }}" loading="lazy">
           {% else %}
             <div style="width:100%; height:100%; background: #e2e8f0; display:flex; align-items:center; justify-content:center; color:#64748b;">Colección</div>
           {% endif %}
@@ -186,7 +208,7 @@
             {% if forloop.index == 3 %}
               <span class="fc-3-tag">Destacado</span>
             {% endif %}
-            <h3 class="fan-title">{% if col != blank %}{{ col.title }}{% else %}Categoría {{ forloop.index }}{% endif %}</h3>
+            <h3 class="fan-title">{{ card_title }}</h3>
           </div>
         </a>
       {% endfor %}
@@ -253,6 +275,27 @@
       "name": "Categoría (Tarjeta)",
       "limit": 5,
       "settings": [
+        {
+          "type": "text",
+          "id": "product_type",
+          "label": "Tipo de Producto (Filtro)",
+          "info": "Ej: Automotriz, bebe, Salud. Si usas esto, no necesitas elegir una colección."
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título de la Tarjeta",
+          "info": "Si se deja en blanco, usará el tipo de producto o el nombre de la colección."
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen Personalizada"
+        },
+        {
+          "type": "header",
+          "content": "O usar Colección tradicional"
+        },
         {
           "type": "collection",
           "id": "collection",
