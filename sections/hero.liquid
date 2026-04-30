@@ -205,7 +205,11 @@
 
         <a href="{{ card_link }}" class="fan-card fc-{{ forloop.index }}" {{ block.shopify_attributes }}>
           {% if card_image_url != blank %}
-            <img src="{{ card_image_url }}" alt="{{ card_title }}" loading="lazy">
+            {% if forloop.index == 3 %}
+              <img src="{{ card_image_url }}" alt="{{ card_title }}" fetchpriority="high" loading="eager">
+            {% else %}
+              <img src="{{ card_image_url }}" alt="{{ card_title }}" loading="lazy">
+            {% endif %}
           {% else %}
             <div style="width:100%; height:100%; background: #e2e8f0; display:flex; align-items:center; justify-content:center; color:#64748b;">Colección</div>
           {% endif %}
