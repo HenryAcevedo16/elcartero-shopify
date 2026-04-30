@@ -200,9 +200,15 @@ nav.scrolled {
 .prod-name {
   font-size: 0.92rem; font-weight: 700; margin-bottom: 14px;
   line-height: 1.35; color: var(--dark);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: calc(0.92rem * 1.35 * 2);
 }
 .prod-bottom { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
-.prod-bottom.amazon-style { flex-direction: column; width: 100%; align-items: flex-start; gap: 8px; margin-top: 0; }
+.prod-bottom.amazon-style { flex-direction: column; width: 100%; align-items: flex-start; gap: 8px; margin-top: auto; }
 .prod-price-block { display: flex; flex-direction: column; gap: 2px; }
 .prod-price-old {
   font-size: 0.72rem; font-weight: 500;

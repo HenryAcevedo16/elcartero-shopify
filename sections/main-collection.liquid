@@ -72,41 +72,71 @@
     <!-- Categorías -->
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
-      <ul class="cat-list">
-        <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
+      <ul class="cat-list" id="sidebar-cat-list">
+        <li><a href="{{ routes.all_products_collection_url }}" onclick="filterCategory('all', this); return false;">
           Todos <span class="cnt">{{ collection.products_count }}</span>
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" {% if request.query_string contains 'automotriz' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Automotriz" onclick="filterCategory('Automotriz', this); return false;">
           Automotriz
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" {% if request.query_string contains 'bebe' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" onclick="filterCategory('bebe', this); return false;">
           Bebé
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal" {% if request.query_string contains 'belleza' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza y cuidado personal" onclick="filterCategory('Belleza y cuidado personal', this); return false;">
           Belleza y cuidado personal
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion" {% if request.query_string contains 'deporte' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Deporte y recreación" onclick="filterCategory('Deporte y recreación', this); return false;">
           Deporte y recreación
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos" {% if request.query_string contains 'electrodomesticos' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electrodomesticos" onclick="filterCategory('Electrodomesticos', this); return false;">
           Electrodomésticos
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion" {% if request.query_string contains 'herramientas' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Herramientas y construcción" onclick="filterCategory('Herramientas y construcción', this); return false;">
           Herramientas y construcción
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar" {% if request.query_string contains 'hogar' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Hogar y oficina" onclick="filterCategory('Hogar y oficina', this); return false;">
           Hogar
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud" {% if request.query_string contains 'salud' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" onclick="filterCategory('Salud', this); return false;">
           Salud
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia" {% if request.query_string contains 'tecnologia' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Tecnologia" onclick="filterCategory('Tecnologia', this); return false;">
           Tecnología
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje" {% if request.query_string contains 'viajes' %}class="active"{% endif %}>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Viajes" onclick="filterCategory('Viajes', this); return false;">
           Viajes y equipaje
         </a></li>
       </ul>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const currentType = urlParams.get('filter.p.product_type');
+          const allLinks = document.querySelectorAll('#sidebar-cat-list a');
+          
+          allLinks.forEach(link => link.classList.remove('active'));
+          
+          if (!currentType) {
+            const allBtn = document.querySelector('#sidebar-cat-list a[onclick*="\'all\'"]');
+            if (allBtn) allBtn.classList.add('active');
+          } else {
+            let matched = false;
+            allLinks.forEach(link => {
+              const onclickAttr = link.getAttribute('onclick');
+              if (onclickAttr && onclickAttr.includes("filterCategory('")) {
+                const linkType = onclickAttr.split("filterCategory('")[1].split("'")[0];
+                if (linkType === currentType || decodeURIComponent(linkType) === currentType) {
+                  link.classList.add('active');
+                  matched = true;
+                }
+              }
+            });
+            if (!matched) {
+               const allBtn = document.querySelector('#sidebar-cat-list a[onclick*="\'all\'"]');
+               if (allBtn) allBtn.classList.add('active');
+            }
+          }
+        });
+      </script>
     </div>
 
     <!-- ══ FILTROS NATIVOS (Shopify Search & Discovery) ══ -->
@@ -361,7 +391,11 @@ function clearFilters() {
 }
 
 // ── FILTER BY CATEGORY (product_type) ────────────────
-function filterCategory(type) {
+function filterCategory(type, element) {
+  if (element) {
+    document.querySelectorAll('.cat-list a').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+  }
   const url = new URL(window.location.href);
   if (type === 'all') {
     url.searchParams.delete('filter.p.product_type');
