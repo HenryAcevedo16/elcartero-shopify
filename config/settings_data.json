@@ -1,0 +1,268 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "logo": "shopify://shop_images/LLGO.png",
+    "colors_accent_1": "#22c244",
+    "colors_accent_2": "#1a2e1e",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {}
+      },
+      "hero": {
+        "type": "hero",
+        "blocks": {
+          "collection_MVXjUf": {
+            "type": "collection",
+            "settings": {
+              "collection": "belleza"
+            }
+          },
+          "collection_wPDzpz": {
+            "type": "collection",
+            "settings": {
+              "collection": "electrodomesticos"
+            }
+          },
+          "collection_NPRUDb": {
+            "type": "collection",
+            "settings": {
+              "collection": "tecnologia"
+            }
+          },
+          "collection_YKaF69": {
+            "type": "collection",
+            "settings": {
+              "collection": "hogar"
+            }
+          },
+          "collection_G4m3Fa": {
+            "type": "collection",
+            "settings": {
+              "collection": "salud"
+            }
+          }
+        },
+        "block_order": [
+          "collection_MVXjUf",
+          "collection_wPDzpz",
+          "collection_NPRUDb",
+          "collection_YKaF69",
+          "collection_G4m3Fa"
+        ],
+        "settings": {
+          "pill_text": "Nuevos productos cada semana",
+          "subheading": "Electrónica, salud, belleza, hogar y mucho más. Encuentra todo en un solo lugar con los mejores precios y envío rápido a tu puerta.",
+          "btn_text": "Ver productos →",
+          "btn_link": ""
+        }
+      },
+      "featured-collections": {
+        "type": "featured-collections",
+        "blocks": {
+          "categoria_HYUPLK": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/vladislav-klapin-pMRBBWD7Xyk-unsplash.jpg",
+              "collection": "",
+              "name": "Automotriz",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_UNg4rT": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/brytny-com-C4rXIFSzEXk-unsplash.jpg",
+              "collection": "",
+              "name": "Bebe",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_dypVqb": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
+              "collection": "",
+              "name": "Belleza y Cuidado personal",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_UAz3ar": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/cuanto-ejercicio-hacer-dia-1.jpg",
+              "collection": "",
+              "name": "Ejercisio y Recreacion",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_wjUxFf": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/giang-duong-I9Nh-aw_i2s-unsplash.jpg",
+              "collection": "",
+              "name": "Tecnologia",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_DBgFGb": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/steven-ungermann-SytnFBoIOxg-unsplash.jpg",
+              "collection": "",
+              "name": "Electrodomesticos",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_N7EMrf": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/benjamin-lehman-EJU7A__krX0-unsplash.jpg",
+              "collection": "",
+              "name": "Herramientas y construccion",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_FkRC3H": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/prydumano-design-oNiVz_CqGgs-unsplash.jpg",
+              "collection": "",
+              "name": "Hogar y Oficina",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_cKTTWB": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/elsa-olofsson-vSFhQdcvyuA-unsplash.jpg",
+              "collection": "",
+              "name": "Salud",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          },
+          "categoria_ykKKtK": {
+            "type": "categoria",
+            "settings": {
+              "image": "shopify://shop_images/alice-donovan-rouse-z9F_yK4Nmf8-unsplash.jpg",
+              "collection": "",
+              "name": "Viajes",
+              "fallback_url": "",
+              "emoji": "✨",
+              "subtitle": "Ver productos",
+              "filter_value": "",
+              "color_bg": "#f0faf3",
+              "color_accent": "#22c244",
+              "color_glow": "#b7f5c8"
+            }
+          }
+        },
+        "block_order": [
+          "categoria_HYUPLK",
+          "categoria_UNg4rT",
+          "categoria_dypVqb",
+          "categoria_UAz3ar",
+          "categoria_wjUxFf",
+          "categoria_DBgFGb",
+          "categoria_N7EMrf",
+          "categoria_FkRC3H",
+          "categoria_cKTTWB",
+          "categoria_ykKKtK"
+        ],
+        "settings": {
+          "eyebrow": "Explorar por categoría",
+          "title": "¿Qué buscas hoy?",
+          "btn_text": "Ver todas",
+          "btn_link": ""
+        }
+      },
+      "featured-products": {
+        "type": "featured-products",
+        "settings": {
+          "eyebrow": "Novedades",
+          "title": "Productos nuevos",
+          "collection": "electronics",
+          "product_limit": 4,
+          "btn_text": "Ver todo",
+          "btn_link": ""
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "settings": {
+          "store_description": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
+        }
+      },
+      "main-collection": {
+        "type": "main-collection",
+        "settings": {
+          "products_per_page": 12
+        }
+      }
+    },
+    "content_for_index": []
+  },
+  "presets": {}
+}

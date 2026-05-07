@@ -1,0 +1,587 @@
+<section class="wrap">
+  <div class="row-header reveal">
+    <div>
+      <p class="section-eyebrow">{{ section.settings.eyebrow }}</p>
+      <h2 class="section-title">{{ section.settings.title }}</h2>
+    </div>
+    <a href="{{ section.settings.btn_link | default: '/collections/all' }}" class="view-all">
+      {{ section.settings.btn_text | default: 'Ver todos los productos' }} &rarr;
+    </a>
+  </div>
+
+  <div class="cats-carousel-wrapper">
+    <button class="cats-nav-btn cats-prev" aria-label="Anterior" onclick="scrollCats(-1)">❮</button>
+    
+    <div class="cats-grid" id="cats-scroll-container">
+      {% if section.blocks.size > 0 %}
+        {% for block in section.blocks %}
+          {% assign modulo_index = forloop.index | modulo: 5 %}
+          {% assign is_large = false %}
+          {% if modulo_index == 0 %}{% assign is_large = true %}{% endif %}
+          
+          {% assign filter_val = block.settings.filter_value | default: block.settings.name | url_encode %}
+          {% assign cat_url = '/collections/all?filter.p.product_type=' | append: filter_val %}
+          <a href="{{ cat_url }}"
+             class="cat-card reveal {% if is_large %}cat-card-large{% endif %} {% if block.settings.image != blank %}has-image{% endif %}"
+             style="text-decoration:none;color:inherit;--cat-bg:{{ block.settings.color_bg }};--cat-accent:{{ block.settings.color_accent }};--cat-glow:{{ block.settings.color_glow }};"
+             {{ block.shopify_attributes }}>
+            <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,var(--cat-glow,rgba(34,194,68,0.25)),transparent 70%);"></div>
+            
+            {% if block.settings.image != blank %}
+              <div class="cat-image-wrap">
+                <img src="{{ block.settings.image | image_url: width: 600 }}" alt="{{ block.settings.name | escape }}" loading="lazy">
+              </div>
+              <div class="cat-info">
+            {% else %}
+              <div class="cat-emoji-wrap">{{ block.settings.emoji | default: '✨' }}</div>
+            {% endif %}
+
+            <p class="cat-card-name">{{ block.settings.name | default: 'Categoría' }}</p>
+            <p class="cat-card-count">{{ block.settings.subtitle }}</p>
+            <div class="cat-arrow" style="color:var(--cat-accent,#22c244);">→</div>
+
+            {% if block.settings.image != blank %}
+              </div>
+            {% endif %}
+          </a>
+        {% endfor %}
+      {% else %}
+        <!-- Fallback: 10 categorías estáticas -->
+        <a href="/collections/all?filter.p.product_type=automotriz" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fef0f0;--cat-accent:#f44336;--cat-glow:#ffcdd2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffcdd2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🚗</div>
+          <p class="cat-card-name">Automotriz</p>
+          <p class="cat-card-count">Accesorios, repuestos y más</p>
+          <div class="cat-arrow" style="color:#f44336;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=bebe" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f3e5f5;--cat-accent:#9c27b0;--cat-glow:#e1bee7;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#e1bee7,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🍼</div>
+          <p class="cat-card-name">Bebé</p>
+          <p class="cat-card-count">Cuidado, maternidad, juguetes y más</p>
+          <div class="cat-arrow" style="color:#9c27b0;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=belleza%20y%20cuidado%20personal" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#fbb6d8,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💄</div>
+          <p class="cat-card-name">Belleza</p>
+          <p class="cat-card-count">Skincare, maquillaje, cuidado personal y más</p>
+          <div class="cat-arrow" style="color:#e91e8c;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=deporte%20y%20recreacion" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#e8f5e9;--cat-accent:#4caf50;--cat-glow:#c8e6c9;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#c8e6c9,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">⚽</div>
+          <p class="cat-card-name">Deportes</p>
+          <p class="cat-card-count">Fitness, equipos outdoor y más</p>
+          <div class="cat-arrow" style="color:#4caf50;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=electrodomesticos" class="cat-card cat-card-large reveal" style="text-decoration:none;color:inherit;--cat-bg:#e3f2fd;--cat-accent:#2196f3;--cat-glow:#bbdefb;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#bbdefb,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🔌</div>
+          <p class="cat-card-name">Electrodomésticos</p>
+          <p class="cat-card-count">Pequeños equipos, línea blanca y más</p>
+          <div class="cat-arrow" style="color:#2196f3;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=herramientas%20y%20construccion" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#ff9800;--cat-glow:#ffecb3;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffecb3,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🛠️</div>
+          <p class="cat-card-name">Herramientas</p>
+          <p class="cat-card-count">Ferretería, bricolaje, equipos y más</p>
+          <div class="cat-arrow" style="color:#ff9800;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=hogar" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#fff3e0;--cat-accent:#ff5722;--cat-glow:#ffe0b2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#ffe0b2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🏠</div>
+          <p class="cat-card-name">Hogar</p>
+          <p class="cat-card-count">Organización, cocina, decoración y más</p>
+          <div class="cat-arrow" style="color:#ff5722;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=salud" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b7f5c8,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💊</div>
+          <p class="cat-card-name">Salud</p>
+          <p class="cat-card-count">Vitaminas, bienestar, monitores y más</p>
+          <div class="cat-arrow" style="color:#22c244;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=tecnologia" class="cat-card reveal" style="text-decoration:none;color:inherit;--cat-bg:#ede7f6;--cat-accent:#673ab7;--cat-glow:#d1c4e9;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#d1c4e9,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">💻</div>
+          <p class="cat-card-name">Tecnología</p>
+          <p class="cat-card-count">Computación, audio, gadgets y más</p>
+          <div class="cat-arrow" style="color:#673ab7;">→</div>
+        </a>
+
+        <a href="/collections/all?filter.p.product_type=viajes%20y%20equipaje" class="cat-card cat-card-large reveal" style="text-decoration:none;color:inherit;--cat-bg:#e0f7fa;--cat-accent:#00acc1;--cat-glow:#b2ebf2;">
+          <div class="cat-glow" style="background:radial-gradient(circle at 30% 30%,#b2ebf2,transparent 70%);"></div>
+          <div class="cat-emoji-wrap">🧳</div>
+          <p class="cat-card-name">Viajes</p>
+          <p class="cat-card-count">Maletas, mochilas, accesorios y más</p>
+          <div class="cat-arrow" style="color:#00acc1;">→</div>
+        </a>
+      {% endif %}
+    </div>
+
+    <button class="cats-nav-btn cats-next" aria-label="Siguiente" onclick="scrollCats(1)">❯</button>
+  </div>
+  
+  <!-- Contenedor para los puntos (dots) -->
+  <div class="cats-dots" id="cats-dots-container"></div>
+
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.getElementById('cats-scroll-container');
+    const dotsContainer = document.getElementById('cats-dots-container');
+    if(!container || !dotsContainer) return;
+    
+    function updateDots() {
+      const scrollWidth = container.scrollWidth - container.clientWidth;
+      if (scrollWidth <= 0) {
+        dotsContainer.innerHTML = '';
+        return;
+      }
+      
+      const dotCount = Math.max(2, Math.ceil(container.scrollWidth / (container.clientWidth * 0.8)));
+      
+      if (dotsContainer.children.length !== dotCount) {
+        dotsContainer.innerHTML = '';
+        for (let i = 0; i < dotCount; i++) {
+          const dot = document.createElement('div');
+          dot.className = 'cat-dot';
+          dot.addEventListener('click', () => {
+            const goTo = (scrollWidth / (dotCount - 1)) * i;
+            container.scrollTo({left: goTo, behavior: 'smooth'});
+          });
+          dotsContainer.appendChild(dot);
+        }
+      }
+
+      const progress = container.scrollLeft / scrollWidth || 0;
+      let activeIndex = Math.round(progress * (dotCount - 1));
+      activeIndex = Math.max(0, Math.min(activeIndex, dotCount - 1));
+
+      Array.from(dotsContainer.children).forEach((dot, idx) => {
+        dot.classList.toggle('active', idx === activeIndex);
+      });
+    }
+
+    container.addEventListener('scroll', updateDots);
+    window.addEventListener('resize', updateDots);
+    
+    setTimeout(updateDots, 150);
+  });
+
+  function scrollCats(direction) {
+    const container = document.getElementById('cats-scroll-container');
+    if(container) {
+      const firstCard = container.querySelector('.cat-card:not(.cat-card-large)') || container.querySelector('.cat-card');
+      if (firstCard) {
+        const scrollAmount = (firstCard.offsetWidth + 16) * 2 * direction; 
+        container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      }
+    }
+  }
+</script>
+
+<style>
+  .cats-carousel-wrapper {
+    position: relative;
+    margin-top: 32px;
+  }
+  
+  .cats-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #1a1a1a;
+    transition: all 0.2s;
+  }
+  .cats-nav-btn:hover {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  .cats-prev { left: -18px; }
+  .cats-next { right: -18px; }
+
+  @media (max-width: 900px) {
+    .cats-prev, .cats-next { display: none; }
+  }
+
+  .cats-grid {
+    display: grid;
+    grid-template-rows: 240px 240px;
+    grid-auto-flow: column;
+    /* Escala las cartas suavemente para rellenar el 100% sin crear excesos de margen lateral */
+    grid-auto-columns: calc((100% - 80px) / 6);
+    gap: 16px;
+    padding: 10px 0 30px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cats-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .cat-card {
+    grid-column: span 1;
+    grid-row: span 1;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    background: var(--cat-bg, #f5f8f0);
+    border-radius: 28px;
+    padding: 24px 16px;
+    text-align: center;
+    overflow: hidden;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s;
+    cursor: pointer;
+    border: 1px solid rgba(0,0,0,0.04);
+  }
+
+  .cat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.08);
+  }
+
+  .cat-card-large {
+    grid-column: span 2;
+    grid-row: span 2;
+    padding: 40px 32px;
+    /* Evita que las tarjetas grandes sean exageradas en monitores ultra-anchos */
+    max-width: 480px;
+    width: 100%;
+    justify-self: center;
+  }
+
+  .cat-card .cat-glow {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.85;
+  }
+
+  .cat-card > * { position: relative; z-index: 1; }
+
+  .cat-image-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 20px;
+    margin-top: 10px;
+  }
+
+  .cat-image-wrap img {
+    max-width: 90%;
+    max-height: 100px;
+    object-fit: contain;
+  }
+  
+  /* Nuevos estilos para imagenes completas (has-image) */
+  .cat-card.has-image {
+    padding: 0;
+    justify-content: flex-end;
+  }
+  .cat-card.has-image .cat-glow {
+    display: none;
+  }
+  .cat-card.has-image .cat-image-wrap {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    z-index: 0;
+  }
+  .cat-card.has-image .cat-image-wrap img {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+  }
+  .cat-card.has-image .cat-image-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
+    pointer-events: none;
+  }
+  .cat-card.has-image:hover .cat-image-wrap img {
+    transform: scale(1.05); /* Efecto zoom al acercar el mouse */
+  }
+  
+  /* Texto sobre la imagen */
+  .cat-card.has-image .cat-info {
+    position: relative;
+    z-index: 2;
+    padding: 24px 20px;
+    width: 100%;
+    text-align: center;
+  }
+  .cat-card.has-image .cat-card-name,
+  .cat-card.has-image .cat-card-count {
+    color: #ffffff;
+  }
+  .cat-card.has-image .cat-arrow {
+    color: #ffffff !important;
+  }
+
+  .cat-card-large:not(.has-image) .cat-image-wrap img {
+    max-width: 90%;
+    max-height: 280px;
+  }
+
+  .cat-emoji-wrap {
+    font-size: 4rem;
+    line-height: 1;
+    margin: 10px 0 20px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .cat-card:hover .cat-emoji-wrap {
+    transform: scale(1.15) rotate(5deg);
+  }
+
+  .cat-card-name {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--dark, #1a2e1e);
+    margin: 0 0 6px;
+    letter-spacing: -0.02em;
+    line-height: 1.25;
+  }
+  
+  .cat-card-large .cat-card-name {
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+    line-height: 1.25;
+  }
+
+  .cat-card-count {
+    font-size: 0.8rem;
+    color: var(--muted, #6b8f72);
+    margin: 0 0 16px;
+    line-height: 1.4;
+  }
+
+  .cat-card-large .cat-card-count {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+
+  .cat-arrow {
+    margin-top: auto;
+    font-size: 1.3rem;
+    font-weight: 800;
+    transition: transform 0.3s;
+  }
+
+  .cat-card:hover .cat-arrow {
+    transform: translateX(6px);
+  }
+
+  /* Dots styles */
+  .cats-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .cat-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #999;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-dot.active {
+    width: 12px;
+    height: 12px;
+    background: transparent;
+    border: 2px solid #1a1a1a;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cat-dot.active::after {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #1a1a1a;
+    border-radius: 50%;
+  }
+
+  @media (max-width: 1050px) {
+    .cats-grid {
+      grid-auto-columns: calc((100% - 32px) / 3);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .cats-grid {
+      /* Explicit sizing to bypass Safari auto-sizing bugs completely */
+      grid-auto-columns: 43vw;
+      grid-template-rows: 190px 190px;
+      gap: 12px;
+    }
+    .cat-card {
+      width: 43vw !important;
+      min-width: 43vw !important;
+      max-width: 43vw !important;
+      height: 190px !important;
+    }
+    .cat-card-large {
+      grid-column: span 1 !important;
+      grid-row: span 1 !important;
+      padding: 20px 12px !important;
+    }
+    .cat-card-large .cat-card-name,
+    .cat-card .cat-card-name {
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+    .cat-card-large .cat-card-count,
+    .cat-card .cat-card-count {
+      font-size: 0.75rem;
+      margin-bottom: 12px;
+    }
+    .cat-card-large:not(.has-image) .cat-image-wrap img,
+    .cat-card:not(.has-image) .cat-image-wrap img {
+      max-height: 85px;
+    }
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Categorías Destacadas",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Texto pequeño arriba",
+      "default": "Explorar por categoría"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Título de la sección",
+      "default": "¿Qué buscas hoy?"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Texto del botón",
+      "default": "Ver todas"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Enlace del botón"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "categoria",
+      "name": "Categoría",
+      "limit": 10,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Imagen de Categoría"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colección de Shopify"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nombre (si no hay colección)",
+          "default": "Categoría"
+        },
+        {
+          "type": "url",
+          "id": "fallback_url",
+          "label": "Enlace (si no hay colección)"
+        },
+        {
+          "type": "text",
+          "id": "emoji",
+          "label": "Emoji",
+          "default": "✨"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtítulo",
+          "default": "Ver productos"
+        },
+        {
+          "type": "text",
+          "id": "filter_value",
+          "label": "Valor del filtro (product_type)"
+        },
+        {
+          "type": "color",
+          "id": "color_bg",
+          "label": "Color de fondo",
+          "default": "#f0faf3"
+        },
+        {
+          "type": "color",
+          "id": "color_accent",
+          "label": "Color del badge",
+          "default": "#22c244"
+        },
+        {
+          "type": "color",
+          "id": "color_glow",
+          "label": "Color del resplandor",
+          "default": "#b7f5c8"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Categorías Destacadas"
+    }
+  ]
+}
+{% endschema %}
