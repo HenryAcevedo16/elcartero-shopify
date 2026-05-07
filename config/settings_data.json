@@ -23,30 +23,42 @@
           "collection_MVXjUf": {
             "type": "collection",
             "settings": {
-              "collection": "belleza"
+              "product_type": "Belleza y cuidado personal",
+              "title": "",
+              "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
+              "collection": "belleza-y-cuidado-personal"
             }
           },
           "collection_wPDzpz": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "electrodomesticos"
             }
           },
           "collection_NPRUDb": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "tecnologia"
             }
           },
           "collection_YKaF69": {
             "type": "collection",
             "settings": {
+              "product_type": "",
+              "title": "",
               "collection": "hogar"
             }
           },
           "collection_G4m3Fa": {
             "type": "collection",
             "settings": {
+              "product_type": "Salud",
+              "title": "",
+              "image": "shopify://shop_images/elsa-olofsson-vSFhQdcvyuA-unsplash.jpg",
               "collection": "salud"
             }
           }
@@ -77,7 +89,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Automotriz",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -92,7 +104,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "bebe",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -104,10 +116,10 @@
               "image": "shopify://shop_images/dina-makhmutova--tVi8-wuWlU-unsplash.jpg",
               "collection": "",
               "name": "Belleza y Cuidado personal",
-              "fallback_url": "",
+              "fallback_url": "shopify://collections/belleza",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Belleza y cuidado personal",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -122,7 +134,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Deporte y recreación",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -137,7 +149,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Tecnologia",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -152,7 +164,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Electrodomesticos",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -167,7 +179,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Herramientas y construcción",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -182,7 +194,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Hogar y Oficina",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -197,7 +209,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Salud",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -212,7 +224,7 @@
               "fallback_url": "",
               "emoji": "✨",
               "subtitle": "Ver productos",
-              "filter_value": "",
+              "filter_value": "Viajes",
               "color_bg": "#f0faf3",
               "color_accent": "#22c244",
               "color_glow": "#b7f5c8"
@@ -251,9 +263,7 @@
       },
       "footer": {
         "type": "footer",
-        "settings": {
-          "store_description": "Tu tienda de todo. Electrónica, salud, belleza, hogar y más con precios increíbles y envío rápido."
-        }
+        "settings": {}
       },
       "main-collection": {
         "type": "main-collection",

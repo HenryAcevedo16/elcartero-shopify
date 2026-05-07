@@ -197,7 +197,7 @@
 @keyframes cardFloat3 { 0%,100%{transform:translateY(0) rotate(1deg);} 50%{transform:translateY(-14px) rotate(-2deg);} }
 
 /* ── STRIP ── */
-.strip { background: var(--dark); overflow: hidden; }
+.strip { background: var(--dark); overflow: hidden; margin-top: 80px; }
 .strip-track {
   display: flex; width: max-content;
   animation: stripScroll 25s linear infinite; padding: 16px 0;

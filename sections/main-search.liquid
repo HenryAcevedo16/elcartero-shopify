@@ -16,7 +16,7 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="ph-left">
-    <h1>{{ collection.title | default: '🛒 Catálogo' }}</h1>
+    <h1>{{ collection.title | default: 'Catálogo' }}</h1>
     <p>
       {{ search.results_count }} producto{% if search.results_count != 1 %}s{% endif %} encontrado{% if search.results_count != 1 %}s{% endif %}
     </p>
@@ -246,7 +246,7 @@
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <div class="prod-actions">
-                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">🛒 Carrito</button>
+                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">Carrito</button>
                     <button type="button" class="prod-buy-btn" {% unless product.available %}disabled{% endunless %} onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ product.variants.first.id }}&quantity=1&return_to=/cart'">Comprar ahora</button>
                   </div>
                 </form>

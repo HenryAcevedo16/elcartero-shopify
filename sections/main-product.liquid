@@ -118,7 +118,7 @@
       <div class="action-btns">
         <button type="submit" name="add" id="AddToCart" class="btn-addcart" {% unless product.available %}disabled="disabled"{% endunless %}>
           <span id="AddToCartText">
-            {% if product.available %}🛒 Agregar al carrito{% else %}Agotado{% endif %}
+            {% if product.available %}Agregar al carrito{% else %}Agotado{% endif %}
           </span>
         </button>
         {% if product.available %}
@@ -206,6 +206,108 @@
   </div>
 </div>
 
+<!-- PRODUCTOS DE LA MISMA CATEGORÍA -->
+{% if product.type != blank %}
+  <div class="products-wrap related-wrapper" style="margin-top: 60px;">
+    <div class="row-header reveal" style="opacity: 1; transform: none; margin-bottom: 32px;">
+      <div>
+        <p class="section-eyebrow">Relacionados</p>
+        <h2 class="section-title">Más de <span style="color:var(--red);">{{ product.type }}</span></h2>
+      </div>
+    </div>
+    <div class="prods-grid related-grid">
+      {% assign count = 0 %}
+      {% paginate collections.all.products by 1000 %}
+        {% for related in collections.all.products %}
+          {% if related.type == product.type and related.id != product.id %}
+            {% assign count = count | plus: 1 %}
+            <div class="prod reveal d{{ count | modulo: 4 | plus: 1 }}" style="position:relative;">
+              <a href="{{ related.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ related.title | escape }}"></a>
+              <div class="prod-thumb" style="background: #ffffff;">
+                {% if related.featured_image %}
+                  <img src="{{ related.featured_image | image_url: width: 600 }}"
+                       alt="{{ related.title }}"
+                       loading="lazy"
+                       style="width:100%; height:100%; object-fit:contain; display:block;">
+                {% else %}
+                  <span>📦</span>
+                {% endif %}
+                {% if related.compare_at_price > related.price %}
+                  <span class="prod-label lb-hot">Oferta</span>
+                {% endif %}
+                <button class="prod-wish-btn"
+                        data-wish-id="{{ related.id }}"
+                        data-wish-title="{{ related.title | escape }}"
+                        data-wish-img="{% if related.featured_image %}{{ related.featured_image | image_url: width: 400 }}{% endif %}"
+                        data-wish-price="{{ related.price | money }}"
+                        data-wish-url="{{ related.url }}"
+                        onclick="event.stopPropagation(); toggleWish(this)"
+                        aria-label="Guardar en favoritos">♡</button>
+              </div>
+              <div class="prod-info">
+                <a href="{{ related.url }}" style="text-decoration:none; color:inherit;">
+                  <p class="prod-name" style="margin-bottom:8px;">{{ related.title }}</p>
+                </a>
+                <div class="prod-bottom amazon-style">
+                  <div class="prod-price-block">
+                    {% if related.compare_at_price > related.price %}
+                      <span class="prod-price-old">{{ related.compare_at_price | money }}</span>
+                    {% endif %}
+                    <span class="prod-price-now">{{ related.price | money }}</span>
+                  </div>
+                  <p class="prod-shipping">Envío GRATIS</p>
+                  <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
+                    <input type="hidden" name="id" value="{{ related.variants.first.id }}">
+                    <input type="hidden" name="quantity" value="1">
+                    <div class="prod-actions">
+                      <button type="submit" name="add" class="prod-cart-btn" {% unless related.available %}disabled{% endunless %} title="Agregar al carrito">Carrito</button>
+                      <button type="button" class="prod-buy-btn" {% unless related.available %}disabled{% endunless %} onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ related.variants.first.id }}&quantity=1&return_to=/cart'">Comprar ahora</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            {% if count == 10 %}
+              {% break %}
+            {% endif %}
+          {% endif %}
+        {% endfor %}
+      {% endpaginate %}
+    </div>
+    {% if count == 0 %}
+      <p style="color:var(--muted); font-size:0.9rem;">No hay más productos en esta categoría por el momento.</p>
+    {% endif %}
+  </div>
+  <style>
+    .related-grid {
+      display: flex !important;
+      flex-wrap: nowrap !important;
+      overflow-x: auto !important;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding-bottom: 24px;
+      gap: 20px;
+    }
+    .related-grid::-webkit-scrollbar { height: 8px; }
+    .related-grid::-webkit-scrollbar-track { background: transparent; }
+    .related-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .related-grid::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    
+    .related-grid .prod {
+      flex: 0 0 calc(25% - 15px) !important;
+      scroll-snap-align: start;
+    }
+    
+    @media (max-width: 960px) {
+      .related-wrapper { padding: 0 20px !important; }
+      .related-grid .prod { flex: 0 0 calc(45% - 10px) !important; }
+    }
+    @media (max-width: 500px) {
+      .related-grid .prod { flex: 0 0 calc(75% - 10px) !important; }
+    }
+  </style>
+{% endif %}
+
 <script>
 // ── Cambio de imagen por thumbnail ──
 function setThumb(el, imageUrl) {
@@ -267,7 +369,7 @@ function _updateSelectedVariant() {
   const addText = document.getElementById('AddToCartText');
   if (addBtn) {
     addBtn.disabled = !match.available;
-    if (addText) addText.textContent = match.available ? '🛒 Agregar al carrito' : 'Agotado';
+    if (addText) addText.textContent = match.available ? 'Agregar al carrito' : 'Agotado';
   }
 }
 
@@ -283,7 +385,7 @@ if (cartForm) {
     btn.style.background = 'var(--red)';
     setTimeout(() => {
       btn.disabled = false;
-      text.textContent = '🛒 Agregar al carrito';
+      text.textContent = 'Agregar al carrito';
       btn.style.background = '';
     }, 2500);
   });

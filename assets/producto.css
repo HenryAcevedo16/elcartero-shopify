@@ -507,14 +507,21 @@
 .desc-empty p { font-size: 0.85rem; }
 
 /* ══════════════════════════════════════════
-   SECCIÓN "También te puede gustar"
-   (reutiliza .products-wrap del tema)
+   SECCIÓN "También te puede gustar" / Relacionados
 ══════════════════════════════════════════ */
 .products-wrap {
-  max-width: 1180px;
-  margin: 0 auto 80px;
-  padding: 0 48px;
+  background: var(--cream);
+  padding: 60px 48px;
+  width: 100%;
 }
+
+.row-header { 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: flex-end; 
+  margin-bottom: 32px; 
+}
+.row-header .section-title { margin-bottom: 0; }
 
 /* ══════════════════════════════════════════
    RESPONSIVE
@@ -531,9 +538,11 @@
     position: static;
   }
 
-  .tabs-section,
-  .products-wrap {
+  .tabs-section {
     padding: 0 20px;
+  }
+  .products-wrap {
+    padding: 40px 20px;
   }
 
   .trust-row {
