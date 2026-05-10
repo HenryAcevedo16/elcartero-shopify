@@ -1,0 +1,366 @@
+/* =============================================
+   CONTACT DRAWER — El Cartero RD
+   ============================================= */
+
+:root {
+  --cd-red:     #D42B2B;
+  --cd-red-dk:  #B01F1F;
+  --cd-border:  rgba(0,0,0,0.12);
+  --cd-muted:   #888;
+  --cd-bg:      #ffffff;
+  --cd-dark:    #0F172A;
+  --cd-radius:  18px;
+}
+
+/* ── BACKDROP ── */
+.cd-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.42);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  z-index: 10000;
+  opacity: 0;
+  pointer-events: none;
+}
+.cd-backdrop.cd-open {
+  pointer-events: auto;
+}
+
+/* ── DRAWER PANEL ── */
+.cd-drawer {
+  position: fixed;
+  top: 1.5vh;
+  right: 1.5vw;
+  bottom: 1.5vh;
+  width: min(480px, 92vw);
+  background: var(--cd-bg);
+  border-radius: var(--cd-radius);
+  box-shadow: -12px 0 60px rgba(0,0,0,0.18);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateX(120%);
+  will-change: transform;
+}
+
+/* Red top stripe */
+.cd-stripe {
+  height: 4px;
+  background: var(--cd-red);
+  flex-shrink: 0;
+}
+
+/* Internal scroller */
+.cd-scroller {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 22px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212,43,43,0.25) transparent;
+}
+.cd-scroller::-webkit-scrollbar { width: 4px; }
+.cd-scroller::-webkit-scrollbar-thumb { background: rgba(212,43,43,0.25); border-radius: 4px; }
+
+/* ── HEADER ── */
+.cd-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+.cd-logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cd-logo-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--cd-dark);
+  letter-spacing: -0.01em;
+}
+.cd-logo-name strong {
+  color: var(--cd-red);
+  font-weight: 800;
+}
+
+/* Close button */
+.cd-close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1.5px solid var(--cd-border);
+  background: transparent;
+  color: #999;
+  font-size: 0.95rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.2s, color 0.2s;
+  font-family: monospace;
+  line-height: 1;
+}
+.cd-close-btn:hover {
+  transform: rotate(90deg);
+  border-color: var(--cd-red);
+  color: var(--cd-red);
+}
+
+/* ── HERO TITLE ── */
+.cd-hero {
+  margin-bottom: 26px;
+}
+.cd-big-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(2rem, 5vw, 2.6rem);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--cd-dark);
+  margin: 0 0 12px;
+}
+.cd-big-title-red {
+  color: var(--cd-red);
+  display: block;
+}
+.cd-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.84rem;
+  color: var(--cd-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── FORM ── */
+.cd-form { display: contents; }
+
+.cd-form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px 16px;
+  margin-bottom: 24px;
+}
+.cd-field--full {
+  grid-column: 1 / -1;
+}
+
+/* ── FIELD ── */
+.cd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+.cd-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--cd-muted);
+}
+.cd-req { color: var(--cd-red); }
+
+.cd-input {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  color: var(--cd-dark);
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--cd-border);
+  outline: none;
+  padding: 6px 0 10px;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+.cd-input::placeholder {
+  color: #bbb;
+  font-weight: 400;
+}
+.cd-input:focus { border-bottom-color: var(--cd-red); }
+.cd-input.has-error { border-bottom-color: var(--cd-red); }
+
+.cd-textarea {
+  resize: none;
+  min-height: 90px;
+  line-height: 1.5;
+}
+
+/* Error message */
+.cd-error-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.68rem;
+  color: var(--cd-red);
+  display: none;
+}
+.cd-field.has-error .cd-error-msg { display: block; }
+
+/* ── CHECKBOXES ── */
+.cd-checks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 12px;
+  margin-top: 2px;
+}
+.cd-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  cursor: pointer;
+}
+.cd-check-raw { display: none; }
+.cd-check-box {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  border-radius: 4px;
+  border: 1.5px solid #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.18s, border-color 0.18s;
+  margin-top: 2px;
+  position: relative;
+}
+.cd-check-box::after {
+  content: '';
+  width: 4px;
+  height: 8px;
+  border: 2px solid white;
+  border-top: none;
+  border-left: none;
+  transform: rotate(45deg) scale(0);
+  transition: transform 0.15s ease;
+  margin-top: -2px;
+}
+.cd-check-raw:checked + .cd-check-box {
+  background: var(--cd-red);
+  border-color: var(--cd-red);
+}
+.cd-check-raw:checked + .cd-check-box::after {
+  transform: rotate(45deg) scale(1);
+}
+.cd-check-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--cd-dark);
+  line-height: 1.35;
+}
+
+/* ── FOOTER ── */
+.cd-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 4px;
+  border-top: 1px solid rgba(0,0,0,0.06);
+  padding-top: 20px;
+}
+
+.cd-btn-submit {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cd-red);
+  color: white;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 26px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 6px 20px rgba(212,43,43,0.32);
+  transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+}
+.cd-btn-submit:hover {
+  background: var(--cd-red-dk);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(212,43,43,0.42);
+}
+.cd-btn-submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* WhatsApp link */
+.cd-wa-block {
+  margin-left: auto;
+  text-align: right;
+  flex-shrink: 0;
+}
+.cd-wa-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--cd-muted);
+  margin: 0 0 3px;
+}
+.cd-wa-cta {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--cd-red);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.2s;
+}
+.cd-wa-cta:hover { color: var(--cd-red-dk); text-decoration: underline; }
+
+/* ── SUCCESS ── */
+.cd-success {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+  gap: 12px;
+  flex: 1;
+}
+.cd-success.cd-visible { display: flex; }
+.cd-success-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #FEF2F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+.cd-success-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--cd-red);
+  margin: 0;
+}
+.cd-success-sub {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--cd-muted);
+  margin: 0;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  .cd-scroller { padding: 18px 18px 24px; }
+  .cd-form-grid { grid-template-columns: 1fr; }
+  .cd-field--full { grid-column: 1; }
+  .cd-checks-grid { grid-template-columns: 1fr; }
+  .cd-big-title { font-size: 1.9rem; }
+}
