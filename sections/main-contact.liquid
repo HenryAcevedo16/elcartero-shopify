@@ -11,10 +11,10 @@
       <div class="contact-layout-left">
         <div class="contact-inner-left" style="display:flex; flex-direction:column; gap:40px;">
           <div class="reveal">
-            <p style="color:#DC2626; font-weight:700; font-size:24px; margin-top:14px; margin-bottom:12px;">
+            <p class="contact-hero-eyebrow">
               ¿Tienes alguna duda?
             </p>
-            <h1 style="font-size:64px; font-weight:800; line-height:1.1; color:#111; letter-spacing:-1px; margin:0;">
+            <h1 class="contact-hero-title">
               Estamos disponibles para ayudarte y responder tus preguntas
             </h1>
           </div>
@@ -26,109 +26,62 @@
               target="_blank"
               rel="noopener"
               class="trust-chip reveal"
-              style="padding:24px; border-radius:12px; background:#F8FAFC; text-decoration:none; color:inherit; display:flex; gap:16px; align-items:flex-start; transition: all 0.2s;"
             >
-              <span style="display:flex; align-items:center; justify-content:center; color:#111; padding-top:2px;">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+              <span class="trust-chip-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path><path d="M9 12h.01"></path><path d="M12 12h.01"></path><path d="M15 12h.01"></path>
                 </svg>
               </span>
               <div>
-                <div style="font-weight:800; font-size:1rem; margin-bottom:4px; color:#111;">Número de contacto</div>
-                <div style="color:#64748B; font-size:.9rem; line-height:1.4;">
+                <div class="trust-chip-title">Número de contacto</div>
+                <div class="trust-chip-text">
                   Respuesta rápida<br>
-                  +1 (809) 326-9319
+                  {{ section.settings.whatsapp }}
                 </div>
               </div>
             </a>
 
             <!-- Email -->
             <a
-              href="mailto:soporte@elcarterord.store"
+              href="mailto:{{ section.settings.email }}"
               class="trust-chip reveal d1"
-              style="padding:24px; border-radius:12px; background:#F8FAFC; text-decoration:none; color:inherit; display:flex; gap:16px; align-items:flex-start; transition: all 0.2s;"
             >
-              <span style="display:flex; align-items:center; justify-content:center; color:#111; padding-top:2px;">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+              <span class="trust-chip-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </svg>
               </span>
               <div>
-                <div style="font-weight:800; font-size:1rem; margin-bottom:4px; color:#111;">Correo electrónico</div>
-                <div style="color:#64748B; font-size:.9rem; line-height:1.4;">
+                <div class="trust-chip-title">Correo electrónico</div>
+                <div class="trust-chip-text">
                   Respondemos en 24h<br>
-                  soporte@elcarterord.store
+                  {{ section.settings.email }}
                 </div>
               </div>
             </a>
 
             <!-- Horario de atención -->
-            <div
-              class="trust-chip reveal d2"
-              style="padding:24px; border-radius:12px; background:#F8FAFC; display:flex; gap:16px; align-items:flex-start; transition: all 0.2s;"
-            >
-              <span style="display:flex; align-items:center; justify-content:center; color:#111; padding-top:2px;">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+            <div class="trust-chip reveal d2">
+              <span class="trust-chip-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline>
                 </svg>
               </span>
               <div>
-                <div style="font-weight:800; font-size:1rem; margin-bottom:4px; color:#111;">Horario de atención</div>
-                <div style="color:#64748B; font-size:.9rem; line-height:1.4;">
-                  Lun-Sáb: 9am-7pm<br>
-                  Dom: 10am-4pm
-                </div>
+                <div class="trust-chip-title">Horario de atención</div>
+                <div class="trust-chip-text">{{ section.settings.hours | newline_to_br }}</div>
               </div>
             </div>
 
             <!-- Redes sociales -->
-            <div
-              class="trust-chip reveal d3"
-              style="padding:24px; border-radius:12px; background:#F8FAFC; display:flex; gap:16px; align-items:flex-start; transition: all 0.2s;"
-            >
-              <span style="display:flex; align-items:center; justify-content:center; color:#111; padding-top:2px;">
-                <svg
-                  width="26"
-                  height="26"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
+            <div class="trust-chip reveal d3">
+              <span class="trust-chip-icon">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
                 </svg>
               </span>
               <div style="width: 100%;">
-                <div style="font-weight:800; font-size:1rem; margin-bottom:12px; color:#111;">Redes sociales</div>
+                <div class="trust-chip-title" style="margin-bottom:12px;">Redes sociales</div>
                 <div style="display:flex; gap:16px; align-items:center;">
                   <a
                     href="https://wa.me/18093269319"
@@ -198,112 +151,121 @@
       </div>
 
       <!-- Lado Derecho: Bloques de Información -->
-      <div class="reveal contact-layout-right" style="padding:0;">
-        <div
-          class="contact-inner-right"
-          style="display: flex; flex-direction: column; justify-content: space-between; gap: 16px; flex: 1;"
-        >
-          <!-- General -->
-          <div class="faq-row">
-            <div class="faq-icon-box active">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              <span>General</span>
+      <div class="reveal contact-layout-right">
+        <div class="contact-inner-right">
+          <div class="faq-interactive-layout">
+            
+            <!-- Sidebar (Íconos) -->
+            <div class="faq-sidebar">
+              <div class="faq-icon-box active" data-target="faq-general">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+                </svg>
+                <span>General</span>
+              </div>
+              <div class="faq-icon-box" data-target="faq-pagos">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>
+                </svg>
+                <span>Pagos</span>
+              </div>
+              <div class="faq-icon-box" data-target="faq-devoluciones">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+                </svg>
+                <span>Devoluciones</span>
+              </div>
+              <div class="faq-icon-box" data-target="faq-delivery">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>
+                </svg>
+                <span>Delivery</span>
+              </div>
             </div>
-            <div class="faq-text-box">
-              <h3>Información General</h3>
-              <p>
-                Encuentra respuestas rápidas sobre cómo funciona nuestra tienda, la disponibilidad de los productos y
-                cómo contactarnos de forma directa.
-              </p>
-            </div>
-          </div>
 
-          <!-- Pagos -->
-          <div class="faq-row">
-            <div class="faq-icon-box">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>
-              </svg>
-              <span>Pagos</span>
-            </div>
-            <div class="faq-text-box">
-              <h3>Métodos de pago</h3>
-              <p>
-                Aceptamos tarjetas de crédito, transferencias bancarias y efectivo contra entrega. Tus transacciones
-                están 100% protegidas.
-              </p>
-            </div>
-          </div>
+            <!-- Content (Tarjetas) -->
+            <div class="faq-content">
+              
+              <!-- Pane: General -->
+              <div id="faq-general" class="faq-pane active">
+                <div class="faq-text-box">
+                  <h3>Información General</h3>
+                  <p>Encuentra respuestas rápidas sobre cómo funciona nuestra tienda, la disponibilidad de los productos y cómo contactarnos de forma directa.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>¿Cómo realizar un pedido?</h3>
+                  <p>Añade los productos al carrito, ve al proceso de pago e ingresa tus datos de envío. Es un proceso rápido y seguro.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>¿Tienen tienda física?</h3>
+                  <p>Operamos de manera 100% online para ofrecerte los mejores precios, con entregas directamente en la puerta de tu casa.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Atención al cliente</h3>
+                  <p>Nuestro equipo está disponible de lunes a viernes de 9 am - 5:30 pm, y los sábados de 9 am - 2 pm para ayudarte con cualquier inquietud sobre tu orden.</p>
+                </div>
+              </div>
 
-          <!-- Devoluciones -->
-          <div class="faq-row">
-            <div class="faq-icon-box">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="9 14 4 9 9 4"></polyline><path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
-              </svg>
-              <span>Devoluciones</span>
-            </div>
-            <div class="faq-text-box">
-              <h3>Políticas de devolución</h3>
-              <p>
-                Si tu artículo presenta algún defecto, tienes hasta 15 días para solicitar un cambio o reembolso, sin
-                complicaciones.
-              </p>
-            </div>
-          </div>
+              <!-- Pane: Pagos -->
+              <div id="faq-pagos" class="faq-pane">
+                <div class="faq-text-box">
+                  <h3>Métodos de pago</h3>
+                  <p>Aceptamos transferencias bancarias y efectivo contra entrega. Tus transacciones están 100% protegidas.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Pagos con tarjeta</h3>
+                  <p>Actualmente solo trabajamos con transferencia y efectivo, ya que el pago se realiza contra entrega al recibir tu pedido.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Transferencias</h3>
+                  <p>Puedes realizar transferencias a nuestras cuentas del Banco Popular, Banreservas y BHD. Cuando el delivery llegue te facilitará el número de cuenta.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Pago contra entrega</h3>
+                  <p>Disponible únicamente en zonas céntricas. Paga en efectivo o transferencia al recibir tu pedido en la puerta de tu casa.</p>
+                </div>
+              </div>
 
-          <!-- Delivery -->
-          <div class="faq-row">
-            <div class="faq-icon-box">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle>
-              </svg>
-              <span>Delivery</span>
-            </div>
-            <div class="faq-text-box">
-              <h3>Envíos y entregas</h3>
-              <p>
-                Hacemos envíos rápidos en 24-48 horas a toda la zona metropolitana, y envíos regulares al resto del
-                país.
-              </p>
+              <!-- Pane: Devoluciones -->
+              <div id="faq-devoluciones" class="faq-pane">
+                <div class="faq-text-box">
+                  <h3>Políticas de devolución</h3>
+                  <p>Si tu artículo presenta algún defecto, tienes hasta 15 días para solicitar un cambio o reembolso, sin complicaciones.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Proceso de cambio</h3>
+                  <p>Contacta a nuestro soporte con tu número de orden y fotos del producto. Te enviaremos las instrucciones para el cambio.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Reembolsos</h3>
+                  <p>Los reembolsos aprobados se procesarán vía transferencia bancaria dentro de los 5-7 días hábiles posteriores a la recepción del artículo.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Artículos no retornables</h3>
+                  <p>Por razones de higiene, no aceptamos devoluciones en artículos de uso personal una vez abiertos, salvo defectos de fábrica.</p>
+                </div>
+              </div>
+
+              <!-- Pane: Delivery -->
+              <div id="faq-delivery" class="faq-pane">
+                <div class="faq-text-box">
+                  <h3>Envíos y entregas</h3>
+                  <p>Hacemos envíos rápidos en 24-72 horas a toda la zona metropolitana, y envíos regulares al resto del país.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Costos de Envío</h3>
+                  <p>El envío es totalmente gratis a todas partes del país, para que recibas tus pedidos sin ningún cargo extra o sorpresa.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Zonas de cobertura</h3>
+                  <p>Enviamos a casi todos los rincones del país a través de nuestros delivery o por Uber para las zonas más lejanas.</p>
+                </div>
+                <div class="faq-text-box">
+                  <h3>Rastreo de pedido</h3>
+                  <p>Una vez tu pedido sea despachado, recibirás un correo o mensaje de WhatsApp con el número de seguimiento.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -347,37 +309,87 @@
   .contact-inner-right {
     max-width: 600px;
     margin: 0 auto;
-  }
-  @media (max-width: 960px) {
-    .contact-page-wrapper {
-      padding: 100px 0 0;
-    }
-    .contact-layout-grid {
-      flex-direction: column;
-      gap: 60px;
-    }
-    .contact-layout-left,
-    .contact-layout-right {
-      width: 100%;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    .contact-inner-left,
-    .contact-inner-right {
-      max-width: 100%;
-      margin: 0 auto;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 16px;
+    flex: 1;
   }
 
-  /* Estilos para el nuevo bloque FAQ */
-  .faq-row {
+  /* ── Hero title ── */
+  .contact-hero-eyebrow {
+    color: #DC2626;
+    font-weight: 700;
+    font-size: 1.2rem;
+    margin-top: 14px;
+    margin-bottom: 12px;
+  }
+  .contact-hero-title {
+    font-size: 64px;
+    font-weight: 800;
+    line-height: 1.1;
+    color: #111;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+
+  /* ── Contact info cards ── */
+  .trust-chip {
+    padding: 24px;
+    border-radius: 12px;
+    background: #F8FAFC;
+    text-decoration: none;
+    color: inherit;
     display: flex;
     gap: 16px;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+  .trust-chip-icon {
+    display: flex;
     align-items: center;
-    position: relative;
-    min-height: 139px;
+    justify-content: center;
+    color: #111;
+    padding-top: 2px;
+    flex-shrink: 0;
+  }
+  .trust-chip-title {
+    font-weight: 800;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    color: #111;
+  }
+  .trust-chip-text {
+    color: #64748B;
+    font-size: .9rem;
+    line-height: 1.4;
   }
 
+  /* ── FAQ Interactive layout ── */
+  .faq-interactive-layout {
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  .faq-sidebar {
+    position: absolute;
+    left: -260px;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .faq-content {
+    flex: 1;
+    width: 100%;
+  }
+  .faq-pane {
+    display: none;
+    flex-direction: column;
+    gap: 16px;
+    animation: faqFadeIn 0.3s ease forwards;
+  }
+  .faq-pane.active { display: flex; }
   .faq-icon-box {
     width: 230px;
     height: 139px;
@@ -393,85 +405,158 @@
     padding: 10px;
     transition: all 0.2s;
     cursor: pointer;
-    position: absolute;
-    left: -260px;
-    top: 50%;
-    transform: translateY(-50%);
   }
-
   .faq-icon-box:hover,
-  .faq-icon-box.active {
-    background: #dc2626;
-    color: #fff;
-  }
-
-  .faq-icon-box span {
-    font-weight: 800;
-    font-size: 0.9rem;
-  }
-
+  .faq-icon-box.active { background: #dc2626; color: #fff; }
+  .faq-icon-box span { font-weight: 800; font-size: 0.9rem; }
   .faq-text-box {
-    flex: 1;
-    height: 139px;
+    width: 100%;
+    min-height: 139px;
+    height: auto;
     background: transparent;
     border: 1px solid #e2e8f0;
-    border-radius: 30px;
+    border-radius: 20px;
     padding: 24px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     transition: all 0.2s;
   }
-
-  .faq-text-box h3 {
-    color: #A72323;
-    margin: 0 0 8px 0;
-    font-weight: 800;
-    font-size: 1.1rem;
+  .faq-text-box h3 { color: #A72323; margin: 0 0 8px 0; font-weight: 800; font-size: 1.1rem; }
+  .faq-text-box p  { color: #111; margin: 0; font-size: 0.95rem; line-height: 1.5; }
+  @keyframes faqFadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  .faq-text-box p {
-    color: #111;
-    margin: 0;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-
-  @media (max-width: 960px) {
-    .contact-layout-grid {
-      flex-direction: column;
-      gap: 60px;
+  /* ── Desktop full: iconos se estiran para alinearse con las tarjetas FAQ ── */
+  @media (min-width: 1503px) {
+    .faq-sidebar {
+      top: 0;
+      bottom: 0;
+      height: auto;
+      gap: 20px;
     }
+    .faq-icon-box {
+      flex: 1;
+      height: auto;
+    }
+  }
+
+  /* ── Pantalla intermedia 1200-1502px: layout desktop adaptado ── */
+  @media (min-width: 1200px) and (max-width: 1502px) {
+    .contact-hero-title {
+      font-size: 40px;
+    }
+    .faq-interactive-layout {
+      align-items: stretch;
+    }
+    .faq-sidebar {
+      position: static;
+      flex-direction: column;
+      gap: 20px;
+      margin-right: 16px;
+    }
+    .faq-icon-box {
+      width: 150px;
+      height: 105px;
+    }
+    .faq-content {
+      max-height: 480px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .faq-pane {
+      flex: 1;
+      gap: 0;
+      justify-content: space-between;
+    }
+    .faq-text-box {
+      min-height: unset;
+      padding: 10px 14px;
+    }
+    .faq-text-box h3 {
+      font-size: 0.9rem;
+      margin-bottom: 4px;
+    }
+    .faq-text-box p {
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+  }
+
+  /* ── Tablet / stacked layout ── */
+  @media (max-width: 1199px) {
+    .contact-page-wrapper { padding: 80px 0 0; }
+    .contact-breadcrumb { padding-left: 24px; }
+    .contact-layout-grid { flex-direction: column; gap: 60px; }
     .contact-layout-left,
     .contact-layout-right {
       width: 100%;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 24px;
+      padding-right: 24px;
     }
-    .contact-breadcrumb {
-      padding-left: 20px;
+    .contact-inner-left,
+    .contact-inner-right {
+      max-width: 100%;
+      margin: 0 auto;
+    }
+    .faq-sidebar {
+      position: static;
+      left: auto;
+      flex-direction: column;
+      margin-right: 24px;
+      gap: 16px;
     }
     .faq-icon-box {
-      position: static;
-      transform: none;
+      width: 200px;
+      height: 139px;
     }
   }
 
-  @media (max-width: 600px) {
-    .faq-row {
+  /* ── Mobile ── */
+  @media (max-width: 768px) {
+    .contact-hero-title {
+      font-size: 2rem;
+      letter-spacing: -0.5px;
+    }
+    .contact-inner-left > div:nth-child(2) {
+      grid-template-columns: 1fr 1fr !important;
+      gap: 12px !important;
+    }
+    .trust-chip {
+      padding: 16px 12px;
       flex-direction: column;
-      gap: 12px;
-      min-height: auto;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+    }
+    .trust-chip > div { width: 100%; }
+    .trust-chip-title { font-size: 0.85rem; }
+    .trust-chip-text  { font-size: 0.75rem; line-height: 1.3; }
+    .faq-interactive-layout { flex-direction: column; }
+    .faq-sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      margin-right: 0;
     }
     .faq-icon-box {
-      width: 100%;
-      flex-direction: row;
-      justify-content: flex-start;
-      padding: 16px 20px;
-      height: auto;
-      position: static;
-      transform: none;
+      width: calc(25% - 8px);
+      height: 90px;
+      padding: 8px 4px;
+      border-radius: 12px;
     }
+    .faq-icon-box svg { width: 24px; height: 24px; }
+    .faq-icon-box span { font-size: 0.6rem; text-align: center; line-height: 1.1; word-break: break-word; }
+    .faq-pane { gap: 12px; }
+    .faq-text-box { padding: 16px; }
+    .faq-text-box h3 { font-size: 1rem; }
+    .faq-text-box p  { font-size: 0.85rem; }
   }
 </style>
 
@@ -500,3 +585,31 @@
   ]
 }
 {% endschema %}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const iconBoxes = document.querySelectorAll('.faq-icon-box');
+    const panes = document.querySelectorAll('.faq-pane');
+    
+    iconBoxes.forEach(iconBox => {
+      iconBox.addEventListener('click', function() {
+        const targetId = this.getAttribute('data-target');
+        
+        // Quitar la clase active de todos
+        iconBoxes.forEach(box => box.classList.remove('active'));
+        panes.forEach(pane => pane.classList.remove('active'));
+        
+        // Agregar la clase active al seleccionado
+        this.classList.add('active');
+        const targetPane = document.getElementById(targetId);
+        targetPane.classList.add('active');
+        
+        // En móvil, hacer scroll hacia la información
+        if (window.innerWidth <= 768) {
+          const offset = targetPane.getBoundingClientRect().top + window.scrollY - 100;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>

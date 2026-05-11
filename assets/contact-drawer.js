@@ -186,7 +186,8 @@
         })
         .catch(function () {
           if (btn) btn.disabled = false;
-          if (btnSpan) btnSpan.textContent = 'Enviar mensaje';
+          if (btnSpan) btnSpan.textContent = 'Enviar consulta';
+          alert('Ocurrió un error al enviar el mensaje. Por favor intenta de nuevo o escríbenos por WhatsApp.');
         });
       });
     }

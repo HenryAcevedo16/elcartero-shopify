@@ -9,10 +9,7 @@
     <!-- HEADER: logo + close -->
     <div class="cd-header">
       <div class="cd-logo">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24">
-          <path fill="#D42B2B" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
-        </svg>
-        <span class="cd-logo-name">ElCartero <strong>RD</strong></span>
+        <img src="{{ 'logo-principal.svg' | asset_url }}" alt="{{ shop.name }}" class="cd-logo-img" width="130" height="32" loading="lazy">
       </div>
       <button id="cdClose" class="cd-close-btn" aria-label="Cerrar">✕</button>
     </div>

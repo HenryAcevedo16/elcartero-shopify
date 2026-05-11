@@ -43,7 +43,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11" defer></script>
 
   {{ content_for_header }}
 
@@ -208,7 +208,7 @@
       font-family: 'Poppins', sans-serif;
       font-size: 0.95rem;
       font-weight: 900;
-      color: #b91c1c;
+      color: #000000;
       line-height: 1;
       user-select: none;
     }
@@ -259,7 +259,7 @@
   </div>
 
   <!-- Wishlist JS -->
-  {{ 'wishlist.js' | asset_url | script_tag }}
+  <script src="{{ 'wishlist.js' | asset_url }}" defer></script>
 
   <!-- MODAL DE BIENVENIDA (una vez por sesión) -->
   <div id="welcomeOverlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
@@ -424,8 +424,8 @@
   </a>
 
   <!-- GSAP 3 + Contact Drawer -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="{{ 'contact-drawer.js' | asset_url }}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="{{ 'contact-drawer.js' | asset_url }}" defer></script>
 
 </body>
 </html>

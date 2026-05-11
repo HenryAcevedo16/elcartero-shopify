@@ -79,6 +79,11 @@
   align-items: center;
   gap: 6px;
 }
+.cd-logo-img {
+  height: 32px;
+  width: auto;
+  object-fit: contain;
+}
 .cd-logo-name {
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
