@@ -243,25 +243,25 @@
                       aria-label="Guardar en favoritos">♡</button>
             </div>
             <div class="prod-info">
-              <!-- <p class="prod-cat">{{ product.type | default: collection.title }}</p> -->
-
               <a href="{{ product.url }}" style="text-decoration:none; color:inherit;">
-                <p class="prod-name" style="margin-bottom:8px;">{{ product.title }}</p>
+                <p class="prod-name" style="margin-bottom:6px; font-weight:500; font-size: 0.83rem; line-height: 1.4;">{{ product.title }}</p>
               </a>
-              <p class="prod-desc" style="display:none; font-size:.78rem; color:var(--muted); line-height:1.5; margin-bottom:10px;">{{ product.description | strip_html | truncate: 100 }}</p>
-              <div class="prod-bottom amazon-style">
-                <div class="prod-price-block">
-                  {% if product.compare_at_price > product.price %}
-                    <span class="prod-price-old">{{ product.compare_at_price | money }}</span>
-                  {% endif %}
-                  <span class="prod-price-now">{{ product.price | money }}</span>
-                </div>
-                <p class="prod-shipping">Envío GRATIS</p>
+              
+              <div class="prod-price-block" style="margin-bottom: 4px;">
+                {% if product.compare_at_price > product.price %}
+                  <span class="prod-price-old" style="font-size:0.8rem; color:var(--muted); text-decoration:line-through; margin-right: 6px;">{{ product.compare_at_price | money }}</span>
+                {% endif %}
+                <span class="prod-price-now" style="font-weight:700; font-size:1.2rem; color:var(--dark);">{{ product.price | money }}</span>
+              </div>
+              
+              <p class="prod-shipping" style="font-size:0.75rem; color:var(--muted); margin-bottom: auto;">Envío GRATIS</p>
+
+              <div class="prod-bottom amazon-style" style="width: 100%; margin-top: 10px;">
                 <form method="post" action="{{ routes.cart_add_url }}" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <div class="prod-actions">
-                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">Carrito</button>
+                    <button type="submit" name="add" class="prod-cart-btn" {% unless product.available %}disabled{% endunless %} title="Agregar al carrito">Agregar al carrito</button>
                     <button type="button" class="prod-buy-btn" {% unless product.available %}disabled{% endunless %} onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ product.variants.first.id }}&quantity=1&return_to=/cart'">Comprar ahora</button>
                   </div>
                 </form>
