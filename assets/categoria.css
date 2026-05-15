@@ -203,7 +203,7 @@
   .prods-grid .prod-buy-btn { display: none !important; }
   .prods-grid .prod-cart-btn { width: 100%; padding: 0; height: 38px; flex: none; font-size: 0.85rem; }
   .view-toggle { display: none !important; }
-  .page-header { padding: 20px 20px 28px; flex-direction: column; align-items: flex-start; gap: 14px; }
+  .page-header { padding: 90px 20px 28px; flex-direction: column; align-items: flex-start; gap: 14px; }
 
   /* AMAZON FILTERS MOBILE */
   .mobile-quick-filters {
@@ -235,7 +235,8 @@
   .sidebar {
     position: fixed !important; top: 0; bottom: 0; left: -100%;
     width: 320px; max-width: 85vw; background: var(--white);
-    z-index: 9999; padding: 0; overflow-y: auto;
+    height: 100%; height: 100dvh; touch-action: pan-y; box-sizing: border-box;
+    z-index: 9999; padding: 0; overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch; overscroll-behavior-y: contain;
     transition: left 0.3s ease-in-out; margin: 0; border-radius: 0; box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   }
   .sidebar.open { left: 0; }

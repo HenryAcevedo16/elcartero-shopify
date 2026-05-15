@@ -18,7 +18,7 @@
         {% if product.featured_image %}
           <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" width="1024" height="1024" style="width:100%; height:100%; object-fit:contain;" id="FeaturedImage">
         {% else %}
-          <span id="mainEmoji">🎧</span>
+          <span id="mainEmoji"></span>
         {% endif %}
       </div>
       {% if product.compare_at_price > product.price %}
@@ -41,7 +41,7 @@
     <div class="prod-badges">
       <span class="pbadge pb-elec">{{ product.type | default: 'Producto' }}</span>
       {% if product.available %}
-        <span class="pbadge pb-stock">✔ En stock</span>
+        <span class="pbadge pb-stock">En stock</span>
       {% else %}
         <span class="pbadge pb-new" style="background:var(--muted)">Agotado</span>
       {% endif %}
@@ -123,7 +123,7 @@
         </button>
         {% if product.available %}
           <button type="button" onclick="const f=document.getElementById('AddToCartForm'); f.classList.remove('ajax-cart-form'); sessionStorage.setItem('cart_step', '2'); let r=document.createElement('input'); r.type='hidden'; r.name='return_to'; r.value='/cart'; f.appendChild(r); f.submit();" class="btn-red" style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;">
-            ⚡ Comprar ahora
+            Comprar ahora
           </button>
         {% endif %}
         <button type="button" class="btn-wish" id="WishBtn"
@@ -140,9 +140,9 @@
 
     <!-- Trust -->
     <div class="trust-row">
-      <div class="trust-chip"><span class="trust-chip-icon">🚚</span><span class="trust-chip-text">Envío gratis<br>a tu puerta</span></div>
-      <div class="trust-chip"><span class="trust-chip-icon">↩️</span><span class="trust-chip-text">Devolución<br>30 días</span></div>
-      <div class="trust-chip"><span class="trust-chip-icon">💵</span><span class="trust-chip-text">Pago contra<br>entrega</span></div>
+      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Envío gratis<br>a tu puerta</span></div>
+      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Devolución<br>30 días</span></div>
+      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Pago contra<br>entrega</span></div>
     </div>
   </div>
 </div>
@@ -172,8 +172,8 @@
   <div class="tab-panel" id="panel-reviews">
     <!-- Sin reseñas todavía -->
     <div style="text-align:center;padding:32px 16px;margin-bottom:32px;border-radius:16px;background:var(--bg);color:var(--muted);">
-      <div style="font-size:2.5rem;margin-bottom:12px;">⭐</div>
-      <p style="font-size:.9rem;font-weight:600;color:var(--dark);margin-bottom:6px;">Aún no hay reseñas</p>
+      <div style="font-size:2.5rem;margin-bottom:12px;"></div>
+      <h3 style="margin:0 0 10px; font-weight:800;">Todavía no hay reseñas</h3>
       <p style="font-size:.82rem;">¡Sé el primero en compartir tu experiencia con este producto!</p>
     </div>
 
@@ -232,7 +232,7 @@
                         loading="lazy"
                         style="width:100%; height:100%; object-fit:contain; display:block;">
                 {% else %}
-                  <span>📦</span>
+                  <span></span>
                 {% endif %}
                 {% if related.compare_at_price > related.price %}
                   <span class="prod-label lb-hot">Oferta</span>
@@ -383,7 +383,7 @@ if (cartForm) {
     const text = document.getElementById('AddToCartText');
     if (!btn || btn.disabled) return;
     btn.disabled = true;
-    text.textContent = '✅ ¡Agregado!';
+    text.textContent = '¡Agregado!';
     btn.style.background = 'var(--red)';
     setTimeout(() => {
       btn.disabled = false;
@@ -425,8 +425,8 @@ function enviarResena() {
   }
   const toast = document.getElementById('toast');
   if (toast) {
-    toast.textContent = '✅ ¡Gracias por tu reseña!';
-    toast.classList.add('show');
+    toast.textContent = '¡Gracias por tu reseña!';
+    toast.className = 'toast show';
     setTimeout(() => toast.classList.remove('show'), 3500);
   }
   document.getElementById('rNombre').value = '';

@@ -13,9 +13,8 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="ph-left">
-    <h1>{{ collection.title | default: '🛒 Catálogo' }}</h1>
     <p>
-      {{ collection.products_count }} producto{% if collection.products_count != 1 %}s{% endif %} encontrado{% if collection.products_count != 1 %}s{% endif %}
+      {{ paginate.items }} producto{% if paginate.items != 1 %}s{% endif %} encontrado{% if paginate.items != 1 %}s{% endif %}
     </p>
   </div>
   <div class="ph-right">
@@ -73,67 +72,54 @@
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
       <ul class="cat-list" id="sidebar-cat-list">
-        <li><a href="{{ routes.all_products_collection_url }}" onclick="filterCategory('all', this); return false;">
-          Todos <span class="cnt">{{ collection.products_count }}</span>
+        <li><a href="{{ routes.all_products_collection_url }}" data-cat="all">
+          Todos <span class="cnt" id="dynamic-count">{{ paginate.items }}</span>
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Automotriz" onclick="filterCategory('Automotriz', this); return false;">
-          Automotriz
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" onclick="filterCategory('bebe', this); return false;">
-          Bebé
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza y cuidado personal" onclick="filterCategory('Belleza y cuidado personal', this); return false;">
-          Belleza y cuidado personal
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Deporte y recreación" onclick="filterCategory('Deporte y recreación', this); return false;">
-          Deporte y recreación
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electrodomesticos" onclick="filterCategory('Electrodomesticos', this); return false;">
-          Electrodomésticos
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Herramientas y construcción" onclick="filterCategory('Herramientas y construcción', this); return false;">
-          Herramientas y construcción
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Hogar y oficina" onclick="filterCategory('Hogar y oficina', this); return false;">
-          Hogar
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" onclick="filterCategory('Salud', this); return false;">
-          Salud
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Tecnologia" onclick="filterCategory('Tecnologia', this); return false;">
-          Tecnología
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Viajes" onclick="filterCategory('Viajes', this); return false;">
-          Viajes y equipaje
-        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Automotriz" data-cat="Automotriz">Automotriz</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" data-cat="bebe">Bebé</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Belleza%20y%20cuidado%20personal" data-cat="Belleza y cuidado personal">Belleza y cuidado personal</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Deporte%20y%20recreaci%C3%B3n" data-cat="Deporte y recreación">Deporte y recreación</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Electrodomesticos" data-cat="Electrodomesticos">Electrodomésticos</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Herramientas%20y%20construcci%C3%B3n" data-cat="Herramientas y construcción">Herramientas y construcción</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Hogar%20y%20oficina" data-cat="Hogar y oficina">Hogar</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Salud" data-cat="Salud">Salud</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Tecnologia" data-cat="Tecnologia">Tecnología</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=Viajes" data-cat="Viajes">Viajes y equipaje</a></li>
       </ul>
       <script>
         document.addEventListener('DOMContentLoaded', () => {
           const urlParams = new URLSearchParams(window.location.search);
           const currentType = urlParams.get('filter.p.product_type');
           const allLinks = document.querySelectorAll('#sidebar-cat-list a');
+          const badge = document.getElementById('dynamic-count');
           
-          allLinks.forEach(link => link.classList.remove('active'));
+          allLinks.forEach(link => {
+            link.classList.remove('active');
+            // add click handler dynamically
+            link.addEventListener('click', function(e) {
+              e.preventDefault();
+              filterCategory(this.getAttribute('data-cat'), this);
+            });
+          });
           
-          if (!currentType) {
-            const allBtn = document.querySelector('#sidebar-cat-list a[onclick*="\'all\'"]');
-            if (allBtn) allBtn.classList.add('active');
-          } else {
-            let matched = false;
+          let matched = false;
+          if (currentType) {
             allLinks.forEach(link => {
-              const onclickAttr = link.getAttribute('onclick');
-              if (onclickAttr && onclickAttr.includes("filterCategory('")) {
-                const linkType = onclickAttr.split("filterCategory('")[1].split("'")[0];
-                if (linkType === currentType || decodeURIComponent(linkType) === currentType) {
-                  link.classList.add('active');
-                  matched = true;
-                }
+              const cat = link.getAttribute('data-cat');
+              if (cat === currentType || decodeURIComponent(cat) === currentType) {
+                link.classList.add('active');
+                if (badge) link.appendChild(badge);
+                matched = true;
               }
             });
-            if (!matched) {
-               const allBtn = document.querySelector('#sidebar-cat-list a[onclick*="\'all\'"]');
-               if (allBtn) allBtn.classList.add('active');
-            }
+          }
+          
+          if (!matched) {
+             const allBtn = document.querySelector('#sidebar-cat-list a[data-cat="all"]');
+             if (allBtn) {
+               allBtn.classList.add('active');
+               if (badge) allBtn.appendChild(badge);
+             }
           }
         });
       </script>
@@ -242,7 +228,7 @@
                      loading="lazy"
                      style="width:100%; height:100%; object-fit:cover; display:block;">
               {% else %}
-                <span>📦</span>
+                <span></span>
               {% endif %}
               {% if product.compare_at_price > product.price %}
                 <span class="prod-label lb-hot">Oferta</span>
@@ -286,7 +272,7 @@
 
       {% else %}
         <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: var(--muted); border-radius: 20px; border: 1.5px dashed var(--sand); background: var(--white); margin: 20px 0;">
-          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;">🔍</span>
+          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;"></span>
           <h3 style="font-size: 1.3rem; color: var(--dark); font-weight: 800; margin-bottom: 8px;">No se encontraron productos</h3>
           <p style="font-size: 0.9rem;">Intenta con otros filtros o explora nuestras categorías principales.</p>
           <button onclick="window.location.href='{{ routes.all_products_collection_url }}'" style="margin-top: 24px; background: var(--dark); color: white; border: none; padding: 12px 28px; border-radius: 12px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem;">Limpiar búsqueda</button>
@@ -443,11 +429,9 @@ function toggleAmazonFilters() {
   if (sidebar.classList.contains('open')) {
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
   } else {
     sidebar.classList.add('open');
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
 }
 </script>

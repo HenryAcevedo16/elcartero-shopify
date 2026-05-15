@@ -16,9 +16,8 @@
 <!-- PAGE HEADER -->
 <div class="page-header">
   <div class="ph-left">
-    <h1>{{ collection.title | default: 'Catálogo' }}</h1>
     <p>
-      {{ search.results_count }} producto{% if search.results_count != 1 %}s{% endif %} encontrado{% if search.results_count != 1 %}s{% endif %}
+      {{ paginate.items }} producto{% if paginate.items != 1 %}s{% endif %} encontrado{% if paginate.items != 1 %}s{% endif %}
     </p>
   </div>
   <div class="ph-right">
@@ -75,41 +74,58 @@
     <!-- Categorías -->
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
-      <ul class="cat-list">
-        <li><a href="{{ routes.all_products_collection_url }}" {% unless request.query_string contains 'filter.p.product_type' %}class="active"{% endunless %}>
-          🛍 Todos <span class="cnt">{{ search.results_count }}</span>
+      {% assign current_cat = '' %}
+      {% if request.query_string contains 'filter.p.product_type=' %}
+        {% assign current_cat = request.query_string | split: 'filter.p.product_type=' | last | split: '&' | first | url_decode %}
+      {% endif %}
+
+      <ul class="cat-list" id="sidebar-cat-list-search">
+        <li><a href="{{ routes.all_products_collection_url }}" data-cat="all">
+          Todos <span class="cnt" id="dynamic-count-search">{{ paginate.items }}</span>
         </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" {% if request.query_string contains 'automotriz' %}class="active"{% endif %}>
-          🚗 Automotriz
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" {% if request.query_string contains 'bebe' %}class="active"{% endif %}>
-          🍼 Bebé
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal" {% if request.query_string contains 'belleza' %}class="active"{% endif %}>
-          💄 Belleza y cuidado personal
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion" {% if request.query_string contains 'deporte' %}class="active"{% endif %}>
-          ⚽ Deporte y recreación
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos" {% if request.query_string contains 'electrodomesticos' %}class="active"{% endif %}>
-          🔌 Electrodomésticos
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion" {% if request.query_string contains 'herramientas' %}class="active"{% endif %}>
-          🛠️ Herramientas y construcción
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar" {% if request.query_string contains 'hogar' %}class="active"{% endif %}>
-          🏠 Hogar
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud" {% if request.query_string contains 'salud' %}class="active"{% endif %}>
-          💊 Salud
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia" {% if request.query_string contains 'tecnologia' %}class="active"{% endif %}>
-          💻 Tecnología
-        </a></li>
-        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje" {% if request.query_string contains 'viajes' %}class="active"{% endif %}>
-          🧳 Viajes y equipaje
-        </a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz" data-cat="automotriz">Automotriz</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe" data-cat="bebe">Bebé</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal" data-cat="belleza y cuidado personal">Belleza y cuidado personal</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion" data-cat="deporte y recreacion">Deporte y recreación</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos" data-cat="electrodomesticos">Electrodomésticos</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion" data-cat="herramientas y construccion">Herramientas y construcción</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar" data-cat="hogar">Hogar</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud" data-cat="salud">Salud</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia" data-cat="tecnologia">Tecnología</a></li>
+        <li><a href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje" data-cat="viajes y equipaje">Viajes y equipaje</a></li>
       </ul>
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const urlParams = new URLSearchParams(window.location.search);
+          const currentType = urlParams.get('filter.p.product_type');
+          const allLinks = document.querySelectorAll('#sidebar-cat-list-search a');
+          const badge = document.getElementById('dynamic-count-search');
+          
+          allLinks.forEach(link => {
+            link.classList.remove('active');
+          });
+          
+          let matched = false;
+          if (currentType) {
+            allLinks.forEach(link => {
+              const cat = link.getAttribute('data-cat');
+              if (cat === currentType || decodeURIComponent(cat) === currentType) {
+                link.classList.add('active');
+                if (badge) link.appendChild(badge);
+                matched = true;
+              }
+            });
+          }
+          
+          if (!matched) {
+             const allBtn = document.querySelector('#sidebar-cat-list-search a[data-cat="all"]');
+             if (allBtn) {
+               allBtn.classList.add('active');
+               if (badge) allBtn.appendChild(badge);
+             }
+          }
+        });
+      </script>
     </div>
 
     <!-- ══ FILTROS NATIVOS (Shopify Search & Discovery) ══ -->
@@ -215,7 +231,7 @@
                      height="600"
                      style="width:100%; height:100%; object-fit:cover; display:block;">
               {% else %}
-                <span>📦</span>
+                <span></span>
               {% endif %}
               {% if product.compare_at_price > product.price %}
                 <span class="prod-label lb-hot">Oferta</span>
@@ -259,7 +275,7 @@
 
       {% else %}
         <div style="grid-column: 1 / -1; padding: 60px 20px; text-align: center; color: var(--muted); border-radius: 20px; border: 1.5px dashed var(--sand); background: var(--white); margin: 20px 0;">
-          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;">🔍</span>
+          <span style="font-size: 3.5rem; display: block; margin-bottom: 20px;"></span>
           <h3 style="font-size: 1.3rem; color: var(--dark); font-weight: 800; margin-bottom: 8px;">No se encontraron productos</h3>
           <p style="font-size: 0.9rem;">Intenta con otros filtros o explora nuestras categorías principales.</p>
           <button onclick="window.location.href='{{ routes.all_products_collection_url }}'" style="margin-top: 24px; background: var(--dark); color: white; border: none; padding: 12px 28px; border-radius: 12px; cursor: pointer; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.85rem;">Limpiar búsqueda</button>
@@ -412,11 +428,9 @@ function toggleAmazonFilters() {
   if (sidebar.classList.contains('open')) {
     sidebar.classList.remove('open');
     overlay.classList.remove('open');
-    document.body.style.overflow = '';
   } else {
     sidebar.classList.add('open');
     overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
   }
 }
 </script>
