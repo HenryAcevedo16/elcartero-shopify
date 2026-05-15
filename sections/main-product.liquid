@@ -3,7 +3,7 @@
   {% if collection %}
     <a href="{{ collection.url }}">{{ collection.title }}</a><span>›</span>
   {% else %}
-    <a href="/collections/all">Catálogo</a><span>›</span>
+    <a href="{{ routes.all_products_collection_url }}">Catálogo</a><span>›</span>
   {% endif %}
   <span class="current">{{ product.title }}</span>
 </div>
@@ -16,7 +16,7 @@
     <div class="gallery-main">
       <div class="gm-bg" id="mainImg">
         {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" style="width:100%; height:100%; object-fit:contain;" id="FeaturedImage">
+          <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" width="1024" height="1024" style="width:100%; height:100%; object-fit:contain;" id="FeaturedImage">
         {% else %}
           <span id="mainEmoji">🎧</span>
         {% endif %}
@@ -29,7 +29,7 @@
     {% if product.images.size > 1 %}
     <div class="gallery-thumbs">
       {% for image in product.images %}
-        <div class="thumb thumb-bg{{ forloop.index | modulo: 4 | plus: 1 }} {% if forloop.first %}active{% endif %}" onclick="setThumb(this, '{{ image | image_url: width: 1024 }}')">           <img src="{{ image | image_url: width: 160 }}" loading="lazy" style="width:100%; height:100%; object-fit:contain; border-radius:10px;">
+        <div class="thumb thumb-bg{{ forloop.index | modulo: 4 | plus: 1 }} {% if forloop.first %}active{% endif %}" onclick="setThumb(this, '{{ image | image_url: width: 1024 }}')">           <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title }}" width="160" height="160" loading="lazy" style="width:100%; height:100%; object-fit:contain; border-radius:10px;">
         </div>
       {% endfor %}
     </div>
@@ -68,7 +68,7 @@
 
     <div class="section-divider"></div>
 
-    <form action="/cart/add" method="post" enctype="multipart/form-data" id="AddToCartForm" class="ajax-cart-form" data-type="pdp">
+    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" id="AddToCartForm" class="ajax-cart-form" data-type="pdp">
       
       <!-- Variantes Selector Oculto usado por Shopify -->
       <select name="id" id="productSelect" style="display:none;">
@@ -217,7 +217,7 @@
     </div>
     <div class="prods-grid related-grid">
       {% assign count = 0 %}
-      {% paginate collections.all.products by 1000 %}
+      {% paginate collections.all.products by 250 %}
         {% for related in collections.all.products %}
           {% if related.type == product.type and related.id != product.id %}
             {% assign count = count | plus: 1 %}
@@ -225,10 +225,12 @@
               <a href="{{ related.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ related.title | escape }}"></a>
               <div class="prod-thumb" style="background: #ffffff;">
                 {% if related.featured_image %}
-                  <img src="{{ related.featured_image | image_url: width: 600 }}"
-                       alt="{{ related.title }}"
-                       loading="lazy"
-                       style="width:100%; height:100%; object-fit:contain; display:block;">
+                   <img src="{{ related.featured_image | image_url: width: 600 }}"
+                        alt="{{ related.title }}"
+                        width="600"
+                        height="600"
+                        loading="lazy"
+                        style="width:100%; height:100%; object-fit:contain; display:block;">
                 {% else %}
                   <span>📦</span>
                 {% endif %}
@@ -256,7 +258,7 @@
                     <span class="prod-price-now">{{ related.price | money }}</span>
                   </div>
                   <p class="prod-shipping">Envío GRATIS</p>
-                  <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
+                  <form method="post" action="{{ routes.cart_add_url }}" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
                     <input type="hidden" name="id" value="{{ related.variants.first.id }}">
                     <input type="hidden" name="quantity" value="1">
                     <div class="prod-actions">

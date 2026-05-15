@@ -7,7 +7,6 @@
   <meta name="theme-color" content="#0F172A">
   
   <link rel="canonical" href="{{ canonical_url }}">
-  <link rel="icon" type="image/svg+xml" href="{{ 'logo-principal.svg' | asset_url }}">
 
   <title>
     {{ page_title }}
@@ -43,12 +42,14 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- SweetAlert2 -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="{{ 'sweetalert2.min.js' | asset_url }}" defer></script>
 
   {{ content_for_header }}
+  <link rel="icon" type="image/svg+xml" href="{{ 'favicon.svg' | asset_url }}">
 
   <!-- Estilos Globales -->
   {{ 'cartero-base.css' | asset_url | stylesheet_tag }}
+  {{ 'contact-drawer.css' | asset_url | stylesheet_tag }}
 
   <!-- Estilos del panel de favoritos -->
   <style>
@@ -146,6 +147,85 @@
       font-size: 0.72rem; font-weight: 600;
       color: var(--dark, #1a2e1e);
     }
+
+    /* ===== BOTÓN FLOTANTE DE AYUDA ===== */
+    #floatHelpBtn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9990;
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      background: linear-gradient(160deg, #DC2626 0%, #b91c1c 100%);
+      box-shadow: 0 6px 22px rgba(220,38,38,0.45);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      padding: 10px 8px 8px;
+    }
+    #floatHelpBtn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 12px 32px rgba(220,38,38,0.6);
+    }
+    /* Nube de pensamiento (dentro del botón) */
+    .fhb-cloud {
+      position: relative;
+      background: rgba(255,255,255,0.92);
+      border-radius: 10px;
+      padding: 2px 7px 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      animation: fhbFloat 2.6s ease-in-out infinite;
+    }
+    /* Bolitas de la nube hacia abajo */
+    .fhb-cloud::after,
+    .fhb-cloud::before {
+      content: '';
+      position: absolute;
+      background: rgba(255,255,255,0.92);
+      border-radius: 50%;
+    }
+    .fhb-cloud::after {
+      width: 8px; height: 8px;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .fhb-cloud::before {
+      width: 5px; height: 5px;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .fhb-question {
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 900;
+      color: #000000;
+      line-height: 1;
+      user-select: none;
+    }
+    /* Persona */
+    .fhb-person {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 6px;
+    }
+    @keyframes fhbFloat {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-3px); }
+    }
+    @media (max-width: 480px) {
+      #floatHelpBtn { bottom: 18px; right: 18px; width: 66px; height: 66px; }
+    }
   </style>
 </head>
 
@@ -179,7 +259,7 @@
   </div>
 
   <!-- Wishlist JS -->
-  {{ 'wishlist.js' | asset_url | script_tag }}
+  <script src="{{ 'wishlist.js' | asset_url }}" defer></script>
 
   <!-- MODAL DE BIENVENIDA (una vez por sesión) -->
   <div id="welcomeOverlay" role="dialog" aria-modal="true" aria-labelledby="welcomeTitle">
@@ -324,6 +404,28 @@
       }
     });
   </script>
+
+  {% render 'contact-drawer' %}
+
+  <!-- ===== BOTÓN FLOTANTE DE AYUDA ===== -->
+  <a id="floatHelpBtn" href="#" aria-label="¿Necesitas ayuda?">
+    <!-- Nube de pensamiento con ? adentro del botón -->
+    <div class="fhb-cloud">
+      <span class="fhb-question">?</span>
+    </div>
+    <!-- Ícono de persona abajo, dentro del mismo botón -->
+    <div class="fhb-person">
+      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+           fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M4 21v-1a8 8 0 0 1 16 0v1"/>
+      </svg>
+    </div>
+  </a>
+
+  <!-- GSAP 3 + Contact Drawer -->
+  <script src="{{ 'gsap.min.js' | asset_url }}" defer></script>
+  <script src="{{ 'contact-drawer.js' | asset_url }}" defer></script>
 
 </body>
 </html>

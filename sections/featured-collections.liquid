@@ -38,6 +38,8 @@
                   src="{{ block.settings.image | image_url: width: 600 }}"
                   alt="{{ block.settings.name | escape }}"
                   loading="lazy"
+                  width="600"
+                  height="600"
                 >
               </div>
               <div class="cat-info">
@@ -57,7 +59,7 @@
       {% else %}
         <!-- Fallback: 10 categorías estáticas -->
         <a
-          href="/collections/all?filter.p.product_type=automotriz"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=automotriz"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#fef0f0;--cat-accent:#f44336;--cat-glow:#ffcdd2;"
         >
@@ -69,7 +71,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=bebe"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=bebe"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#f3e5f5;--cat-accent:#9c27b0;--cat-glow:#e1bee7;"
         >
@@ -81,7 +83,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=belleza%20y%20cuidado%20personal"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=belleza%20y%20cuidado%20personal"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#fff0f6;--cat-accent:#e91e8c;--cat-glow:#fbb6d8;"
         >
@@ -93,7 +95,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=deporte%20y%20recreacion"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=deporte%20y%20recreacion"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#e8f5e9;--cat-accent:#4caf50;--cat-glow:#c8e6c9;"
         >
@@ -105,7 +107,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=electrodomesticos"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=electrodomesticos"
           class="cat-card cat-card-large reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#e3f2fd;--cat-accent:#2196f3;--cat-glow:#bbdefb;"
         >
@@ -117,7 +119,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=herramientas%20y%20construccion"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=herramientas%20y%20construccion"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#fff8e1;--cat-accent:#ff9800;--cat-glow:#ffecb3;"
         >
@@ -129,7 +131,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=hogar"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=hogar"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#fff3e0;--cat-accent:#ff5722;--cat-glow:#ffe0b2;"
         >
@@ -141,7 +143,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=salud"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=salud"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#f0faf3;--cat-accent:#22c244;--cat-glow:#b7f5c8;"
         >
@@ -153,7 +155,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=tecnologia"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=tecnologia"
           class="cat-card reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#ede7f6;--cat-accent:#673ab7;--cat-glow:#d1c4e9;"
         >
@@ -165,7 +167,7 @@
         </a>
 
         <a
-          href="/collections/all?filter.p.product_type=viajes%20y%20equipaje"
+          href="{{ routes.all_products_collection_url }}?filter.p.product_type=viajes%20y%20equipaje"
           class="cat-card cat-card-large reveal"
           style="text-decoration:none;color:inherit;--cat-bg:#e0f7fa;--cat-accent:#00acc1;--cat-glow:#b2ebf2;"
         >

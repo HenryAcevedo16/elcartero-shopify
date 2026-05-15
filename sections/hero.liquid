@@ -5,24 +5,26 @@
     max-width: none;
     position: relative;
     /* Un radial mucho más amplio en el centro para dar el efecto del diseño original */
-    background: radial-gradient(circle at 50% 56%, #EF5052 18%, #BD2627 42%, #A72323 64%, #871D1E 96%);
+    background: radial-gradient(circle at 50% 56%, #ef5052 18%, #bd2627 42%, #a72323 64%, #871d1e 96%);
     border-radius: 50px;
     overflow: hidden;
     color: white;
     padding: 70px 20px 50px;
     text-align: center;
   }
-  
+
   .hero-red-container h1 {
     font-size: clamp(2.8rem, 6vw, 4.8rem);
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1.05;
     letter-spacing: -0.04em;
     margin-bottom: 56px;
     font-family: 'Poppins', sans-serif;
   }
-  .hero-red-container h1 strong { font-weight: 900; }
-  
+  .hero-red-container h1 strong {
+    font-weight: 900;
+  }
+
   .fan-container {
     position: relative;
     height: 400px;
@@ -33,7 +35,7 @@
     perspective: 1200px;
     margin-bottom: 50px;
   }
-  
+
   .fan-card {
     position: absolute;
     top: 50%;
@@ -45,60 +47,132 @@
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     cursor: pointer;
     text-decoration: none;
-    border: 1px solid rgba(255,255,255,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
-  .fan-card:hover { z-index: 50; transform: translateY(-40px) !important; box-shadow: 0 30px 60px rgba(0,0,0,0.6); }
-  
+  .fan-card:hover {
+    z-index: 50;
+    transform: translateY(-40px) !important;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  }
+
   .fan-card img {
-    width: 100%; height: 100%; object-fit: cover;
-    filter: grayscale(100%); opacity: 0.5;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    opacity: 0.5;
     transition: all 0.6s ease;
   }
-  .fan-card:hover img { filter: grayscale(0%); opacity: 1; transform: scale(1.05); }
-  
+  .fan-card:hover img {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.05);
+  }
+
   .fan-card-content {
     position: absolute;
-    bottom: 0; left: 0; right: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     padding: 60px 24px 24px;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
     color: white;
     text-align: left;
   }
-  .fan-title { font-size: 1.2rem; font-weight: 700; margin: 0; line-height: 1.2; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
-  
+  .fan-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  }
+
   /* C1: Leftmost */
-  .fc-1 { transform: rotate(-12deg) translateX(-180%); z-index: 10; }
-  .fc-1:hover { transform: rotate(0) translateX(-180%) translateY(-40px) !important; }
+  .fc-1 {
+    transform: rotate(-12deg) translateX(-180%);
+    z-index: 10;
+  }
+  .fc-1:hover {
+    transform: rotate(0) translateX(-180%) translateY(-40px) !important;
+  }
   /* C2: Left */
-  .fc-2 { transform: rotate(-6deg) translateX(-95%); z-index: 20; }
-  .fc-2:hover { transform: rotate(0) translateX(-95%) translateY(-40px) !important; }
+  .fc-2 {
+    transform: rotate(-6deg) translateX(-95%);
+    z-index: 20;
+  }
+  .fc-2:hover {
+    transform: rotate(0) translateX(-95%) translateY(-40px) !important;
+  }
   /* C3: Center */
-  .fc-3 { 
-    width: 270px; height: 370px; z-index: 40; 
-    margin-top: -185px; margin-left: -135px;
-    border: 3px solid rgba(255,255,255,0.1);
+  .fc-3 {
+    width: 270px;
+    height: 370px;
+    z-index: 40;
+    margin-top: -185px;
+    margin-left: -135px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
   }
-  .fc-3 img { opacity: 0.9; filter: none; }
-  .fc-3 .fan-card-content { display: flex; flex-direction: column; text-align: center; padding-bottom: 30px; }
-  .fc-3-tag { color: #ff5252; font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 6px; }
-  .fc-3 .fan-title { font-size: 1.6rem; }
+  .fc-3 img {
+    opacity: 0.9;
+    filter: none;
+  }
+  .fc-3 .fan-card-content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+  .fc-3-tag {
+    color: #ff5252;
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 6px;
+  }
+  .fc-3 .fan-title {
+    font-size: 1.6rem;
+  }
   .fc-3::before {
-    content: ''; position: absolute; inset:0; background: linear-gradient(135deg, rgba(0,0,0,0.3), rgba(0,0,0,0.9)); z-index: 1; pointer-events:none; transition: opacity 0.4s;
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9));
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.4s;
   }
-  .fc-3:hover::before { opacity: 0.5; }
-  .fc-3 img { z-index: 0; position:relative; }
-  .fc-3 .fan-card-content { z-index: 2; }
+  .fc-3:hover::before {
+    opacity: 0.5;
+  }
+  .fc-3 img {
+    z-index: 0;
+    position: relative;
+  }
+  .fc-3 .fan-card-content {
+    z-index: 2;
+  }
 
   /* C4: Right */
-  .fc-4 { transform: rotate(6deg) translateX(95%); z-index: 20; }
-  .fc-4:hover { transform: rotate(0) translateX(95%) translateY(-40px) !important; }
+  .fc-4 {
+    transform: rotate(6deg) translateX(95%);
+    z-index: 20;
+  }
+  .fc-4:hover {
+    transform: rotate(0) translateX(95%) translateY(-40px) !important;
+  }
   /* C5: Rightmost */
-  .fc-5 { transform: rotate(12deg) translateX(180%); z-index: 10; }
-  .fc-5:hover { transform: rotate(0) translateX(180%) translateY(-40px) !important; }
+  .fc-5 {
+    transform: rotate(12deg) translateX(180%);
+    z-index: 10;
+  }
+  .fc-5:hover {
+    transform: rotate(0) translateX(180%) translateY(-40px) !important;
+  }
 
   /* GRID ALIGNMENT FOR BOTTOM SECTION */
   .hero-bottom-grid {
@@ -109,81 +183,165 @@
     padding: 0 48px; /* Mismo padding horizontal que el resto */
     margin: 0 auto;
   }
-  
+
   .hero-desc {
     grid-column: 2;
     max-width: 600px;
     font-size: 1rem;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255, 255, 255, 0.9);
     line-height: 1.5;
     margin: 0;
     text-align: center;
   }
-  
+
   .hero-btn-container {
     grid-column: 3;
     display: flex;
     justify-content: flex-end;
   }
-  
+
   .hero-btn-white {
-    background: white; color: #0F172A;
-    padding: 16px 36px; border-radius: 50px;
-    font-weight: 800; font-size: 0.95rem;
+    background: white;
+    color: #0f172a;
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-weight: 800;
+    font-size: 0.95rem;
     text-decoration: none;
-    display: inline-flex; align-items: center; justify-content: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
   }
-  .hero-btn-white:hover { transform: translateY(-3px); box-shadow: 0 12px 24px rgba(0,0,0,0.3); background: #f8fafc; }
-  
+  .hero-btn-white:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    background: #f8fafc;
+  }
+
   @media (max-width: 1024px) {
-    .hero-red-container { margin: 100px 24px 40px; }
-    .fan-card { width: 170px; height: 260px; margin-top: -130px; margin-left: -85px; }
-    .fc-3 { width: 210px; height: 300px; margin-top: -150px; margin-left: -105px; }
-    .fc-3 .fan-title { font-size: 1.3rem; }
-    .fc-1 { transform: rotate(-8deg) translateX(-140%); }
-    .fc-5 { transform: rotate(8deg) translateX(140%); }
-    .hero-bottom-grid { padding: 0 24px; }
+    .hero-red-container {
+      margin: 100px 24px 40px;
+    }
+    .fan-card {
+      width: 170px;
+      height: 260px;
+      margin-top: -130px;
+      margin-left: -85px;
+    }
+    .fc-3 {
+      width: 210px;
+      height: 300px;
+      margin-top: -150px;
+      margin-left: -105px;
+    }
+    .fc-3 .fan-title {
+      font-size: 1.3rem;
+    }
+    .fc-1 {
+      transform: rotate(-8deg) translateX(-140%);
+    }
+    .fc-5 {
+      transform: rotate(8deg) translateX(140%);
+    }
+    .hero-bottom-grid {
+      padding: 0 24px;
+    }
   }
-  
+
   @media (max-width: 768px) {
-    .hero-red-container { margin: 100px 20px 30px; border-radius: 40px; padding: 50px 16px 40px; width: auto; }
-    .hero-red-container h1 { font-size: 2.2rem; margin-bottom: 40px; }
-    .hero-bottom-grid { grid-template-columns: 1fr; gap: 24px; }
-    .hero-desc { grid-column: 1; max-width: 100%; font-size: 0.95rem; }
-    .hero-btn-container { grid-column: 1; justify-content: center; }
-    .fan-container { height: 280px; perspective: 800px; margin-bottom: 30px; }
-    .fan-card { width: 130px; height: 190px; margin-top: -95px; margin-left: -65px; }
-    .fc-3 { width: 150px; height: 210px; margin-top: -105px; margin-left: -75px; }
-    .fc-3 .fan-title { font-size: 1.1rem; }
-    .fan-card-content { padding: 40px 12px 16px; }
-    .fan-title { font-size: 0.9rem; }
-    .fc-1 { transform: rotate(-6deg) translateX(-130%); }
-    .fc-2 { transform: rotate(-4deg) translateX(-70%); }
-    .fc-4 { transform: rotate(4deg) translateX(70%); }
-    .fc-5 { transform: rotate(6deg) translateX(130%); }
+    .hero-red-container {
+      margin: 100px 20px 30px;
+      border-radius: 40px;
+      padding: 50px 16px 40px;
+      width: auto;
+    }
+    .hero-red-container h1 {
+      font-size: 2.2rem;
+      margin-bottom: 40px;
+    }
+    .hero-bottom-grid {
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+    .hero-desc {
+      grid-column: 1;
+      max-width: 100%;
+      font-size: 0.95rem;
+    }
+    .hero-btn-container {
+      grid-column: 1;
+      justify-content: center;
+    }
+    .fan-container {
+      height: 280px;
+      perspective: 800px;
+      margin-bottom: 30px;
+    }
+    .fan-card {
+      width: 130px;
+      height: 190px;
+      margin-top: -95px;
+      margin-left: -65px;
+    }
+    .fc-3 {
+      width: 150px;
+      height: 210px;
+      margin-top: -105px;
+      margin-left: -75px;
+    }
+    .fc-3 .fan-title {
+      font-size: 1.1rem;
+    }
+    .fan-card-content {
+      padding: 40px 12px 16px;
+    }
+    .fan-title {
+      font-size: 0.9rem;
+    }
+    .fc-1 {
+      transform: rotate(-6deg) translateX(-130%);
+    }
+    .fc-2 {
+      transform: rotate(-4deg) translateX(-70%);
+    }
+    .fc-4 {
+      transform: rotate(4deg) translateX(70%);
+    }
+    .fc-5 {
+      transform: rotate(6deg) translateX(130%);
+    }
   }
-  
+
   @media (max-width: 480px) {
-    .fc-1, .fc-5 { display: none; } /* On very small screens, only show 3 to avoid overflow */
-    .fc-2 { transform: rotate(-6deg) translateX(-100%); }
-    .fc-4 { transform: rotate(6deg) translateX(100%); }
+    .fc-1,
+    .fc-5 {
+      display: none;
+    } /* On very small screens, only show 3 to avoid overflow */
+    .fc-2 {
+      transform: rotate(-6deg) translateX(-100%);
+    }
+    .fc-4 {
+      transform: rotate(6deg) translateX(100%);
+    }
   }
 </style>
 
 <div class="hero-red-container">
-
-  <h1>Tu tienda de <strong>todo</strong><br>lo que necesitas.</h1>
+  <h1>
+    Tu tienda de <strong>todo</strong><br>
+    lo que necesitas.
+  </h1>
 
   <div class="fan-container">
     {%- if section.blocks.size > 0 -%}
       {% for block in section.blocks limit: 5 %}
         {% assign col = collections[block.settings.collection] %}
-        
+
         {%- assign card_link = '#' -%}
         {%- assign card_title = 'Categoría ' | append: forloop.index -%}
         {%- assign card_image_url = '' -%}
-        
+
         {%- if block.settings.product_type != blank -%}
           {%- assign encoded_type = block.settings.product_type | url_encode -%}
           {%- assign card_link = '/collections/all?filter.p.product_type=' | append: encoded_type -%}
@@ -195,21 +353,25 @@
           {%- assign card_link = col.url -%}
           {%- assign card_title = block.settings.title | default: col.title -%}
           {%- if block.settings.image != blank -%}
-             {%- assign card_image_url = block.settings.image | image_url: width: 600, height: 800, crop: 'center' -%}
+            {%- assign card_image_url = block.settings.image | image_url: width: 600, height: 800, crop: 'center' -%}
           {%- elsif col.image -%}
             {%- assign card_image_url = col.image | image_url: width: 600, height: 800, crop: 'center' -%}
           {%- elsif col.products.first.featured_image -%}
-            {%- assign card_image_url = col.products.first.featured_image | image_url: width: 600, height: 800, crop: 'center' -%}
+            {%- assign card_image_url = col.products.first.featured_image
+              | image_url: width: 600, height: 800, crop: 'center'
+            -%}
           {%- endif -%}
         {%- endif -%}
 
         <a href="{{ card_link }}" class="fan-card fc-{{ forloop.index }}" {{ block.shopify_attributes }}>
           {% if card_image_url != blank %}
-            <img src="{{ card_image_url }}" alt="{{ card_title }}" loading="lazy">
+            <img src="{{ card_image_url }}" alt="{{ card_title }}" width="600" height="800" loading="lazy">
           {% else %}
-            <div style="width:100%; height:100%; background: #e2e8f0; display:flex; align-items:center; justify-content:center; color:#64748b;">Colección</div>
+            <div style="width:100%; height:100%; background: #e2e8f0; display:flex; align-items:center; justify-content:center; color:#64748b;">
+              Colección
+            </div>
           {% endif %}
-          
+
           <div class="fan-card-content">
             {% if forloop.index == 3 %}
               <span class="fc-3-tag">Destacado</span>
@@ -221,21 +383,29 @@
     {%- else -%}
       <!-- Mockup states if no collections are selected -->
       {% for i in (1..5) %}
-      <a href="#" class="fan-card fc-{{ i }}">
-         <div style="width:100%; height:100%; background: {% if i == 3 %}#1E293B{% elsif i == 2 or i == 4 %}#475569{% else %}#94A3B8{% endif %}; display:flex; align-items:center; justify-content:center; flex-direction:column; color:white;">
-           <span style="opacity:0.3; font-size:3rem;">📷</span>
-         </div>
-         <div class="fan-card-content" {% if i == 3 %}style="text-align:center;"{% endif %}>
-           {% if i == 3 %}<span class="fc-3-tag">Destacado</span>{% endif %}
-           <h3 class="fan-title">Categoría {{ i }}</h3>
-         </div>
-      </a>
+        <a href="#" class="fan-card fc-{{ i }}">
+          <div style="width:100%; height:100%; background: {% if i == 3 %}#1E293B{% elsif i == 2 or i == 4 %}#475569{% else %}#94A3B8{% endif %}; display:flex; align-items:center; justify-content:center; flex-direction:column; color:white;">
+            <span style="opacity:0.3; font-size:3rem;">📷</span>
+          </div>
+          <div
+            class="fan-card-content"
+            {% if i == 3 %}
+              style="text-align:center;"
+            {% endif %}
+          >
+            {% if i == 3 -%}
+              <span class="fc-3-tag">Destacado</span>
+            {%- endif %}
+            <h3 class="fan-title">Categoría {{ i }}</h3>
+          </div>
+        </a>
       {% endfor %}
     {%- endif -%}
   </div>
 
   <div class="hero-bottom-grid">
-    <div></div> <!-- Empty left column for center alignment -->
+    <div></div>
+    <!-- Empty left column for center alignment -->
     <p class="hero-desc">
       {{ section.settings.subheading }}
     </p>

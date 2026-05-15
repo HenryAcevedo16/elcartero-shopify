@@ -211,6 +211,8 @@
                 <img src="{{ product.featured_image | image_url: width: 600 }}"
                      alt="{{ product.title }}"
                      loading="lazy"
+                     width="600"
+                     height="600"
                      style="width:100%; height:100%; object-fit:cover; display:block;">
               {% else %}
                 <span>📦</span>
@@ -242,7 +244,7 @@
                   <span class="prod-price-now">{{ product.price | money }}</span>
                 </div>
                 <p class="prod-shipping">Envío GRATIS</p>
-                <form method="post" action="/cart/add" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
+                <form method="post" action="{{ routes.cart_add_url }}" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
                   <input type="hidden" name="id" value="{{ product.variants.first.id }}">
                   <input type="hidden" name="quantity" value="1">
                   <div class="prod-actions">

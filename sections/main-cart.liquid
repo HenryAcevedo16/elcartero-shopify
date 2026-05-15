@@ -1,6 +1,5 @@
 {% comment %} CART PAGE — El Cartero {% endcomment %}
 {{ 'pedido.css' | asset_url | stylesheet_tag }}
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <style>
   .cart-layout {
@@ -600,7 +599,7 @@
             >
               <div
                 class="oi-img"
-                style="background-image:url('{{ item.image | img_url: 'small' }}'); background-size:cover; background-position:center; width:60px; height:60px; border-radius:8px; flex-shrink:0; position:relative;"
+                style="background-image:url('{{ item.image | image_url: width: 120 }}'); background-size:cover; background-position:center; width:60px; height:60px; border-radius:8px; flex-shrink:0; position:relative;"
               >
                 <span
                   class="oi-qty"
@@ -705,7 +704,7 @@
           </button>
         </div>
         <div style="display: flex; justify-content: space-between; align-items: center;">
-          <a href="/collections/all" style="color:#7b2cbf; text-decoration:none; font-weight:700; font-size:0.95rem;"
+          <a href="{{ routes.all_products_collection_url }}" style="color:#7b2cbf; text-decoration:none; font-weight:700; font-size:0.95rem;"
             >← Seguir comprando</a
           >
           <button
@@ -962,7 +961,7 @@
 
         <div style="margin-top: 40px;">
           <a
-            href="/collections/all"
+            href="{{ routes.all_products_collection_url }}"
             class="btn-submit"
             style="display:inline-block; width: max-content; background:#dc2626; color:#fff; border:none; padding:16px 32px; border-radius:12px; font-weight:800; font-size:1rem; cursor:pointer; text-decoration:none; text-align:center;"
           >
@@ -980,7 +979,7 @@
     <h2 style="font-size:1.4rem; font-weight:700; margin-bottom:12px;">Tu carrito está vacío</h2>
     <p style="color:var(--muted); margin-bottom:28px;">¡Agrega algunos productos para empezar!</p>
     <a
-      href="/collections/all"
+      href="{{ routes.all_products_collection_url }}"
       class="btn-main"
       style="text-decoration:none; padding: 14px 32px; border-radius: 12px; background: #dc2626; color: #fff; font-weight: 800;"
       >Explorar tienda →</a
@@ -999,7 +998,7 @@
         quantity:   {{ item.quantity }},
         title:      "{{ item.product.title | escape }}",
         price:      "{{ item.line_price | money }}",
-        image:      "{{ item.image | img_url: 'small' }}"
+        image:      "{{ item.image | image_url: width: 120 }}"
       }{% unless forloop.last %},{% endunless %}
     {% endfor %}
   ];

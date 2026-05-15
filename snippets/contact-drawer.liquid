@@ -1,0 +1,101 @@
+{%- comment -%} snippets/contact-drawer.liquid {%- endcomment -%}
+
+<div id="cdBackdrop" class="cd-backdrop" aria-hidden="true"></div>
+
+<div id="contactDrawer" class="cd-drawer" role="dialog" aria-modal="true" aria-labelledby="cdTitle">
+  <div class="cd-stripe"></div>
+  <div class="cd-scroller">
+
+    <!-- HEADER: logo + close -->
+    <div class="cd-header">
+      <div class="cd-logo">
+        <img src="{{ 'logo-principal.svg' | asset_url }}" alt="{{ shop.name }}" class="cd-logo-img" width="130" height="32" loading="lazy">
+      </div>
+      <button id="cdClose" class="cd-close-btn" aria-label="Cerrar">✕</button>
+    </div>
+
+    <!-- HERO: big title + subtitle -->
+    <div class="cd-hero" data-animate>
+      <h2 id="cdTitle" class="cd-big-title">
+        ¿Tienes alguna<br><span class="cd-big-title-red">duda?</span>
+      </h2>
+      <p class="cd-subtitle">Escríbenos y te respondemos rápido — normalmente antes de 24&nbsp;horas.</p>
+    </div>
+
+    {% form 'contact', id: 'cdContactForm', class: 'cd-form' %}
+
+      <div class="cd-form-grid" id="cdFormGrid">
+
+        <!-- Nombre -->
+        <div class="cd-field" data-animate>
+          <label class="cd-label" for="cdName">TU NOMBRE <span class="cd-req">*</span></label>
+          <input class="cd-input" type="text" id="cdName" name="contact[name]" autocomplete="name" placeholder="Ej: María Pérez">
+          <span class="cd-error-msg" id="cdNameErr">Por favor ingresa tu nombre</span>
+        </div>
+
+        <!-- Teléfono -->
+        <div class="cd-field" data-animate>
+          <label class="cd-label" for="cdPhone">WHATSAPP / TELÉFONO</label>
+          <input class="cd-input" type="text" id="cdPhone" name="contact[phone]" autocomplete="tel" placeholder="Ej: 809-555-0000">
+        </div>
+
+        <!-- Email -->
+        <div class="cd-field cd-field--full" data-animate>
+          <label class="cd-label" for="cdEmail">CORREO ELECTRÓNICO <span class="cd-req">*</span></label>
+          <input class="cd-input" type="email" id="cdEmail" name="contact[email]" autocomplete="email" placeholder="tucorreo@gmail.com">
+          <span class="cd-error-msg" id="cdEmailErr">Ingresa un correo válido</span>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="cd-field cd-field--full" data-animate>
+          <span class="cd-label">¿SOBRE QUÉ ES TU CONSULTA? <span class="cd-req">*</span></span>
+          <div class="cd-checks-grid">
+            {%- assign check_opts = "Disponibilidad de producto,Estado de mi pedido,Envíos y tiempo de entrega,Devolución / cambio,Precios y ofertas,Métodos de pago,Otra consulta" | split: "," -%}
+            {%- for opt in check_opts -%}
+              <label class="cd-check">
+                <input type="checkbox" class="cd-check-raw" value="{{ opt }}">
+                <span class="cd-check-box"></span>
+                <span class="cd-check-text">{{ opt }}</span>
+              </label>
+            {%- endfor -%}
+          </div>
+        </div>
+
+        <!-- Mensaje -->
+        <div class="cd-field cd-field--full" data-animate>
+          <label class="cd-label" for="cdBody">CUÉNTANOS TU CONSULTA <span class="cd-req">*</span></label>
+          <textarea class="cd-input cd-textarea" id="cdBody" name="contact[body]" rows="4"
+            placeholder="Ej: ¿Tienen disponible la camisa talla M en azul? / Mi pedido #1234 no ha llegado..."></textarea>
+          <span class="cd-error-msg" id="cdBodyErr">Por favor escribe tu mensaje</span>
+        </div>
+
+      </div><!-- /cd-form-grid -->
+
+      <!-- FOOTER -->
+      <div class="cd-footer" id="cdFooter" data-animate>
+        <button type="submit" id="cdSubmit" class="cd-btn-submit">
+          <span>Enviar consulta</span>
+        </button>
+        <div class="cd-wa-block">
+          <p class="cd-wa-label">¿PREFIERES WHATSAPP?</p>
+          <a class="cd-wa-cta" href="https://wa.me/18091234567" target="_blank" rel="noopener">Escríbenos directo</a>
+        </div>
+      </div>
+
+    {% endform %}
+
+    <!-- SUCCESS -->
+    <div class="cd-success" id="cdSuccess">
+      <div class="cd-success-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="52" height="52" viewBox="0 0 24 24" fill="none"
+             stroke="#D42B2B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+      </div>
+      <p class="cd-success-title">¡Mensaje recibido!</p>
+      <p class="cd-success-sub">Te respondemos pronto. 🛍️</p>
+    </div>
+
+  </div><!-- /cd-scroller -->
+</div>
