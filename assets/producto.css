@@ -74,7 +74,10 @@
   padding-bottom: 4px;
   scrollbar-width: none;
 }
-.gallery-thumbs::-webkit-scrollbar { display: none; }
+
+.gallery-thumbs::-webkit-scrollbar {
+  display: none;
+}
 
 .thumb {
   flex-shrink: 0;
@@ -91,10 +94,21 @@
   font-size: 2rem;
 }
 
-.thumb-bg1 { background: linear-gradient(135deg, #e8f4fd, #cce5f8); }
-.thumb-bg2 { background: linear-gradient(135deg, #e8fdf0, #c0f0d4); }
-.thumb-bg3 { background: linear-gradient(135deg, #fdf5e8, #fae5c0); }
-.thumb-bg4 { background: linear-gradient(135deg, #f0e8fd, #dcc0f8); }
+.thumb-bg1 {
+  background: linear-gradient(135deg, #e8f4fd, #cce5f8);
+}
+
+.thumb-bg2 {
+  background: linear-gradient(135deg, #e8fdf0, #c0f0d4);
+}
+
+.thumb-bg3 {
+  background: linear-gradient(135deg, #fdf5e8, #fae5c0);
+}
+
+.thumb-bg4 {
+  background: linear-gradient(135deg, #f0e8fd, #dcc0f8);
+}
 
 .thumb.active {
   border-color: var(--dark);
@@ -129,9 +143,20 @@
   text-transform: uppercase;
 }
 
-.pb-elec  { background: #e8f0fe; color: #3f51b5; }
-.pb-stock { background: #e8f5e9; color: #2e7d32; }
-.pb-new   { background: var(--dark); color: white; }
+.pb-elec {
+  background: #e8f0fe;
+  color: #3f51b5;
+}
+
+.pb-stock {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.pb-new {
+  background: var(--dark);
+  color: white;
+}
 
 /* Título */
 .prod-title {
@@ -152,14 +177,34 @@
   flex-wrap: wrap;
 }
 
-.rating-stars { color: #f5b800; font-size: 1.05rem; letter-spacing: -2px; }
-.rating-num   { font-size: 0.85rem; font-weight: 700; color: var(--dark); }
-.rating-count { font-size: 0.78rem; color: var(--muted); }
-.rating-link  {
-  font-size: 0.75rem; font-weight: 600;
-  color: var(--red); text-decoration: none; margin-left: 4px;
+.rating-stars {
+  color: #f5b800;
+  font-size: 1.05rem;
+  letter-spacing: -2px;
 }
-.rating-link:hover { text-decoration: underline; }
+
+.rating-num {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.rating-count {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.rating-link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--red);
+  text-decoration: none;
+  margin-left: 4px;
+}
+
+.rating-link:hover {
+  text-decoration: underline;
+}
 
 /* Bloque de precios */
 .price-block {
@@ -240,7 +285,7 @@
 
 .color-dot.selected {
   border-color: var(--dark);
-  box-shadow: 0 0 0 3px rgba(26,46,30,0.15);
+  box-shadow: 0 0 0 3px rgba(26, 46, 30, 0.15);
   transform: scale(1.08);
 }
 
@@ -312,8 +357,11 @@
   -moz-appearance: textfield;
   appearance: textfield;
 }
+
 .qty-num::-webkit-inner-spin-button,
-.qty-num::-webkit-outer-spin-button { -webkit-appearance: none; }
+.qty-num::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
 
 /* ── BOTONES DE ACCIÓN ── */
 .action-btns {
@@ -356,6 +404,7 @@
   flex: 1;
   min-width: 160px;
 }
+
 .shopify-payment-button__button {
   border-radius: 16px !important;
   font-family: 'Poppins', sans-serif !important;
@@ -364,6 +413,7 @@
   padding: 16px 28px !important;
   transition: transform 0.2s, box-shadow 0.2s !important;
 }
+
 .shopify-payment-button__button:hover {
   transform: translateY(-2px) !important;
 }
@@ -415,7 +465,19 @@
   box-shadow: var(--shadow);
 }
 
-.trust-chip-icon { font-size: 1.3rem; flex-shrink: 0; }
+.trust-chip-icon {
+  font-size: 1.3rem;
+  flex-shrink: 0;
+  color: #dc2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trust-chip-icon svg {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
 
 .trust-chip-text {
   font-size: 0.72rem;
@@ -455,7 +517,9 @@
   border-radius: 8px 8px 0 0;
 }
 
-.tab-btn:hover { color: var(--dark); }
+.tab-btn:hover {
+  color: var(--dark);
+}
 
 .tab-btn.active {
   color: var(--dark);
@@ -463,12 +527,25 @@
   font-weight: 700;
 }
 
-.tab-panel { display: none; }
-.tab-panel.active { display: block; animation: fadeInTab 0.3s ease; }
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+  animation: fadeInTab 0.3s ease;
+}
 
 @keyframes fadeInTab {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: none; }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .desc-text {
@@ -478,20 +555,27 @@
   max-width: 680px;
 }
 
-.desc-text h1, .desc-text h2, .desc-text h3 {
+.desc-text h1,
+.desc-text h2,
+.desc-text h3 {
   color: var(--dark);
   margin-top: 24px;
   margin-bottom: 8px;
 }
 
-.desc-text ul, .desc-text ol {
+.desc-text ul,
+.desc-text ol {
   padding-left: 20px;
   margin-top: 8px;
 }
 
-.desc-text li { margin-bottom: 6px; }
+.desc-text li {
+  margin-bottom: 6px;
+}
 
-.desc-text p { margin-bottom: 12px; }
+.desc-text p {
+  margin-bottom: 12px;
+}
 
 /* ── EMPTY STATE: producto sin descripción ── */
 .desc-empty {
@@ -503,8 +587,14 @@
   text-align: center;
   color: var(--muted);
 }
-.desc-empty-icon { font-size: 3.5rem; }
-.desc-empty p { font-size: 0.85rem; }
+
+.desc-empty-icon {
+  font-size: 3.5rem;
+}
+
+.desc-empty p {
+  font-size: 0.85rem;
+}
 
 /* ══════════════════════════════════════════
    SECCIÓN "También te puede gustar" / Relacionados
@@ -515,13 +605,16 @@
   width: 100%;
 }
 
-.row-header { 
-  display: flex; 
-  justify-content: space-between; 
-  align-items: flex-end; 
-  margin-bottom: 32px; 
+.row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 32px;
 }
-.row-header .section-title { margin-bottom: 0; }
+
+.row-header .section-title {
+  margin-bottom: 0;
+}
 
 /* ══════════════════════════════════════════
    RESPONSIVE
@@ -541,6 +634,7 @@
   .tabs-section {
     padding: 0 20px;
   }
+
   .products-wrap {
     padding: 40px 20px;
   }
@@ -567,12 +661,22 @@
 }
 
 @media (max-width: 480px) {
-  .prod-title { font-size: 1.4rem; }
+  .prod-title {
+    font-size: 1.4rem;
+  }
 
-  .qty-btn    { width: 40px; height: 40px; }
-  .qty-num    { width: 40px; }
+  .qty-btn {
+    width: 40px;
+    height: 40px;
+  }
 
-  .trust-chip-text { font-size: 0.68rem; }
+  .qty-num {
+    width: 40px;
+  }
+
+  .trust-chip-text {
+    font-size: 0.68rem;
+  }
 
   .tab-btn {
     padding: 12px 14px;

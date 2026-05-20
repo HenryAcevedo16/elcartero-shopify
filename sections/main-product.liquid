@@ -10,13 +10,19 @@
 
 <!-- PRODUCT -->
 <div class="product-section">
-
   <!-- GALLERY -->
   <div class="gallery reveal">
     <div class="gallery-main">
       <div class="gm-bg" id="mainImg">
         {% if product.featured_image %}
-          <img src="{{ product.featured_image | image_url: width: 1024 }}" alt="{{ product.title }}" width="1024" height="1024" style="width:100%; height:100%; object-fit:contain;" id="FeaturedImage">
+          <img
+            src="{{ product.featured_image | image_url: width: 1024 }}"
+            alt="{{ product.title }}"
+            width="1024"
+            height="1024"
+            style="width:100%; height:100%; object-fit:contain;"
+            id="FeaturedImage"
+          >
         {% else %}
           <span id="mainEmoji"></span>
         {% endif %}
@@ -25,14 +31,25 @@
         <span class="gm-label">Oferta</span>
       {% endif %}
     </div>
-    
+
     {% if product.images.size > 1 %}
-    <div class="gallery-thumbs">
-      {% for image in product.images %}
-        <div class="thumb thumb-bg{{ forloop.index | modulo: 4 | plus: 1 }} {% if forloop.first %}active{% endif %}" onclick="setThumb(this, '{{ image | image_url: width: 1024 }}')">           <img src="{{ image | image_url: width: 160 }}" alt="{{ product.title }}" width="160" height="160" loading="lazy" style="width:100%; height:100%; object-fit:contain; border-radius:10px;">
-        </div>
-      {% endfor %}
-    </div>
+      <div class="gallery-thumbs">
+        {% for image in product.images %}
+          <div
+            class="thumb thumb-bg{{ forloop.index | modulo: 4 | plus: 1 }} {% if forloop.first %}active{% endif %}"
+            onclick="setThumb(this, '{{ image | image_url: width: 1024 }}')"
+          >
+            <img
+              src="{{ image | image_url: width: 160 }}"
+              alt="{{ product.title }}"
+              width="160"
+              height="160"
+              loading="lazy"
+              style="width:100%; height:100%; object-fit:contain; border-radius:10px;"
+            >
+          </div>
+        {% endfor %}
+      </div>
     {% endif %}
   </div>
 
@@ -46,9 +63,9 @@
         <span class="pbadge pb-new" style="background:var(--muted)">Agotado</span>
       {% endif %}
     </div>
-    
+
     <h1 class="prod-title">{{ product.title }}</h1>
-    
+
     <div class="prod-rating-row">
       <span class="rating-stars" style="color:#ddd;" title="Sin reseñas todavía">★★★★★</span>
       <a href="#reviews" class="rating-link">Ver reseñas →</a>
@@ -68,19 +85,21 @@
 
     <div class="section-divider"></div>
 
-    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" id="AddToCartForm" class="ajax-cart-form" data-type="pdp">
-      
+    <form
+      action="{{ routes.cart_add_url }}"
+      method="post"
+      enctype="multipart/form-data"
+      id="AddToCartForm"
+      class="ajax-cart-form"
+      data-type="pdp"
+    >
       <!-- Variantes Selector Oculto usado por Shopify -->
       <select name="id" id="productSelect" style="display:none;">
         {% for variant in product.variants %}
           {% if variant.available %}
-            <option value="{{ variant.id }}">
-              {{ variant.title }} - {{ variant.price | money_with_currency }}
-            </option>
+            <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
           {% else %}
-            <option disabled="disabled">
-              {{ variant.title }} - Agotado
-            </option>
+            <option disabled="disabled">{{ variant.title }} - Agotado</option>
           {% endif %}
         {% endfor %}
       </select>
@@ -89,13 +108,28 @@
       {% unless product.has_only_default_variant %}
         {% for option in product.options_with_values %}
           <div class="variant-wrapper" style="margin-bottom: 24px;">
-            <p class="opt-label" style="margin-top:4px;">{{ option.name }}: <strong style="color:var(--dark);text-transform:none;letter-spacing:0;" id="{{ option.name }}-Name">{{ option.values.first }}</strong></p>
+            <p class="opt-label" style="margin-top:4px;">
+              {{ option.name }}:
+              <strong style="color:var(--dark);text-transform:none;letter-spacing:0;" id="{{ option.name }}-Name">
+                {{- option.values.first -}}
+              </strong>
+            </p>
             <div class="color-opts" id="opts-{{ option.name | handleize }}">
               {% for value in option.values %}
-                <label class="color-dot {% if forloop.first %}selected{% endif %}"
-                       style="background: var(--sand); display:flex; justify-content:center; align-items:center;"
-                       onclick="selectOpt(this, '{{ option.name | escape }}', '{{ value | escape }}')">
-                  <input type="radio" value="{{ value | escape }}" name="{{ option.name }}" {% if forloop.first %}checked{% endif %} style="display:none;">
+                <label
+                  class="color-dot {% if forloop.first %}selected{% endif %}"
+                  style="background: var(--sand); display:flex; justify-content:center; align-items:center;"
+                  onclick="selectOpt(this, '{{ option.name | escape }}', '{{ value | escape }}')"
+                >
+                  <input
+                    type="radio"
+                    value="{{ value | escape }}"
+                    name="{{ option.name }}"
+                    {% if forloop.first %}
+                      checked
+                    {% endif %}
+                    style="display:none;"
+                  >
                   <span style="font-size: 0.6rem; font-weight:700;">{{ value | slice: 0, 3 }}</span>
                 </label>
               {% endfor %}
@@ -109,40 +143,128 @@
         <span class="qty-label">Cantidad</span>
         <div class="qty-ctrl">
           <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepDown()">−</button>
-          <input type="number" id="Quantity" name="quantity" value="1" min="1" class="qty-num" style="min-width:40px; text-align:center; font-size:.9rem; font-weight:700; border:none; outline:none; -moz-appearance:textfield;">
+          <input
+            type="number"
+            id="Quantity"
+            name="quantity"
+            value="1"
+            min="1"
+            class="qty-num"
+            style="min-width:40px; text-align:center; font-size:.9rem; font-weight:700; border:none; outline:none; -moz-appearance:textfield;"
+          >
           <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepUp()">+</button>
         </div>
       </div>
 
       <!-- Action buttons -->
       <div class="action-btns">
-        <button type="submit" name="add" id="AddToCart" class="btn-addcart" {% unless product.available %}disabled="disabled"{% endunless %}>
+        <button
+          type="submit"
+          name="add"
+          id="AddToCart"
+          class="btn-addcart"
+          {% unless product.available %}
+            disabled="disabled"
+          {% endunless %}
+        >
           <span id="AddToCartText">
             {% if product.available %}Agregar al carrito{% else %}Agotado{% endif %}
           </span>
         </button>
         {% if product.available %}
-          <button type="button" onclick="const f=document.getElementById('AddToCartForm'); f.classList.remove('ajax-cart-form'); sessionStorage.setItem('cart_step', '2'); let r=document.createElement('input'); r.type='hidden'; r.name='return_to'; r.value='/cart'; f.appendChild(r); f.submit();" class="btn-red" style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;">
+          <button
+            type="button"
+            onclick="const f=document.getElementById('AddToCartForm'); f.classList.remove('ajax-cart-form'); sessionStorage.setItem('cart_step', '2'); let r=document.createElement('input'); r.type='hidden'; r.name='return_to'; r.value='/cart'; f.appendChild(r); f.submit();"
+            class="btn-red"
+            style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;"
+          >
             Comprar ahora
           </button>
         {% endif %}
-        <button type="button" class="btn-wish" id="WishBtn"
-                data-wish-id="{{ product.id }}"
-                data-wish-title="{{ product.title | escape }}"
-                data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
-                data-wish-price="{{ product.price | money }}"
-                data-wish-url="{{ product.url }}"
-                onclick="toggleWish(this)"
-                aria-label="Guardar en favoritos">♡</button>
+        <button
+          type="button"
+          class="btn-wish"
+          id="WishBtn"
+          data-wish-id="{{ product.id }}"
+          data-wish-title="{{ product.title | escape }}"
+          data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
+          data-wish-price="{{ product.price | money }}"
+          data-wish-url="{{ product.url }}"
+          onclick="toggleWish(this)"
+          aria-label="Guardar en favoritos"
+        >
+          ♡
+        </button>
       </div>
-
     </form>
 
     <!-- Trust -->
     <div class="trust-row">
-      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Envío gratis<br>a tu puerta</span></div>
-      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Devolución<br>30 días</span></div>
-      <div class="trust-chip"><span class="trust-chip-icon"></span><span class="trust-chip-text">Pago contra<br>entrega</span></div>
+      <div class="trust-chip">
+        <span class="trust-chip-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="1" y="3" width="15" height="13"></rect>
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon>
+            <circle cx="5.5" cy="18.5" r="2.5"></circle>
+            <circle cx="18.5" cy="18.5" r="2.5"></circle>
+          </svg>
+        </span>
+        <span class="trust-chip-text">
+          Envío gratis<br>a tu puerta
+        </span>
+      </div>
+
+      <div class="trust-chip">
+        <span class="trust-chip-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 14 4 9 9 4"></polyline>
+            <path d="M20 20v-7a4 4 0 0 0-4-4H4"></path>
+          </svg>
+        </span>
+        <span class="trust-chip-text">
+          Devolución<br>30 días
+        </span>
+      </div>
+
+      <div class="trust-chip">
+        <span class="trust-chip-icon">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+            <circle cx="12" cy="12" r="2"></circle>
+            <path d="M6 12h.01M18 12h.01"></path>
+          </svg>
+        </span>
+        <span class="trust-chip-text">
+          Pago contra<br>entrega
+        </span>
+      </div>
     </div>
   </div>
 </div>
@@ -165,7 +287,10 @@
 
   <div class="tab-panel" id="panel-specs">
     <div class="desc-text">
-       <p>El formato del peso del producto es {{ product.weight | weight_with_unit }}. Otras especificaciones se añadirían vía Metafields.</p>
+      <p>
+        El formato del peso del producto es {{ product.weight | weight_with_unit }}. Otras especificaciones se añadirían
+        vía Metafields.
+      </p>
     </div>
   </div>
 
@@ -198,10 +323,17 @@
         </div>
         <div class="form-group span2">
           <label class="form-label" for="rComentario">Comentario</label>
-          <textarea class="form-inp" id="rComentario" style="min-height:90px;resize:vertical;" placeholder="¿Cómo fue tu experiencia?"></textarea>
+          <textarea
+            class="form-inp"
+            id="rComentario"
+            style="min-height:90px;resize:vertical;"
+            placeholder="¿Cómo fue tu experiencia?"
+          ></textarea>
         </div>
       </div>
-      <button onclick="enviarResena()" class="btn-main" style="margin-top:16px;width:100%;text-align:center;">Enviar reseña</button>
+      <button onclick="enviarResena()" class="btn-main" style="margin-top:16px;width:100%;text-align:center;">
+        Enviar reseña
+      </button>
     </div>
   </div>
 </div>
@@ -212,7 +344,9 @@
     <div class="row-header reveal" style="opacity: 1; transform: none; margin-bottom: 32px;">
       <div>
         <p class="section-eyebrow">Relacionados</p>
-        <h2 class="section-title">Más de <span style="color:var(--red);">{{ product.type }}</span></h2>
+        <h2 class="section-title">
+          Más de <span style="color:var(--red);">{{ product.type }}</span>
+        </h2>
       </div>
     </div>
     <div class="prods-grid related-grid">
@@ -222,29 +356,39 @@
           {% if related.type == product.type and related.id != product.id %}
             {% assign count = count | plus: 1 %}
             <div class="prod reveal d{{ count | modulo: 4 | plus: 1 }}" style="position:relative;">
-              <a href="{{ related.url }}" style="position:absolute;inset:0;z-index:1;" aria-label="{{ related.title | escape }}"></a>
+              <a
+                href="{{ related.url }}"
+                style="position:absolute;inset:0;z-index:1;"
+                aria-label="{{ related.title | escape }}"
+              ></a>
               <div class="prod-thumb" style="background: #ffffff;">
                 {% if related.featured_image %}
-                   <img src="{{ related.featured_image | image_url: width: 600 }}"
-                        alt="{{ related.title }}"
-                        width="600"
-                        height="600"
-                        loading="lazy"
-                        style="width:100%; height:100%; object-fit:contain; display:block;">
+                  <img
+                    src="{{ related.featured_image | image_url: width: 600 }}"
+                    alt="{{ related.title }}"
+                    width="600"
+                    height="600"
+                    loading="lazy"
+                    style="width:100%; height:100%; object-fit:contain; display:block;"
+                  >
                 {% else %}
                   <span></span>
                 {% endif %}
                 {% if related.compare_at_price > related.price %}
                   <span class="prod-label lb-hot">Oferta</span>
                 {% endif %}
-                <button class="prod-wish-btn"
-                        data-wish-id="{{ related.id }}"
-                        data-wish-title="{{ related.title | escape }}"
-                        data-wish-img="{% if related.featured_image %}{{ related.featured_image | image_url: width: 400 }}{% endif %}"
-                        data-wish-price="{{ related.price | money }}"
-                        data-wish-url="{{ related.url }}"
-                        onclick="event.stopPropagation(); toggleWish(this)"
-                        aria-label="Guardar en favoritos">♡</button>
+                <button
+                  class="prod-wish-btn"
+                  data-wish-id="{{ related.id }}"
+                  data-wish-title="{{ related.title | escape }}"
+                  data-wish-img="{% if related.featured_image %}{{ related.featured_image | image_url: width: 400 }}{% endif %}"
+                  data-wish-price="{{ related.price | money }}"
+                  data-wish-url="{{ related.url }}"
+                  onclick="event.stopPropagation(); toggleWish(this)"
+                  aria-label="Guardar en favoritos"
+                >
+                  ♡
+                </button>
               </div>
               <div class="prod-info">
                 <a href="{{ related.url }}" style="text-decoration:none; color:inherit;">
@@ -258,12 +402,36 @@
                     <span class="prod-price-now">{{ related.price | money }}</span>
                   </div>
                   <p class="prod-shipping">Envío GRATIS</p>
-                  <form method="post" action="{{ routes.cart_add_url }}" class="ajax-cart-form" style="margin:0;width:100%;position:relative;z-index:2;">
+                  <form
+                    method="post"
+                    action="{{ routes.cart_add_url }}"
+                    class="ajax-cart-form"
+                    style="margin:0;width:100%;position:relative;z-index:2;"
+                  >
                     <input type="hidden" name="id" value="{{ related.variants.first.id }}">
                     <input type="hidden" name="quantity" value="1">
                     <div class="prod-actions">
-                      <button type="submit" name="add" class="prod-cart-btn" {% unless related.available %}disabled{% endunless %} title="Agregar al carrito">Carrito</button>
-                      <button type="button" class="prod-buy-btn" {% unless related.available %}disabled{% endunless %} onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ related.variants.first.id }}&quantity=1&return_to=/cart'">Comprar ahora</button>
+                      <button
+                        type="submit"
+                        name="add"
+                        class="prod-cart-btn"
+                        {% unless related.available %}
+                          disabled
+                        {% endunless %}
+                        title="Agregar al carrito"
+                      >
+                        Carrito
+                      </button>
+                      <button
+                        type="button"
+                        class="prod-buy-btn"
+                        {% unless related.available %}
+                          disabled
+                        {% endunless %}
+                        onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ related.variants.first.id }}&quantity=1&return_to=/cart'"
+                      >
+                        Comprar ahora
+                      </button>
                     </div>
                   </form>
                 </div>
@@ -290,22 +458,100 @@
       padding-bottom: 24px;
       gap: 20px;
     }
-    .related-grid::-webkit-scrollbar { height: 8px; }
-    .related-grid::-webkit-scrollbar-track { background: transparent; }
-    .related-grid::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-    .related-grid::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-    
+    .related-grid::-webkit-scrollbar {
+      height: 8px;
+    }
+    .related-grid::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .related-grid::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .related-grid::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
     .related-grid .prod {
       flex: 0 0 calc(25% - 15px) !important;
       scroll-snap-align: start;
     }
-    
+
     @media (max-width: 960px) {
-      .related-wrapper { padding: 0 20px !important; }
-      .related-grid .prod { flex: 0 0 calc(45% - 10px) !important; }
+      .related-wrapper {
+        padding: 0 20px !important;
+      }
+      .related-grid .prod {
+        flex: 0 0 calc(45% - 10px) !important;
+      }
     }
     @media (max-width: 500px) {
-      .related-grid .prod { flex: 0 0 calc(75% - 10px) !important; }
+      .related-grid .prod {
+        flex: 0 0 calc(75% - 10px) !important;
+      }
+    }
+
+    /* Trust Chips Styling */
+    .trust-row {
+      display: flex !important;
+      gap: 12px !important;
+      flex-wrap: wrap !important;
+      margin-top: 24px !important;
+      margin-bottom: 24px !important;
+      width: 100% !important;
+    }
+
+    .trust-chip {
+      display: flex !important;
+      align-items: center !important;
+      gap: 10px !important;
+      background: var(--white, #ffffff) !important;
+      border: 1.5px solid var(--sand, #e2e8f0) !important;
+      border-radius: 14px !important;
+      padding: 12px 16px !important;
+      flex: 1 !important;
+      min-width: 120px !important;
+      box-shadow: var(--shadow) !important;
+      justify-content: flex-start !important;
+    }
+
+    .trust-chip-icon {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      color: #dc2626 !important; /* brand red */
+      flex-shrink: 0 !important;
+      width: 24px !important;
+      height: 24px !important;
+    }
+
+    .trust-chip-icon svg {
+      width: 24px !important;
+      height: 24px !important;
+      display: block !important;
+    }
+
+    .trust-chip-text {
+      font-size: 0.72rem !important;
+      font-weight: 600 !important;
+      color: var(--dark, #0f172a) !important;
+      line-height: 1.4 !important;
+      text-align: left !important;
+    }
+
+    @media (max-width: 960px) {
+      .trust-row {
+        gap: 8px !important;
+      }
+      .trust-chip {
+        padding: 10px 12px !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .trust-chip-text {
+        font-size: 0.68rem !important;
+      }
     }
   </style>
 {% endif %}
