@@ -289,13 +289,13 @@
 .banner:hover { transform: scale(1.015); }
 .banner-a { background: var(--red); }
 .banner-b { background: var(--dark); }
-.bn-circle { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.08); }
+.bn-circle { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.08); pointer-events: none; }
 .bnc1 { width: 280px; height: 280px; top: -80px; right: -80px; }
 .bnc2 { width: 160px; height: 160px; bottom: -50px; left: 40px; }
 .bn-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.15); border-radius: 50px; padding: 5px 14px; font-size: 0.68rem; font-weight: 700; color: rgba(255,255,255,0.85); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 18px; }
 .bn-title { font-size: clamp(1.6rem, 2.5vw, 2.5rem); font-weight: 800; letter-spacing: -0.04em; color: white; line-height: 1.1; margin-bottom: 14px; }
 .bn-sub { font-size: 0.85rem; font-weight: 400; color: rgba(255,255,255,0.65); line-height: 1.6; margin-bottom: 28px; }
-.bn-btn { display: inline-flex; align-items: center; gap: 8px; background: white; border: none; border-radius: 12px; padding: 12px 24px; font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: transform 0.2s; }
+.bn-btn { display: inline-flex; align-items: center; gap: 8px; background: white; border: none; border-radius: 12px; padding: 12px 24px; font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 700; cursor: pointer; transition: transform 0.2s; position: relative; z-index: 2; }
 .bn-btn:hover { transform: scale(1.04); }
 .bn-btn.red  { color: var(--red); }
 .bn-btn.dark { color: var(--dark); }
