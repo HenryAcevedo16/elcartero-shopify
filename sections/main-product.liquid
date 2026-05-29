@@ -300,6 +300,8 @@
   </div>
 </div>
 
+{% content_for_blocks %}
+
 <!-- PRODUCTOS DE LA MISMA CATEGORÍA -->
 {% if product.type != blank %}
   <div class="products-wrap related-wrapper" style="margin-top: 60px;">
@@ -620,6 +622,11 @@ if (cartForm) {
 {% schema %}
 {
   "name": "Product Information",
-  "settings": []
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}
