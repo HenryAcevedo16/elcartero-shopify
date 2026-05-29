@@ -273,7 +273,6 @@
 <div class="tabs-section">
   <div class="tabs-header">
     <button class="tab-btn active" onclick="setTab(this,'desc')">Descripción</button>
-    <button class="tab-btn" onclick="setTab(this,'specs')">Especificaciones</button>
     <button class="tab-btn" onclick="setTab(this,'reviews')" id="reviewsTab">Reseñas</button>
   </div>
 
@@ -285,56 +284,19 @@
     </div>
   </div>
 
-  <div class="tab-panel" id="panel-specs">
-    <div class="desc-text">
-      <p>
-        El formato del peso del producto es {{ product.weight | weight_with_unit }}. Otras especificaciones se añadirían
-        vía Metafields.
-      </p>
-    </div>
-  </div>
 
   <div class="tab-panel" id="panel-reviews">
-    <!-- Sin reseñas todavía -->
-    <div style="text-align:center;padding:32px 16px;margin-bottom:32px;border-radius:16px;background:var(--bg);color:var(--muted);">
-      <div style="font-size:2.5rem;margin-bottom:12px;"></div>
-      <h3 style="margin:0 0 10px; font-weight:800;">Todavía no hay reseñas</h3>
-      <p style="font-size:.82rem;">¡Sé el primero en compartir tu experiencia con este producto!</p>
+    <!-- Start of Judge.me code -->
+    {% assign has_legacy = false %}
+    {% if product.metafields.judgeme.widget.size > 20 %}{% assign has_legacy = true %}{% endif %}
+    <div style='clear:both'></div>
+    <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-product-id='{{ product.id }}' data-widget='review' data-auto-install='false' data-shop-reviews-count='{{ shop.metafields.judgeme.shop_reviews_count | default: 0 | escape }}' data-entry-point='review_widget.js' data-entry-key='review-widget/main.js'>
+      {% if has_legacy %}<div class='jdgm-legacy-widget-content' style='display: none;'>{{ product.metafields.judgeme.widget }}</div>{% endif %}
     </div>
-
-    <!-- Formulario para nueva reseña -->
-    <div style="background:var(--bg);border-radius:18px;padding:24px;" id="reviewForm">
-      <h4 style="font-size:.95rem;font-weight:800;margin-bottom:18px;">✍️ Deja tu reseña</h4>
-      <div class="form-grid" style="gap:12px;">
-        <div class="form-group">
-          <label class="form-label" for="rNombre">Nombre</label>
-          <input class="form-inp" id="rNombre" type="text" placeholder="Tu nombre">
-        </div>
-        <div class="form-group" style="display:flex;flex-direction:column;justify-content:flex-end;gap:6px;">
-          <label class="form-label">Calificación</label>
-          <div id="starPicker" style="display:flex;gap:6px;font-size:1.6rem;cursor:pointer;">
-            <span data-val="1" onclick="setReviewStar(1)" style="color:var(--sand);">★</span>
-            <span data-val="2" onclick="setReviewStar(2)" style="color:var(--sand);">★</span>
-            <span data-val="3" onclick="setReviewStar(3)" style="color:var(--sand);">★</span>
-            <span data-val="4" onclick="setReviewStar(4)" style="color:var(--sand);">★</span>
-            <span data-val="5" onclick="setReviewStar(5)" style="color:var(--sand);">★</span>
-          </div>
-          <input type="hidden" id="rStars" value="0">
-        </div>
-        <div class="form-group span2">
-          <label class="form-label" for="rComentario">Comentario</label>
-          <textarea
-            class="form-inp"
-            id="rComentario"
-            style="min-height:90px;resize:vertical;"
-            placeholder="¿Cómo fue tu experiencia?"
-          ></textarea>
-        </div>
-      </div>
-      <button onclick="enviarResena()" class="btn-main" style="margin-top:16px;width:100%;text-align:center;">
-        Enviar reseña
-      </button>
-    </div>
+    {% if product.metafields.judgeme.review_widget_data %}
+    <script>jdgm.data ||= {}; jdgm.data.reviewWidget ||= {}; jdgm.data.reviewWidget[{{ product.id }}] = {{ product.metafields.judgeme.review_widget_data }}</script>
+    {% endif %}
+    <!-- End of Judge.me code -->
   </div>
 </div>
 
@@ -652,33 +614,7 @@ if (cartForm) {
   }
 })();
 
-// ── Selector de estrellas para reseñas ──
-function setReviewStar(val) {
-  document.getElementById('rStars').value = val;
-  document.querySelectorAll('#starPicker span').forEach(s => {
-    s.style.color = parseInt(s.dataset.val) <= val ? '#f5b800' : 'var(--sand)';
-  });
-}
 
-// ── Enviar reseña ──
-function enviarResena() {
-  const nombre = document.getElementById('rNombre').value.trim();
-  const stars = document.getElementById('rStars').value;
-  const comentario = document.getElementById('rComentario').value.trim();
-  if (!nombre || stars === '0' || !comentario) {
-    alert('Por favor completa todos los campos y selecciona una calificación.');
-    return;
-  }
-  const toast = document.getElementById('toast');
-  if (toast) {
-    toast.textContent = '¡Gracias por tu reseña!';
-    toast.className = 'toast show';
-    setTimeout(() => toast.classList.remove('show'), 3500);
-  }
-  document.getElementById('rNombre').value = '';
-  document.getElementById('rComentario').value = '';
-  setReviewStar(0);
-}
 </script>
 
 {% schema %}
