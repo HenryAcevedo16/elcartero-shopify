@@ -74,9 +74,7 @@
     <!-- Categorías -->
     <div class="sidebar-card reveal">
       <p class="sb-title">Categorías</p>
-      {% assign current_cat = '' %}
       {% if request.query_string contains 'filter.p.product_type=' %}
-        {% assign current_cat = request.query_string | split: 'filter.p.product_type=' | last | split: '&' | first | url_decode %}
       {% endif %}
 
       <ul class="cat-list" id="sidebar-cat-list-search">
