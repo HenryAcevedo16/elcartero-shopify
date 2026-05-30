@@ -481,43 +481,39 @@
   <!-- SUMMARY -->
   <div class="ecr-summary">
     <div class="ecr-summary-score">
-      <div class="ecr-big">{{ section.settings.puntuacion }}</div>
+      <div class="ecr-big">0.0</div>
       <div class="ecr-stars-row">
         <div class="ecr-stars">
-          {% assign score_floor = section.settings.puntuacion | floor %}
-          {% for i in (1..5) %}
-            {% if i <= score_floor %}
-              <span class="ecr-star ecr-filled">★</span>
-            {% else %}
-              <span class="ecr-star">★</span>
-            {% endif %}
-          {% endfor %}
+          <span class="ecr-star">★</span>
+          <span class="ecr-star">★</span>
+          <span class="ecr-star">★</span>
+          <span class="ecr-star">★</span>
+          <span class="ecr-star">★</span>
         </div>
       </div>
-      <div class="ecr-count">de 5</div>
+      <div class="ecr-count">Basado en 0 reseñas</div>
     </div>
     <div class="ecr-summary-divider"></div>
     <div class="ecr-summary-bars">
-      {% assign total_reviews = section.settings.total_resenas | default: 50 %}
       <div class="ecr-bar-row">
         <span class="ecr-bar-label">5</span>
-        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:82%"></div></div>
-        <span class="ecr-bar-count">{{ total_reviews | times: 0.82 | round }}</span>
+        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:0%"></div></div>
+        <span class="ecr-bar-count">0</span>
       </div>
       <div class="ecr-bar-row">
         <span class="ecr-bar-label">4</span>
-        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:12%"></div></div>
-        <span class="ecr-bar-count">{{ total_reviews | times: 0.12 | round }}</span>
+        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:0%"></div></div>
+        <span class="ecr-bar-count">0</span>
       </div>
       <div class="ecr-bar-row">
         <span class="ecr-bar-label">3</span>
-        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:4%"></div></div>
-        <span class="ecr-bar-count">{{ total_reviews | times: 0.04 | round }}</span>
+        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:0%"></div></div>
+        <span class="ecr-bar-count">0</span>
       </div>
       <div class="ecr-bar-row">
         <span class="ecr-bar-label">2</span>
-        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:2%"></div></div>
-        <span class="ecr-bar-count">{{ total_reviews | times: 0.02 | round }}</span>
+        <div class="ecr-bar-track"><div class="ecr-bar-fill" style="width:0%"></div></div>
+        <span class="ecr-bar-count">0</span>
       </div>
       <div class="ecr-bar-row">
         <span class="ecr-bar-label">1</span>
@@ -527,7 +523,7 @@
     </div>
     <div class="ecr-summary-divider"></div>
     <div class="ecr-summary-badge">
-      <span class="ecr-badge-num">{{ section.settings.porcentaje_satisfaccion }}%</span>
+      <span class="ecr-badge-num">0%</span>
       <div class="ecr-badge-text">clientes satisfechos</div>
     </div>
   </div>
@@ -763,6 +759,11 @@
       ecrSetStars(0);
 
       ecrCloseModal();
+      
+      // Update the UI immediately
+      if (typeof ecrLoadSupabaseReviews === 'function') {
+        ecrLoadSupabaseReviews();
+      }
     } catch (err) {
       errorEl.textContent = 'Hubo un error al enviar tu reseña. Intenta nuevamente.';
       errorEl.style.display = 'block';
