@@ -5,6 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#0F172A">
+  <meta name="google-site-verification" content="fbvRWyQ9Mvz3S6_eRVJgFSPkbRSCGB3zgv6uyF6_7ss" />
   
   <link rel="canonical" href="{{ canonical_url }}">
 
@@ -15,8 +16,8 @@
     {%- unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless -%}
   </title>
 
-  {% if page_description %}
-    <meta name="description" content="{{ page_description | escape }}">
+  {% if page_description or shop.description %}
+    <meta name="description" content="{{ page_description | default: shop.description | escape }}">
   {% endif %}
 
   <!-- Open Graph / Social sharing -->
