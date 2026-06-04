@@ -30,6 +30,20 @@
       {% if product.compare_at_price > product.price %}
         <span class="gm-label">Oferta</span>
       {% endif %}
+      <button
+        type="button"
+        class="gm-wish-btn"
+        id="WishBtn"
+        data-wish-id="{{ product.id }}"
+        data-wish-title="{{ product.title | escape }}"
+        data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
+        data-wish-price="{{ product.price | money }}"
+        data-wish-url="{{ product.url }}"
+        onclick="toggleWish(this)"
+        aria-label="Guardar en favoritos"
+      >
+        ♡
+      </button>
     </div>
 
     {% if product.images.size > 1 %}
@@ -181,20 +195,7 @@
             Comprar ahora
           </button>
         {% endif %}
-        <button
-          type="button"
-          class="btn-wish"
-          id="WishBtn"
-          data-wish-id="{{ product.id }}"
-          data-wish-title="{{ product.title | escape }}"
-          data-wish-img="{% if product.featured_image %}{{ product.featured_image | image_url: width: 400 }}{% endif %}"
-          data-wish-price="{{ product.price | money }}"
-          data-wish-url="{{ product.url }}"
-          onclick="toggleWish(this)"
-          aria-label="Guardar en favoritos"
-        >
-          ♡
-        </button>
+
       </div>
     </form>
 
