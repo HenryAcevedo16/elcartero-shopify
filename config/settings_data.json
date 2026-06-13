@@ -274,7 +274,28 @@
       },
       "main-product": {
         "type": "main-product",
-        "settings": {}
+        "blocks": {
+          "review_NF9T3d": {
+            "type": "review",
+            "settings": {
+              "nombre": "María Rodríguez",
+              "producto": "Audífonos P9 Pro Max",
+              "estrellas": 5,
+              "texto": "Llegó en 2 días, muy bien empacado y exactamente lo que esperaba.",
+              "fecha": "hace 3 días"
+            }
+          }
+        },
+        "block_order": [
+          "review_NF9T3d"
+        ],
+        "settings": {
+          "titulo_resenas": "Lo que dicen nuestros <span style=\"color:#D62828\">clientes</span>",
+          "subtitulo_resenas": "Reseñas reales de personas que compraron en El Cartero RD",
+          "puntuacion": "4.8",
+          "total_resenas": 50,
+          "porcentaje_satisfaccion": 98
+        }
       }
     },
     "content_for_index": [],
