@@ -156,7 +156,7 @@
       <div class="qty-row">
         <span class="qty-label">Cantidad</span>
         <div class="qty-ctrl">
-          <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepDown()">−</button>
+          <button type="button" class="qty-btn" onclick="var q=document.getElementById('Quantity'); q.stepDown(); q.setAttribute('value', q.value);">−</button>
           <input
             type="number"
             id="Quantity"
@@ -164,9 +164,10 @@
             value="1"
             min="1"
             class="qty-num"
+            onchange="this.setAttribute('value', this.value);"
             style="min-width:40px; text-align:center; font-size:.9rem; font-weight:700; border:none; outline:none; -moz-appearance:textfield;"
           >
-          <button type="button" class="qty-btn" onclick="document.getElementById('Quantity').stepUp()">+</button>
+          <button type="button" class="qty-btn" onclick="var q=document.getElementById('Quantity'); q.stepUp(); q.setAttribute('value', q.value);">+</button>
         </div>
       </div>
 
@@ -185,16 +186,7 @@
             {% if product.available %}Agregar al carrito{% else %}Agotado{% endif %}
           </span>
         </button>
-        {% if product.available %}
-          <button
-            type="button"
-            onclick="const f=document.getElementById('AddToCartForm'); f.classList.remove('ajax-cart-form'); sessionStorage.setItem('cart_step', '2'); let r=document.createElement('input'); r.type='hidden'; r.name='return_to'; r.value='/cart'; f.appendChild(r); f.submit();"
-            class="btn-red"
-            style="display:flex; align-items:center; justify-content:center; gap:8px; text-decoration:none; border-radius:14px; font-family:'Poppins',sans-serif; font-size:0.88rem; font-weight:700;"
-          >
-            Comprar ahora
-          </button>
-        {% endif %}
+
 
       </div>
     </form>
@@ -1032,16 +1024,7 @@
                       >
                         Carrito
                       </button>
-                      <button
-                        type="button"
-                        class="prod-buy-btn"
-                        {% unless related.available %}
-                          disabled
-                        {% endunless %}
-                        onclick="sessionStorage.setItem('cart_step', '2'); window.location.href='/cart/add?id={{ related.variants.first.id }}&quantity=1&return_to=/cart'"
-                      >
-                        Comprar ahora
-                      </button>
+
                     </div>
                   </form>
                 </div>
@@ -1167,6 +1150,7 @@
 {% endif %}
 
 <script>
+
 // ── Cambio de imagen por thumbnail ──
 function setThumb(el, imageUrl) {
   document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
