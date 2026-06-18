@@ -71,6 +71,7 @@
               <span class="prod-price-now">{{ product.price | money }}</span>
             </div>
             <form
+              id="product-form-{{ product.id }}-{{ section.id }}"
               method="post"
               action="{{ routes.cart_add_url }}"
               class="ajax-cart-form"
@@ -80,6 +81,7 @@
               <input type="hidden" name="quantity" value="1">
               <button type="submit" class="prod-cart-btn" onclick="event.stopPropagation()">+</button>
             </form>
+            <div class="releasit-cod-button" data-product-id="{{ product.id }}"></div>
           </div>
         </div>
       </div>

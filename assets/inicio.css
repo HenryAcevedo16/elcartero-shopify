@@ -274,12 +274,31 @@
 .pcat-belleza{ color: #c2185b; }
 .pcat-hogar  { color: #e65100; }
 .prod-name { font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; line-height: 1.35; color: var(--dark); }
-.prod-bottom { display: flex !important; align-items: center; justify-content: space-between; margin-top: auto !important; }
+.prod-bottom { display: flex !important; flex-wrap: wrap; align-items: center; justify-content: space-between; margin-top: auto !important; gap: 10px; }
 .prod-price-block { display: flex; flex-direction: column; gap: 1px; }
 .prod-price-old { font-size: 0.68rem; font-weight: 500; color: var(--muted); text-decoration: line-through; }
 .prod-price-now { font-size: 1.05rem; font-weight: 800; color: var(--dark); letter-spacing: -0.03em; }
-.prod-cart-btn { width: 36px; height: 36px; border-radius: 10px; background: var(--dark); color: white; border: none; font-size: 1.2rem; cursor: pointer; font-weight: 400; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; }
+.ajax-cart-form { display: flex; justify-content: flex-end; width: auto; max-width: 100%; flex: 1 1 auto; }
+.prod-cart-btn { width: 36px; height: 36px; border-radius: 10px; background: var(--dark); color: white; border: none; font-size: 1.2rem; cursor: pointer; font-weight: 400; display: flex; align-items: center; justify-content: center; transition: background 0.2s, transform 0.2s; flex-shrink: 0; }
 .prod-cart-btn:hover { background: var(--red); transform: scale(1.12); }
+
+/* Releasit App Button Fixes */
+.ajax-cart-form > :not(input):not(.prod-cart-btn) { 
+  width: 100% !important; 
+  flex: 1 1 100% !important; 
+  white-space: normal !important; 
+}
+.ajax-cart-form { flex-wrap: wrap; gap: 8px; }
+
+/* In case Releasit injects directly into .prod-bottom instead of .ajax-cart-form */
+.prod-bottom > div:not(.prod-price-block):not(.ajax-cart-form) {
+  width: 100% !important;
+  flex: 1 1 100% !important;
+  white-space: normal !important;
+}
+.prod-bottom > *:not(.prod-price-block):not(.ajax-cart-form) {
+  margin-top: 8px;
+}
 .prod-stars { font-size: 0.65rem; color: var(--muted); margin-bottom: 10px; display: flex; align-items: center; gap: 3px; }
 .stars { color: #f5b800; }
 
@@ -389,4 +408,11 @@
   .prod-name { font-size: 0.77rem; margin-bottom: 8px; }
   .prod-cart-btn { width: 26px; height: 26px; font-size: 1rem; border-radius: 6px; }
   .prod-price-now { font-size: 0.95rem; }
+
+  /* Lista de productos horizontal en móviles */
+  .prods-grid { grid-template-columns: 1fr !important; gap: 14px; }
+  .prod { flex-direction: row !important; padding: 10px; gap: 14px; height: auto !important; }
+  .prod-thumb { width: 120px !important; height: auto !important; aspect-ratio: 1; flex-shrink: 0; border-radius: 12px; }
+  .prod-info { padding: 4px 0 !important; justify-content: center; }
+  .prod-bottom { margin-top: auto; }
 }
