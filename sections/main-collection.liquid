@@ -6,6 +6,15 @@
   - Fallback: 12 productos de demostración cuando la colección está vacía
 {% endcomment %}
 
+<script>
+  // Redirigir a "Más nuevos" por defecto si no hay ningún parámetro de ordenación en la URL
+  if (!window.location.search.includes('sort_by')) {
+    const url = new URL(window.location.href);
+    url.searchParams.set('sort_by', 'created-descending');
+    window.location.replace(url.toString());
+  }
+</script>
+
 {% paginate collection.products by section.settings.products_per_page %}
 
 
@@ -19,11 +28,11 @@
   </div>
   <div class="ph-right">
     <select class="sort-select" onchange="sortProducts(this)">
-      <option value="">Más relevantes</option>
-      <option value="price-asc">Precio: menor a mayor</option>
-      <option value="price-desc">Precio: mayor a menor</option>
-      <option value="rating">Mejor valorados</option>
-      <option value="newest">Más nuevos</option>
+      <option value="" {% if request.query_string == blank or request.query_string contains 'sort_by=manual' %}selected{% endif %}>Más relevantes</option>
+      <option value="price-asc" {% if request.query_string contains 'sort_by=price-ascending' %}selected{% endif %}>Precio: menor a mayor</option>
+      <option value="price-desc" {% if request.query_string contains 'sort_by=price-descending' %}selected{% endif %}>Precio: mayor a menor</option>
+      <option value="rating" {% if request.query_string contains 'sort_by=best-selling' %}selected{% endif %}>Mejor valorados</option>
+      <option value="newest" {% if request.query_string contains 'sort_by=created-descending' %}selected{% endif %}>Más nuevos</option>
     </select>
     <div class="view-toggle">
       <button class="vtbtn on" onclick="setView('grid', this)" title="Vista cuadrícula">⊞</button>
