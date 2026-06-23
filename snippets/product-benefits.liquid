@@ -426,32 +426,48 @@
           {% if pb_stat1 != blank %}
             {% assign s1 = pb_stat1 | split: '|' %}
             <div class="pb-stat">
-              <div class="pb-stat-num">{{ s1[0] }}</div>
-              <div class="pb-stat-label">{{ s1[1] }}</div>
+              {% if s1.size > 1 %}
+                <div class="pb-stat-num">{{ s1[0] }}</div>
+                <div class="pb-stat-label">{{ s1[1] }}</div>
+              {% else %}
+                <div class="pb-stat-label" style="font-size: 14px; color: var(--pb-red); font-weight: 800; text-transform: none; line-height: 1.2;">{{ s1[0] }}</div>
+              {% endif %}
             </div>
           {% endif %}
 
           {% if pb_stat2 != blank %}
             {% assign s2 = pb_stat2 | split: '|' %}
             <div class="pb-stat">
-              <div class="pb-stat-num">{{ s2[0] }}</div>
-              <div class="pb-stat-label">{{ s2[1] }}</div>
+              {% if s2.size > 1 %}
+                <div class="pb-stat-num">{{ s2[0] }}</div>
+                <div class="pb-stat-label">{{ s2[1] }}</div>
+              {% else %}
+                <div class="pb-stat-label" style="font-size: 14px; color: var(--pb-red); font-weight: 800; text-transform: none; line-height: 1.2;">{{ s2[0] }}</div>
+              {% endif %}
             </div>
           {% endif %}
 
           {% if pb_stat3 != blank %}
             {% assign s3 = pb_stat3 | split: '|' %}
             <div class="pb-stat">
-              <div class="pb-stat-num">{{ s3[0] }}</div>
-              <div class="pb-stat-label">{{ s3[1] }}</div>
+              {% if s3.size > 1 %}
+                <div class="pb-stat-num">{{ s3[0] }}</div>
+                <div class="pb-stat-label">{{ s3[1] }}</div>
+              {% else %}
+                <div class="pb-stat-label" style="font-size: 14px; color: var(--pb-red); font-weight: 800; text-transform: none; line-height: 1.2;">{{ s3[0] }}</div>
+              {% endif %}
             </div>
           {% endif %}
 
           {% if pb_stat4 != blank %}
             {% assign s4 = pb_stat4 | split: '|' %}
             <div class="pb-stat">
-              <div class="pb-stat-num">{{ s4[0] }}</div>
-              <div class="pb-stat-label">{{ s4[1] }}</div>
+              {% if s4.size > 1 %}
+                <div class="pb-stat-num">{{ s4[0] }}</div>
+                <div class="pb-stat-label">{{ s4[1] }}</div>
+              {% else %}
+                <div class="pb-stat-label" style="font-size: 14px; color: var(--pb-red); font-weight: 800; text-transform: none; line-height: 1.2;">{{ s4[0] }}</div>
+              {% endif %}
             </div>
           {% endif %}
 
@@ -478,10 +494,20 @@
 
         {% for pb_ben_raw in pb_benefit_list %}
           {% if pb_ben_raw != blank and pb_ben_raw != '' %}
-            {% assign pb_parts   = pb_ben_raw | split: '|' %}
-            {% assign pb_icon_key = pb_parts[0] | strip %}
-            {% assign pb_ben_tit  = pb_parts[1] | strip %}
-            {% assign pb_ben_dsc  = pb_parts[2] | strip %}
+            {% assign pb_parts = pb_ben_raw | split: '|' %}
+            {% if pb_parts.size == 1 %}
+              {% assign pb_icon_key = 'check' %}
+              {% assign pb_ben_tit  = '' %}
+              {% assign pb_ben_dsc  = pb_parts[0] | strip %}
+            {% elsif pb_parts.size == 2 %}
+              {% assign pb_icon_key = 'check' %}
+              {% assign pb_ben_tit  = pb_parts[0] | strip %}
+              {% assign pb_ben_dsc  = pb_parts[1] | strip %}
+            {% else %}
+              {% assign pb_icon_key = pb_parts[0] | strip %}
+              {% assign pb_ben_tit  = pb_parts[1] | strip %}
+              {% assign pb_ben_dsc  = pb_parts[2] | strip %}
+            {% endif %}
 
             <div class="pb-benefit-card">
 
