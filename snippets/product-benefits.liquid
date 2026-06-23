@@ -21,19 +21,46 @@
 {% endcomment %}
 
 {% assign pb_img     = product.metafields.benefits.imagen_central %}
+{% if pb_img == blank %}{% assign pb_img = product.metafields.custom.benefits_imagen_central %}{% endif %}
+
 {% assign pb_titulo  = product.metafields.benefits.titulo %}
+{% if pb_titulo == blank %}{% assign pb_titulo = product.metafields.custom.benefits_titulo %}{% endif %}
+
 {% assign pb_desc    = product.metafields.benefits.descripcion_corta %}
+{% if pb_desc == blank %}{% assign pb_desc = product.metafields.custom.benefits_descripcion_corta %}{% endif %}
+
 {% assign pb_stat1   = product.metafields.benefits.estadistica_1 %}
+{% if pb_stat1 == blank %}{% assign pb_stat1 = product.metafields.custom.benefits_estadistica_1 %}{% endif %}
+
 {% assign pb_stat2   = product.metafields.benefits.estadistica_2 %}
+{% if pb_stat2 == blank %}{% assign pb_stat2 = product.metafields.custom.benefits_estadistica_2 %}{% endif %}
+
 {% assign pb_stat3   = product.metafields.benefits.estadistica_3 %}
+{% if pb_stat3 == blank %}{% assign pb_stat3 = product.metafields.custom.benefits_estadistica_3 %}{% endif %}
+
 {% assign pb_stat4   = product.metafields.benefits.estadistica_4 %}
+{% if pb_stat4 == blank %}{% assign pb_stat4 = product.metafields.custom.benefits_estadistica_4 %}{% endif %}
+
 {% assign pb_ben1    = product.metafields.benefits.beneficio_1 %}
+{% if pb_ben1 == blank %}{% assign pb_ben1 = product.metafields.custom.benefits_beneficio_1 %}{% endif %}
+
 {% assign pb_ben2    = product.metafields.benefits.beneficio_2 %}
+{% if pb_ben2 == blank %}{% assign pb_ben2 = product.metafields.custom.benefits_beneficio_2 %}{% endif %}
+
 {% assign pb_ben3    = product.metafields.benefits.beneficio_3 %}
+{% if pb_ben3 == blank %}{% assign pb_ben3 = product.metafields.custom.benefits_beneficio_3 %}{% endif %}
+
 {% assign pb_ben4    = product.metafields.benefits.beneficio_4 %}
+{% if pb_ben4 == blank %}{% assign pb_ben4 = product.metafields.custom.benefits_beneficio_4 %}{% endif %}
+
 {% assign pb_ben5    = product.metafields.benefits.beneficio_5 %}
+{% if pb_ben5 == blank %}{% assign pb_ben5 = product.metafields.custom.benefits_beneficio_5 %}{% endif %}
+
 {% assign pb_ben6    = product.metafields.benefits.beneficio_6 %}
+{% if pb_ben6 == blank %}{% assign pb_ben6 = product.metafields.custom.benefits_beneficio_6 %}{% endif %}
+
 {% assign pb_compat  = product.metafields.benefits.compatibilidad %}
+{% if pb_compat == blank %}{% assign pb_compat = product.metafields.custom.benefits_compatibilidad %}{% endif %}
 
 {% if pb_img != blank %}
 

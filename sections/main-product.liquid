@@ -284,7 +284,7 @@
     Para activarlo en un producto: ve a Admin → Productos → [producto]
     → Metafields → benefits.imagen_central y sube la imagen central.
   ============================================================ -->
-  {% if product.metafields.benefits.imagen_central != blank %}
+  {% if product.metafields.benefits.imagen_central != blank or product.metafields.custom.benefits_imagen_central != blank %}
     {% render 'product-benefits' %}
   {% endif %}
 
