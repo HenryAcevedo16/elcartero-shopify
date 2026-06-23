@@ -278,6 +278,16 @@
     </div>
   </div>
 
+  <!-- ============================================================
+    BENEFICIOS VISUALES DEL PRODUCTO
+    Solo se renderiza si el metafield benefits.imagen_central existe.
+    Para activarlo en un producto: ve a Admin → Productos → [producto]
+    → Metafields → benefits.imagen_central y sube la imagen central.
+  ============================================================ -->
+  {% if product.metafields.benefits.imagen_central != blank %}
+    {% render 'product-benefits' %}
+  {% endif %}
+
 
 
   <div class="tab-panel" id="panel-reviews">
