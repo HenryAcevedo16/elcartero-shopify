@@ -1,0 +1,167 @@
+<style>
+  .delivery-timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    position: relative;
+    margin: 24px 0;
+    padding: 24px 16px;
+    font-family: 'Poppins', sans-serif;
+    background: #F9F3F3; /* Fondo claro para destacar */
+    border: 1.5px solid #EFEFEF;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+  }
+
+  .dt-line {
+    position: absolute;
+    top: 48px; /* Ajustado por el padding del contenedor */
+    left: 15%;
+    right: 15%;
+    height: 2px;
+    background-color: #D1D1D1; /* Línea gris sutil */
+    z-index: 1;
+  }
+
+  .dt-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 33.33%;
+  }
+
+  .dt-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #D62828; /* Rojo de la marca para destacar */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 12px rgba(214, 40, 40, 0.2);
+  }
+
+  .dt-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: #ffffff;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .dt-date {
+    font-size: 14px;
+    font-weight: 800;
+    color: #1a1a2e;
+    margin-bottom: 4px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .dt-label {
+    font-size: 11px;
+    color: #555555;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  @media (max-width: 480px) {
+    .delivery-timeline {
+      padding: 16px 8px;
+    }
+    .dt-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 8px;
+    }
+    .dt-icon svg {
+      width: 20px;
+      height: 20px;
+    }
+    .dt-line {
+      top: 36px;
+    }
+    .dt-date {
+      font-size: 11px;
+    }
+    .dt-label {
+      font-size: 9px;
+    }
+  }
+</style>
+
+<div class="delivery-timeline">
+  <div class="dt-line"></div>
+  
+  <div class="dt-step">
+    <div class="dt-icon">
+      <!-- Cart Icon -->
+      <svg viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+    </div>
+    <div class="dt-date" id="dt-date-1">--</div>
+    <div class="dt-label">Orden Procesada</div>
+  </div>
+
+  <div class="dt-step">
+    <div class="dt-icon">
+      <!-- Truck Icon -->
+      <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg>
+    </div>
+    <div class="dt-date" id="dt-date-2">--</div>
+    <div class="dt-label">En Preparación</div>
+  </div>
+
+  <div class="dt-step">
+    <div class="dt-icon">
+      <!-- Gift Icon -->
+      <svg viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+    </div>
+    <div class="dt-date" id="dt-date-3">--</div>
+    <div class="dt-label">Entrega Estimada</div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function formatDate(date) {
+      const options = { month: 'short', day: 'numeric' };
+      let str = date.toLocaleDateString('es-ES', options);
+      // capitalize first letter of month (e.g. "23 jun" -> "23 Jun")
+      let parts = str.split(' ');
+      if (parts.length === 2) {
+        // format usually "23 jun." or "23 jun"
+        let day = parts[0];
+        let month = parts[1].replace('.', '');
+        month = month.charAt(0).toUpperCase() + month.slice(1);
+        return `${day} ${month}`;
+      }
+      return str;
+    }
+
+    function addDays(date, days) {
+      let result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+    }
+
+    const today = new Date();
+    
+    // Step 1: Orden Procesada (Today)
+    document.getElementById("dt-date-1").textContent = formatDate(today);
+    
+    // Step 2: En Preparación (Today - Tomorrow)
+    const tomorrow = addDays(today, 1);
+    document.getElementById("dt-date-2").textContent = `${formatDate(today)} - ${formatDate(tomorrow)}`;
+    
+    // Step 3: Entrega Estimada (Tomorrow - +3 days)
+    const day3 = addDays(today, 3);
+    document.getElementById("dt-date-3").textContent = `${formatDate(tomorrow)} - ${formatDate(day3)}`;
+  });
+</script>
